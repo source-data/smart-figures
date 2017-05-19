@@ -1,0 +1,46 @@
+<!--
+/************************ LICENCE ***************************
+* 	This file is part of <SourceData SmartFigure frontend code to search and navigate the SourceData resource>
+*     Copyright (C) <2016>  EMBO and Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+
+
+<div class = 'panel panel-default'>
+	<div class = 'panel-body'>
+		<ul class = 'nav nav-pills'>
+			<li ng-repeat = 'hypo in result.hypos|filter:repeatFilter'>
+				<div class = 'btn-group' ng-click = 'loadPanel(hypo)' style = 'margin-right: 10px;'>
+					<button class = 'btn btn-xs btn-danger' style = 'width: 115px; font-size: 10px; overflow: hidden; text-overflow: ellipsis; text-align: left'><img ng-src = '{{baseURL}}images/icon_{{hypo.typeLeft}}_white.png' height = "14" width = "14" >{{::hypo.externalDisplayLeft || hypo.displayLeft.join(", ")}}</button>
+					<button class = 'btn btn-xs btn-primary' style = 'width: 115px; font-size: 10px; overflow: hidden; text-overflow: ellipsis; text-align: left'><img ng-src = '{{baseURL}}images/icon_{{hypo.typeRight}}_white.png' height = "14" width = "14" >{{::hypo.externalDisplayRight || hypo.displayRight.join(", ")}}</button>
+				</div>
+
+			</li>
+
+		</ul>
+		<p style = 'margin: 0; font-size: 12px;'><a class = 'pull-right' ng-if = 'repeatFilter && (diff = result.hypos.length - (result.hypos|filter:{display:true}).length) ' ng-click = 'showAll()'><ng-pluralize count="diff"
+         when="{'0': 'no more relation.',
+             'one': 'show 1 more relation',
+             'other': 'show {} more relations'}">
+		 </ng-pluralize></a>
+		</p>
+		<h5 style = 'margin-bottom: 3px;'>{{::result.title}} <a href = 'http://dx.doi.org/{{::result.doi}}' target = '_blank' ng-if = 'result.doi' class = 'glyphicon glyphicon-share'></a></h5>
+		<p class = 'text-muted' style = 'margin-bottom: 0px; font-size: 12px;'>{{::result.author_list|firstAuthor}}</p>
+		<p style = 'margin-bottom: 0px; font-size: 12px'>{{::result.journal_title}} - {{::result.date}}</p>
+
+	</div>
+</div>

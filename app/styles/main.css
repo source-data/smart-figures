@@ -1,0 +1,217 @@
+#sliderContainer{
+	width: 266.666%;
+	-webkit-transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+	    -moz-transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+	    -ms-transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+	    -o-transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+	    transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+	transform: translate(-31.25%,0);
+}
+
+#sliderContainer div.col{
+	float: left;
+	padding: 0 15px;
+}
+
+
+/* Space out content a bit */
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+figcaption{
+	padding-left: 10px;
+	font-weight: bold;
+	font-size: 10px;
+}
+
+.ellipsis{
+	white-space: nowrap;
+	overflow: hidden;
+
+}
+
+.psmall p{
+	margin-bottom: 2px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 10px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+.cursor-pointer{
+	cursor:pointer;
+}
+
+div.navigation-border{
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 25px;
+	background-color: #999;
+	opacity: 0.3;
+	z-index: 10;
+	line-height: 50%;
+	font-size: 20px;
+	color: #FFF;
+	padding: 25% 0;
+}
+div.navigation-border.right{
+	text-align: right;
+	right: 0;
+}
+div.navigation-border.left{
+	text-align: left;
+	left: 0;
+}
+div.navigation-border:hover{
+	opacity: 0.8;
+}
+
+.dlPopover{
+	font-size:11px;
+}
+
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+.graphTooltip{
+	position: absolute;
+	width: 260px;
+	border: 1px solid #555555;
+	color: #555;
+	font-size: 12px;
+	padding: 5px;
+	background-color: #FFF;
+	text-align: center;
+/*	visibility: hidden;*/
+	z-index: 100;
+}
+
+.active-perso{
+	background-color:#F4F9FB;
+}
+
+.documentation p{
+	margin:2px;
+}
+
+.wait{
+	cursor:wait;
+}
+
+li.liSearchResult:hover{
+	border-color: #999;
+}
+
+div.searchResultPanelInCarousel, div.similarPanelInCarousel {
+	cursor:pointer;
+	width: 180px;
+	height: 200px;
+	float: left;
+	border: 1px solid #999;
+	border-radius: 3px;
+	padding: 8px;
+	position: relative;
+}
+div.similarPanelInCarousel{
+	height: 280px;
+}
+
+
+
+div.searchResultPanelInCarousel:hover, div.similarPanelInCarousel:hover{
+	border: 2px solid #999;
+	padding: 7px;
+}
+
+.ul-wo-lst{
+	list-style-type:none !important;
+	padding-left:10px;
+}
+
+.experimental-badge{
+	font-size:12px !important;
+	background-color:#D8D8D8 ! important;
+	color:#2E2E2E;
+	font-weight:normal !important;
+	margin-right:3px !important;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+    font-size: 16px;
+	margin: 0;
+}

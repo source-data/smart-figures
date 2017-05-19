@@ -1,0 +1,311 @@
+<!--
+/************************ LICENCE ***************************
+* 	This file is part of <SourceData SmartFigure frontend code to search and navigate the SourceData resource>
+*     Copyright (C) <2016>  EMBO and Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+
+<div class = 'container'>
+	<div ng-if = 'showHeader'>
+		<h4>{{::panel.paper.title}}</h4>
+		<p class = 'text-muted'>
+			<a ng-href = 'http://dx.doi.org/{{::panel.paper.doi}}' ng-if = 'panel.paper.doi'>
+				<small>{{::panel.paper.author_list|firstAuthor}} <i>{{::panel.paper.journal}}</i> {{::panel.paper.year}}</small>
+			</a>
+			<small ng-if = '!panel.paper.doi'>{{::panel.paper.author_list|firstAuthor}} <i>{{::panel.paper.journal}}</i> {{::panel.paper.year}}</small>
+		</p>
+	</div>
+
+	<div class = 'panel panel-default'>
+		<div class = 'panel-heading' style = 'position: relative;'>
+			<div class = 'panel-title' style = 'margin-right: 120px;'>
+				{{::panel.figure.label}} 
+				<span ng-if = 'panel.figure.title'> - <span ng-bind-html = 'panel.figure.title'></span></span></div>
+				<div class="btn-group" role="group" style="position: absolute; right: 75px; top: 5px;">
+					<button type="button" class="btn btn-sm btn-default" ng-class="(panelHistoryView=='panel')?'active':''" ng-click="changePanelHistoryView('panel')">Panel</button>
+					<button type="button" class="btn btn-sm btn-default" ng-class="(panelHistoryView=='summary')?'active':''" ng-click="changePanelHistoryView('summary')" tooltip="Visual summary of this experiment">Summary</button>
+					<button type="button" class="btn btn-sm btn-default" ng-class="(panelHistoryView=='history')?'active':''" ng-click="changePanelHistoryView('history')" ng-disabled="!graph.nodes.length">History</button>
+				</div>
+				<button style="position: absolute; right: 5px; top: 5px;" class='btn btn-sm btn-default pull-right' ng-click='downloadPanel()' tooltip='download panel package'><i class='glyphicon glyphicon-download-alt'></i></button>
+		</div>
+		<div class="panel-heading" style="background-color:white;padding:5px 15px 0 15px" ng-if="panel.figure.panels[panel.currentPanelIdx].links.nb">
+			<div class="panel-default" style="padding:5px">
+				<p class="text-center">Source data</p>
+				<ul class="ul-wo-lst" >
+					<li ng-repeat="link in panel.figure.panels[panel.currentPanelIdx].links.url" style="font-size:11px;"><a target="blank" ng-href="{{link.document}}">{{link.document}}</a></li>
+					<li ng-repeat="link in panel.figure.panels[panel.currentPanelIdx].links.file" style="font-size:11px;"><a target="blank" ng-click="downloadPanel(link.panel_document_id)">{{link.document}}</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class = 'panel-body' style = 'overflow: hidden; position:relative'>
+			<div class = 'navigation-border left' ng-show = 'view=="downstream"' ng-click = 'closeNav()'><span class = 'glyphicon glyphicon-chevron-left'></span></div>
+			<div class = 'navigation-border right' ng-show = 'view=="upstream"' ng-click = 'closeNav()'><span class = 'glyphicon glyphicon-chevron-right'></span></div>
+
+			<div id = 'sliderContainer'>
+				<!-- filters -->
+				<div style="display: table;width: 100%;">
+						<div ng-if='searchParams.done && !searchParams.loading' style="padding: 0 15px;display: table-row;width: 100%;" >
+							<div class="panel panel-default"  style="background-color: #eeeeee;width: 15.45%;display: table-cell;">
+								<div class="panel-body" style="padding: 5px">
+									<button class="btn btn-xs" style="color: white;background-color: darkgrey;" ng-show="filtercollection.subitems.length==0" ng-click="filterInit();firstClick=1;" > <i ng-class="{'fa fa-angle-down':!collapsed_filt}"></i> Filter upstream</button>
+									<button class="btn btn-xs" style="color: white;background-color: darkgrey;" ng-show="firstClick==1 && filtercollection.subitems.length>0" ng-click="collapsed_filt=!collapsed_filt" > <i ng-class="{'fa fa-angle-up':!collapsed_filt,'fa fa-angle-down':collapsed_filt}"></i> Filter upstream</button>
+									<div class="row" ng-show="searchParams.summary.papers" >
+										<div class="col-xs-12" ng-show="!collapsed_filt">
+											<div ng-repeat="subitem in filtercollection.subitems" style="height: 35px;">
+												<filter-results style="padding: 5px;"
+																parentindex="$index"
+																render = "2"
+																remove-filter-item="removeFilterItem(i,type, currFilt)"
+																add-new-filter-item="addNewFilterItem()"
+																apply-filter="applyFilter(currFilt)"
+																track-selections="trackSelections(currFilt)">
+												</filter-results>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div style="width: 20.1%;display: table-cell;"></div>
+							<div class="panel panel-default"  style="background-color: #eeeeee;width: 15.45%;display: table-cell;">
+								<div class="panel-body" style="padding: 5px">
+									<button class="btn btn-xs" style="color: white;background-color: darkgrey;"  ng-show="filtercollection.subitems.length==0" ng-click="filterInit();firstClick=1;" > <i ng-class="{'fa fa-angle-down':!collapsed_filt}"></i> Filter downstream</button>
+									<button class="btn btn-xs" style="color: white;background-color: darkgrey;"  ng-show="firstClick==1 && filtercollection.subitems.length>0" ng-click="collapsed_filt=!collapsed_filt" > <i ng-class="{'fa fa-angle-up':!collapsed_filt,'fa fa-angle-down':collapsed_filt}"></i> Filter downstream</button>
+									<div class="row" ng-show="searchParams.summary.papers" >
+										<div class="col-xs-12" ng-show="!collapsed_filt">
+											<div ng-repeat="subitem in filtercollection.subitems" style="height: 35px;">
+												<filter-results style="padding: 5px;"
+																parentindex="$index"
+																render = "2"
+																remove-filter-item="removeFilterItem(i,type, currFilt)"
+																add-new-filter-item="addNewFilterItem()"
+																apply-filter="applyFilter(currFilt)"
+																track-selections="trackSelections(currFilt)">
+												</filter-results>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+
+
+				<div class="row">
+					<!-- LEFT -->
+					<div style = 'width: 31.25%;' class = 'col' ng-if='searchParams.done && !searchParams.loading'>
+						<h4>Upstream of {{currentTag.text}} (<span compile = 'currentTag|printExternalIds'></span>)</h4>
+						<list-search-result ng-repeat = 'result in searchParams.displayedResult' result = 'result' view = 'upstream'></list-search-result>
+					</div>
+					<div class = 'col' style = 'width: 31.25%' ng-if='!searchParams.done || searchParams.loading'>
+						<div class="alert alert-info" style="margin-top: 42px;">
+							<span >Loading results... </span>
+								<span><img ng-src='{{baseURL}}images/ring.gif' alt='loading...' height='20' width='20'></span>
+						</div>
+					</div>
+
+					<!-- MIDDLE -->
+					<!--middle upstream -->
+					<div class = 'col' ng-style="{visibility:(panelHistoryView=='history')?'hidden':'visible',width:'6.25%'}">
+						<h5 class = 'text-center'  tooltip='{{(view=="upstream")?"An entity that is assayed/measured/observed":"Entities in this experiment that were altered in a controlled way across experimental groups (also called \"perturbations\")"}}' tooltip-append-to-body = 'true' ng-class = '(view=="upstream")?"text-primary":"text-danger"' style="display:inline-flex"
+							tooltip = 'An entity altered in a controlled way across experimental groups (also called "perturbation")'
+							tooltip-append-to-body = 'true'
+						>{{(view=="upstream")?"Assayed":"Intervention"}}
+						</h5>
+						<!-- <h5 class = 'text-center' title="Entities in this experiment that were altered in a controlled way across experimental groups (also called ‘perturbations’)"  ng-class = '(view=="upstream")?"text-primary":"text-danger"' style="display:inline-flex">{{(view=="upstream")?"Assayed":"Intervention"}}</h5>
+                        <h5 class = 'text-center' title="Entities in this experiment that were altered in a controlled way across experimental groups (also called ‘perturbations’)"  ng-class = '(view=="upstream")?"text-primary":"text-danger"' style="display:inline-flex">{{(view=="upstream")?"Assayed":"Intervention"}}</h5> -->
+						<div class="btn-group" style="margin-bottom:4px" ng-repeat = 'tag in (panel.figure.panels|filter:{panel_id:panel.current_panel_id})[0].tags|filter:{role:"intervention"}|uniqueTagTexts'>
+							<button class="btn btn-sm btn-default"
+									tooltip = "Upstream experiment where this entity is assayed"
+									tooltip-popup-delay = "200"
+									tooltip-append-to-body = 'true'
+									ng-click = 'setSearchForm(tag,"upstream",true)'
+									ng-if = 'view=="panel" && tag.nbResults'
+									style="padding:4px 3px; cursor:w-resize;">
+								<span class = 'glyphicon glyphicon-chevron-left' style="font-size:8px"></span>
+							</button>
+							<button class="btn btn-sm btn-danger"
+
+									ng-style = '{width: "66px", paddingLeft: "3px", paddingRight: "3px", marginLeft: ((view=="panel" && tag.nbResults)?"":"14px"),overflow: "hidden",textOverflow: "ellipsis",fontSize: "10px", textAlign:"left"}'
+									tooltip = '{{tag.text}}'
+									tooltip-append-to-body = 'true'
+									popover-placement = '{{(view=="upstream")?"left":"right"}}'
+									popover-title = '{{tag.external_names[0] || tag.text}} ({{tag.type}}) '
+									popover-html = '"<dl><dt>External ids</dt><dd>{{tag|printExternalIds}}</dd><dt>External names</dt><dd>{{tag|printExternalNames}}</dd><dt>Taxon</dt><dd>{{tag|printTaxon}}</dd></dl>"'
+									popover-trigger = 'click'
+									popover-append-to-body = 'true'
+									popover-animation = 'false'
+							>
+								<img ng-src = '{{baseURL}}images/icon_{{tag.type}}_white.png' height = "14" width = "14" >
+								<span ng-bind-html = 'tag.text' style="font-size:11px"></span>
+							</button>
+						</div>
+					</div>
+					<!--middle content -->
+					<div class = 'col' style = 'width: 25%'>
+						<div ng-if="panelHistoryView=='history'" style="height:500px;overflow:scroll">
+							<button ng-show="panelHistoryView=='history'&&graph.nodes.length" style="position: absolute; right: 580px;" class="btn btn-xs btn-default pull-right" ng-click="clearHistory()"><small>Reset</small></button>
+							<graph-history graph='graph'></graph-history>
+						</div>
+						<div ng-if="panelHistoryView=='panel'">
+							<sd-panel panel = 'panel' ></sd-panel>
+							<div style="margin-top:5px">
+								<span class="badge experimental-badge" style="font-size:11px" ng-repeat="assay in assayBadges">{{assay[0]}}</span>
+							</div>
+
+						</div>
+
+						<div ng-if="panelHistoryView=='summary'"><div ng-include = '"views/partials/summaryView.html"'></div></div>
+					</div>
+
+					<!--middle downstream -->
+					<div class = 'col' style = 'width: 6.25%; position: relative;right:-10px' ng-style="{visibility:(panelHistoryView=='history')?'hidden':'visible',width:'6.25%'}">
+						<h5 class = 'text-center'
+							tooltip='{{(view=="downstream")?"Entities in this experiment that were altered in a controlled way across experimental groups (also called \"perturbations\")":"An entity that is assayed/measured/observed"}}'
+							tooltip-append-to-body = 'true'  ng-class = '(view=="downstream")?"text-danger":"text-primary"'>{{(view=="downstream")?"Intervention":"Assayed"}}</h5>
+						<div class="btn-group" style="margin-bottom:4px" ng-repeat = 'tag in (panel.figure.panels|filter:{panel_id:panel.current_panel_id})[0].tags|filter:{role:"assayed"}|uniqueTagTexts'>
+							<button class = 'btn btn-sm btn-block'
+									ng-style = '{width: "66px", paddingLeft: "3px", paddingRight: "3px", marginRight: ((view=="panel" && tag.nbResults)?"":"14px"),overflow: "hidden",textOverflow: "ellipsis",fontSize: "10px", textAlign:"left"}'
+									ng-class = '(view=="downstream") ? (tag.text==searchParams.intervention) ? "btn-danger" : "text-danger btn-default" : "btn-primary"'
+									popover-placement = '{{(view=="downstream")?"right":"left"}}'
+									popover-title = '{{tag.external_names[0] || tag.text}} ({{tag.type}})'
+									popover-html = '"<dl><dt>External ids</dt><dd>{{tag|printExternalIds}}</dd><dt>External names</dt><dd>{{tag|printExternalNames}}</dd><dt>Taxon</dt><dd>{{tag|printTaxon}}</dd></dl>"'
+									popover-trigger = 'click'
+									popover-append-to-body = 'true'
+									popover-animation = 'false'
+									ng-click = 'setSearchForm(tag,"downstream",view!="panel")'
+									tooltip = '{{tag.text}}'
+									tooltip-append-to-body = 'true'
+							>
+								<img ng-src = '{{baseURL}}images/icon_{{tag.type}}_white.png' height = "14" width = "14" >
+								<span ng-bind-html = 'tag.text' style="font-size:11px"></span>
+							</button>
+							<button
+									type = 'button'
+									class = 'btn btn-default btn-sm'
+									ng-style = '{padding: "4px 3px",cursor:(tag.nbResults)?"e-resize":"no-drop"}'
+									ng-click = 'setSearchForm(tag,"downstream",true)'
+									ng-if = 'view=="panel" && tag.nbResults'
+									tooltip = "Downstream experiment testing this entity’s effect"
+									tooltip-append-to-body = 'true'
+									tooltip-popup-delay = "200"
+							>
+								<span class = 'glyphicon glyphicon-chevron-right' style="font-size:8px"></span>
+							</button>
+						</div>
+
+					</div>
+
+					<!-- RIGHT -->
+
+					<div class = 'col' style = 'width: 31.25%' ng-if='searchParams.done && !searchParams.loading'>
+						<h4>Downstream of {{currentTag.text}} (<span compile = 'currentTag|printExternalIds'></span>)</h4>
+						<list-search-result ng-repeat = 'result in searchParams.displayedResult' result = 'result' view = 'downstream'></list-search-result>
+						<p class = 'text-center'><button class = 'btn btn-default btn-sm' ng-click = 'closeNav()'>close</button></p>
+					</div>
+					<div class = 'col' style = 'width: 31.25%' ng-if='!searchParams.done || searchParams.loading'>
+						<div class="alert alert-info" style="margin-top: 42px;">
+							<span >Loading results... </span>
+							<span><img ng-src='{{baseURL}}images/ring.gif' alt='loading...' height='20' width='20'></span>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+
+		<div class = 'panel-footer text-center fade3' ng-if = 'view=="panel" && panelHistoryView != "history"'>
+			<div class = 'row'>
+				<div class = 'col-sm-1'>
+					<!-- <a nav-figure-in-paper action="previous" panel="panel"></a> -->
+					<a tooltip="Previous figure" ng-show="panel.nextPreviousFig.previous!=null" href="#/panel/{{panel.paper.figures[panel.nextPreviousFig.previous].panel_id}}" title="{{panel.paper.figures[panel.nextPreviousFig.previous].label}}" class="glyphicon glyphicon-chevron-left" ></a>
+				</div>
+				<div class = 'col-sm-10'>
+					<div class="btn-group" role="group">
+						<button type="button" class="btn btn-default btn-sm" ng-repeat = 'p in panel.figure.panels|orderBy:"label"' ng-click = 'setPanel(p.panel_id)' ng-class = 'p.panel_id==panel.current_panel_id?"active":""'>{{p.label}}</button>
+					</div>
+				</div>
+				<div class = 'col-sm-1'>
+					<!-- <a nav-figure-in-paper action="next" panel="panel"></a> -->
+					<a tooltip="Next figure" ng-show="panel.nextPreviousFig.next!=null" href="#/panel/{{panel.paper.figures[panel.nextPreviousFig.next].panel_id}}" title="{{panel.paper.figures[panel.nextPreviousFig.next].label}}" class="glyphicon glyphicon-chevron-right"></a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+<!--*********** RELATED PANELS ***********-->
+	<div class="panel panel-default" ng-if = 'similarPanels.length && view=="panel"'>
+		<div class="panel-heading">
+			<div class="panel-title form-inline" ng-form='panelForm'><a ng-click = 'toggleShowSimilarPanels()'><span class = 'glyphicon' ng-class = '(showSimilarPanels?"glyphicon-minus":"glyphicon-plus")' style = 'margin-right: 10px;'></span>Related data</a>
+				<small class = 'pull-right'>
+					<div class = 'radio'>
+						<label>
+							<input type = 'radio' ng-model = 'similarSearchScope' name = 'similarSearchScope' value = 'paper' ng-click = 'getSimilarCollections("paper")'>
+							This paper only ({{(similarPanels|similarSearchFilter:"paper":panel.paper.paper_id).length}})
+						</label>
+					</div>
+					<div class = 'radio' style="margin-left:5px">
+						<label>
+							<input type = 'radio' ng-model = 'similarSearchScope' name = 'similarSearchScope' value = 'global' ng-click = 'getSimilarCollections("global")' >
+							Global search ({{(similarPanels|similarSearchFilter:"global":panel.paper.paper_id).length}})
+						</label>
+					</div>
+				</small>
+			</div>
+		</div>
+		<div class="panel-body" ng-if = 'showSimilarPanels'>
+			<div class = 'row'>
+				<div class = 'col-xs-12'>
+					<ul rn-carousel rn-carousel-index = 'carouselIndex' rn-carousel-controls class="image" style = 'height: 280px;position:relative;display: block;width: 550px; margin: auto;'>
+						<li ng-repeat="collection in similarCollections">
+							<div ng-repeat="similarPanel in collection" class="layer similarPanelInCarousel"  ng-click = 'setPanel(similarPanel.panel_id)' ng-mouseenter = 'similarPanel.paper.showTitle = true' ng-mouseleave = 'similarPanel.paper.showTitle = false'>
+								<div style = 'position: absolute; top: 0; left: 0; background-color: #000; opacity: 0.8; color: #FFF; text-align: center; padding: 3px; font-size: 11px' ng-show = 'similarPanel.paper.showTitle'>{{(similarSearchScope=="global")?similarPanel.paper.title:similarPanel.panel_label}}</div>
+								<span class="pull-right" style="margin-top:-5px"> <span class="fa fa-star" ng-repeat="s in similarPanel.star track by $index" style="color:#FFBF00;font-size:10px"></span> </span>
+
+								<img class = '{{baseURL}}img-responsive center-block' ng-src = '{{serverURL}}/file.php?panel_id={{similarPanel.panel_id}}' style = 'max-height: 160px'>
+								<div class = 'row'>
+									<div class = 'col-sm-6 text-left' style = 'position: absolute; bottom: 35px; left: 0; background-color: #FFF; opacity: 0.8;'>
+										<button type = 'button' class = 'btn btn-danger btn-xs' style = 'font-size: 8px' ng-repeat = 'similarTag in similarPanel.tags|filter:{role:"intervention"}|unique:"text"|limitTo:3'>{{similarTag.text}}</button>
+									</div>
+									<div class = 'col-sm-6 text-right' style = 'position: absolute; bottom: 35px; right: 0; background-color: #FFF; opacity: 0.8;'>
+										<button type = 'button' class = 'btn btn-primary btn-xs'  style = 'font-size: 9px'  ng-repeat = 'similarTag in similarPanel.tags|filter:{role:"assayed"}|unique:"text"|limitTo:3'>{{similarTag.text}}</button>
+									</div>
+								</div>
+								<p class = 'text-muted' style = 'position: absolute; bottom: 0px; font-size: 10px; line-height: 12px;'>{{similarPanel.paper.author_list|firstAuthor}}<br> {{similarPanel.paper.journal}} ({{similarPanel.paper.year}})</p>
+							</div>
+
+						</li>
+					</ul>
+					<div rn-carousel-indicators ng-if="similarCollections.length > 1" slides="similarCollections" rn-carousel-index="carouselIndex"></div>
+				</div>
+			</div>
+		</div>
+		<div class="panel-footer" >
+			<p>Click on figure to view it in SmartFigure
+			<span class="pull-right" ng-if = 'similarLimit < (similarPanels|similarSearchFilter:similarSearchScope:panel.paper.paper_id).length && showSimilarPanels'>
+				<a ng-click = 'showAllSimilarPanels()'>show <ng-pluralize count="((similarPanels|similarSearchFilter:similarSearchScope:panel.paper.paper_id).length-similarLimit)"
+					when="{'0': 'no more similar panels.',
+					'one': ' 1 more experiment',
+					'other': ' {} more experiments'}"></ng-pluralize></a>
+			</span>
+			</p>
+			</div>
+		</div>
+		<p class = 'text-center' ng-if = '!inIFrame && showHeader'><button type = 'button' class = 'btn btn-default' ng-click = 'newSearch()'>new search</button></p>
+	</div>
+</div>

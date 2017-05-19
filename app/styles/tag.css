@@ -1,0 +1,172 @@
+#experimentContainer{
+  display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;      /* TWEENER - IE 10 */
+  display: -webkit-flex;     /* NEW - Chrome */
+  display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+
+}
+#experimentContainer div {
+    -webkit-box-flex: 1;      /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1;         /* OLD - Firefox 19- */
+    -webkit-flex: 1;          /* Chrome */
+    -ms-flex: 1;              /* IE 10 */
+    flex: 1;                  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+/*    text-align: center;*/
+
+/*    border: 1px solid black;*/
+}
+
+#experimentCenter {
+    -webkit-box-ordinal-group: 2;   /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-ordinal-group: 2;      /* OLD - Firefox 19- */
+    -ms-flex-order: 2;              /* TWEENER - IE 10 */
+    -webkit-order: 2;               /* NEW - Chrome */
+    order: 2;                       /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+#experimentRight {
+    -webkit-box-ordinal-group: 3;   /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-ordinal-group: 3;      /* OLD - Firefox 19- */
+    -ms-flex-order: 3;              /* TWEENER - IE 10 */
+    -webkit-order: 3;               /* NEW - Chrome */
+    order: 3;                       /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+.greyBackground {
+	background-color:#F2F1F1;
+}
+.arrow{
+	width:100%;
+	position:relative;
+}
+.arrowSummary{
+	border-right-style:none !important;
+	border-top-right-radius:2px !important;
+	z-index:2 !important;
+	margin-right:5px;
+}
+.holeSummary{
+	border-left-style:none !important;
+	border-top-left-radius:2px !important;
+	z-index:2 !important;
+	margin-right:5px;
+}
+.borderField {
+	border-style:solid;
+	border-width:1px;
+	border-radius:4px;
+	border-color:#585858;
+}
+.borderTag {
+	padding: 4px;
+	/* text-align: center; */
+	text-indent: -30px;
+	padding-left: 30px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 110px;
+	display: inline-block;
+	margin: 2px;
+	font-size: 11px;
+}
+sd-tag, span.sdTag{
+	position: relative;
+	white-space: nowrap;
+	border-radius: 4px;
+}
+
+
+.intervention, .bg_intervention,.bg_intervention_selected {
+	background-color: #fbb4ae;
+}
+
+sd-tag.intervention{
+	background-color: rgba(251,180,174,0.8);
+	border: 2px solid #FB1400;
+}
+
+sd-tag.active.intervention{
+	background-color: #FB1400;
+	color: #FFF;
+}
+
+.assayed, .bg_assayed, .bg_assayed_selected {
+	background-color: #b3cde3;
+}
+
+sd-tag.assayed{
+	background-color: rgba(179,205,227,0.8);
+	border: 2px solid #007BE3;
+}
+
+sd-tag.active.assayed{
+	background-color: #007BE3;
+	color: #FFF;
+}
+
+.normalizing, .bg_normalizing, .bg_normalizing_selected {
+	background-color: #ccebc5;
+}
+
+sd-tag.normalizing, sd-pretag.normalizing{
+	background-color: rgba(204,235,197,0.8);
+	border: 2px solid #1B8401;
+}
+
+sd-tag.active.normalizing{
+	background-color: #1B8401;
+	color: #FFF;
+}
+
+.experiment, .bg_experiment, .bg_experiment_selected{
+	background-color: #decbe4;
+}
+
+sd-tag.experiment, sd-pretag.experiment{
+	background-color: rgba(222,203,228,0.8);
+	border: 2px solid #AD00E4;
+}
+
+sd-tag.active.experiment{
+	background-color: #AD00E4;
+	color: #FFF;
+}
+
+.component, .bg_component, .bg_component_selected{
+	background-color: #fed9a6;
+	border: 2px solid #FB8008;
+}
+
+sd-tag.active.component{
+	background-color: #FB8008;
+	color: #FFF;
+}
+
+
+sd-tag.component, sd-pretag.component{
+	background-color: rgba(254,217,166,0.8);
+}
+
+.reporter, .bg_reporter, .bg_reporter_selected{
+	background-color: #ffffcc;
+}
+
+sd-tag.reporter, sd-pretag.reporter{
+	background-color: rgba(255,255,204,0.8);
+	border: 2px solid #fed509;
+}
+
+sd-tag.active.reporter{
+	background-color: #fed509;
+	color: #6c4302;
+}
+
+.bg_component_selected, .bg_experiment_selected, .bg_normalizing_selected, .bg_assayed_selected, .bg_intervention_selected{
+	color: #C00;
+}
+
+
+.undefinedRole {
+		background-color:#CCC;
+}

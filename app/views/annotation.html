@@ -1,0 +1,67 @@
+<!--
+/************************ LICENCE ***************************
+* 	This file is part of <SourceData SmartFigure frontend code to search and navigate the SourceData resource>
+*     Copyright (C) <2016>  EMBO and Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+
+
+
+<div class="container-fluid">
+
+<div class="row">
+	<div class="col-sm-4 col-sm-offset-4">
+		
+	<form ng-submit="routeUpdate()" ng-style="{opacity:(panel.$wait)?0.4:1}">
+  <label><input style="margin:0 5px" type="radio" value="pubtator" ng-model="panel.format"> PubTator</label>
+	<label><input style="margin:0 5px" type="radio" value="pubannotation" ng-model="panel.format">PubAnnotation</label>
+		<div class="input-group">
+				<input ng-model="panel.panel_id" class="form-control" placeholder="panel id">
+				<span class="input-group-btn">
+					<button class="btn btn-primary" ng-disabled="!panel.panel_id || !panel.format" type="submit">go</button>
+					<button class="btn btn-default" type="reset" ng-click="reset()">reset</button>
+		    </span>
+		</div>
+		<span ng-repeat="p in panel_list " class="pointer"><a ng-click="routeUpdate(p)">{{p}}</a><span ng-show="!$last">, </span></span>
+
+	</form>
+	</div>
+</div>
+
+<div ng-show="panel.annotation.format=='pubtator'">
+	<h4>Format : {{panel.annotation.format}}</h4>
+	<h4>Output</h4> <textarea class="form-control" rows="20" style="background-color:#FBF8EF">{{panel.annotation.output}}</textarea>
+</div>
+
+<div ng-show="panel.annotation.format=='pubannotation'&&panel.annotation.text">
+	<div style="margin-top:20px">
+		<h4>Format : {{panel.annotation.format}}</h4> 
+		<h4>Output</h4> <textarea class="form-control" rows="20" style="background-color:#FBF8EF">{{panel.annotation.output}}</textarea>
+		<button class="btn btn-default btn-sm" ng-click="panel.annotation.$showmore = !panel.annotation.$showmore" style="margin-top:5px">{{{'true':'more',false:'hide'}[!panel.annotation.$showmore]}} <small>(don't trust - utf8 problem) could use <a href="http://pojo.sodhanalibrary.com/lineCharPosition.html" target='_blank'>this site</a></small></button>
+		<div ng-show="panel.annotation.$showmore">
+		<h4>Text</h4> {{panel.annotation.text}}
+		<h4>Tags</h4>
+			<ul>
+				<li ng-repeat="tag in panel.annotation.tags|orderBy:'begin'">{{tag.tag}} <small>({{tag.begin}})</small> => {{tag.id}}</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+	
+</div>

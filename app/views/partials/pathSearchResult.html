@@ -1,0 +1,65 @@
+<!--
+/************************ LICENCE ***************************
+* 	This file is part of <SourceData SmartFigure frontend code to search and navigate the SourceData resource>
+*     Copyright (C) <2016>  EMBO and Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+
+<div class = 'col-sm-12 col-xs-12 col-md-6 col-lg-4' style = 'padding: 0 30px; position: relative'>
+	<div class = 'panel panel-default'>
+		<div class = 'panel-body'>
+			<div class = 'row'>
+				<div class = 'row' ng-click="newSearch(step)">
+					<div class = 'col-xs-5 text-right'><img ng-src = '{{baseURL}}images/icon_{{step.typeLeft}}_intervention.png' height = "20" width = "20" alt = '{{step.typeLeft}}' style = 'margin-right: 10px;' ><span ng-bind-html = 'step.displayLeft'></span></div>
+					<div class = 'col-xs-2 cursor-pointer'><h3 class = 'glyphicon glyphicon-arrow-right' style = 'margin: 0'></h3></div>
+					<div class = 'col-xs-5' ><span ng-bind-html = 'step.displayRight'></span><img ng-src = '{{baseURL}}images/icon_{{step.typeRight}}_assayed.png' height = "20" width = "20" alt = '{{step.typeRight}}' style = 'margin-left: 10px;'></div>
+				</div>
+				<ul class="list-group psmall">
+					<li class="list-group-item" ng-repeat = 'paper in step.papers' ng-click = 'paper.show =! paper.show'>
+				  		<p><small><b>{{paper.title}}</b></small></p>
+						<p class = 'ellipsis'><small class = 'text-muted'>{{paper.author_list}}</small></p>
+						<p><small>{{paper.journal_title}} - {{paper.date}}</small></p>
+						<hr ng-if = 'paper.show' />
+						<div class = 'row' ng-if = 'paper.show' style = 'overflow: auto'>
+							<ul rn-carousel rn-carousel-controls rn-carousel-index="paper.carouselIndex" class="image" style = 'height: 200px;position:relative;display: block;width: 550px; margin: auto;'>
+								<li ng-repeat="collection in paper.panelCollections">
+									<div ng-repeat="panel in collection" class="layer searchResultPanelInCarousel"  ng-click = 'loadPanel(panel.panel_id)'>
+										<figcaption>{{::panel.label}}  {{hypo.carouselIndex}}</figcaption>
+										<img class = 'img-responsive center-block' ng-src = '{{serverURL}}/file.php?panel_id={{panel.panel_id}}' style = 'max-height: 160px'>
+
+									</div>
+
+								</li>
+							</ul>
+							<div rn-carousel-indicators ng-if="paper.panelCollections.length > 1" slides="paper.panelCollections" rn-carousel-index="paper.carouselIndex"></div>
+
+							<!-- <figure ng-repeat = 'panel in paper.panels' style = 'width:300px;float: left;'>
+								{{panel.panel_id}}
+								<figcaption>{{panel.label}}</figcaption>
+								<img class = 'img-responsive' style="margin-bottom:10px;max-width: 300px" ng-src = '{{serverURL}}/file.php?panel_id={{panel.panel_id}}' ng-click = 'loadPanel(panel.panel_id)'/>
+							</figure> -->
+
+						</div>
+
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+	<h1 class = 'glyphicon glyphicon-arrow-right text-center' ng-show = '!first' style = 'position: absolute; left: -15px; top: 30px;'></h1>
+</div>

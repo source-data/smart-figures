@@ -1,0 +1,70 @@
+<!--
+/************************ LICENCE ***************************
+* 	This file is part of <SourceData SmartFigure frontend code to search and navigate the SourceData resource>
+*     Copyright (C) <2016>  EMBO and Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+
+<div >
+	<div style="padding:20px">
+		<!-- <dl class="dl-horizontal">
+			<dt>All tags</dt><dd><span ng-repeat="tag in result.allTags">{{tag}}<span ng-show="!$last"> - </span></span></dd>
+			<dt>treated Tags</dt><dd><span ng-repeat="tag in result.tags">{{tag}}<span ng-show="!$last"> - </span></span></dd>
+		</dl> -->
+		<table class="table table-condensed table-bordered" style="margin-bottom: 0px">
+			<tr >
+				<th class="text-center" style="background-color:#ffffff;border-color:#D1E8F4">Intervention</th>
+				<th class="text-center" style="background-color:#ffffff;border-color:#D1E8F4">Assayed</th>
+				<th style="background-color:#ffffff;border-color:#D1E8F4" ng-if="showMore.state" class="text-center">Focus on <img ng-src = 'images/icon_{{showMore.tag.type}}_{{showMore.tag.role}}.png' height = "20" width = "20" style="margin:0 3px" >{{showMore.tag.text}}</th>
+			</tr>
+			<tr >
+				<td style="border-color:#ffffff">
+					<ul style="list-style-type:none">
+						<li class="cursor-pointer" ng-repeat="tag in result.downstream|orderBy:['type','text']" ng-click="showMoreAction(tag,'downstream')" ng-style="{opacity:(showMore.state && tag !== showMore.tag)?'0.3':'1'}" >
+							<img ng-src = '{{baseURL}}images/icon_{{tag.type}}_intervention.png' height = "20" width = "20" style = 'margin-right: 10px;'>
+							<b><span compile="tag.text"></span></b>
+							<ng-pluralize count="tag.nb" when="{'0': '','one': '','other': ' : {} occurences'}"></ng-pluralize><ng-pluralize count="tag.papers.length" when="{'0': '','one': '','other': ' in {} papers.'}"></ng-pluralize>
+						</li>
+					</ul>
+				</td>
+				<td style="border-color:#ffffff">
+					<ul style="list-style-type:none">
+						<li class="cursor-pointer" ng-repeat="tag in result.upstream|orderBy:['type','text']" ng-click="showMoreAction(tag,'upstream')" ng-style="{opacity:(showMore.state && tag !== showMore.tag)?'0.3':'1'}" >
+							<img ng-src = '{{baseURL}}images/icon_{{tag.type}}_assayed.png' height = "20" width = "20" style = 'margin-right: 10px;'>
+							<b><span compile="tag.text"></span></b>
+							<ng-pluralize count="tag.nb" when="{'0': '','one': '','other': ' : {} occurences'}"></ng-pluralize><ng-pluralize count="tag.papers.length" when="{'0': '','one': '','other': ' in {} papers.'}"></ng-pluralize>
+						</li>
+					</ul>
+				</td>
+				<td style="border-color:#ffffff" ng-if="showMore.state">
+					<div>
+						<input class="form-control" style="width:40%;margin-bottom:10px" ng-model="showMore.searchInTo">
+					</div>
+					<ul style="list-style-type:none">
+						<li ng-repeat="to in showMore.tag.to | orderBy:['-nb','type','text']" >
+							<a ng-show="!showMore.searchInTo || to.text.indexOf(showMore.searchInTo)>-1" ng-click = 'goTo(showMore.tag,to)'>
+								<img ng-src = '{{baseURL}}images/icon_{{to.type}}_{{showMore.tag.antiRole}}.png' height = "20" width = "20" >
+								<span compile='to.text'></span>
+								<small ng-if="to.nb>1">({{to.nb}})</small>
+							</a>
+						</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>

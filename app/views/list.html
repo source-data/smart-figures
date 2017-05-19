@@ -1,0 +1,60 @@
+<!--
+/************************ LICENCE ***************************
+* 	This file is part of <SourceData SmartFigure frontend code to search and navigate the SourceData resource>
+*     Copyright (C) <2016>  EMBO and Swiss Institute of Bioinformatics
+*
+*     This program is free software: you can redistribute it and/or modify
+*     it under the terms of the GNU Affero General Public License as
+*     published by the Free Software Foundation, either version 3 of the
+*     License, or (at your option) any later version.
+*
+*     This program is distributed in the hope that it will be useful,
+*     but WITHOUT ANY WARRANTY; without even the implied warranty of
+*     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*     GNU Affero General Public License for more details.
+*
+*     You should have received a copy of the GNU Affero General Public License
+*    along with this program.  If not, see <http://www.gnu.org/licenses/>
+*
+*****************************************************************/
+-->
+
+<div class = 'container' ng-cloak="" layout-gt-sm="row" layout="column">
+	<h3 class = 'page-header' layout="row" style="text-align: center">List of processed papers in the SourceData compendium</h3>
+
+	<div ng-if="publications.length > 0">
+		<div class="panel panel-primary" style="background-color: #eeeeee" >
+			<div class="panel-body">
+				<h5 class="text-primary"> Filter displayed publications
+					<input ng-model="limitpub" style="margin-left: 10px;color: black;font-weight: normal;">
+					<span class="badge" style="margin-left: 10px; background-color: #2563AB">{{filteredPublications.length}}</span>
+				</h5>
+			</div>
+		</div>
+		<div class="list-group">
+			<div style="position: relative;" class="list-group-item"
+				 ng-repeat='publi in filteredPublications = (publications | filter : limitpub)'>
+
+				<div>
+					<h5>{{ publi.title}}</h5>
+
+					<p class = 'text-muted' style = 'margin-bottom: 0px; font-size: 12px;'>{{ publi.authors|firstAuthor }}, ({{publi.year}}), {{publi.journal}}</p>
+					<p>
+						<a style = 'margin-bottom: 0px; font-size: 12px' ng-href = 'http://dx.doi.org/{{publi.doi}}' target = '_blank' ng-if = 'publi.doi'>doi:{{publi.doi}}</a>
+					</p>
+
+					<button class="btn btn-default btn-xs" ng-click = 'loadPanel(publi.figures[0].first_panel_id)'>
+						View as Smart Figure
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-if="!publications.length ">
+		<div class="alert alert-info" style="margin-top: 42px;">
+			<span >Loading results... </span>
+			<span><img ng-src='{{baseURL}}images/ring.gif' alt='loading...' height='20' width='20'></span>
+		</div>
+	</div>
+
+</div>
