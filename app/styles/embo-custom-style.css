@@ -204,11 +204,17 @@ sd-form form .sdform-advanced-container > .col-sm-offset-1:first-child {
 }
 
 
-.sdform-adv-interv-input {
+.sdform-adv-interv-input,
+.sdform-adv-interv-input:focus,
+.sdform-adv-interv-input:active
+
+{
     border-color:#cb5b3c;
 }
 
-.sdform-adv-btn-assay-input {
+.sdform-adv-btn-assay-input,
+.sdform-adv-btn-assay-input:focus,
+.sdform-adv-btn-assay-input:active {
     border-color:#6292d0;
 }
 
@@ -329,6 +335,7 @@ sd-form form .sdform-advanced-container > .col-sm-offset-1:first-child {
 
     border: solid 4px #5cb85c;
     border-radius:6px;
+    margin-top:2em;
     
 }
 
