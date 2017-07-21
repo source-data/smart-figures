@@ -79,8 +79,15 @@
     .sdform-adv-question {
         display:block;
     }
- 
+    
+    /* Simple search form */
 
+
+    .sdform-simple-input-group {
+
+        margin-top:0;
+        
+    }
 
     .results-container {
         margin-left:0;
