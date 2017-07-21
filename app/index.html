@@ -23,7 +23,8 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title></title>
+	<base href='/'>
+    <title>SourceData</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -39,7 +40,13 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/tag.css">
-      <link rel="stylesheet" href="styles/list.css">
+    <link rel="stylesheet" href="styles/list.css">
+      <link rel="stylesheet" href="styles/sd-style-1.css">
+      <link rel="stylesheet" href="styles/sd-style-2.css">
+      <link rel="stylesheet" href="styles/sd-style-3.css">
+      <link rel="stylesheet" href="styles/embo-custom-style.css">
+      <link rel="stylesheet" href="styles/embo-custom-style-tablet.css">
+      <link rel="stylesheet" href="styles/embo-custom-style-desktop.css">
     <!-- endbuild -->
   </head>
   <body ng-app="publicSourcedataApp">
@@ -48,24 +55,32 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container-fluid">
-      <div class="header" ng-if = 'showHeader'>
-        <ul class="nav nav-pills pull-right">
-					<li><a href = '#/' access = 'active'>Home</a></li>
-          <li><a href="http://sourcedata.embo.org" target="blank">About</a></li>
-          <li><a href="#/list" tooltip = 'List of processed papers in the SourceData compendium' tooltip-placement = 'bottom' access = 'active'>List of papers</a></li>
-          <li><a ng-href="#/api" access = 'active'>API</a></li>
-		  		<li><a href = 'http://sourcedata.vital-it.ch'>Curation interface</a></li>
-        </ul>
-        <h3 class="text-muted"><a href="http://sourcedata.embo.org" target = '_blank'><img ng-src = '{{baseURL}}images/sourcedata_logo.png' height = '50' style = 'margin-right: 8px;'/></a></h3>
-        <!-- <h3 class="text-muted"><img ng-src = '{{baseURL}}images/icon_SD.png' height = '32' style = 'margin-right: 8px;'/>EMBO - Sourcedata</h3> -->
-
+    <header class="header public-ng-header" ng-if = 'showHeader'>
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span >MENU</span>
+          </button>
+          <a href="http://sourcedata.embo.org" target = '_blank' class="navbar-brand"><img ng-src = '{{baseURL}}images/sourcedata_logo.png' style='height:70px; width:auto;'/></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+                <li><a href = '/' access = 'active'>Home</a></li>
+                <li><a href="http://sourcedata.embo.org" target="blank">About</a></li>
+                <li><a href="/list" tooltip = 'List of processed papers in the SourceData compendium' tooltip-placement = 'bottom' access = 'active'>List of papers</a></li>
+                <li><a ng-href="/api" access = 'active'>API</a></li>
+                <li><a href = 'http://sourcedata.vital-it.ch'>Curation interface</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
+    </nav>
+        <!-- <h3 class="text-muted"><img ng-src = '{{baseURL}}images/icon_SD.png' height = '32' style = 'margin-right: 8px;'/>EMBO - Sourcedata</h3> -->
+    </header>
+    <div class="container-fluid">
 	  <div class="body" ng-view=""></div>
-
-      <!-- <div class="footer">
-        <p></p>
-      </div> -->
     </div>
 
 
@@ -110,6 +125,7 @@
     <!-- endbower -->
     <!-- endbuild -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
         <script src="scripts/thirdParties.js" type="text/javascript" charset="utf-8"></script>
         <script src="scripts/config.js"></script>
         <script src="scripts/app.js"></script>
@@ -141,7 +157,7 @@
         <script src="scripts/controllers/validationrequired.js"></script>
         <script src="scripts/controllers/user.js"></script>
         <script src="scripts/controllers/annotation.js"></script>
-        <script src="scripts/controllers/test.js"></script>
+        <!-- <script src="scripts/controllers/test.js"></script> -->
         <script src="scripts/directives/access.js"></script>
         <script src="scripts/filters/main.js"></script>
         <script src="scripts/controllers/list.js"></script>

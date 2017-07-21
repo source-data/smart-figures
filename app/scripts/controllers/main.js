@@ -49,20 +49,21 @@ angular.module('publicSourcedataApp')
 				$scope.searchParams.hide_input = true;
 				$scope.searchParams.loading = false;
 				$scope.searchParams.navbarResult = 'result';
+				Filter.removeAll();
+				Filter.init();
 			});
+		}else{
+			Filter.removeAll();
+			Filter.init();
 		}
-
 	};
 
 	//-O------ On route UPDATE Search and rm filters ------//
 	$scope.$on('$routeUpdate', function(){
         search();
-		$scope.firstClick = 0;
-		Filter.removeAll();
 	});
 	$scope.$on('$routeChangeSuccess', function(){
-		$scope.firstClick = 0;
-		Filter.removeAll();
+		search();
 	});
 
 
@@ -94,10 +95,6 @@ angular.module('publicSourcedataApp')
 		Search.searchParams.displayedResult = result;
 		$scope.searchParams.displayedResult = result;
 		Search.getSummary();
-	};
-	$scope.filterInit = function() {
-		Filter.init();
-		Filter.filtercollection.subitems.push({});
 	};
 
 	//adjust displayed results when adding or removing filter

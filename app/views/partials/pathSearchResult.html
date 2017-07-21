@@ -20,18 +20,18 @@
 -->
 
 <div class = 'col-sm-12 col-xs-12 col-md-6 col-lg-4' style = 'padding: 0 30px; position: relative'>
-	<div class = 'panel panel-default'>
+	<div class = 'panel panel-default pathsearch-panel'>
 		<div class = 'panel-body'>
 			<div class = 'row'>
 				<div class = 'row' ng-click="newSearch(step)">
-					<div class = 'col-xs-5 text-right'><img ng-src = '{{baseURL}}images/icon_{{step.typeLeft}}_intervention.png' height = "20" width = "20" alt = '{{step.typeLeft}}' style = 'margin-right: 10px;' ><span ng-bind-html = 'step.displayLeft'></span></div>
-					<div class = 'col-xs-2 cursor-pointer'><h3 class = 'glyphicon glyphicon-arrow-right' style = 'margin: 0'></h3></div>
-					<div class = 'col-xs-5' ><span ng-bind-html = 'step.displayRight'></span><img ng-src = '{{baseURL}}images/icon_{{step.typeRight}}_assayed.png' height = "20" width = "20" alt = '{{step.typeRight}}' style = 'margin-left: 10px;'></div>
+					<div class = 'col-xs-5 text-right pathsearch-step-left'><img ng-src = '{{baseURL}}images/icon_{{step.typeLeft}}_intervention.png' height = "20" width = "20" alt = '{{step.typeLeft}}' style = 'margin-right: 10px;' ><span ng-bind-html = 'step.displayLeft'></span></div>
+					<div class = 'col-xs-2 cursor-pointer pathsearch-cursor-pointer'><h3 class = 'glyphicon glyphicon-arrow-right' style = 'margin: 0'></h3></div>
+					<div class = 'col-xs-5 pathsearch-step-right' ><span ng-bind-html = 'step.displayRight'></span><img ng-src = '{{baseURL}}images/icon_{{step.typeRight}}_assayed.png' height = "20" width = "20" alt = '{{step.typeRight}}' style = 'margin-left: 10px;'></div>
 				</div>
-				<ul class="list-group psmall">
-					<li class="list-group-item" ng-repeat = 'paper in step.papers' ng-click = 'paper.show =! paper.show'>
+				<ul class="list-group psmall pathsearch-ul">
+					<li class="list-group-item pathsearch-group-item" ng-repeat = 'paper in step.papers' ng-click = 'paper.show =! paper.show'>
 				  		<p><small><b>{{paper.title}}</b></small></p>
-						<p class = 'ellipsis'><small class = 'text-muted'>{{paper.author_list}}</small></p>
+						<p class = 'ellipsis pathsearch-ellipsis'><small class = 'text-muted'>{{paper.author_list}}</small></p>
 						<p><small>{{paper.journal_title}} - {{paper.date}}</small></p>
 						<hr ng-if = 'paper.show' />
 						<div class = 'row' ng-if = 'paper.show' style = 'overflow: auto'>

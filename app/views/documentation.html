@@ -19,76 +19,116 @@
 *****************************************************************/
 -->
 
-<div class="container-fluid documentation"style="padding:0% 10%">
-	<div class="panel panel-success">
-		<div class="panel-heading">
-			<div class="panel-title"><b>Rest API Documentation</b></div>
-		</div>
-		<div class="panel-body">
-			<div>
-				<h3>Citation</h3>
-				<div class = 'panel panel-default'>
-					<div class = 'panel-body'>
-<p>If you are using this resource, please cite the following paper: <cite>"Robin Liechti, Lou Götz, Nancy George, Sara El-Gebali, Isaac Crespo, Ioannis Xenarios, Thomas Lemberger (2016). SourceData - a semantic platform for curating and searching figures."</cite> BioRxiv doi: <a href="http://dx.doi.org/10.1101/058529" target="blank">http://dx.doi.org/10.1101/058529</a>.</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<h3>Basic authentication</h3>
-				<div class = 'panel panel-default'>
-					<div class = 'panel-body'>
-						<dl class = ''>
-							<dt>Base URL</dt>
-							<dd><pre>{{user.baseUrl}}</pre></dd>
-							<dt ng-if = 'user.login != "public_search"'>Login</dt>
-							<dd ng-if = 'user.login != "public_search"'>{{user.login}}</dd>
-							<dt ng-if = 'user.login != "public_search"'>Password (for API)</dt>
-							<dd ng-if = 'user.login != "public_search"'>{{user.api_key}}</dd>
-							<dt>Example</dt>
-							<dd><pre>curl <span ng-if = 'user.login != "public_search"'>-u {{user.login}}:{{user.api_key}} </span>{{user.baseUrl}}/panel/13904</pre></dd>
-						</dl>
+<div class="container-fluid documentation" style="padding:0% 10%">
+    <div class="panel panel-success documentation-panel">
+        <div class="panel-heading documentation-heading">
+            <div class="panel-title" id="step1"><b>Rest API Documentation</b></div>
+        </div>
+        <div class="panel-body documentation-body">
+            <div>
+                <h3>Citation</h3>
+                <div class='panel panel-default panel-citation'>
+                    <div class='panel-body panel-citation-body' id="step2">
+                        <p>If you are using this resource, please cite the following paper: <cite>"Robin Liechti, Lou
+                            Götz, Nancy George, Sara El-Gebali, Isaac Crespo, Ioannis Xenarios, Thomas Lemberger (2016).
+                            SourceData - a semantic platform for curating and searching figures."</cite> BioRxiv doi: <a
+                                href="http://dx.doi.org/10.1101/058529"
+                                target="blank">http://dx.doi.org/10.1101/058529</a>.</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>Basic authentication</h3>
+                <div class='panel panel-default panel-authentication'>
+                    <div class='panel-body panel-authentication-body'>
+                        <dl class=''>
+                            <dt>Base URL</dt>
+                            <dd>
+                                <pre>{{user.baseUrl}}</pre>
+                            </dd>
+                            <dt ng-if='user.login != "public_search"'>Login</dt>
+                            <dd ng-if='user.login != "public_search"'>{{user.login}}</dd>
+                            <dt ng-if='user.login != "public_search"'>Password (for API)</dt>
+                            <dd ng-if='user.login != "public_search"'>{{user.api_key}}</dd>
+                            <dt>Example</dt>
+                            <dd>
+                                <pre>curl <span
+                                        ng-if='user.login != "public_search"'>-u {{user.login}}:{{user.api_key}} </span>{{user.baseUrl}}/panel/13904</pre>
+                            </dd>
+                        </dl>
 
-					</div>
-				</div>
-			</div>
-			<div ng-repeat="(category,data) in documentation">
-				<h3 style="margin-top:0px">{{category}}</h3>
-				<div class="list-group">
-					<div href="#" class="list-group-item" ng-repeat="(docIdx,doc) in data" ng-class="(doc.show)?'active-perso':''">
-						<p ng-click="showDoc(category, doc)" class="cursor-pointer" style="margin-bottom:10px"><span class="text-info" style="font-size:16px"><b>{{doc.title}}</b></span>: <span>{{doc.description}}</span></p>
-						<div ng-show="doc.show">
-							<p><span class="label label-primary" style="font-size:13px;margin-right:10px">{{doc.type}}</span>{{doc.path}} </p>
-							<hr style="margin:10px 0px">
-							<p><a ng-click="doc.hideParams=!doc.hideParams" class="cursor-pointer">Parameters</a></p>
-							<table class="table table-condensed table-hover table-bordered" ng-show="!doc.hideParams">
-								<thead><tr><th class="text-center">Name</th><th class="text-center">Type</th><th class="text-center">Description</th><th class="text-center">Value</th><th class="text-center">Mandatory</th></tr></thead>
-								<tbody>
-									<tr ng-repeat="param in doc.parameters">
-									<td class="text-center">{{param.name}}</td>
-									<td class="text-center">{{param.type}}</td>
-									<td style="width:50%;font-size:12px" compile="param.description"></td>
-									<td class="text-center" style="width:20%">
-										<input ng-model="param.value" type="test" class="form-control" style="width:90%" ng-if="param.choice == 'N'&&param.type!='integer'"></input>
-										<input ng-model="param.value" type="number" class="form-control" style="width:90%" ng-if="param.choice == 'N'&&param.type=='integer'"></input>
-										<select ng-model="param.value" class="form-control" style="width:90%" ng-if="param.choice != 'N'"><option ng-repeat="choice in param.choice">{{choice}}</option></select>
-									</td>
-									<td class="text-center" style="width:10%;">{{param.mandatory}}</td>
-									</tr>
-								</tbody>
-							</table>
-							<hr style="margin:10px 0px">
-							<p><a ng-click="doc.hideOutput=!doc.hideOutput" class="cursor-pointer">Output</a></p>
-							<p ng-show="!doc.hideOutput" compile="doc.output"></p>
-							<div style="margin-top:10px">
-								<button class="btn btn-warning btn-sm" ng-click="try(doc,docIdx)">Try it !</button>
-								<img  style="margin:auto;margin-left:30%;max-height:35px" ng-src="{{baseURL}}/images/loading-bar.gif" ng-show="doc.run.status=='pend'">
-							</div>
-							<div ng-show="doc.run.status" style="margin-top:5px"><p>Request URL</p><textarea class="form-control" rows="1" style="background-color:#FBF8EF">{{doc.run.url}}</textarea></div>
-							<div ng-show="doc.run.status == 'finished'" style="margin-top:5px"><p>Response Body <button class="btn btn-xs pull-right" ng-class="(doc.run.copy)?'btn-success':'btn-default'" style="margin-bottom:3px" clipboard text="doc.run.response" on-copied="copySuccess(doc)" on-error="copyFail(err)"><small>copy to clipboard</small></button></p><textarea class="form-control" rows="15" style="background-color:#FBF8EF">{{doc.run.response}}</textarea></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                    </div>
+                </div>
+            </div>
+            <div ng-repeat="(category,data) in documentation">
+                <h3 style="margin-top:0px">{{category}}</h3>
+                <div class="list-group doc-list">
+                    <div href="#" class="list-group-item" ng-repeat="(docIdx,doc) in data"
+                         ng-class="(doc.show)?'active-perso':''">
+                        <p ng-click="showDoc(category, doc)" class="cursor-pointer" style="margin-bottom:10px"><span
+                                class="text-info" style="font-size:16px"><b>{{doc.title}}</b></span>: <span>{{doc.description}}</span>
+                        </p>
+                        <div ng-show="doc.show">
+                            <p><span class="label label-primary"
+                                     style="font-size:13px;margin-right:10px">{{doc.type}}</span>{{doc.path}} </p>
+                            <hr style="margin:10px 0px">
+                            <p><a ng-click="doc.hideParams=!doc.hideParams" class="cursor-pointer">Parameters</a></p>
+                            <table class="table table-condensed table-hover table-bordered" ng-show="!doc.hideParams">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Name</th>
+                                    <th class="text-center">Type</th>
+                                    <th class="text-center">Description</th>
+                                    <th class="text-center">Value</th>
+                                    <th class="text-center">Mandatory</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="param in doc.parameters">
+                                    <td class="text-center">{{param.name}}</td>
+                                    <td class="text-center">{{param.type}}</td>
+                                    <td style="width:50%;font-size:12px" compile="param.description"></td>
+                                    <td class="text-center" style="width:20%">
+                                        <input ng-model="param.value" type="test" class="form-control" style="width:90%"
+                                               ng-if="param.choice == 'N'&&param.type!='integer'">
+                                        <input ng-model="param.value" type="number" class="form-control"
+                                               style="width:90%"
+                                               ng-if="param.choice == 'N'&&param.type=='integer'">
+                                        <select ng-model="param.value" class="form-control" style="width:90%"
+                                                ng-if="param.choice != 'N'">
+                                            <option ng-repeat="choice in param.choice">{{choice}}</option>
+                                        </select>
+                                    </td>
+                                    <td class="text-center" style="width:10%;">{{param.mandatory}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <hr style="margin:10px 0px">
+                            <p><a ng-click="doc.hideOutput=!doc.hideOutput" class="cursor-pointer">Output</a></p>
+                            <p ng-show="!doc.hideOutput" compile="doc.output"></p>
+                            <div style="margin-top:10px">
+                                <button class="btn btn-warning btn-sm" ng-click="try(doc,docIdx)">Try it !</button>
+                                <img style="margin:auto;margin-left:30%;max-height:35px"
+                                     ng-src="{{baseURL}}/images/loading-bar.gif" ng-show="doc.run.status=='pend'">
+                            </div>
+                            <div ng-show="doc.run.status" style="margin-top:5px"><p>Request URL</p><textarea
+                                    class="form-control" rows="1"
+                                    style="background-color:#FBF8EF">{{doc.run.url}}</textarea></div>
+                            <div ng-show="doc.run.status == 'finished'" style="margin-top:5px">
+                                <p>Response Body
+                                    <button class="btn btn-xs pull-right"
+                                            ng-class="(doc.run.copy)?'btn-success':'btn-default'"
+                                            style="margin-bottom:3px" clipboard text="doc.run.response"
+                                            on-copied="copySuccess(doc)" on-error="copyFail(err)">
+                                        <small>copy to clipboard</small>
+                                    </button>
+                                </p>
+                                <textarea class="form-control" rows="15" style="background-color:#FBF8EF">{{doc.run.response}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

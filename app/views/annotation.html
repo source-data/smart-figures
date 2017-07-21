@@ -21,19 +21,19 @@
 
 
 
-<div class="container-fluid">
+<div class="container-fluid annot-container">
 
 <div class="row">
 	<div class="col-sm-4 col-sm-offset-4">
 		
-	<form ng-submit="routeUpdate()" ng-style="{opacity:(panel.$wait)?0.4:1}">
+	<form ng-submit="routeUpdate()" ng-style="{opacity:(panel.$wait)?0.4:1}" class="annot-form">
   <label><input style="margin:0 5px" type="radio" value="pubtator" ng-model="panel.format"> PubTator</label>
 	<label><input style="margin:0 5px" type="radio" value="pubannotation" ng-model="panel.format">PubAnnotation</label>
-		<div class="input-group">
-				<input ng-model="panel.panel_id" class="form-control" placeholder="panel id">
+		<div class="input-group annot-input-group">
+				<input ng-model="panel.panel_id" class="form-control annot-form-control" placeholder="panel id">
 				<span class="input-group-btn">
-					<button class="btn btn-primary" ng-disabled="!panel.panel_id || !panel.format" type="submit">go</button>
-					<button class="btn btn-default" type="reset" ng-click="reset()">reset</button>
+					<button class="btn btn-primary annot-btn-go" ng-disabled="!panel.panel_id || !panel.format" type="submit">go</button>
+					<button class="btn btn-default annot-btn-reset" type="reset" ng-click="reset()">reset</button>
 		    </span>
 		</div>
 		<span ng-repeat="p in panel_list " class="pointer"><a ng-click="routeUpdate(p)">{{p}}</a><span ng-show="!$last">, </span></span>

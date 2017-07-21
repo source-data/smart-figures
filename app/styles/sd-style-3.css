@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'sourcedata_icons_3_font';
+  src: url('fonts/sourcedata_icons_3_font.ttf?l9yu3t') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="sd-icon-3-"], [class*=" sd-icon-3-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'sourcedata_icons_3_font' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.sd-icon-3-arrow:before {
+  content: "\e900";
+}

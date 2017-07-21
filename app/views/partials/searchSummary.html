@@ -25,14 +25,17 @@
 			<dt>All tags</dt><dd><span ng-repeat="tag in result.allTags">{{tag}}<span ng-show="!$last"> - </span></span></dd>
 			<dt>treated Tags</dt><dd><span ng-repeat="tag in result.tags">{{tag}}<span ng-show="!$last"> - </span></span></dd>
 		</dl> -->
-		<table class="table table-condensed table-bordered" style="margin-bottom: 0px">
+		<table class="table table-condensed table-bordered searchsum-table" style="margin-bottom: 0px">
 			<tr >
-				<th class="text-center" style="background-color:#ffffff;border-color:#D1E8F4">Intervention</th>
-				<th class="text-center" style="background-color:#ffffff;border-color:#D1E8F4">Assayed</th>
-				<th style="background-color:#ffffff;border-color:#D1E8F4" ng-if="showMore.state" class="text-center">Focus on <img ng-src = 'images/icon_{{showMore.tag.type}}_{{showMore.tag.role}}.png' height = "20" width = "20" style="margin:0 3px" >{{showMore.tag.text}}</th>
+				<!--<th class="text-center" style="background-color:#ffffff;border-color:#D1E8F4">Intervention</th>-->
+				<!--<th class="text-center" style="background-color:#ffffff;border-color:#D1E8F4">Assayed</th>-->
+				<!--<th style="background-color:#ffffff;border-color:#D1E8F4" ng-if="showMore.state" class="text-center">Focus on <img ng-src = 'images/icon_{{showMore.tag.type}}_{{showMore.tag.role}}.png' height = "20" width = "20" style="margin:0 3px" >{{showMore.tag.text}}</th>-->
+				<th class="text-center searchsum-text-center" >Intervention</th>
+				<th class="text-center searchsum-text-center" >Assayed</th>
+				<th ng-if="showMore.state" class="text-center searchsum-text-center">Focus on <img ng-src = 'images/icon_{{showMore.tag.type}}_{{showMore.tag.role}}.png' height = "20" width = "20" style="margin:0 3px" >{{showMore.tag.text}}</th>
 			</tr>
 			<tr >
-				<td style="border-color:#ffffff">
+				<td >
 					<ul style="list-style-type:none">
 						<li class="cursor-pointer" ng-repeat="tag in result.downstream|orderBy:['type','text']" ng-click="showMoreAction(tag,'downstream')" ng-style="{opacity:(showMore.state && tag !== showMore.tag)?'0.3':'1'}" >
 							<img ng-src = '{{baseURL}}images/icon_{{tag.type}}_intervention.png' height = "20" width = "20" style = 'margin-right: 10px;'>
@@ -41,7 +44,7 @@
 						</li>
 					</ul>
 				</td>
-				<td style="border-color:#ffffff">
+				<td class="searchsum-td">
 					<ul style="list-style-type:none">
 						<li class="cursor-pointer" ng-repeat="tag in result.upstream|orderBy:['type','text']" ng-click="showMoreAction(tag,'upstream')" ng-style="{opacity:(showMore.state && tag !== showMore.tag)?'0.3':'1'}" >
 							<img ng-src = '{{baseURL}}images/icon_{{tag.type}}_assayed.png' height = "20" width = "20" style = 'margin-right: 10px;'>
@@ -50,7 +53,7 @@
 						</li>
 					</ul>
 				</td>
-				<td style="border-color:#ffffff" ng-if="showMore.state">
+				<td class="searchsum-td" ng-if="showMore.state">
 					<div>
 						<input class="form-control" style="width:40%;margin-bottom:10px" ng-model="showMore.searchInTo">
 					</div>

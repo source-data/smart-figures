@@ -1,6 +1,6 @@
 // Generated on 2015-08-03 using generator-angular 0.9.8
 'use strict';
-
+var modRewrite = require('connect-modrewrite');
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -41,15 +41,16 @@ module.exports = function (grunt) {
  			  },
  			  constants: {
  				  ENV: {
- 					  // serverURL: 'http://sourcedata-dev.vital-it.ch/robin/public/php/api/',
- 					  serverURL: 'http://sourcedata-dev.vital-it.ch/lou/public/php/api/',
- 					  //serverURL: 'http://sourcedata-dev.vital-it.ch/anastasia/public/php/api/',
+ 					   serverURL: 'https://api.sourcedata.io/',
+ 					  //  serverURL: 'http://sourcedata.vital-it.ch/public/php/api/',
+ 					  //serverURL: 'http://sourcedata-dev.vital-it.ch/lou/public/php/api/',
 					  baseURL: '',
 					  baseHref: '/',
  					  withCredentials: true,
  					  debugInfoEnabled: true,
  					  CORS: true,
-					  httpCache: false
+					  httpCache: false,
+					  html5: false
  				  }
  			  }
  		  },
@@ -59,17 +60,17 @@ module.exports = function (grunt) {
  			  },
  			  constants: {
  				  ENV: {
- 					  serverURL: 'http://sourcedata-dev.vital-it.ch/lou/public/php/api/',
-					  baseURL: 'http://sourcedata-dev.vital-it.ch/lou/public/',
-					  baseHref: '/lou/public/',
-					  // serverURL: '/public/php/api/',
-					  // baseURL: 'http://sourcedata.vital-it.ch/public/',
-					  // baseHref: '/public/',
-
+					  //  					  serverURL: 'http://sourcedata-dev.vital-it.ch/lou/public/php/api/',
+					  // baseURL: 'http://sourcedata-dev.vital-it.ch/lou/public/',
+					  // baseHref: '/lou/public/',
+					  serverURL: '/php/api/',
+					  baseURL: 'https://sourcedata2.vital-it.ch/',
+					  baseHref: '/',
  					  withCredentials: true,
  					  debugInfoEnabled: false,
  					  CORS: true,
-					  httpCache: true
+					  httpCache: true,
+					  html5: true
  				  }
  			  }
  		  }
@@ -116,7 +117,8 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        // hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
       livereload: {
@@ -124,6 +126,7 @@ module.exports = function (grunt) {
           open: true,
           middleware: function (connect) {
             return [
+  			  modRewrite(['^[^\\.]*$ /index.html [L]']),
               connect.static('.tmp'),
               connect().use(
                   '/bower_components',

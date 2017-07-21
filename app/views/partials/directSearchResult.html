@@ -19,50 +19,61 @@
 *****************************************************************/
 -->
 
-<div class = 'panel panel-default'>
-	<div class = 'panel-body'>
+<div class = 'panel panel-default direct-search-res-container'>
+	<div class = 'panel-body direct-search-res-body'>
 		<div class = 'row'>
-			<div class = 'col-sm-5'>
-				<h5 style = 'margin-bottom: 4px;'>{{::result.title}}  </h5>
-				<button type="button" class="btn btn-default btn-xs" ng-click="result.showDetails = !result.showDetails"> {{{'true':'Hide','false':'Show'}[result.showDetails]}} details</button>
-
-				<p class = 'text-muted' style = 'margin-bottom: 4px; margin-top: 0;' ng-if="!result.showDetails">{{::result.authors|firstAuthor}}</p>
-				<p class = 'text-muted' style = 'margin-bottom: 4px; margin-top: 0;' ng-if="result.showDetails">{{::result.authors}}</p>
-
+			<div class = 'col-md-5'>
+				<h5 class="direct-search-res-title" style = 'margin-bottom: 4px;'>{{::result.title}}  </h5>
+				<p class = 'text-muted direct-search-res-author' style = 'margin-bottom: 4px; margin-top: 0;' ng-if="!result.showDetails">{{::result.authors|firstAuthor}}</p>
+				<p class = 'text-muted direct-search-res-authors' style = 'margin-bottom: 4px; margin-top: 0;' ng-if="result.showDetails">{{::result.authors}}</p>
 				<p style = 'margin: 0; font-size: 12px'>
-					<a href = 'http://dx.doi.org/{{::result.doi}}' target = '_blank' ng-if = 'result.doi'>{{::result.journal_title}}<span ng-show="result.date">-</span> {{::result.date}}</a>
+					<a href = 'http://dx.doi.org/{{::result.doi}}' target = '_blank' ng-if = 'result.doi' class="direct-search-res-doi-link">{{::result.journal_title}}<span ng-show="result.date"> -</span> {{::result.date}}</a>
 					<span ng-if="!result.doi">{{::result.journal_title}}<span ng-show="result.date"> - </span>{{::result.date}}</span>
 				</p>
-				<div ng-show="result.showDetails">
-					<div ng-if="::result.abstract!=null"> Abstract: <p compile="::result.abstract"></p></div>
-					<div ng-if="::result.abstract==null"> No abstract available </div>
-					<div ng-show="result.assays.length"><img ng-src="{{baseURL}}images/icon_assay.png" width="20" height="20" alt="Icon Assay"> <span ng-repeat="assay in result.assays" class="badge experimental-badge">{{assay.external_name}}</span></div>
-				</div>
+				<button type="button" class="btn btn-default btn-xs direct-search-res-btn" ng-click="result.showDetails = !result.showDetails"> {{(result.showDetails)?'Hide':'Show'}} abstract
+					<span class="glyphicon direct-search-res-chevrons" ng-class="(result.showDetails)?'glyphicon-chevron-up':'glyphicon-chevron-down'"></span>
+				</button>
 
+				<div ng-show="result.showDetails">
+					<div class="direct-search-res-abstract" ng-if="::result.abstract!=null"> <b>Abstract: </b><p compile="::result.abstract"></p></div>
+					<div class="direct-search-res-no-abstract" ng-if="::result.abstract==null"> No abstract available </div>
+					<div class="direct-search-res-assay" ng-show="result.assays.length">
+						<span class='sd-icon-2-assay direct-search-res-assay-icon'></span>
+						<span ng-repeat="assay in result.assays" class="badge experimental-badge">{{assay.external_name}}</span></div>
+				</div>
 			</div>
-			<div class = 'col-sm-7'>
-				<ul class="list-group list-sm">
-					<li class="list-group-item liSearchResult" ng-repeat = 'hypo in result.hypos|filter:repeatFilter' style="padding-bottom:0px">
+			<div class = 'col-md-7'>
+				<ul class="list-group list-sm direct-search-res-list">
+					<li class="list-group-item liSearchResult direct-search-res-item" ng-repeat = 'hypo in result.hypos|filter:repeatFilter' style="padding-bottom:0px">
 						<div class = 'row' ng-click = 'hypo.show = !hypo.show'>
-							<div class = 'col-xs-5 text-right' style="padding-top:15px">
-								<img ng-src = '{{baseURL}}images/icon_{{hypo.typeLeft}}_intervention.png' height = "20" width = "20" alt = '{{hypo.typeLeft}}' style = 'margin-right: 10px;' >
+							<div class = 'col-xs-5 text-right direct-search-res-intervention' style="padding-top:15px">
+								<span class='sd-icon-1-{{hypo.typeLeft}} direct-search-res-intervention-icons'></span>
 								<span compile = '::hypo.externalDisplayLeft || hypo.displayLeft'></span>
 								<span ng-if = 'hypo.externalDisplayLeft && (hypo.externalDisplayLeft|lowercase) != (hypo.displayLeft.join(", ")|lowercase)'>(<span compile = 'hypo.displayLeft.join(", ")'></span>)</span>
 								<sup ng-if = 'hypo.motif_score > 8 && hypo.motif_role == "intervention"' class = 'glyphicon glyphicon-star' style = 'color:#ff9f11' tooltip = 'potential regulator' ></sup>
 							<!-- </span> -->
 							</div>
-							<div class = 'col-xs-2 text-center' style = 'position: relative'>
+							<div class = 'col-xs-2 text-center direct-search-res-arrow' style = 'position: relative'>
 								<p style="margin-bottom:0px"><span style='font-size: 10px;'>{{hypo.nb_panels}} experiment<span ng-show="hypo.nb_panels>1">s</span></span></p>
 								<!-- <span style = 'position: absolute; top: -10px;  text-align: center;  font-size: 10px;'>{{hypo.nb_panels}} experiments</span> -->
-								<h3 class="text-center" style="margin-top:0"><span class = 'glyphicon glyphicon-arrow-right cursor-pointer'></span></h3>
+								<h3 class="text-center arrow-icon-container" style="margin-top:0"><span class = 'sd-icon-3-arrow '></span></h3>
 							</div>
-							<div class = 'col-xs-5' style="padding-top:15px">
+							<div class = 'col-xs-5 direct-search-res-assayed' style="padding-top:15px">
+								<span class='sd-icon-1-{{hypo.typeRight}} direct-search-res-intervention-icons'></span>
 								<span compile = '::hypo.externalDisplayRight || hypo.displayRight'></span>
 								<span ng-if = 'hypo.externalDisplayRight && (hypo.externalDisplayRight|lowercase) != (hypo.displayRight.join(", ")|lowercase)'>(<span compile = 'hypo.displayRight.join(", ")'></span>)</span>
 								<sup ng-if = 'hypo.motif_score > 8 && hypo.motif_role == "assayed"' class = 'glyphicon glyphicon-star'  style = 'color:#ff9f11' tooltip = 'potential regulator'></sup>
-								<img ng-src = '{{baseURL}}images/icon_{{hypo.typeRight}}_assayed.png' height = "20" width = "20" alt = '{{hypo.typeRight}}' style = 'margin-left: 10px;'>
-								<span class="pull-right fa cursor-pointer" style="color:#6E6E6E" ng-class="(hypo.show)?'fa-minus-square':'fa-plus-square'"></span>
-							 </div>
+								
+								<button type="button" class="sd-mobilehide pull-right cursor-pointer btn btn-default btn-xs direct-search-res-figures-btn" >{{(hypo.show)?'Hide':'Show'}} figures
+									<span class="glyphicon direct-search-res-chevrons" ng-class="(hypo.show)?'glyphicon-chevron-up':'glyphicon-chevron-down'"></span>
+								</button>
+
+							</div>
+							<div class="sd-mobile-hypo-toggle-container sd-mobileshow col-xs-12">
+								<button type="button" class="cursor-pointer btn btn-default btn-xs direct-search-res-figures-btn" >{{(hypo.show)?'Hide':'Show'}} figures
+								<span class="glyphicon direct-search-res-chevrons" ng-class="(hypo.show)?'glyphicon-chevron-up':'glyphicon-chevron-down'"></span>
+								</button>
+							</div>
 						</div>
 						<!-- <hr ng-if = 'hypo.show' /> -->
 						<div class = 'row' ng-if = 'hypo.show' style="margin-top:5px">
@@ -70,12 +81,12 @@
 								<h3 ng-click = 'hypo.carouselIndex= hypo.carouselIndex-1' ng-if = 'hypo.carouselIndex' style = 'padding-top: 50px; cursor: pointer;' class = 'glyphicon glyphicon-chevron-left'></h3>
 							</div>
 							<div class = 'col-xs-10'>
-								<ul rn-carousel rn-carousel-index="hypo.carouselIndex" class="image" style = 'height: 200px;position:relative;display: block;width: 550px; margin: auto;'>
+								<ul rn-carousel rn-carousel-index="hypo.carouselIndex" class="image direct-search-res-carousel" style = 'height: 200px;position:relative;display: block;width: 550px; margin: auto;'>
 									<li ng-repeat="collection in hypo.collections" >
-										<div ng-repeat="panel in collection" class="layer searchResultPanelInCarousel"  ng-click = 'loadPanel(panel.panel_id)'>
+										<div ng-repeat="panel in collection" class="layer searchResultPanelInCarousel direct-search-res-carousel-panel"  ng-click = 'loadPanel(panel.panel_id)'>
 											<figcaption tooltip-placement="bottom" class="cursor-pointer" >{{::panel.label}}<span class="pull-right glyphicon glyphicon-paperclip" ng-show="panel.panel_doc"></span></figcaption>
 											<img class = '{{baseURL}}img-responsive center-block' ng-src = '{{serverURL}}/file.php?panel_id={{panel.panel_id}}' style = 'max-height: 160px'>
-											<span><span class="badge experimental-badge" style="font-size:11px" ng-repeat="assay in panel.assays">{{assay.external_name}}</span></span>
+											<span><span class="badge experimental-badge direct-search-res-exp-badge" style="font-size:11px" ng-repeat="assay in panel.assays">{{assay.external_name}}</span></span>
 										</div>
 									</li>
 								</ul>
@@ -86,7 +97,7 @@
 							</div>
 						</div>
 						<div class="row" ng-if = 'hypo.show' style="margin-top:5px">
-								<p style="background-color:#F2F2F2;padding:10px;margin:0" class="text-center">Click on figure to view it in SmartFigure</p>
+								<p style="background-color:#F2F2F2;padding:10px;margin:0" class="text-center direct-search-res-click-figure">Click on figure to view it in SmartFigure</p>
 						</div>
 					</li>
 				</ul>

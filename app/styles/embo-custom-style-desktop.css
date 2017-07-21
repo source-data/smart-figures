@@ -1,0 +1,104 @@
+/*Tablet-upwards Specific Styles*/
+@media all and (min-width: 992px){
+
+
+
+    /*filter*/
+
+    .result-filters {
+        border-radius:6px;
+        background-color:#f0f0f0;
+        margin-top:1.5em;
+        margin-left:0;
+        margin-right:0;
+    }
+
+
+
+    .sdform-input-wrapper,
+    .sd-form-button-container    
+    {
+        width:100%;
+    }
+
+        /*search input widths*/
+    .sdform-advanced-container .col-sm-4 {
+        min-width:300px;
+    }
+
+
+     sd-form form .sdform-advanced-container > .col-sm-offset-1 {
+        margin-left:8.33333333%;
+     }
+
+
+    .sdform-adv-does, 
+    .sdform-adv-affect,
+    .sdform-adv-question
+    {
+
+        width:8.33333333%;
+
+    }
+
+
+
+
+}
+
+
+
+
+/*Tablet-upwards Specific Styles*/
+@media all and (min-width: 1200px){
+
+    .sdform-advanced-container > .col-sm-offset-1 {
+        margin-left: 8.33333333%;
+    }
+
+    .sdform-input-wrapper
+    {
+        width:75%;
+    }
+
+    .sd-form-button-container    
+    {
+        width:16.6666667%;
+        margin-top:-45px;
+    }
+
+    .sdform-example {
+        padding:1em;
+        padding-left:5.5em;
+
+    }
+
+    .sdform-adv-btn-go {
+        width:80px;
+
+    }
+
+    .results-title{
+        text-align:left;
+        padding-left:15px;
+    }
+
+    .result-filter-item-category-container:before {
+        content:"Type";
+        position:absolute;
+        left: -48px;
+        top: 0.4em;
+        font-weight:bold;
+
+    }
+
+
+    .result-filter-text-container {
+        padding-top: 1.65em;
+    }
+
+
+
+
+
+}

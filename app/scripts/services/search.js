@@ -59,7 +59,7 @@ angular.module('publicSourcedataApp')
 		getCategories: function(){
 			return categories;
 		},
-			
+
 		getSummary: function(){
 			var _this = this;
 			var sum = {hypothesis:''};
@@ -68,13 +68,13 @@ angular.module('publicSourcedataApp')
 				sum.hypothesis = "<b>" + ((_this.searchParams.genericType) ? _this.searchParams.generic + " ("+_this.searchParams.genericType+")" : _this.searchParams.generic) + "</b>";
 			}
 			else{
-				if(_this.searchParams.interventionType) sum.hypothesis = "influence of <b>" + ((_this.searchParams.intervention) ? _this.searchParams.intervention + " ("+_this.searchParams.interventionType+")" : _this.searchParams.interventionType + " components ") + "</b>";				
+				if(_this.searchParams.interventionType) sum.hypothesis = "influence of <b>" + ((_this.searchParams.intervention) ? _this.searchParams.intervention + " ("+_this.searchParams.interventionType+")" : _this.searchParams.interventionType + " components ") + "</b>";
 				else if(_this.searchParams.intervention) sum.hypothesis = "influence of <b>" + _this.searchParams.intervention + "</b>";
 				if(sum.hypothesis && (_this.searchParams.assayedType || _this.searchParams.assayed)) sum.hypothesis += " on ";
-				if(_this.searchParams.assayedType) sum.hypothesis += "<b>" + ((_this.searchParams.assayed) ? _this.searchParams.assayed + " ("+_this.searchParams.assayedType+")" : _this.searchParams.assayedType + " components ") + "</b>"; 				
+				if(_this.searchParams.assayedType) sum.hypothesis += "<b>" + ((_this.searchParams.assayed) ? _this.searchParams.assayed + " ("+_this.searchParams.assayedType+")" : _this.searchParams.assayedType + " components ") + "</b>";
 				else if(_this.searchParams.assayed) sum.hypothesis += "<b>" + _this.searchParams.assayed + "</b>";
 			}
-	
+
 			if(sum.cas =='direct'){
 				sum.papers = _this.searchParams.displayedResult.length;
 				sum.panels = [];
@@ -93,7 +93,7 @@ angular.module('publicSourcedataApp')
 			else if(sum.cas =='shortestPath'){
 				sum.papers = _this.searchParams.result.shortestPath.length;
 				sum.phrase = "One path of " + sum.papers + " steps found where " + sum.hypothesis + " is measured.";
-				
+
 			}
 			else if(!sum.cas){
 				sum.phrase = "No papers found where " + sum.hypothesis + " is measured.";
@@ -104,7 +104,7 @@ angular.module('publicSourcedataApp')
 
 		//-F------ FROM LOCATION GET PARAMETERS and DO THE SEARCH ------//
 		search: function () {
-			
+
 			function getPaperExperimentalAssays(){
 				_.forEach(_this.searchParams.result.direct,function(paper){
 					paper.assays = [];
@@ -116,9 +116,9 @@ angular.module('publicSourcedataApp')
 							});
 						})
 					})
-				})	
+				})
 			}
-						
+
 			var _this = this;
 			_this.searchParams.loading = true;
 			_this.searchParams.result = '';
@@ -172,10 +172,10 @@ angular.module('publicSourcedataApp')
 					_this.searchParams.action = data.action;
 					_this.searchParams.summaryResult = data.summary;
 					_this.searchParams.done = true;
-					
+
 					getPaperExperimentalAssays();
 					_this.getSummary();
-					
+
 
 					if(data.results.direct.length && !data.results.shortestPath.length){
 						Restangular.one('fetchResult',data.path).get({action:data.action,intervention:data.summary.tagsI.join(";"),assayed:data.summary.tagsA.join(";")}).then(function(dataFull){
@@ -189,9 +189,9 @@ angular.module('publicSourcedataApp')
 									}
 								}
 							});
-									
+
 							getPaperExperimentalAssays();
-												
+
 							// angular.merge(_this.searchParams.result,dataFull.results);
 							$rootScope.$broadcast('UPDATE.RESULTS');
 							_this.searchParams.displayedResult = angular.copy(_this.searchParams.result.direct);
@@ -204,6 +204,7 @@ angular.module('publicSourcedataApp')
 						_this.searchParams.done = true;
 						_this.searchParams.loading = false;
 					}
+
 				});
 			}
 		},

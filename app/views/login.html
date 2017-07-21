@@ -22,12 +22,12 @@
 <div class="col-md-6 col-md-offset-3">
 	<h3>Welcome to the {{vm.siteTitle}} platform</h3>
 
-	<div class = 'panel panel-default' style = 'margin-top: 50px;'>
-		<div class = 'panel-heading'>
-			<div class = 'panel-title'>Login</div>
+	<div class = 'panel panel-default login-panel' style = 'margin-top: 50px;'>
+		<div class = 'panel-heading login-panel-heading'>
+			<div class = 'panel-title login-panel-title'>Login</div>
 		</div>
-		<div class = 'panel-body'>
-			<form name="form" ng-submit="vm.login()" role="form" novalidate class = 'form-horizontal' role = 'form'>
+		<div class = 'panel-body login-panel-body'>
+			<form name="form" ng-submit="vm.login()" role="form" novalidate class = 'form-horizontal login-form-horizontal' role = 'form'>
 				<div class = 'form-group' ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
 					<label class = 'control-label col-sm-3' for="username">Username</label>
 					<div class = 'col-sm-6'><input type="text" name="username" id="username" class="form-control" ng-model="vm.username" required /></div>
@@ -39,10 +39,10 @@
 					<div class = 'col-sm-3'><span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span></div>
 				</div>
 				<div class = 'form-actions col-sm-9 col-sm-offset-3'>
-					<button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Login</button>
-					<!-- <a href="#/register" class="btn btn-link">Register</a>
-					<a href="#/forgetPassword" class="btn btn-link">Reset password</a> -->
-					<a href = '#/search' class = 'btn btn-link'>Cancel</a>
+					<button type="submit" ng-disabled="form.$invalid" class="btn btn-primary login-btn">Login</button>
+					<!-- <a href="/register" class="btn btn-link">Register</a>
+					<a href="/forgetPassword" class="btn btn-link">Reset password</a> -->
+					<a href = '/search' class = 'btn btn-link login-btn-cancel'>Cancel</a>
 				</div>
 			</form>
 

@@ -128,6 +128,16 @@ angular
 					permissionCheckType: 'one'
 				}
 			})
+			.when('/annotation', {
+				templateUrl: ENV.baseURL+'views/annotation.html',
+				controller: 'AnnotationCtrl',
+				access:{
+					loginRequired: true,
+					permissions: [],
+					permissionCheckType: 'one'
+				},
+				pageKey: 'TEST'
+			})
 			.when('/test', {
 				templateUrl: ENV.baseURL+'views/test.html',
 				controller: 'TestCtrl',
@@ -230,26 +240,6 @@ angular
 				},
 				pageKey: 'LIST'
 			})
-			.when('/annotation', {
-				templateUrl: ENV.baseURL+'views/annotation.html',
-				controller: 'AnnotationCtrl',
-				access:{
-					loginRequired: true,
-					permissions: [],
-					permissionCheckType: 'one'
-				},
-				pageKey: 'TEST'
-			})
-			.when('/test', {
-				templateUrl: ENV.baseURL+'views/test.html',
-				controller: 'TestCtrl',
-				access:{
-					loginRequired: true,
-					permissions: [],
-					permissionCheckType: 'one'
-				},
-				pageKey: 'TEST'
-			})
 
 			// used for web_components //
 			.when('/form', {
@@ -284,7 +274,10 @@ angular
 		$compileProvider.debugInfoEnabled(ENV.debugInfoEnabled);
 	}])
 	.config(function($locationProvider,ENV){
-		$locationProvider.html5Mode(false);
+		$locationProvider.html5Mode({
+			enabled: true,
+			requireBase: false
+		});
 		$locationProvider.baseHref = ENV.baseHref;
 	})
 	.run(function($rootScope, $location, localStorageService, $http,Authentication,Authorization,ENV) {
@@ -322,6 +315,8 @@ angular
 			$rootScope.showHeader = ($location.absUrl().indexOf(ENV.baseURL) > -1);
 			// console.info($location.absUrl(),ENV.baseURL);
 			$rootScope.baseURL = ENV.baseURL;
+
+
 		}
 	)
 	.run(function ($window,Restangular,toastr,$log){

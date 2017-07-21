@@ -36,7 +36,7 @@ angular.module('publicSourcedataApp')
 			var figIdx = _.findIndex(scope.panel.paper.figures,function(figure){return figure.label == scope.panel.figure.label;});
 			var idx = (attrs.action=='previous')? (figIdx==0) ? null : figIdx-1: (figIdx==scope.panel.paper.figures.length-1)?null:figIdx+1;
 			if(idx !=null){
-				scope.href = "#/panel/" + scope.panel.paper.figures[idx].panel_id;
+				scope.href = "/panel/" + scope.panel.paper.figures[idx].panel_id;
 				scope.title = scope.panel.paper.figures[idx].label;
 				scope.class= (attrs.action=='previous')? "glyphicon glyphicon-chevron-left": "glyphicon glyphicon-chevron-right";
 			}

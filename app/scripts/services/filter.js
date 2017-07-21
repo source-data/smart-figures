@@ -14,7 +14,7 @@ angular.module('publicSourcedataApp')
         return {
 
             filtercollection : { //responsible for rendering filter divs
-            subitems : []
+            subitems : [{}]
             },
 
             multiple : { // all multiple select values
@@ -29,12 +29,11 @@ angular.module('publicSourcedataApp')
             {name:'journal',type:0,value:0},
             {name:'author',type:0,value:0},
             {name:'year',type:0,value:0},
-						{name:'assay',type:0,value:0},
+            {name:'assay',type:0,value:0},
             {name:'organism',type:0,value:0}
             ],
 
             selections : [],
-
             journal : [],
             author : [],
             year : [],
@@ -76,11 +75,19 @@ angular.module('publicSourcedataApp')
             //------- list of categories available for filter auto-complete ------//
             init: function () {
                 var _this = this;
-                _this.journal = _this.getListOfjournal(Search.searchParams.result.direct);
-                _this.author = _this.getListOfauthor(Search.searchParams.result.direct);
-                _this.year = _this.getListOfyear(Search.searchParams.result.direct);
-                _this.assay = _this.getListOfassay(Search.searchParams.result.direct);
-                _this.organism = _this.getListOforganism(Search.searchParams.result.direct);
+				if(Search.searchParams.result !== null){
+                	_this.journal = _this.getListOfjournal(Search.searchParams.result.direct);
+                	_this.author = _this.getListOfauthor(Search.searchParams.result.direct);
+                	_this.year = _this.getListOfyear(Search.searchParams.result.direct);
+                	_this.assay = _this.getListOfassay(Search.searchParams.result.direct);
+                	_this.organism = _this.getListOforganism(Search.searchParams.result.direct);
+				} else {
+					_this.journal = null;
+					_this.author = null;
+					_this.year = null;
+					_this.assay = null;
+					_this.organism = null;
+				}
             },
 
             getListOfassay: function(results){
@@ -346,7 +353,7 @@ angular.module('publicSourcedataApp')
 
             removeAll : function () {
                 var _this = this;
-                _this.filtercollection.subitems = [];
+                _this.filtercollection.subitems = [{}];
                 angular.forEach(_this.multiple, function (m) {
                     m.length = 0;
                 });

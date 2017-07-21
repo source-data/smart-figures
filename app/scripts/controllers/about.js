@@ -40,7 +40,6 @@ angular.module('publicSourcedataApp')
 		$scope.user.baseUrl = (ENV.serverURL.indexOf('http') > -1) ? ENV.serverURL+'index.php': window.location.href.split("#")[0]+ ENV.serverURL+'index.php';
 	});
 
-
 	//-D------ GET DATA ------//
 	Restangular.all('documentation').getList().then(function(data){
 		$scope.documentation = data[0].category;
@@ -101,10 +100,35 @@ angular.module('publicSourcedataApp')
 				doc.run.response = JSON.stringify(data.plain(),null,3);
 			}
 			else{
-				doc.run.response = data;				
+				doc.run.response = data;
 			}
 		});
 		}
 	};
+
+    //
+	// $scope.startTour = function() {
+	// 	var tour = new Tour({
+	// 		debug:true,
+	// 		backdrop:true,
+	// 		steps: [
+	// 			{
+	// 				element: "#step1",
+	// 				title: "Title of step 1",
+	// 				content: "Content of my step 1"
+	// 			},
+	// 			{
+	// 				element: "#step2",
+	// 				title: "Title of step 2",
+	// 				content: "Content of my step 2"
+	// 			}
+	// 		]
+	// 	});
+	// 	console.info(tour);
+	// 	tour.init(); //will only launch tour for the first time! Have to empty cache to see it again
+	// 	tour.start();
+	// }
+
+
 }])
 	;

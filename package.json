@@ -1,7 +1,9 @@
 {
   "name": "publicsourcedata",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "connect-modrewrite": "^0.10.1"
+  },
   "devDependencies": {
     "grunt": "^0.4.1",
     "grunt-autoprefixer": "^0.7.3",
@@ -32,7 +34,8 @@
     "karma-phantomjs-launcher": "^0.2.0",
     "load-grunt-tasks": "^0.4.0",
     "phantomjs": "^1.9.17",
-    "time-grunt": "^0.3.1"
+    "time-grunt": "^0.3.1",
+    "connect-modrewrite": "^0.10.1"
   },
   "engines": {
     "node": ">=0.10.0"
