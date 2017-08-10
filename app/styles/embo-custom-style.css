@@ -9,6 +9,7 @@ Contents
 5. Search Results Containers
 6. Search Results Figures Containers
 7. SmartFigure Panel
+8. Upstream and downstream
 
 */
 
@@ -779,11 +780,101 @@ div.rn-carousel-indicator span.active {
   .figpanel-related-panel-head {
       border-bottom:none;
       background-color:#f0f0f0;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+
+  .figpanel-related-panel-head .glyphicon {
+      font-size:0.824em;
   }
 
   .figpanel-related-footer p {
       font-size:0.824em;
   }
+
+    .figpanel-related-footer {
+        border-top:none;
+        background-color:#f0f0f0;  
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+
+/* 8. Upstream and downstream */
+
+.figpanel-panel .figpanel-filter-row {
+    padding-bottom:1em;
+    margin-bottom:1em;
+    /* border-bottom: solid 2px #d2d2d2; */
+}
+
+.figpanel-panel .figpanel-filter-item-container {
+    height:auto !important;
+    /* max-height:60px; */
+}
+
+.figpanel-panel .result-filter-item-category-container:before {
+    content:none;
+} 
+
+.figpanel-panel .figpanel-filter-text-container span {
+    font-size: 1rem;
+    font-weight:bold;
+}
+
+.figpanel-panel .result-filter-item-category
+{
+    height:45px !important;
+}
+
+.figpanel-panel .result-filter-item-value {
+    min-height:45px !important;
+}
+
+.figpanel-panel .result-filter-button-group {
+    padding-top:9px;
+}
+
+.figpanel-panel .result-filter-button-group .btn {
+    width:27px;
+    height:27px;
+}
+
+.figpanel-panel .result-filter-button-add {
+    color:#fff;
+}
+
+.figpanel-panel .result-filter-button-group .glyphicon {
+    left:-1px;
+    top:2px;
+}
+
+h4.upstr-title {
+    font-weight:bold;
+    margin-bottom:1em;
+}
+
+.listsearchres-ul.nav-pills li {
+    margin-left:0;
+}
+
+.listsearchres-panel {
+    border-radius:6px;
+    background-color:#f0f0f0;
+}
+
+.listsearchres-panel-body a.pull-right {
+    float:none;
+}
+
+.result-filter-item-value > div {
+    padding-top:0.7em;
+    font-size:14px;
+    color:#000;
+}
+
+/* .row.result-filter-item-smartfig {
+    margin-bottom:0.5em;
+} */
 
 /* ipad size rules */
 .sd-mobileshow {display:block;}
