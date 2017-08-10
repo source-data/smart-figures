@@ -8,6 +8,7 @@ Contents
 4. Search Results
 5. Search Results Containers
 6. Search Results Figures Containers
+7. SmartFigure Panel
 
 */
 
@@ -669,7 +670,122 @@ div.rn-carousel-indicator span.active {
 }
 
 
-/* 7. ipad size rules */
+/*
+    7. SmartFigure Panel
+*/
+
+.figpanel-header {
+    margin-bottom:1em;
+}
+
+.figpanel-paper-title {
+    font-size: 1rem;
+    font-weight:bold;
+    line-height:1.3em;
+    color:#505050;
+    margin-bottom:3px;
+}
+
+.figpanel-panel-title {
+    font-weight:bold;
+}
+
+.figpanel-panel {
+
+    border: solid 1px #d2d2d2;
+    border-radius: 6px; 
+
+}
+
+
+
+.panel-heading.figpanel-panel-heading,
+.panel-footer.figpanel-panel-footer {
+    border:none;
+    border-top:none;
+    border-bottom:none;
+    background-color: #f0f0f0;
+    padding-top:1em;
+    padding-bottom:1em;
+}
+  
+ .panel-heading.figpanel-panel-heading {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+
+}   
+
+ .panel-footer.figpanel-panel-footer {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+ }
+
+ .figpanel-btn-group, 
+ .figpanel-btn-download {
+    top:12px !important;
+ }
+
+ .figpanel-center-mid-col div[compile-caption], 
+ .figpanel-center-mid-col div[compile-caption] p {
+     font-size:0.824rem;
+     line-height:1.6;
+ }
+
+  .figpanel-center-mid-col div[compile-caption] {
+      margin-bottom:1em;
+  }
+
+  .figpanel-center-mid-col h4 {
+      font-size:0.824rem;
+      font-weight:bold;
+      margin-bottom:1.18em;
+      color: #505050;
+      border-bottom: solid 2px #d2d2d2;
+      padding-bottom:0.4rem;
+  }
+
+  .figpanel-text-assayed,
+  .figpanel-text-interv {
+      margin-bottom:0.5em;
+  }
+
+  .figpanel-related-link .figpanel-related-btn-blue,
+  .figpanel-related-link .figpanel-related-btn-red {
+      width:100%;
+      overflow:hidden;
+      text-overflow: ellipsis;
+  }
+
+  .figpanel-exp-badge {
+      padding:6px;
+      border:solid 1px #d2d2d2;
+         color:#606060;
+  }
+
+
+  div.similarPanelInCarousel,
+  div.similarPanelInCarousel:hover,
+  div.similarPanelInCarousel:focus,
+  div.similarPanelInCarousel:active {
+     border:solid 1px #d2d2d2; 
+     padding:8px;
+
+  }
+
+  .figpanel-related-panel {
+      border-radius:6px;
+  }
+
+  .figpanel-related-panel-head {
+      border-bottom:none;
+      background-color:#f0f0f0;
+  }
+
+  .figpanel-related-footer p {
+      font-size:0.824em;
+  }
+
+/* ipad size rules */
 .sd-mobileshow {display:block;}
 .sd-mobilehide {display:none;}
 
