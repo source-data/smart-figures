@@ -10,7 +10,8 @@ Contents
 6. Search Results Figures Containers
 7. SmartFigure Panel
 8. Upstream and downstream
-
+9. Paper List
+10. API Documentation
 */
 
 
@@ -48,6 +49,7 @@ body {
 
 .page-header {
     font-size:2.12em;
+    line-height: 1.3;
     font-weight:bold;
     border:none;
     margin-top:0.8em;
@@ -335,7 +337,8 @@ sd-form form .sdform-advanced-container > .col-sm-offset-1:first-child {
 
 .sdform-simple-input-group {
 
-    border: solid 4px #5cb85c;
+    /* border: solid 4px #5cb85c; */
+    border: solid 4px #d2d2d2;
     border-radius:6px;
     margin-top:2em;
     
@@ -739,7 +742,7 @@ div.rn-carousel-indicator span.active {
   .figpanel-center-mid-col h4 {
       font-size:0.824rem;
       font-weight:bold;
-      margin-bottom:1.18em;
+      margin-bottom:1.765em;
       color: #505050;
       border-bottom: solid 2px #d2d2d2;
       padding-bottom:0.4rem;
@@ -813,7 +816,7 @@ div.rn-carousel-indicator span.active {
 } */
 
 .figpanel-panel  .panel-title.figpanel-panel-title {
-    margin-right:260px;
+    margin-right:260px !important;
 }
 
 .figpanel-panel .result-filter-item-category-container:before {
@@ -879,7 +882,7 @@ h4.upstr-title {
 }
 
 .listsearchres-panel-body a.pull-right {
-    float:none;
+    float:none !important;
 }
 
 .result-filter-item-value > div {
@@ -892,6 +895,90 @@ h4.upstr-title {
     border-bottom: solid 2px #f0f0f0;
 }
 
+.figpanel-alert-loading {
+    background-color: #f0f0f0;
+    color:#216a87;
+    border-color: #d2d2d2;
+}
+
+/* 9. Paper List */
+
+.paperlist-container .paperlist-filter-panel{
+
+    border:none;
+    background-color: #f0f0f0;
+    border-radius: 6px;
+
+}
+
+.paperlist-filter-text {
+    font-size:1rem;
+    color: #505050;
+}
+
+.paperlist-filter-input {
+    color: #505050;
+    padding: 4px;
+}
+
+.paperlist-group-item,
+.paperlist-group-item:first-child {
+
+     font-size:1rem;  
+    border-radius:6px;
+    border-color: #d2d2d2;
+    margin-bottom: 0.824em;
+    padding-top:0.4em;
+    padding-bottom:1em;
+}
+
+.paperlist-group-item h5 {
+     font-weight:bold; 
+     font-size: 1rem;
+     line-height:1.3;
+     margin-bottom:2px;
+}
+
+.paperlist-group-item p {
+    font-size:0.882rem !important;
+}
+
+.btn-paperlist {
+        margin-top: 1em;
+    margin-bottom: 1em;
+    background-color: #fff;
+    font-size: 0.824em;
+    font-weight: bold;
+    padding: 0.35em 0.55em;
+    border-radius: 6px;
+    border-color: #b4b4b4;
+    color: #505050;
+}
+
+dd, dt {
+    font-size:14px;
+}
+
+/* 10. API Documentation */
+
+.documentation-panel {
+    border:none;
+}
+
+.documentation-panel > div.panel-heading {
+
+    color:#505050;
+    background-color:transparent;
+    border:none;
+}
+
+.documentation-panel .panel-title {
+    font-size:2.12rem;
+}
+
+.active-perso {
+    background-color:transparent;
+}
 /* .row.result-filter-item-smartfig {
     margin-bottom:0.5em;
 } */
