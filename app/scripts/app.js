@@ -274,7 +274,7 @@ angular
 			.setNotify(true, true);
 	})
 	.config(function(RestangularProvider,ENV) {
-		RestangularProvider.setBaseUrl(ENV.serverURL+'index.php');
+		RestangularProvider.setBaseUrl(ENV.serverURL);
 		// RestangularProvider.setRequestSuffix('.json');
 		//RestangularProvider.setDefaultHttpFields({cache: ENV.httpCache});
 

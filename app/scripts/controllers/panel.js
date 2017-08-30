@@ -40,16 +40,16 @@ angular.module('publicSourcedataApp')
 		$scope.panel.currentPanelIdx =panelIdx;
 		// p.caption = '<p>E, F Glucose infusion rate (GINF) (E) and <sd-pretag id="sdPretag14543178683290" parent-tag-id="397">glucose</sd-pretag> disposal rate (GDR) (F) during hyperinsulinemic euglycemic clamps in weight-matched WT (n = 4) and <sd-tag id="sdTag38" >NOD2</sd-tag><sup>−/−</sup> (n = 3) <sd-tag id="sdTag39" popover-html="tst" tooltip="test" popover-append-to-body = "true">mice</sd-tag> fed a HFD for 16 weeks, *P = 0.02.</p>';
 		// console.info(panelIdx, $scope.panel.figure.panels[panelIdx].caption);
-		
-		
+
+
 							//
 							// popover-html = '"<dl><dt>External ids</dt><dd>{{tag|printExternalIds}}</dd><dt>External names</dt><dd>{{tag|printExternalNames}}</dd><dt>Taxon</dt><dd>{{tag|printTaxon}}</dd></dl>"'
 							// popover-trigger = 'click'
 							// popover-append-to-body = 'true'
 							// popover-animation = 'false'
-		
+
 	}
-	
+
 	$scope.tags = _.filter(panel.figure.panels,function(p){return p.panel_id == panel.current_panel_id;})[0].tags;
 
 	angular.forEach(_.uniq($scope.tags,function(t){return t.type+":"+t.text;}),function(tag){
@@ -328,21 +328,21 @@ angular.module('publicSourcedataApp')
 					//c1 = same external ids.
 					var c1 = hasExtIdANDsameExternalId(cTag,tag,sameExternalStatus);
 
-					//c2 = same text AND (same taxon OR no taxon) and no external ids 
+					//c2 = same text AND (same taxon OR no taxon) and no external ids
 					var c2 = false;
 					var c2_text = cTag.text.toLowerCase() == tag.text.toLowerCase();
 					var c2_taxon = (cTag.taxon && tag.taxon && cTag.taxon.tax_id == tag.taxon.tax_id) || ((!cTag.taxon || !cTag.taxon.tax_id) && (!tag.taxon || !tag.taxon.tax_id));
 					var c2_external_id = ((!cTag.external_id || !cTag.external_id.length) && (!tag.external_id || !tag.external_id.length));
 					c2 =  c2_text && c2_taxon && c2_external_id;
-					
-					//c3 : same type/category and role 
+
+					//c3 : same type/category and role
 					var c3SameTandR = (tag.type && cTag.type==tag.type && cTag.role==tag.role) || (tag.category && cTag.category==tag.category);
 					if(!sameRole) c3SameTandR = (tag.type && cTag.type==tag.type) || (tag.category && cTag.category==tag.category);
-					
+
 					//c4 : same tag status
 					var c4SameStatus = true;
 					if(sameStatus) c4SameStatus = (tag.status == cTag.status);
-					
+
 					if(c4SameStatus && c3SameTandR && (c1||c2)){
 						if(!cTag.futurText) cTag.futurText = [cTag.text];
 						if(_.map(cTag.futurText,function(t){return t.toLowerCase()}).indexOf(tag.text.toLowerCase())<0) cTag.futurText.push(tag.text);
@@ -522,10 +522,10 @@ angular.module('publicSourcedataApp')
 
 	$scope.downloadPanel = function(panel_doc_id){
 		if(panel_doc_id){
-			self.location.href = $scope.serverURL+"/index.php/panel/"+$scope.panel.current_panel_id+"/"+panel_doc_id+"/export?authdata="+Authentication.currentUser.authdata;			
+			self.location.href = $scope.serverURL+"panel/"+$scope.panel.current_panel_id+"/"+panel_doc_id+"/export?authdata="+Authentication.currentUser.authdata;
 		}
 		else{
-			self.location.href = $scope.serverURL+"/index.php/panel/"+$scope.panel.current_panel_id+"/export?authdata="+Authentication.currentUser.authdata;			
+			self.location.href = $scope.serverURL+"panel/"+$scope.panel.current_panel_id+"/export?authdata="+Authentication.currentUser.authdata;
 		}
 	};
 
