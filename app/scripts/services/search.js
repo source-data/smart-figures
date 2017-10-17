@@ -140,24 +140,29 @@ angular.module('publicSourcedataApp')
 			var rest;
 
 			if(abortSearch){
-				abortSearch.resolve();
-				$timeout.cancel(abortSearch);
+				console.log('aborting');
+				// abortSearch.resolve();
+				// $timeout.cancel(abortSearch);
 			}
 			abortSearch = $q.defer();
 
 
 
 			if(generic){
+				console.log('generic');
 				rest = Restangular.one('generic',generic.replace("/","##")).withHttpConfig({timeout: abortSearch.promise}).get({motif:_this.searchParams.motif, limit: _this.searchParams.limit});
 				_this.advanced = false;
 			}
 			else if(intervention && assayed){
+				console.log("IA");
 				rest = Restangular.one('intervention',intervention.replace("/","##")).withHttpConfig({timeout: abortSearch.promise}).one('assayed',assayed).get({motif:_this.searchParams.motif, limit: _this.searchParams.limit});
 			}
 			else if(intervention){
+				console.log("I");
 				rest = Restangular.one('intervention',intervention.replace("/","##")).withHttpConfig({timeout: abortSearch.promise}).get({motif:_this.searchParams.motif, limit: _this.searchParams.limit});
 			}
 			else if(assayed){
+				console.log("A");
 				rest = Restangular.one('assayed',assayed.replace("/","##")).withHttpConfig({timeout: abortSearch.promise}).get({motif:_this.searchParams.motif, limit: _this.searchParams.limit});
 			}
 

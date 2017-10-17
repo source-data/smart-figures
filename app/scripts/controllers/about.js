@@ -37,7 +37,7 @@ angular.module('publicSourcedataApp')
 		user.api_key = authdata.split(":")[1];
 		$scope.user.login = user.login;
 		$scope.user.api_key = user.api_key;
-		$scope.user.baseUrl = (ENV.serverURL.indexOf('http') > -1) ? ENV.serverURL: window.location.href.split("#")[0]+ ENV.serverURL;
+		$scope.user.baseUrl = (ENV.serverURL.indexOf('http') > -1) ? ENV.serverURL+'index.php': window.location.href.split("#")[0]+ ENV.serverURL+'index.php';
 	});
 
 	//-D------ GET DATA ------//
@@ -66,7 +66,7 @@ angular.module('publicSourcedataApp')
 	$scope.try = function(doc){
 		var rest = null;
 		doc.run.status = 'pend';
-		var start_url = ENV.serverURL;
+		var start_url = ENV.serverURL + "index.php/";
 		if(doc.name == 'panel'){
 			doc.run.url = start_url + doc.name + "/"+doc.parameters.panel_id.value;
 			rest = Restangular.one(doc.name,doc.parameters.panel_id.value).get();

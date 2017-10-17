@@ -22,7 +22,7 @@
 
 			<div ng-if='searchParams.advanced' class="sdform-advanced-container">
 				<div class="row col-sm-offset-1" >
-					<div class="col-sm-1" style="padding:10px;text-align: right"></div>
+					<div class="col-sm-1 sdform-adv-explanation-spacer" style="padding:10px;text-align: right"></div>
 					<div class="col-sm-4 sdform-adv-explanation sd-perturbation sd-mobilehide">
 						<p style="text-align:center"> Perturbation
 						<span class="glyphicon glyphicon-question-sign" tooltip="Perturbation / Intervention / Manipulation / Alteration / Independent variable"></span>
@@ -41,9 +41,10 @@
 					</div>
 					<div class="col-sm-4 sdform-adv-explanation sd-perturbation sd-mobileshow">
 						<p style="text-align:center"> Perturbation
-						<span class="glyphicon glyphicon-question-sign" tooltip="Perturbation / Intervention / Manipulation / Alteration / Independent variable"></span>
+							<span class="glyphicon glyphicon-question-sign" tooltip="Perturbation / Intervention / Manipulation / Alteration / Independent variable"></span>
 						</p>
-					</div>					<div class='col-sm-4'>
+					</div>
+					<div class='col-sm-4'>
 						<div class="btn-group-vertical sdform-adv-btn-interv">
 							<input type="text" class="form-control sdform-adv-interv-input" placeholder="entity X" ng-model = 'searchParams.intervention' typeahead=" tag for tag in proposeTags('intervention',$viewValue)" typeahead-min-length="2" typeahead-wait-ms="300">
 							<div class="input-group-btn sdform-adv-interv-input-group-btn">

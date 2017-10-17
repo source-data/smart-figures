@@ -44,7 +44,7 @@
                         <dl class=''>
                             <dt>Base URL</dt>
                             <dd>
-                                <pre>{{user.baseUrl}}</pre>
+                                <pre>https://api.sourcedata.io/</pre>
                             </dd>
                             <dt ng-if='user.login != "public_search"'>Login</dt>
                             <dd ng-if='user.login != "public_search"'>{{user.login}}</dd>
@@ -53,7 +53,7 @@
                             <dt>Example</dt>
                             <dd>
                                 <pre>curl <span
-                                        ng-if='user.login != "public_search"'>-u {{user.login}}:{{user.api_key}} </span>{{user.baseUrl}}/panel/13904</pre>
+                                        ng-if='user.login != "public_search"'>-u {{user.login}}:{{user.api_key}} </span>https://api.sourcedata.io/panel/13904</pre>
                             </dd>
                         </dl>
 

@@ -54,7 +54,7 @@ angular
 	})
 	.config(function ($routeProvider,ENV) {
 		$routeProvider
-			.when('/search', {
+			.when('/', {
 				templateUrl: ENV.baseURL+'views/main.html',
 				controller: 'MainCtrl',
 				reloadOnSearch: false,
@@ -110,6 +110,21 @@ angular
 					permissionCheckType: 'one'
 				}
 			})
+			.when('/paper/:doi1/:doi2/figure/:figureIdx/panel/:panelIdx',{
+				templateUrl: ENV.baseURL+'views/figure.html',
+				controller: 'FigureCtrl',
+				resolve: {
+					figure: function(Restangular,$route){
+						return Restangular.one('paper',$route.current.params.doi1+":"+$route.current.params.doi2).one('figure',$route.current.params.figureIdx).one('panel',$route.current.params.panelIdx).get();
+					}
+				},
+				access:{
+					loginRequired: true,
+					permissions: ['active'],
+					permissionCheckType: 'one'
+				}
+			})
+
 			.when('/about', {
 				templateUrl: ENV.baseURL+'views/about.html',
 				controller: 'AboutCtrl',
@@ -253,7 +268,7 @@ angular
 				pageKey: ''
 			})
 			.otherwise({
-				redirectTo: '/search'
+				redirectTo: '/'
 			});
 	})
 	.constant('siteTitle',{name:'SourceData'})
@@ -264,7 +279,7 @@ angular
 			.setNotify(true, true);
 	})
 	.config(function(RestangularProvider,ENV) {
-		RestangularProvider.setBaseUrl(ENV.serverURL);
+		RestangularProvider.setBaseUrl(ENV.serverURL+'index.php');
 		// RestangularProvider.setRequestSuffix('.json');
 		//RestangularProvider.setDefaultHttpFields({cache: ENV.httpCache});
 
@@ -312,11 +327,9 @@ angular
 					$(".pagekey").toggleClass("active", false);
 					$(".pagekey_" + pageKey).toggleClass("active", true);
 				});
-			$rootScope.showHeader = ($location.absUrl().indexOf(ENV.baseURL) > -1);
+			$rootScope.showHeader = ($location.absUrl().indexOf('sourcedata') > -1 || $location.absUrl().indexOf('localhost') > -1);
 			// console.info($location.absUrl(),ENV.baseURL);
 			$rootScope.baseURL = ENV.baseURL;
-
-
 		}
 	)
 	.run(function ($window,Restangular,toastr,$log){

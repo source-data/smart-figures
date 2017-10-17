@@ -23,13 +23,10 @@
     <div ng-if='showHeader' class="figpanel-header">
         <h4 class="figpanel-paper-title">{{::panel.paper.title}}</h4>
         <p class='text-muted figpanel-paper-info'>
-            <a ng-href='http://dx.doi.org/{{::panel.paper.doi}}' ng-if='panel.paper.doi'>
-                <small>{{::panel.paper.author_list|firstAuthor}} <i>{{::panel.paper.journal}}</i> {{::panel.paper.year}}
-                </small>
-            </a>
-            <small ng-if='!panel.paper.doi'>{{::panel.paper.author_list|firstAuthor}} <i>{{::panel.paper.journal}}</i>
-                {{::panel.paper.year}}
-            </small>
+            <small>
+				{{::panel.paper.author_list|firstAuthor}} <i>{{::panel.paper.journal}}</i> {{::panel.paper.year}}<br>
+            	<em class="text-muted">Reproduced from <a ng-href='http://dx.doi.org/{{::panel.paper.doi}}' ng-if='panel.paper.doi'>{{::panel.paper.doi}}</a><span ng-if='!panel.paper.doi'>{{::panel.paper.journal}}</span> with permissions</em>
+			</small>
         </p>
     </div>
 

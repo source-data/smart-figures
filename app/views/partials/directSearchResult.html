@@ -27,7 +27,7 @@
 				<p class = 'text-muted direct-search-res-author' style = 'margin-bottom: 4px; margin-top: 0;' ng-if="!result.showDetails">{{::result.authors|firstAuthor}}</p>
 				<p class = 'text-muted direct-search-res-authors' style = 'margin-bottom: 4px; margin-top: 0;' ng-if="result.showDetails">{{::result.authors}}</p>
 				<p style = 'margin: 0; font-size: 12px'>
-					<a href = 'http://dx.doi.org/{{::result.doi}}' target = '_blank' ng-if = 'result.doi' class="direct-search-res-doi-link">{{::result.journal_title}}<span ng-show="result.date"> -</span> {{::result.date}}</a>
+					<a href = 'http://dx.doi.org/{{::result.doi}}' target = '_blank' ng-if = 'result.doi' class="direct-search-res-doi-link">{{::result.journal_title}}<span ng-show="result.date">-</span> {{::result.date}}</a>
 					<span ng-if="!result.doi">{{::result.journal_title}}<span ng-show="result.date"> - </span>{{::result.date}}</span>
 				</p>
 				<button type="button" class="btn btn-default btn-xs direct-search-res-btn" ng-click="result.showDetails = !result.showDetails"> {{(result.showDetails)?'Hide':'Show'}} abstract
@@ -63,15 +63,14 @@
 								<span compile = '::hypo.externalDisplayRight || hypo.displayRight'></span>
 								<span ng-if = 'hypo.externalDisplayRight && (hypo.externalDisplayRight|lowercase) != (hypo.displayRight.join(", ")|lowercase)'>(<span compile = 'hypo.displayRight.join(", ")'></span>)</span>
 								<sup ng-if = 'hypo.motif_score > 8 && hypo.motif_role == "assayed"' class = 'glyphicon glyphicon-star'  style = 'color:#ff9f11' tooltip = 'potential regulator'></sup>
-								
+
 								<button type="button" class="sd-mobilehide pull-right cursor-pointer btn btn-default btn-xs direct-search-res-figures-btn" >{{(hypo.show)?'Hide':'Show'}} figures
 									<span class="glyphicon direct-search-res-chevrons" ng-class="(hypo.show)?'glyphicon-chevron-up':'glyphicon-chevron-down'"></span>
 								</button>
-
 							</div>
 							<div class="sd-mobile-hypo-toggle-container sd-mobileshow col-xs-12">
 								<button type="button" class="cursor-pointer btn btn-default btn-xs direct-search-res-figures-btn" >{{(hypo.show)?'Hide':'Show'}} figures
-								<span class="glyphicon direct-search-res-chevrons" ng-class="(hypo.show)?'glyphicon-chevron-up':'glyphicon-chevron-down'"></span>
+									<span class="glyphicon direct-search-res-chevrons" ng-class="(hypo.show)?'glyphicon-chevron-up':'glyphicon-chevron-down'"></span>
 								</button>
 							</div>
 						</div>

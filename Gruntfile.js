@@ -21,6 +21,10 @@ module.exports = function (grunt) {
     dist: 'dist'
   };
 
+ // Proxy snippet
+  var proxySnippet = require('grunt-connect-proxy2/lib/utils').proxyRequest;
+
+
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -41,7 +45,7 @@ module.exports = function (grunt) {
  			  },
  			  constants: {
  				  ENV: {
- 					   serverURL: 'https://api.sourcedata.io/',
+ 					   serverURL: 'php/api/',
 					  baseURL: '',
 					  baseHref: '/',
  					  withCredentials: true,
@@ -61,8 +65,8 @@ module.exports = function (grunt) {
 					  //  					  serverURL: 'http://sourcedata-dev.vital-it.ch/lou/public/php/api/',
 					  // baseURL: 'http://sourcedata-dev.vital-it.ch/lou/public/',
 					  // baseHref: '/lou/public/',
-					  serverURL: '/php/api/',
-					  baseURL: 'https://sourcedata2.vital-it.ch/',
+					  serverURL: 'https://api.sourcedata.io/',
+					  baseURL: 'https://search.sourcedata.io/',
 					  baseHref: '/',
  					  withCredentials: true,
  					  debugInfoEnabled: false,
@@ -115,15 +119,23 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        // hostname: 'localhost',
-        hostname: '0.0.0.0',
+        hostname: 'localhost',
+        // hostname: '0.0.0.0',
         livereload: 35729
       },
+		proxies: [{
+			context: '/php',
+			host: 'sourcedata-robin.vital-it.ch',
+			port: 443,
+			https: true,
+			secure: false
+		}],
       livereload: {
         options: {
           open: true,
           middleware: function (connect) {
             return [
+			  proxySnippet,
   			  modRewrite(['^[^\\.]*$ /index.html [L]']),
               connect.static('.tmp'),
               connect().use(
@@ -357,7 +369,8 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'fonts/*'
+            'fonts/*',
+			'styles/fonts/*'
           ]
         }, {
           expand: true,
@@ -420,6 +433,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer',
+	  'configureProxies:server',
       'connect:livereload',
       'watch'
     ]);

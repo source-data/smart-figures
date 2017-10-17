@@ -17,8 +17,8 @@ This program is free software: you can redistribute it and/or modify
 The search interface of SourceData needs some external modules from Bower and NPM. 
 After cloning the directory, update the external components:
 ```bash
-npm install
-bower update
+npm install;
+bower update;
 ```
 ## editing Gruntfile
 The development of SourceData is managed by Grunt. 
@@ -32,15 +32,4 @@ To build, type:
 `grunt build`
 
 This will package the application in the `dist` folder
-
-## fixing Bower Bootstrap problems
-
-When running the build process, Bootstrap files will not be included in the index.html document unless the following changes are made:
-
-open bower_components/bootstrap/bower.json and replace the "main" array with
-
-  "main": [
-    "dist/css/bootstrap.css",
-    "dist/js/bootstrap.js"
-  ]
 
