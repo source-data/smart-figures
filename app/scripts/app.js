@@ -316,7 +316,6 @@ angular
 			});
 		}
 		else{
-			console.log('no html5 mode');
 			$locationProvider.html5Mode({
 				enabled: false,
 				requireBase: false
@@ -357,8 +356,6 @@ angular
 					$(".pagekey_" + pageKey).toggleClass("active", true);
 				});
 			$rootScope.showHeader = ($location.absUrl().indexOf('sourcedata') > -1 || ($location.absUrl().indexOf('localhost') > -1 && ENV.debugInfoEnabled));
-			console.log("showHeader:"+ENV.debugInfoEnabled+" => ");
-			console.info($location.absUrl());
 			$rootScope.baseURL = ENV.baseURL;
 		}
 	)
