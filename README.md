@@ -14,14 +14,19 @@ This program is free software: you can redistribute it and/or modify
 ```
 
 # SourceData - search interface
-The search interface of SourceData needs some external modules from Bower and NPM. 
+The search interface of SourceData needs some external modules from Bower and NPM.
 After cloning the directory, update the external components:
 ```bash
 npm install;
 bower update;
 ```
+
+## edit bootstrap to use css instead of less
+edit the file: `bower_components/bootstrap/bower.json`.
+change `"less/bootstrap.less",` to `"dist/css/bootstrap.css",`
+
 ## editing Gruntfile
-The development of SourceData is managed by Grunt. 
+The development of SourceData is managed by Grunt.
 You might want to change the path to the backend:
 `serverURL:`
 
