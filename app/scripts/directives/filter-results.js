@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('publicSourcedataApp')
-    .directive('filterResults',['_','Search', 'Filter', function (_,Search,Filter) {
+    .directive('filterResults',['ENV','_','Search', 'Filter', function (ENV,_,Search,Filter) {
         return {
             scope:{parentindex:'=',
                 render:'=',
@@ -11,7 +11,7 @@ angular.module('publicSourcedataApp')
                 applyFilter:'&',
                 trackSelections:'&'},
             restrict: 'E',
-            templateUrl:'views/partials/filterResults.html',
+            templateUrl:ENV.baseURL+'views/partials/filterResults.html',
             link:function(scope,element,attributes){
 
                 scope.filters = Filter.filters;

@@ -1,0 +1,59 @@
+@font-face {
+  font-family: 'sourcedata_icons_1_font';
+  src:  url('fonts/sourcedata_icons_1_font.eot?ahml59');
+  src:  url('fonts/sourcedata_icons_1_font.eot?ahml59#iefix') format('embedded-opentype'),
+    url('fonts/sourcedata_icons_1_font.ttf?ahml59') format('truetype'),
+    url('fonts/sourcedata_icons_1_font.woff?ahml59') format('woff'),
+    url('fonts/sourcedata_icons_1_font.svg?ahml59#sourcedata_icons_1_font') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'sourcedata_icons_1_font' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cell:before {
+  content: "\e900";
+}
+.icon-time:before {
+  content: "\e901";
+}
+.icon-gene:before {
+  content: "\e902";
+}
+.icon-lightning:before {
+  content: "\e903";
+}
+.icon-subcellular:before {
+  content: "\e904";
+}
+.icon-organism:before {
+  content: "\e905";
+}
+.icon-assay:before {
+  content: "\e906";
+}
+.icon-protein:before {
+  content: "\e907";
+}
+.icon-tissue:before {
+  content: "\e908";
+}
+.icon-undefined:before {
+  content: "\e909";
+}
+.icon-molecule:before {
+  content: "\e90a";
+}

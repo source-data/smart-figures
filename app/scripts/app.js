@@ -110,7 +110,27 @@ angular
 					permissionCheckType: 'one'
 				}
 			})
+
+
+			// ====================================
+			// = Used when embedding smart figure =
+			// ====================================
+
 			.when('/paper/:doi1/:doi2/figure/:figureIdx/panel/:panelIdx',{
+				templateUrl: ENV.baseURL+'views/figure.html',
+				controller: 'FigureCtrl',
+				resolve: {
+					figure: function(Restangular,$route){
+						return Restangular.one('paper',$route.current.params.doi1+":"+$route.current.params.doi2).one('figure',$route.current.params.figureIdx).one('panel',$route.current.params.panelIdx).get();
+					}
+				},
+				access:{
+					loginRequired: true,
+					permissions: ['active'],
+					permissionCheckType: 'one'
+				}
+			})
+			.when('/doi/:doi1/:doi2/figure/:figureIdx/panel/:panelIdx',{
 				templateUrl: ENV.baseURL+'views/figure.html',
 				controller: 'FigureCtrl',
 				resolve: {
@@ -289,10 +309,19 @@ angular
 		$compileProvider.debugInfoEnabled(ENV.debugInfoEnabled);
 	}])
 	.config(function($locationProvider,ENV){
-		$locationProvider.html5Mode({
-			enabled: true,
-			requireBase: false
-		});
+		if(window.location.href.indexOf('sourcedata') > -1 || (window.location.href.indexOf('localhost') > -1 && ENV.debugInfoEnabled)){
+			$locationProvider.html5Mode({
+				enabled: true,
+				requireBase: false
+			});
+		}
+		else{
+			console.log('no html5 mode');
+			$locationProvider.html5Mode({
+				enabled: false,
+				requireBase: false
+			});
+		}
 		$locationProvider.baseHref = ENV.baseHref;
 	})
 	.run(function($rootScope, $location, localStorageService, $http,Authentication,Authorization,ENV) {
@@ -327,8 +356,9 @@ angular
 					$(".pagekey").toggleClass("active", false);
 					$(".pagekey_" + pageKey).toggleClass("active", true);
 				});
-			$rootScope.showHeader = ($location.absUrl().indexOf('sourcedata') > -1 || $location.absUrl().indexOf('localhost') > -1);
-			// console.info($location.absUrl(),ENV.baseURL);
+			$rootScope.showHeader = ($location.absUrl().indexOf('sourcedata') > -1 || ($location.absUrl().indexOf('localhost') > -1 && ENV.debugInfoEnabled));
+			console.log("showHeader:"+ENV.debugInfoEnabled+" => ");
+			console.info($location.absUrl());
 			$rootScope.baseURL = ENV.baseURL;
 		}
 	)
