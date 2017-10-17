@@ -1,6 +1,6 @@
 // Generated on 2015-08-03 using generator-angular 0.9.8
 'use strict';
-
+var modRewrite = require('connect-modrewrite');
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -20,6 +20,10 @@ module.exports = function (grunt) {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
   };
+
+ // Proxy snippet
+  var proxySnippet = require('grunt-connect-proxy2/lib/utils').proxyRequest;
+
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -41,15 +45,14 @@ module.exports = function (grunt) {
  			  },
  			  constants: {
  				  ENV: {
- 					  // serverURL: 'http://sourcedata-dev.vital-it.ch/robin/public/php/api/',
- 					  serverURL: 'http://sourcedata-dev.vital-it.ch/lou/public/php/api/',
- 					  //serverURL: 'http://sourcedata-dev.vital-it.ch/anastasia/public/php/api/',
+ 					   serverURL: 'php/api/',
 					  baseURL: '',
 					  baseHref: '/',
  					  withCredentials: true,
  					  debugInfoEnabled: true,
  					  CORS: true,
-					  httpCache: false
+					  httpCache: false,
+					  html5: false
  				  }
  			  }
  		  },
@@ -59,17 +62,17 @@ module.exports = function (grunt) {
  			  },
  			  constants: {
  				  ENV: {
- 					  serverURL: 'http://sourcedata-dev.vital-it.ch/lou/public/php/api/',
-					  baseURL: 'http://sourcedata-dev.vital-it.ch/lou/public/',
-					  baseHref: '/lou/public/',
-					  // serverURL: '/public/php/api/',
-					  // baseURL: 'http://sourcedata.vital-it.ch/public/',
-					  // baseHref: '/public/',
-
+					  //  					  serverURL: 'http://sourcedata-dev.vital-it.ch/lou/public/php/api/',
+					  // baseURL: 'http://sourcedata-dev.vital-it.ch/lou/public/',
+					  // baseHref: '/lou/public/',
+					  serverURL: 'https://api.sourcedata.io/',
+					  baseURL: 'https://search.sourcedata.io/',
+					  baseHref: '/',
  					  withCredentials: true,
  					  debugInfoEnabled: false,
  					  CORS: true,
-					  httpCache: true
+					  httpCache: true,
+					  html5: true
  				  }
  			  }
  		  }
@@ -117,13 +120,23 @@ module.exports = function (grunt) {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
+        // hostname: '0.0.0.0',
         livereload: 35729
       },
+		proxies: [{
+			context: '/php',
+			host: 'sourcedata-robin.vital-it.ch',
+			port: 443,
+			https: true,
+			secure: false
+		}],
       livereload: {
         options: {
           open: true,
           middleware: function (connect) {
             return [
+			  proxySnippet,
+  			  modRewrite(['^[^\\.]*$ /index.html [L]']),
               connect.static('.tmp'),
               connect().use(
                   '/bower_components',
@@ -356,7 +369,8 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'fonts/*'
+            'fonts/*',
+			'styles/fonts/*'
           ]
         }, {
           expand: true,
@@ -419,6 +433,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer',
+	  'configureProxies:server',
       'connect:livereload',
       'watch'
     ]);

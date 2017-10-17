@@ -1,0 +1,55 @@
+@font-face {
+  font-family: 'sourcedata_icons_1_font';
+  src: url('fonts/sourcedata_icons_1_font.ttf?ahml59') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="sd-icon-1-"], [class*=" sd-icon-1-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'sourcedata_icons_1_font' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.sd-icon-1-cell:before {
+  content: "\e900";
+}
+.sd-icon-1-time:before {
+  content: "\e901";
+}
+.sd-icon-1-gene:before {
+  content: "\e902";
+}
+.sd-icon-1-lightning:before {
+  content: "\e903";
+}
+.sd-icon-1-subcellular:before {
+  content: "\e904";
+}
+.sd-icon-1-organism:before {
+  content: "\e905";
+}
+.sd-icon-1-assay:before {
+  content: "\e906";
+}
+.sd-icon-1-protein:before {
+  content: "\e907";
+}
+.sd-icon-1-tissue:before {
+  content: "\e908";
+}
+.sd-icon-1-undefined:before {
+  content: "\e909";
+}
+.sd-icon-1-molecule:before {
+  content: "\e90a";
+}

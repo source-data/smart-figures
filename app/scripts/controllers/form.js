@@ -30,7 +30,7 @@ angular.module('publicSourcedataApp')
 	//-F------ FORM SUBMIT => change Location ------//
 	$scope.formSubmit = function(){
 		$scope.baseURL = ENV.baseURL;
-		var baseurl = 'http://sourcedata.vital-it.ch/public/#/search?';
+		var baseurl = 'http://sourcedata.vital-it.ch/public//search?';
 		var url = baseurl;
 		angular.forEach(categories,function(cat){
 			var type = ($scope.searchParams[cat+"Type"]) ? $scope.searchParams[cat+"Type"]+":" : "";

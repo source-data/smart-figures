@@ -1,0 +1,992 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+/*
+Contents
+========
+1. Typography and html elements
+2. Header and Navigation
+3. SourceData Search Form
+4. Search Results
+5. Search Results Containers
+6. Search Results Figures Containers
+7. SmartFigure Panel
+8. Upstream and downstream
+9. Paper List
+10. API Documentation
+*/
+
+
+/*
+1. Typography and HTML elements
+*/
+
+html, body, p {
+
+    color: #505050;
+    font-family: "Open Sans", sans-serif;
+    font-size:15px;
+
+}
+
+
+
+body {
+    padding-top:0;
+}
+
+.container-fluid{
+    max-width:1400px !important;
+}
+
+/*
+2. Header and Navigation
+*/
+
+.public-ng-header {
+    padding:0;
+    border:none;
+
+}
+
+.page-header {
+    font-size:2.12em;
+    line-height: 1.3;
+    font-weight:bold;
+    border:none;
+    margin-top:0.8em;
+
+}
+
+nav.navbar-default {
+
+    background-color: #0B4E6F;
+    color: #fff;
+    padding-top:1em;
+    padding-bottom:0.5em;
+    box-sizing:content-box;
+
+}
+
+nav.navbar-default .navbar-header {
+    padding-bottom:1em;
+}
+
+.navbar-brand {
+    padding:0 0 0.882em 0;
+    position:relative;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+.navbar-brand img {
+    padding-bottom:1em;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color:#fff;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:active{
+
+    color:#6292d0;
+
+}
+
+.navbar-toggle {
+    border:none;
+    border-radius:0;
+    color:#fff;
+    background-color:#000;
+    position:absolute;
+    right:-15px;
+    bottom:-46px;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:active,
+.navbar-default .navbar-toggle:focus {
+
+    background-color:#000;
+
+}
+
+nav.navbar-default .navbar-collapse {
+    border:none;
+}
+
+/* 3. SourceData Search Form */
+
+.sdform-input-wrapper {
+    width:100%;
+}
+
+/*The perturbation title and ? icon*/
+.sdform-adv-explanation.sd-perturbation,
+.sdform-adv-explanation.sd-perturbation p,
+.sdform-adv-explanation.sd-perturbation span
+
+ {
+    color: #cb5b3c;
+    font-weight:bold;
+}
+
+/*The measured element title and ? icon*/
+.sdform-adv-explanation.sd-measured,
+.sdform-adv-explanation.sd-measured p,
+.sdform-adv-explanation.sd-measured span
+
+ {
+    color: #6292d0;
+    font-weight:bold;
+}
+
+.sdform-adv-explanation.sd-perturbation span,
+.sdform-adv-explanation.sd-measured span
+{
+    font-size:1.4em;
+    font-weight: normal;
+    position:relative;
+    top:5px;
+}
+
+.sdform-adv-does, 
+.sdform-adv-affect,
+.sdform-adv-question
+ {
+    text-align:left !important;
+    padding:20px 0 10px 30px !important;
+    font-size:1.18em;
+}
+
+.sdform-adv-question {
+    display:none;
+}
+
+sd-form form {
+    max-width:1200px;
+    background-color:#f0f0f0;
+    padding-bottom:1em;
+    border-radius:0;
+    margin:auto;
+    margin-bottom:1em;
+}
+
+/*.sdform-advanced-container > .col-sm-offset-1 {
+    margin-left:5px;
+}*/
+
+sd-form form .sdform-advanced-container > .col-sm-offset-1:first-child {
+    display:none;
+}
+
+/* inputs */
+
+.sdform-adv-btn-interv,
+.sdform-adv-btn-assay {
+    width:100%;
+}
+
+.sdform-adv-interv-input,
+.sdform-adv-btn-assay-input {
+
+    box-sizing:border-box;
+    border: solid 4px;
+    border-radius:6px;
+    height:45px;
+    margin-bottom:15px;
+    font-size:1em;
+}
+
+.sdform-adv-interv-input:focus,
+.sdform-adv-btn-assay-input:focus,
+.sdform-adv-interv-input:active,
+.sdform-adv-btn-assay-input:active{
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+
+}
+
+
+.sdform-adv-interv-input,
+.sdform-adv-interv-input:focus,
+.sdform-adv-interv-input:active
+
+{
+    border-color:#cb5b3c;
+}
+
+.sdform-adv-btn-assay-input,
+.sdform-adv-btn-assay-input:focus,
+.sdform-adv-btn-assay-input:active {
+    border-color:#6292d0;
+}
+
+/* dropdown lists of elements */
+.sdform-adv-assay-dropdown,
+.sdform-adv-interv-dropdown 
+{
+    width:100%;
+    line-height:1.765em;
+    color: #fff;
+    height:45px;
+    margin-left:0;
+    padding-right:25px;
+    padding-top:2px;
+    border-radius:6px;
+}
+
+.sdform-adv-assay-dropdown:hover,
+.sdform-adv-interv-dropdown:hover {
+    color:#fff;
+} 
+
+/* The icon inside each dropdown list*/
+.sdform-adv-dropdown-current-icons,
+.sdform-adv-dropdown-icons
+ {
+    font-size: 1.9em;
+    position:relative;
+    top:6px;
+    left:2px;
+}
+
+.sdform-adv-btn-interv .sdform-adv-dropdown-icons {
+    margin-right:0.2em;
+    color:#cb5b3c;
+}
+
+.sdform-adv-btn-assay .sdform-adv-dropdown-icons {
+    margin-right:0.2em;
+    color:#6292D0;
+}
+
+.sdform-adv-interv-dropdown {
+
+    background-color: #cb5b3c !important;
+    border-top-left-radius:6px !important;
+    border-bottom-left-radius:6px !important;
+
+}
+
+.sdform-adv-assay-dropdown {
+    background-color: #6292D0 !important;
+    border-top-left-radius:6px !important;
+    border-bottom-left-radius:6px !important;   
+
+    
+}
+
+
+/*little drop-down icons*/
+.sdform-adv-assay-dropdown .fa,
+.sdform-adv-interv-dropdown .fa {
+    position:absolute;
+    right:10px;
+    top:15px;
+}
+
+.sdform-example {
+    font-size:1rem !important;
+    padding:1em 1em 1em 1em;
+}
+
+.sdform-example a {
+    color:#505050;
+}
+
+.sdform-example i {
+    font-style:normal;
+    font-weight:bold;
+    color:#337ab7;
+}
+
+/* buttons */
+
+.sd-form-button-container {
+    margin-top:1em;
+    display:block;
+}
+
+.sdform-adv-btn-go {
+    width:140px;
+    border-radius:6px;
+    margin:1em auto;
+    display:block;
+}
+
+.sdform-adv-btn-go .fa {
+    font-size:2.15em;
+
+}
+
+.sdform-adv-btn-reset {
+    font-weight:bold;
+    font-size: 1rem;
+    width:140px;
+    line-height:2rem;
+    padding-bottom:7px;
+    border-color:#b4b4b4;
+    border-radius:6px;
+    margin:1em auto;
+    display:block;
+}
+
+/* Simple search form */
+
+
+.sdform-simple-input-group {
+
+    /* border: solid 4px #5cb85c; */
+    border: solid 4px #d2d2d2;
+    border-radius:6px;
+    margin-top:2em;
+    
+}
+
+.sdform-simple-input-group > input {
+    border:none;
+    font-size:1rem;
+}
+
+.sdform-simple-btn-go {
+    border-radius:0;
+
+}
+
+.sdform-simple-btn-go.btn-success:hover,
+.sdform-simple-btn-go.btn-success:active, 
+.sdform-simple-btn-go.btn-success:focus {
+
+    border: solid 1px #449d44;
+
+}
+
+.sdform-simple-container .sdform-example {
+    padding:0;
+}
+
+/*4. Search Results*/
+
+filter-results {
+    padding-top:0 !important;
+}
+
+.results-container {
+    margin-left:-15px;
+    margin-right:-15px;
+}
+
+.result-filter-summary {
+    text-align:center;
+}
+
+.results-title {
+    font-size:1.765em;
+    font-weight:bold;
+    margin:0;
+    text-align:center;
+}
+
+.result-filter-summary {
+    line-height:1.765em;
+}
+
+.result-filter-container > .row > .col-lg-11 {
+    margin-top:5px !important;
+} 
+
+
+.result-filters {
+    border:none;
+    border-radius:0;
+    background-color:#f0f0f0;
+    margin-top:1.5em;
+    margin-left:-15px;
+    margin-right:-15px;
+}
+
+.result-filter-text-container {
+    padding-top: 0;
+    font-size: 1.18em;
+}
+
+.result-filter-item-main .form-control {
+    border-color:#d2d2d2;
+    border-radius:6px;
+    min-height:45px !important;
+}
+
+.result-filter-item-category {
+    height:45px;
+}
+
+.result-filter-item-value > div {
+    padding-top:0.45em;
+    padding-left:4px;
+}
+
+/* result filter buttons */
+
+.result-filter-button-group-container{
+    text-align:center;
+}
+
+.result-filter-item-category-container,
+.result-filter-item-value-container {
+    margin-bottom:1em;
+}
+
+.result-filter-button-group {
+    padding-top:6px;
+}
+
+.result-filter-button-group button {
+    height:30px;
+    width:30px;
+    border-top-right-radius: 6px !important;
+    border-top-left-radius: 6px !important;
+    border-bottom-left-radius: 6px !important;
+    border-bottom-right-radius: 6px !important;
+
+}
+
+.result-filter-button-group button .glyphicon {
+    left:-2px;
+}
+
+.result-filter-button-add {
+    background-color: #505050;
+    margin-right:5px;
+}
+
+.result-filter-item-category-container:before {
+    content: "Type: ";
+    display:block;
+    position:static;
+    font-weight:normal;
+    font-size:1.18em;
+    padding:0 0 0.8475em 0;
+}
+
+
+/*5. Search Results Containers*/
+.direct-search-res-container {
+    border-color: #d2d2d2;
+    border-radius:6px;
+}
+
+h5.direct-search-res-title {
+    font-size: 1rem;
+    font-weight:bold;
+    line-height:1.3em;
+}
+
+.direct-search-res-authors,
+.direct-search-res-author  {
+    font-size:0.882em;
+    line-height:1.3em;
+    margin-bottom:0 !important;
+}
+
+.direct-search-res-doi-link {
+    font-size:0.882rem;
+    color: #337ab7;
+
+}
+
+.direct-search-res-btn{
+    margin-top:1em;
+    margin-bottom: 1em;
+    background-color: #fff;
+    font-size:0.824em;
+    font-weight:bold;
+    padding:0.35em 0.55em;
+    border-radius:6px;
+    border-color:#b4b4b4;
+}
+
+.sd-mobileshow .direct-search-res-figures-btn {
+    display: block;
+    margin: 2em auto 0;
+    position: static;
+}
+
+.direct-search-res-btn .direct-search-res-chevrons {
+    top:2px;
+}
+
+
+
+.direct-search-res-abstract,
+.direct-search-res-abstract p
+ {
+    font-size: 0.882rem;
+    line-height:1.3em;
+}
+
+.direct-search-res-assay {
+    padding-bottom:2em;
+}
+
+/*6. Search results figures containers*/
+.direct-search-res-list  .liSearchResult {
+    border:solid 18px #f0f0f0;
+    border-radius: 6px;
+    background-color: #fff;
+    padding-top:0;
+    margin-bottom:1em;
+}
+
+.direct-search-res-list  .liSearchResult:hover,
+.direct-search-res-list  .liSearchResult:focus,
+.direct-search-res-list  .liSearchResult:active
+{
+
+    border-color:#f0f0f0;
+
+}
+
+.direct-search-res-list  .liSearchResult:last-of-type {
+    margin-bottom:0;
+}
+
+.direct-search-res-intervention,
+.direct-search-res-assayed
+{
+    /*comment these two out for fixed width results header*/
+    display:inline-block;
+    width:auto;
+
+    position: static;
+    width:38%;
+    padding-left:0;
+    padding-right:0;
+    text-align:center;
+}
+
+.direct-search-res-list  .liSearchResult > .row:first-child {
+    padding-top:1em;
+    padding-bottom:1em;
+    background-color:#f0f0f0;
+}
+
+
+.direct-search-res-figures-btn{
+    background-color: #fff;
+    font-size:0.824em;
+    font-weight:bold;
+    padding:0.35em 0.55em;
+    border-radius:6px;
+    border-color:#b4b4b4;
+    /*position:relative;
+    top:-6px;*/
+    position:absolute;
+    right:0px;
+    top:10px;
+}
+
+.direct-search-res-figures-btn .direct-search-res-chevrons {
+    top:2px;
+}
+
+.direct-search-res-intervention {
+    color:#cb5b3c;
+    padding-top:0 !important;
+}
+
+.direct-search-res-assayed {
+    color:#6292d0;
+    padding-top:0 !important;
+}
+
+
+
+.direct-search-res-intervention-icons,
+.direct-search-res-assay-icons {
+    font-size:3em;
+    position:relative;
+    display:block;
+}
+
+/*little experiment count arrow*/
+
+
+.direct-search-res-arrow  {
+
+    position:relative;
+    top:-0.8em;
+    width:24%;
+    padding-left:0;
+    padding-right:0;
+
+}
+
+.direct-search-res-arrow > p {
+    line-height:10px;
+    /* margin-left:-2px; */
+
+}
+
+
+.arrow-icon-container .sd-icon-3-arrow  {
+
+font-size: 2.2em;
+line-height: 0.6em;
+color:#777;
+padding-left:4px;
+
+
+}
+
+.direct-search-res-click-figure {
+
+    background-color:#fff !important;
+    font-size:0.824em;
+    font-weight:bold;
+
+}
+
+/*carousel*/
+.direct-search-res-carousel {
+    margin-top:1em !important;
+}
+
+div.rn-carousel-indicator {
+    text-align:center;
+    transition:all 0.3s linear;
+}
+
+div.rn-carousel-indicator span {
+    font-size:1.18em;
+    color: #b4b4b4;
+}
+
+div.rn-carousel-indicator span.active {
+
+    color:#337ab7;
+
+}
+
+.direct-search-res-carousel div.searchResultPanelInCarousel
+{
+    border:none;
+}
+
+
+/*
+    7. SmartFigure Panel
+*/
+
+.figpanel-header {
+    margin-bottom:1em;
+}
+
+.figpanel-paper-title {
+    font-size: 1rem;
+    font-weight:bold;
+    line-height:1.3em;
+    color:#505050;
+    margin-bottom:3px;
+}
+
+.figpanel-panel-title {
+    font-weight:bold;
+}
+
+.figpanel-panel {
+
+    border: solid 1px #d2d2d2;
+    border-radius: 6px; 
+
+}
+
+
+
+.panel-heading.figpanel-panel-heading,
+.panel-footer.figpanel-panel-footer {
+    border:none;
+    border-top:none;
+    border-bottom:none;
+    background-color: #f0f0f0;
+    padding-top:1em;
+    padding-bottom:1em;
+}
+  
+ .panel-heading.figpanel-panel-heading {
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+
+}   
+
+ .panel-footer.figpanel-panel-footer {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+ }
+
+ .figpanel-btn-group, 
+ .figpanel-btn-download {
+    top:12px !important;
+ }
+
+ .figpanel-center-mid-col div[compile-caption], 
+ .figpanel-center-mid-col div[compile-caption] p {
+     font-size:0.824rem;
+     line-height:1.6;
+ }
+
+  .figpanel-center-mid-col div[compile-caption] {
+      margin-bottom:1em;
+  }
+
+  .figpanel-center-mid-col h4 {
+      font-size:0.824rem;
+      font-weight:bold;
+      margin-bottom:1.765em;
+      color: #505050;
+      border-bottom: solid 2px #d2d2d2;
+      padding-bottom:0.4rem;
+  }
+
+  .figpanel-text-assayed,
+  .figpanel-text-interv {
+      margin-bottom:0.5em;
+  }
+
+  .figpanel-related-link .figpanel-related-btn-blue,
+  .figpanel-related-link .figpanel-related-btn-red {
+      width:100%;
+      overflow:hidden;
+      text-overflow: ellipsis;
+  }
+
+  .figpanel-exp-badge {
+      padding:6px;
+      border:solid 1px #d2d2d2;
+         color:#606060;
+  }
+
+
+  div.similarPanelInCarousel,
+  div.similarPanelInCarousel:hover,
+  div.similarPanelInCarousel:focus,
+  div.similarPanelInCarousel:active {
+     border:solid 1px #d2d2d2; 
+     padding:8px;
+
+  }
+
+  .figpanel-related-panel {
+      border-radius:6px;
+  }
+
+  .figpanel-related-panel-head {
+      border-bottom:none;
+      background-color:#f0f0f0;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+  }
+
+  .figpanel-related-panel-head .glyphicon {
+      font-size:0.824em;
+  }
+
+  .figpanel-related-footer p {
+      font-size:0.824em;
+  }
+
+    .figpanel-related-footer {
+        border-top:none;
+        background-color:#f0f0f0;  
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+
+/* 8. Upstream and downstream */
+
+.figpanel-panel .figpanel-filter-row {
+    padding-bottom:1em;
+    margin-bottom:1em;
+    /* border-bottom: solid 2px #d2d2d2; */
+}
+
+/* .figpanel-panel .figpanel-filter-item-container {
+     height:auto !important; */
+    /* max-height:60px; 
+} */
+
+.figpanel-panel  .panel-title.figpanel-panel-title {
+    margin-right:260px !important;
+}
+
+.figpanel-panel .result-filter-item-category-container:before {
+    content:none;
+} 
+
+.figpanel-panel .figpanel-filter-text-container span {
+    font-size: 1rem;
+    font-weight:bold;
+}
+
+.figpanel-panel .result-filter-item-category
+{
+    height:45px !important;
+}
+
+.figpanel-panel .result-filter-item-value {
+    min-height:45px !important;
+    margin-bottom: 1em;
+}
+
+.figpanel-panel .result-filter-button-group {
+    padding-top:9px;
+}
+
+.figpanel-panel .result-filter-button-group .btn {
+    width:27px;
+    height:27px;
+}
+
+.figpanel-panel .result-filter-button-add {
+    color:#fff;
+}
+
+.figpanel-panel .result-filter-button-group .glyphicon {
+    left:-1px;
+    top:2px;
+}
+
+.figpanel-panel .sdpanel-text {
+    margin-bottom:1.768em;;
+}
+
+.figpanel-panel .figpanel-filter-panel {
+    border:none;
+    box-shadow:none;
+    margin-bottom:0;
+}
+
+h4.upstr-title {
+    font-weight:bold;
+    margin-bottom:1em;
+}
+
+.listsearchres-ul.nav-pills li {
+    margin-left:0;
+}
+
+.listsearchres-panel {
+    border-radius:6px;
+    border:none;
+    background-color:#f0f0f0;
+}
+
+.listsearchres-panel-body a.pull-right {
+    float:none !important;
+}
+
+.result-filter-item-value > div {
+    padding-top:0.7em;
+    font-size:14px;
+    color:#000;
+}
+
+.figpanel-filter-panel-body {
+    border-bottom: solid 2px #f0f0f0;
+}
+
+.figpanel-alert-loading {
+    background-color: #f0f0f0;
+    color:#216a87;
+    border-color: #d2d2d2;
+}
+
+/* 9. Paper List */
+
+.paperlist-container .paperlist-filter-panel{
+
+    border:none;
+    background-color: #f0f0f0;
+    border-radius: 6px;
+
+}
+
+.paperlist-filter-text {
+    font-size:1rem;
+    color: #505050;
+}
+
+.paperlist-filter-input {
+    color: #505050;
+    padding: 4px;
+}
+
+.paperlist-group-item,
+.paperlist-group-item:first-child {
+
+     font-size:1rem;  
+    border-radius:6px;
+    border-color: #d2d2d2;
+    margin-bottom: 0.824em;
+    padding-top:0.4em;
+    padding-bottom:1em;
+}
+
+.paperlist-group-item h5 {
+     font-weight:bold; 
+     font-size: 1rem;
+     line-height:1.3;
+     margin-bottom:2px;
+}
+
+.paperlist-group-item p {
+    font-size:0.882rem !important;
+}
+
+.btn-paperlist {
+        margin-top: 1em;
+    margin-bottom: 1em;
+    background-color: #fff;
+    font-size: 0.824em;
+    font-weight: bold;
+    padding: 0.35em 0.55em;
+    border-radius: 6px;
+    border-color: #b4b4b4;
+    color: #505050;
+}
+
+dd, dt {
+    font-size:14px;
+}
+
+/* 10. API Documentation */
+
+.documentation-panel {
+    border:none;
+}
+
+.documentation-panel > div.panel-heading {
+
+    color:#505050;
+    background-color:transparent;
+    border:none;
+}
+
+.documentation-panel .panel-title {
+    font-size:2.12rem;
+}
+
+.active-perso {
+    background-color:transparent;
+}
+/* .row.result-filter-item-smartfig {
+    margin-bottom:0.5em;
+} */
+
+/* ipad size rules */
+.sd-mobileshow {display:block;}
+.sd-mobilehide {display:none;}
+
+.vcenter {
+    font-size:inherit;
+}

@@ -1,18 +1,18 @@
 
-<div class="row" ng-show="render==1">
-    <div class="col-sm-4">
-        <select class="form-control" ng-options="filter as filter.name for filter in filters | filterTypes:currentFilter" ng-model="currentFilter" ng-change="currentFilter.value=1;trackSelections({currFilt:currentFilter})"></select>
+<div class="row result-filter-item-main" ng-show="render==1">
+    <div class="col-sm-4 result-filter-item-category-container">
+        <select class="form-control result-filter-item-category" ng-options="filter as filter.name for filter in filters | filterTypes:currentFilter" ng-model="currentFilter" ng-change="currentFilter.value=1;trackSelections({currFilt:currentFilter})"></select>
     </div>
-    <div class="col-sm-6" ng-show="currentFilter.name == 'journal'">
-        <ui-select multiple theme="bootstrap" class="form-control" ng-model="multiple.selectedjournal" close-on-select="false" style="min-height: 34px" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
+    <div class="col-sm-6 result-filter-item-value-container" ng-show="currentFilter.name == 'journal'">
+        <ui-select multiple theme="bootstrap" class="form-control result-filter-item-value" ng-model="multiple.selectedjournal" close-on-select="false" style="min-height: 34px" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
             <ui-select-match placeholder="Select journal...">{{$item}}</ui-select-match>
             <ui-select-choices repeat="journal in journals | filter:$select.search" >
                 {{journal}}
             </ui-select-choices>
         </ui-select>
     </div>
-    <div class="col-sm-6" ng-show="currentFilter.name == 'author'" >
-        <ui-select multiple theme="bootstrap" class="form-control" ng-model="multiple.selectedauthor" close-on-select="false" style="min-height: 34px" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
+    <div class="col-sm-6 result-filter-item-value-container" ng-show="currentFilter.name == 'author'" >
+        <ui-select multiple theme="bootstrap" class="form-control result-filter-item-value" ng-model="multiple.selectedauthor" close-on-select="false" style="min-height: 34px" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
             <ui-select-match placeholder="Select author...">{{$item}}</ui-select-match>
             <ui-select-choices repeat="author in authors | filter:$select.search" >
                 {{author}}
@@ -20,16 +20,16 @@
         </ui-select>
     </div>
 
-    <div class="col-sm-6" ng-show="currentFilter.name == 'assay'">
-        <ui-select multiple theme="bootstrap" class="form-control" ng-model="multiple.selectedassay" close-on-select="false" style="min-height: 34px" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
+    <div class="col-sm-6 result-filter-item-value-container" ng-show="currentFilter.name == 'assay'">
+        <ui-select multiple theme="bootstrap" class="form-control result-filter-item-value" ng-model="multiple.selectedassay" close-on-select="false" style="min-height: 34px" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
             <ui-select-match  placeholder="Select assay...">{{$item}}</ui-select-match>
             <ui-select-choices repeat="assay in assays | filter:$select.search" >
                  {{assay}}
             </ui-select-choices>
         </ui-select>
     </div>
-    <div class="col-sm-6" ng-show="currentFilter.name == 'year'">
-        <ui-select multiple theme="bootstrap" class="form-control" ng-model="multiple.selectedyear" close-on-select="false" style="min-height: 34px" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
+    <div class="col-sm-6 result-filter-item-value-container" ng-show="currentFilter.name == 'year'">
+        <ui-select multiple theme="bootstrap" class="form-control result-filter-item-value" ng-model="multiple.selectedyear" close-on-select="false" style="min-height: 34px" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
             <ui-select-match  placeholder="Select year...">{{$item}}</ui-select-match>
             <ui-select-choices repeat="year in years | filter:$select.search" >
                 {{year}}
@@ -37,8 +37,8 @@
         </ui-select>
     </div>
 
-    <div class="col-sm-6" ng-show="currentFilter.name == 'organism'">
-        <ui-select multiple theme="bootstrap" class="form-control" ng-model="multiple.selectedorganism" close-on-select="false" style="min-height: 34px" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
+    <div class="col-sm-6 result-filter-item-value-container" ng-show="currentFilter.name == 'organism'">
+        <ui-select multiple theme="bootstrap" class="form-control result-filter-item-value" ng-model="multiple.selectedorganism" close-on-select="false" style="min-height: 34px" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
             <ui-select-match  placeholder="Select organism...">{{$item}}</ui-select-match>
             <ui-select-choices repeat="organism in organisms | filter:$select.search" >
                 {{organism}}
@@ -46,33 +46,33 @@
         </ui-select>
     </div>
 
-    <div class="col-sm-2">
-        <div class="btn-group btn-group-sm">
-            <button class="btn btn-primary" ng-disabled="filtercollection.subitems.length==filters.length" ng-click="addNewFilterItem();currentFilter.value=1;currentFilter.type=1;applyFilter({currFilt:currentFilter.name})"><span class="glyphicon glyphicon-plus"></span></button>
-            <button class="btn btn-default" ng-show="currentFilter.name == 'journal'" ng-click="multiple.selectedjournal=[];removeFilterItem({i:parentindex, type:0, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" style="color: lightslategray"></span></button>
-            <button class="btn btn-default" ng-show="currentFilter.name == 'author'" ng-click="multiple.selectedauthor=[];removeFilterItem({i:parentindex, type:1, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" style="color: lightslategray"></span></button>
-            <button class="btn btn-default" ng-show="currentFilter.name == 'year'" ng-click="multiple.selectedyear=[];removeFilterItem({i:parentindex, type:2, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" style="color: lightslategray"></span></button>
-            <button class="btn btn-default" ng-show="currentFilter.name == 'assay'" ng-click="multiple.selectedassay=[];removeFilterItem({i:parentindex, type:3, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" style="color: lightslategray"></span></button>
-            <button class="btn btn-default" ng-show="currentFilter.name == 'organism'" ng-click="multiple.selectedorganism=[];removeFilterItem({i:parentindex, type:4, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" style="color: lightslategray"></span></button>
+    <div class="col-sm-2 result-filter-button-group-container">
+        <div class="btn-group btn-group-sm  result-filter-button-group">
+            <button class="btn btn-primary result-filter-button-add" ng-disabled="filtercollection.subitems.length==filters.length" ng-click="addNewFilterItem();currentFilter.value=1;currentFilter.type=1;applyFilter({currFilt:currentFilter.name})"><span class="glyphicon glyphicon-plus"></span></button>
+            <button class="btn btn-default result-filter-button-remove" ng-disabled="filtercollection.subitems.length==1" ng-show="currentFilter.name == 'journal'" ng-click="multiple.selectedjournal=[];removeFilterItem({i:parentindex, type:0, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus"></span></button>
+            <button class="btn btn-default result-filter-button-remove" ng-disabled="filtercollection.subitems.length==1" ng-show="currentFilter.name == 'author'" ng-click="multiple.selectedauthor=[];removeFilterItem({i:parentindex, type:1, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" ></span></button>
+            <button class="btn btn-default result-filter-button-remove" ng-disabled="filtercollection.subitems.length==1" ng-show="currentFilter.name == 'year'" ng-click="multiple.selectedyear=[];removeFilterItem({i:parentindex, type:2, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" ></span></button>
+            <button class="btn btn-default result-filter-button-remove" ng-disabled="filtercollection.subitems.length==1" ng-show="currentFilter.name == 'assay'" ng-click="multiple.selectedassay=[];removeFilterItem({i:parentindex, type:3, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" ></span></button>
+            <button class="btn btn-default result-filter-button-remove" ng-disabled="filtercollection.subitems.length==1" ng-show="currentFilter.name == 'organism'" ng-click="multiple.selectedorganism=[];removeFilterItem({i:parentindex, type:4, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" ></span></button>
 
         </div>
     </div>
 </div>
 
-<div class="row" ng-show="render==2">
-    <div class="col-xs-4">
-        <select class="form-control" style="height: 27px" ng-options="filter as filter.name for filter in filters | filterTypes:currentFilter" ng-model="currentFilter" ng-change="currentFilter.value=1;trackSelections({currFilt:currentFilter})"></select>
+<div class="row result-filter-item-smartfig" ng-show="render==2">
+    <div class="col-xs-4 result-filter-item-category-container">
+        <select class="form-control result-filter-item-category" style="height: 27px" ng-options="filter as filter.name for filter in filters | filterTypes:currentFilter" ng-model="currentFilter" ng-change="currentFilter.value=1;trackSelections({currFilt:currentFilter})"></select>
     </div>
-    <div class="col-xs-6" ng-show="currentFilter.name == 'journal'">
-        <ui-select multiple theme="bootstrap" class="form-control" ng-model="multiple.selectedjournal" close-on-select="false" style="min-height: 27px; padding: 0 3px 0 3px;" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
+    <div class="col-xs-6 result-filter-item-value-container" ng-show="currentFilter.name == 'journal'">
+        <ui-select multiple theme="bootstrap" class="form-control result-filter-item-value" ng-model="multiple.selectedjournal" close-on-select="false" style="min-height: 27px; padding: 0 3px 0 3px;" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
             <ui-select-match placeholder="Select journal...">{{$item}}</ui-select-match>
             <ui-select-choices repeat="journal in journals | filter:$select.search" >
                 {{journal}}
             </ui-select-choices>
         </ui-select>
     </div>
-    <div class="col-xs-6" ng-show="currentFilter.name == 'author'" >
-        <ui-select multiple theme="bootstrap" class="form-control form-control-sm" ng-model="multiple.selectedauthor" close-on-select="false" style="min-height: 27px; padding: 0 3px 0 3px;" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
+    <div class="col-xs-6 result-filter-item-value-container" ng-show="currentFilter.name == 'author'" >
+        <ui-select multiple theme="bootstrap" class="form-control form-control-sm result-filter-item-value" ng-model="multiple.selectedauthor" close-on-select="false" style="min-height: 27px; padding: 0 3px 0 3px;" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
             <ui-select-match placeholder="Select author...">{{$item}}</ui-select-match>
             <ui-select-choices repeat="author in authors | filter:$select.search" >
                 {{author}}
@@ -80,16 +80,16 @@
         </ui-select>
     </div>
 
-    <div class="col-xs-6" ng-show="currentFilter.name == 'assay'">
-        <ui-select multiple theme="bootstrap" class="form-control form-control-sm" ng-model="multiple.selectedassay" close-on-select="false" style="min-height: 27px; padding: 0 3px 0 3px;" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
+    <div class="col-xs-6 result-filter-item-value-container" ng-show="currentFilter.name == 'assay'">
+        <ui-select multiple theme="bootstrap" class="form-control form-control-sm result-filter-item-value" ng-model="multiple.selectedassay" close-on-select="false" style="min-height: 27px; padding: 0 3px 0 3px;" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
             <ui-select-match  placeholder="Select assay...">{{$item}}</ui-select-match>
             <ui-select-choices repeat="assay in assays | filter:$select.search" >
                 {{assay}}
             </ui-select-choices>
         </ui-select>
     </div>
-    <div class="col-xs-6" ng-show="currentFilter.name == 'year'">
-        <ui-select multiple theme="bootstrap" class="form-control form-control-sm" ng-model="multiple.selectedyear" close-on-select="false" style="min-height: 27px; padding: 0 3px 0 3px;" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
+    <div class="col-xs-6 result-filter-item-value-container" ng-show="currentFilter.name == 'year'">
+        <ui-select multiple theme="bootstrap" class="form-control form-control-sm result-filter-item-value" ng-model="multiple.selectedyear" close-on-select="false" style="min-height: 27px; padding: 0 3px 0 3px;" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
             <ui-select-match  placeholder="Select year...">{{$item}}</ui-select-match>
             <ui-select-choices repeat="year in years | filter:$select.search" >
                 {{year}}
@@ -97,8 +97,8 @@
         </ui-select>
     </div>
 
-    <div class="col-xs-6" ng-show="currentFilter.name == 'organism'">
-        <ui-select multiple theme="bootstrap" class="form-control form-control-sm" ng-model="multiple.selectedorganism" close-on-select="false" style="min-height: 27px; padding: 0 3px 0 3px;" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
+    <div class="col-xs-6 result-filter-item-value-container" ng-show="currentFilter.name == 'organism'">
+        <ui-select multiple theme="bootstrap" class="form-control form-control-sm result-filter-item-value" ng-model="multiple.selectedorganism" close-on-select="false" style="min-height: 27px; padding: 0 3px 0 3px;" ng-change="currentFilter.value=1;applyFilter({currFilt:currentFilter.name})">
             <ui-select-match  placeholder="Select organism...">{{$item}}</ui-select-match>
             <ui-select-choices repeat="organism in organisms | filter:$select.search" >
                 {{organism}}
@@ -106,14 +106,14 @@
         </ui-select>
     </div>
 
-    <div class="col-xs-2">
-        <div class="btn-group btn-group-xs">
-            <button class="btn" style="color: white;background-color: darkgrey;"  ng-disabled="filtercollection.subitems.length==filters.length" ng-click="addNewFilterItem();currentFilter.value=1;currentFilter.type=1;applyFilter({currFilt:currentFilter.name})"><span class="glyphicon glyphicon-plus"></span></button>
-            <button class="btn btn-default" ng-show="currentFilter.name == 'journal'" ng-click="multiple.selectedjournal=[];removeFilterItem({i:parentindex, type:0, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" style="color: darkgrey"></span></button>
-            <button class="btn btn-default" ng-show="currentFilter.name == 'author'" ng-click="multiple.selectedauthor=[];removeFilterItem({i:parentindex, type:1, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" style="color: darkgrey"></span></button>
-            <button class="btn btn-default" ng-show="currentFilter.name == 'year'" ng-click="multiple.selectedyear=[];removeFilterItem({i:parentindex, type:2, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" style="color: darkgrey"></span></button>
-            <button class="btn btn-default" ng-show="currentFilter.name == 'assay'" ng-click="multiple.selectedassay=[];removeFilterItem({i:parentindex, type:3, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" style="color: darkgrey"></span></button>
-            <button class="btn btn-default" ng-show="currentFilter.name == 'organism'" ng-click="multiple.selectedorganism=[];removeFilterItem({i:parentindex, type:4, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" style="color: darkgrey"></span></button>
+    <div class="col-xs-2 result-filter-button-group-container">
+        <div class="btn-group btn-group-xs result-filter-button-group">
+            <button class="btn result-filter-button-add"  ng-disabled="filtercollection.subitems.length==filters.length" ng-click="addNewFilterItem();currentFilter.value=1;currentFilter.type=1;applyFilter({currFilt:currentFilter.name})"><span class="glyphicon glyphicon-plus"></span></button>
+            <button class="btn btn-default result-filter-button-remove" ng-disabled="filtercollection.subitems.length==1" ng-show="currentFilter.name == 'journal'" ng-click="multiple.selectedjournal=[];removeFilterItem({i:parentindex, type:0, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" ></span></button>
+            <button class="btn btn-default result-filter-button-remove" ng-disabled="filtercollection.subitems.length==1" ng-show="currentFilter.name == 'author'" ng-click="multiple.selectedauthor=[];removeFilterItem({i:parentindex, type:1, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" ></span></button>
+            <button class="btn btn-default result-filter-button-remove" ng-disabled="filtercollection.subitems.length==1" ng-show="currentFilter.name == 'year'" ng-click="multiple.selectedyear=[];removeFilterItem({i:parentindex, type:2, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" ></span></button>
+            <button class="btn btn-default result-filter-button-remove" ng-disabled="filtercollection.subitems.length==1" ng-show="currentFilter.name == 'assay'" ng-click="multiple.selectedassay=[];removeFilterItem({i:parentindex, type:3, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus"></span></button>
+            <button class="btn btn-default result-filter-button-remove" ng-disabled="filtercollection.subitems.length==1" ng-show="currentFilter.name == 'organism'" ng-click="multiple.selectedorganism=[];removeFilterItem({i:parentindex, type:4, currFilt:currentFilter.name})"><span class="glyphicon glyphicon-minus" ></span></button>
         </div>
     </div>
 

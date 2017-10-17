@@ -19,22 +19,21 @@
 *****************************************************************/
 -->
 
-<div class = 'container' ng-cloak="" layout-gt-sm="row" layout="column">
-	<h3 class = 'page-header' layout="row" style="text-align: center">List of processed papers in the SourceData compendium</h3>
+<div class = 'container paperlist-container' ng-cloak="" layout-gt-sm="row" layout="column">
+	<h3 class = 'page-header paperlist-header' layout="row" style="text-align: center">List of processed papers in the SourceData compendium</h3>
 
 	<div ng-if="publications.length > 0">
-		<div class="panel panel-primary" style="background-color: #eeeeee" >
-			<div class="panel-body">
-				<h5 class="text-primary"> Filter displayed publications
-					<input ng-model="limitpub" style="margin-left: 10px;color: black;font-weight: normal;">
-					<span class="badge" style="margin-left: 10px; background-color: #2563AB">{{filteredPublications.length}}</span>
+		<div class="panel panel-primary paperlist-filter-panel">
+			<div class="panel-body paperlist-filter-panel-body">
+				<h5 class="text-primary paperlist-filter-text"> Filter displayed publications
+					<input ng-model="limitpub" class="paperlist-filter-input" style="margin-left: 10px">
+					<span class="badge paperlist-filter-badge" style="margin-left: 10px">{{filteredPublications.length}}</span>
 				</h5>
 			</div>
 		</div>
-		<div class="list-group">
-			<div style="position: relative;" class="list-group-item"
+		<div class="list-group paperlist-group">
+			<div style="position: relative;" class="list-group-item paperlist-group-item"
 				 ng-repeat='publi in filteredPublications = (publications | filter : limitpub)'>
-
 				<div>
 					<h5>{{ publi.title}}</h5>
 
@@ -43,7 +42,7 @@
 						<a style = 'margin-bottom: 0px; font-size: 12px' ng-href = 'http://dx.doi.org/{{publi.doi}}' target = '_blank' ng-if = 'publi.doi'>doi:{{publi.doi}}</a>
 					</p>
 
-					<button class="btn btn-default btn-xs" ng-click = 'loadPanel(publi.figures[0].first_panel_id)'>
+					<button class="btn btn-default btn-xs btn-paperlist" ng-click = 'loadPanel(publi.figures[0].first_panel_id)'>
 						View as Smart Figure
 					</button>
 				</div>
@@ -51,7 +50,7 @@
 		</div>
 	</div>
 	<div ng-if="!publications.length ">
-		<div class="alert alert-info" style="margin-top: 42px;">
+		<div class="alert alert-info alert-paperlist-loading" style="margin-top: 42px;">
 			<span >Loading results... </span>
 			<span><img ng-src='{{baseURL}}images/ring.gif' alt='loading...' height='20' width='20'></span>
 		</div>

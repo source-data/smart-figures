@@ -18,31 +18,34 @@
 *
 *****************************************************************/
 -->
+<h3 class = 'page-header search-result-header' layout="row" style="text-align: center">Data search</h3>
 
 <!--FORM -->
-
-<sd-form search-params = 'searchParams' on-form-submit = 'formSubmit()'></sd-form>
+<sd-form search-params='searchParams' on-form-submit='formSubmit()'></sd-form>
 
 <!--RESULTS -->
-<div class='container-fluid' ng-if="searchParams.result" style="margin-top: 20px">
+<div class='container-fluid results-container' ng-if="searchParams.result" style="margin-top: 20px">
 
-    <div ng-if='searchParams.result && searchParams.done '>
+    <div ng-if='searchParams.result && searchParams.done' class='result-filter-container'>
+        <!--RESULTS COUNT AND DESCRIPTION-->
+        <div class="row">
+            <div class="col-lg-1"><h4 class="results-title">Results</h4></div>
+            <div class="col-lg-11" style="margin-top: 9px"> <p class='result-filter-summary' style="padding-left:15px" compile="searchParams.summary.phrase"></p></div>
+        </div>
 
         <!--FILTERS -->
-        <div class="panel panel-primary" style="background-color: #eeeeee" >
+        <div class="panel panel-primary result-filters" >
             <div class="panel-body">
-                <div class="row"> <p style="padding-left:15px" compile="searchParams.summary.phrase" ></p> </div>
-                <div class="row" ng-show="searchParams.summary.papers" >
+                <div class="row" >
                     <div ng-if="!searchParams.result.shortestPath.length">
-                        <div class="col-sm-2">
-                            <button class="btn btn-primary btn-sm" ng-show="filtercollection.subitems.length==0" ng-click="filterInit();firstClick=1;" > Filter results </button>
-                            <button class="btn btn-primary btn-sm" ng-show="firstClick==1 && filtercollection.subitems.length>0" ng-click="collapsed_filt=!collapsed_filt" > <i ng-class="{'fa fa-angle-up':!collapsed_filt,'fa fa-angle-down':collapsed_filt}"></i> Filter results </button>
+                        <div class="col-lg-2 result-filter-text-container">
+                            <span> Filter results </span>
                         </div>
-                        <div class="col-sm-10" ng-show="!collapsed_filt">
-                            <div ng-repeat="subitem in filtercollection.subitems">
+                        <div class="col-lg-10">
+                            <div ng-repeat="subitem in filtercollection.subitems" class='result-filter-item-container'>
                                 <filter-results style="padding: 20px;"
                                                 parentindex="$index"
-                                                render = "1"
+                                                render="1"
                                                 remove-filter-item="removeFilterItem(i,type, currFilt)"
                                                 add-new-filter-item="addNewFilterItem()"
                                                 apply-filter="applyFilter(currFilt)"
@@ -57,21 +60,21 @@
     </div>
 
 
-        <direct-search-result type='direct'
-                              ng-repeat='(idx, result) in searchParams.displayedResult'
-                              index='idx'
-                              result='result'>
-        </direct-search-result>
-        <path-search-result type='path' ng-repeat='step in searchParams.result.shortestPath'
-                            ng-if='searchParams.result.direct.length == 0 && searchParams.action == "connect"'
-                            step='step' first='{{$first}}'>
+    <direct-search-result type='direct'
+                          ng-repeat='(idx, result) in searchParams.displayedResult'
+                          index='idx'
+                          result='result'>
+    </direct-search-result>
+    <path-search-result type='path' ng-repeat='step in searchParams.result.shortestPath'
+                        ng-if='searchParams.result.direct.length == 0 && searchParams.action == "connect"'
+                        step='step' first='{{$first}}'>
 
-        </path-search-result>
+    </path-search-result>
 
-        <div ng-if='!searchParams.result.direct.length && !searchParams.result.shortestPath.length && searchParams.done'
-             class='alert alert-info'>Sorry, no result found.
-        </div>
-    <div ng-if='searchParams.loading' class='alert alert-info'>Searching. Please wait...</div>
+    <div ng-if='!searchParams.result.direct.length && !searchParams.result.shortestPath.length && searchParams.done'
+         class='alert alert-info alert-no-results'>Sorry, no result found.
+    </div>
+    <div ng-if='searchParams.loading' class='alert alert-info alert-results-wait'>Searching. Please wait...</div>
 
 </div>
 
