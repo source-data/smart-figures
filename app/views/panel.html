@@ -282,7 +282,7 @@
                 <div class='col-sm-1'>
                     <!-- <a nav-figure-in-paper action="previous" panel="panel"></a> -->
                     <a tooltip="Previous figure" ng-show="panel.nextPreviousFig.previous!=null"
-                       href="/panel/{{panel.paper.figures[panel.nextPreviousFig.previous].panel_id}}"
+					   ng-click='setPanel(panel.paper.figures[panel.nextPreviousFig.previous].panel_id)'
                        title="{{panel.paper.figures[panel.nextPreviousFig.previous].label}}"
                        class="glyphicon glyphicon-chevron-left figpanel-glyphicon-chevron-left"></a>
                 </div>
@@ -297,7 +297,7 @@
                 <div class='col-sm-1'>
                     <!-- <a nav-figure-in-paper action="next" panel="panel"></a> -->
                     <a tooltip="Next figure" ng-show="panel.nextPreviousFig.next!=null"
-                       href="/panel/{{panel.paper.figures[panel.nextPreviousFig.next].panel_id}}"
+					   ng-click='setPanel(panel.paper.figures[panel.nextPreviousFig.next].panel_id)'
                        title="{{panel.paper.figures[panel.nextPreviousFig.next].label}}"
                        class="glyphicon glyphicon-chevron-right figpanel-glyphicon-chevron-right"></a>
                 </div>

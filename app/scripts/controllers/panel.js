@@ -181,6 +181,7 @@ angular.module('publicSourcedataApp')
             $location.path('panel/' + panel_id);
         };
 
+
         //-F------ SET SEARCH FORM => change location search => on route update------//
         $scope.setSearchForm = function (tag, direction, perform) { // tag button is clickable only when view !== "panel" => use of perform to abort the function.
             if (!perform) return;

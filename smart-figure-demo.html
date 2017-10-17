@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+
+<!--Embed SourceData Smart Figure in a web page.
+---------------------------------------------
+This techique is using web components, a feature developped by Google.
+Not all browsers support it. That's why we need to add a polyfills library
+(webcomponents-lite.min.js)
+
+1. Set the DOI of the Paper
+2. Add polyfills library for browsers that don't support web components
+3. Add link[rel="import"] tag to SourceData App
+
+-> Foreach Figure:
+	4. Add a container for the SmartFigure of this figure. ID must be: "SDsmartFigure{{figure-label-without-space-characters}}"
+	5. Add a button / link that shows the SmartFigure. The argument of the showSmartFigure() function must be the label of the figure
+ -->
+
+<html>
+	<head>
+		<script>
+		// 1. Set the DOI of the Paper
+			var doi = "10.1083/jcb.138.1.37";
+		</script>
+
+		<!-- 2. Add polyfills library for browsers that don't support web components -->
+		<script src="webcomponents-lite.min.js" type="text/javascript" charset="utf-8"></script>
+
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>webcomp</title>
+
+		<!-- 3. Add link[rel="import"] tag to SourceData App -->
+		<link rel="import" href="https://search.sourcedata.io/">
+
+	</head>
+	<body id="webcomp" onload="" style = 'margin: 30px; width: 1024px;'>
+		<h1>Title of the Paper</h1>
+		<h4>Figure 1</h4>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<!--4. Add a container for the SmartFigure of this figure. ID must be: "SDsmartFigure{{figurelabel without space characters}}" -->
+		<div class = 'SDsmartfigure' id = 'SDsmartFigureFigure1'></div>
+
+		<!--5. Add a button / link that shows the SmartFigure. The argument of the showSmartFigure() function must be the label of the figure -->
+		<button type = 'button' onclick = 'showSmartFigure("Figure 1")'>show smart figure</button>
+
+		<h4>Figure 2</h4>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+		<!--4. Add container for the SmartFigure of this figure. ID must be: "SDsmartFigure{{figurelabel without space characters}}" -->
+		<div class = 'SDsmartfigure' id = 'SDsmartFigureFigure2'></div>
+		<!--5. Add a button / link that shows the SmartFigure. The argument of the showSmartFigure() function must be the label of the figure -->
+		<button type = 'button' onclick = 'showSmartFigure("Figure 2")'>show smart figure</button>
+
+
+	</body>
+    <script>
+		var angularLoaded = false;
+
+		function showSmartFigure(idx){
+			// remove spaces in idx
+			idx = idx.replace(/\s/g,'');
+
+			// set location href
+			var hashIdx = window.location.href.indexOf('#');
+			 		    window.location.href = window.location.href.substr(0,hashIdx)+"#/doi/"+doi+"/figure/"+idx;
+			console.log(window.location.href.substr(0,hashIdx)+"#/doi/"+doi+"/figure/"+idx);
+
+			// first loading of SourceData Smart Figure
+			if(!angularLoaded){
+
+				// we create a div to contain the app
+			    var div = document.querySelector('#SDsmartFigure');
+				if(!div){
+					div = document.createElement('div');
+					div.id = 'SDsmartFigure';
+				}
+
+				// we append the div to the correct place in the dom
+				document.querySelector('#SDsmartFigure'+idx).appendChild(div);
+
+				// we get the content of SourceData App
+				var content = document.querySelector('link[rel="import"]').import;
+			    var el = content.querySelector('body');
+			    div.appendChild(el.cloneNode(true));
+
+				// we bootstrap the angular of SourceData App for the first time //
+				angular.element(function() {
+				      angular.bootstrap(document, ['publicSourcedataApp']);
+					  angularLoaded = true;
+		    	});
+			}
+			else{
+
+				// we move the SourceData App to the correct place
+				var div = document.querySelector('#SDsmartFigure');
+				document.querySelector('#SDsmartFigure'+idx).appendChild(div);
+			}
+		}
+     </script>
+</html>
