@@ -38,3 +38,6 @@ To build, type:
 
 This will package the application in the `dist` folder
 
+## SourceData - embedding the search bar in a web page
+It is possible to embed the SourceData search form in another web page using the web-components technology.
+The file `search-bar-demo.html` is a minimal example of SourceData integration. The included HTML and Javascript code is commented.
