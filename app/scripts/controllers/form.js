@@ -51,6 +51,7 @@ angular.module('publicSourcedataApp')
 	$scope.searchParams.genericType = ($scope.searchParams.genericType=='gene,protein') ? '':$scope.searchParams.genericType;
 
 	var categories = Search.getCategories();
+
 }]);
 
 

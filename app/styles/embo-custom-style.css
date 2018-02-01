@@ -12,6 +12,7 @@ Contents
 8. Upstream and downstream
 9. Paper List
 10. API Documentation
+11. Tour Popover
 */
 
 
@@ -989,4 +990,22 @@ dd, dt {
 
 .vcenter {
     font-size:inherit;
+}
+
+/* TOUR POPOVERS */
+h3.popover-title {
+    background-color:#0B4E6F;
+    color: #fff;
+    font-size:17px;
+    line-height:1.3em;
+}
+
+.popover-content, .popover-content p {
+    font-size:14px;
+}
+
+.popover-navigation {
+    background-color:#0B4E6F;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }

@@ -28,4 +28,8 @@
  */
   .service('d3', function ($window) {
     return $window.d3;
-  });
+  })
+  .service('tour', function ($window){
+    return $window.Tour;
+  })
+  ;
