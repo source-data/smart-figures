@@ -993,18 +993,18 @@ dd, dt {
 }
 
 /* TOUR POPOVERS */
-h3.popover-title {
+.popover.tour-searchTour h3.popover-title {
     background-color:#0B4E6F;
     color: #fff;
     font-size:17px;
     line-height:1.3em;
 }
 
-.popover-content, .popover-content p {
+.popover.tour-searchTour .popover-content, .popover-content p {
     font-size:14px;
 }
 
-.popover-navigation {
+.popover.tour-searchTour .popover-navigation {
     background-color:#0B4E6F;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;

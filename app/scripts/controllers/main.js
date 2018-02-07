@@ -25,90 +25,10 @@
 * Controller of the publicSourcedataApp
 */
 angular.module('publicSourcedataApp')
-.controller('MainCtrl', ['$scope','$rootScope','$location', 'Search', 'Filter', 'tour', function ($scope, $rootScope, $location, Search, Filter, tour ) {
+.controller('MainCtrl', ['$scope','$rootScope','$location', 'Search', 'Filter', 'tour', 'searchTour', function ($scope, $rootScope, $location, Search, Filter, tour, searchTour ) {
 	
-	//-BEGIN THE TOUR ON PAGE LOAD---------------//
-	angular.element(document).ready(function(){
-		console.log("ready!");
-		var searchTour = new tour({
-			steps: [
-				{
-					orphan: true,
-					title: "SourceData SmartFigure Search",
-					content: "<p>Welcome to the SmartFigure search engine from SourceData.</p><p>SourceData helps you to find figures showing data on many different types of cell, gene, molecule or structure. We refer to these as entities.</p> <p>Press 'Next' to see a short tour of the application.</p>",
-					animation: true,
-					backdrop:true,
-					backdropPadding:5
-				},
-				{
-					element: ".sdform-adv-btn-interv",
-					title: "Perturbation",
-					placement: "top",
-					content: "This input box is for the independent variable: the entity that was manipulated in a study. We refer to these as perturbations.",
-					animation: true,
-					backdrop:true,
-					backdropPadding:5
-				},
-				{
-					element: ".sdform-adv-interv-input",
-					title: "Enter the perturbation here",
-					placement: "bottom",
-					content: "Type the name of the perturbation here. A list of the available entities that match your input will be shown.",
-					animation: true,
-					backdrop:true,
-					backdropPadding:{top:5, right:18, bottom:15, left:10}
-				},
-				{
-					element: ".sdform-adv-interv-input-group-btn",
-					title: "Choose the perturbation element type",
-					placement: "top",
-					content: "You can specify the type of entity that interests you using this drop-down box. You can specify that you are searching only for subcellular structures, for example.",
-					animation: true,
-					backdrop:true,
-					backdropPadding:{top:5, right:7, bottom:5, left:10}
-				},
-				{
-					element: ".sdform-adv-btn-assay",
-					title: "Assay",
-					placement: "top",
-					content: "This input box is for the dependent variable: the entity that was measured in the study. We refer to this as the assay.",
-					animation: true,
-					backdrop:true,
-					backdropPadding:5
-				},
-				{
-					element: ".sdform-adv-btn-assay-input",
-					title: "Enter the assayed item here",
-					placement: "bottom",
-					content: "Type the name of the assay here. A list of the available entities that match your input will be available to select.",
-					animation: true,
-					backdrop:true,
-					backdropPadding:{top:5, right:15, bottom:15, left:10}
-				},
-				{
-					element: ".sdform-adv-btn-assay-input-group-btn",
-					title: "Choose the assayed element type",
-					placement: "top",
-					content: "Just like the perturbations, you can narrow down your search to only certain entity types.",
-					animation: true,
-					backdrop:true,
-					backdropPadding:{top:5, right:7, bottom:5, left:10}
-				},
-				{
-					element: ".sdform-adv-btn-go",
-					title: "Click here to search",
-					placement: "top",
-					content: "Click here to search for figures where the perturbation you entered was performed and the assayed entity was measured.",
-					animation: true,
-					backdrop:true,
-					backdropPadding: 5
-				}
-			]
-		});
-
-		searchTour.init();
-		searchTour.start();
-	});
+    // The First Tour Starts Here (see thirdParties.js for details)
+	searchTour.init(tour, $scope);
 
 	//-F------ FORM SUBMIT => change Location ------//
 	$scope.formSubmit = function(){
@@ -133,6 +53,7 @@ angular.module('publicSourcedataApp')
 				$scope.searchParams.navbarResult = 'result';
 				Filter.removeAll();
 				Filter.init();
+				
 			});
 		}else{
 			Filter.removeAll();

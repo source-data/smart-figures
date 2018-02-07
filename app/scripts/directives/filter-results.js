@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('publicSourcedataApp')
-    .directive('filterResults',['ENV','_','Search', 'Filter', function (ENV,_,Search,Filter) {
+    .directive('filterResults',['ENV','_','Search', 'Filter', '$timeout', 'tour', 'resultsTour', function (ENV,_,Search,Filter, $timeout, tour, resultsTour) {
         return {
             scope:{parentindex:'=',
                 render:'=',
@@ -13,7 +13,7 @@ angular.module('publicSourcedataApp')
             restrict: 'E',
             templateUrl:ENV.baseURL+'views/partials/filterResults.html',
             link:function(scope,element,attributes){
-
+                
                 scope.filters = Filter.filters;
                 scope.currentFilter = Filter.newFilterType(scope.filters);
                 scope.selections = Filter.selections;
@@ -43,6 +43,9 @@ angular.module('publicSourcedataApp')
                     Filter.selections = [];
                     scope.selections = [];
                 });
+
+                //run the results tour - see thirdParties.js for details
+                if(Search.searchParams.displayedResult && Search.searchParams.displayedResult.length>0) resultsTour.init(tour, scope, $timeout, Search);
 
             }
         };
