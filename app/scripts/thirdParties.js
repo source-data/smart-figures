@@ -43,8 +43,8 @@
                 steps: [
                   {
                     orphan: true,
-                    title: "SourceData SmartFigure Search",
-                    content: "<p>Welcome to the SmartFigure search engine from SourceData.</p><p>With SourceData you can search the main elements of an experiment: cells, genes, molecules, organisms, etc. - also known as experimental <strong>'entities'</strong> - and find relationships between them.</p> <p>Press 'Next' to continue.</p>",
+                    title: "SourceData Search",
+                    content: "<p>Welcome to the SourceData Search engine.</p><p>With SourceData you can search the main elements of an experiment: cells, genes, molecules, organisms, etc. - also known as experimental <strong>'entities'</strong> - and find relationships between them.</p> <p>Press 'Next' to continue.</p>",
                     animation: true,
                     backdrop:true,
                     backdropPadding:5
@@ -53,7 +53,7 @@
                     element: ".sdform-adv-btn-interv",
                     title: "Perturbation",
                     placement: "top",
-                    content: "<p>This input box is for the variable you manipulated or 'perturbed' in the experiment.</p><p>If you were asking the question: 'How does <strong>insulin</strong> affect glucose levels?', insulin would be the independent variable or 'perturbation'" ,
+                    content: "<p>Enter here a gene name or cell type or any variable that was manipulated in the experiment</p><p>For example, if you were asking the question: 'How does <strong>insulin</strong> affect glucose levels?', enter insulin here" ,
                     animation: true,
                     backdrop:true,
                     backdropPadding:5,
@@ -73,7 +73,7 @@
                     element: ".sdform-adv-btn-assay",
                     title: "Measured entity",
                     placement: "top",
-                    content: "<p>This input box is for the element you are interested in that was measured in an experiment, also known as the 'measured entity'.</p><p>Following our example on glucose and insulin, we want to know how the levels of <strong>glucose</strong> change when we manipulate insulin.</p>",
+                    content: "<p>This input box is for the element you are interested in that was observed in an experiment, the 'measured entity'.</p><p>Following our example on glucose and insulin, we want to know how the levels of <strong>glucose</strong> change when we manipulate insulin.</p>",
                     animation: true,
                     backdrop:true,
                     backdropPadding:5,
