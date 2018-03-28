@@ -44,7 +44,7 @@
                   {
                     orphan: true,
                     title: "SourceData Search",
-                    content: "<p>Welcome to the SourceData Search engine.</p><p>With SourceData you can search the main elements of an experiment: cells, genes, molecules, organisms, etc. - also known as experimental <strong>'entities'</strong> - and find relationships between them.</p> <p>Press 'Next' to continue.</p>",
+                    content: "<p>Welcome to SourceData Search.</p><p>With SourceData you can search the components of an experiment: cells, genes, molecules, organisms etc - called the experimental <em>entities</em> - and find relationships between them.</p> <p>Press 'Next' to continue.</p>",
                     animation: true,
                     backdrop:true,
                     backdropPadding:5
@@ -53,7 +53,7 @@
                     element: ".sdform-adv-btn-interv",
                     title: "Perturbation",
                     placement: "top",
-                    content: "<p>Enter here a gene name or cell type or any variable that was manipulated in the experiment</p><p>For example, if you were asking the question: 'How does <strong>insulin</strong> affect glucose levels?', enter insulin here" ,
+                    content: "<p>Enter the name of an entity that was <em>manipulated</em> in the experiment, such as a gene name or cell type</p><p>For example, to ask &quot;How does <em>insulin</em> affect glucose levels?&quot;, enter <em>insulin</em> here" ,
                     animation: true,
                     backdrop:true,
                     backdropPadding:5,
@@ -63,7 +63,7 @@
                     element: ".sdform-adv-btn-assay",
                     title: "Measured entity",
                     placement: "top",
-                    content: "<p>This input box is for the element you are interested in that was observed in an experiment, the 'measured entity'.</p><p>Following our example on glucose and insulin, we want to know how the levels of <strong>glucose</strong> change when we manipulate insulin.</p>",
+                    content: "<p>Enter the entity that was observed in an experiment - the &quot;measured entity&quot;.</p><p>In our example on insulin and glucose, we want to know how the levels of <em>glucose</em> change when we manipulate insulin.</p>",
                     animation: true,
                     backdrop:true,
                     backdropPadding:5,
@@ -73,7 +73,7 @@
                     element: ".sdform-adv-btn-go",
                     title: "Click here to search",
                     placement: "top",
-                    content: "Ready to try it? Now you can perform your search and answer the question 'Does <strong>glucose</strong> affect <strong>insulin</strong>?'. End the tour and click this button to see the results.",
+                    content: "Ready to try it? Now you can perform your search and answer the question &quot;Does <em>insulin</em> affect <em>glucose</em>?&quot;. End the tour and click this button to see the results.",
                     animation: true,
                     backdrop:true,
                     backdropPadding: 5
@@ -110,7 +110,7 @@
                           element: "direct-search-result:first-of-type .direct-search-res-list .list-group-item:first-child",
                           title: "Relationships tested in the paper",
                           placement: "top",
-                          content: "Here you can see one of the relationships that were tested in this paper. The perturbation is shown in red and the measured entity is shown in blue.",
+                          content: "Here you can see one of the relationships tested in this paper. The perturbation is shown in red and the measured entity is shown in blue.",
                           animation: true,
                           backdrop:true,
                           backdropPadding:{top: 8, right: 44, bottom: 28, left: 8}
@@ -139,7 +139,7 @@
                           element: ".result-filters",
                           title: "Filter your results",
                           placement: "bottom",
-                          content: "You can add one or more filters if you only want results from specific journals, authors, years, assays or organisms.",
+                          content: "You can add one or more filters to show specific journals, authors, years, assays or organisms.",
                           animation: true,
                           backdrop:true,
                           backdropPadding:5,
