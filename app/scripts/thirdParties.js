@@ -60,16 +60,6 @@
                     onShown: function(tour){ $scope.searchParams.intervention="insulin"; $scope.$apply(); }
                   },
                   {
-                    element: ".sdform-adv-interv-input-group-btn",
-                    title: "Choose the perturbation element type",
-                    placement: "bottom",
-                    content: "<p>Here you can choose a specific class of entity in case you want to narrow down the search results.</p><p>In our example, we know glucose is a molecular compound, so we choose 'small molecule'</p>",
-                    animation: true,
-                    backdrop:true,
-                    backdropPadding:{top:5, right:7, bottom:5, left:10},
-                    onShown: function(tour){ $scope.searchParams.interventionType = "molecule"; $scope.$apply(); }
-                  },
-                  {
                     element: ".sdform-adv-btn-assay",
                     title: "Measured entity",
                     placement: "top",
@@ -78,16 +68,6 @@
                     backdrop:true,
                     backdropPadding:5,
                     onShown: function(tour){ $scope.searchParams.assayed="glucose"; $scope.$apply(); }
-                  },
-                  {
-                    element: ".sdform-adv-btn-assay-input-group-btn",
-                    title: "Choose the assayed element type",
-                    placement: "bottom",
-                    content: "Just like the perturbations, you can narrow down your search to only certain entity types. Here, we choose to look at 'small molecules' again.",
-                    animation: true,
-                    backdrop:true,
-                    backdropPadding:{top:5, right:7, bottom:5, left:10},
-                    onShown: function(tour){ $scope.searchParams.assayedType = "molecule"; $scope.$apply();}
                   },
                   {
                     element: ".sdform-adv-btn-go",
