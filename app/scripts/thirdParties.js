@@ -44,7 +44,7 @@
                   {
                     orphan: true,
                     title: "SourceData Search",
-                    content: "<p>Welcome to SourceData Search.</p><p>With SourceData you can search the components of an experiment: cells, genes, molecules, organisms etc - called the experimental <em>entities</em> - and find relationships between them.</p> <p>Press 'Next' to continue.</p>",
+                    content: "<p>Welcome to the SourceData Search, which allows you to find papers where a specific hypothesis has been tested.</p><p>With SourceData you can search the components of an experiment: cells, genes, molecules, organisms etc - called the experimental <em>entities</em> - and find relationships between them.</p> <p>Press 'Next' to continue.</p>",
                     animation: true,
                     backdrop:true,
                     backdropPadding:5
