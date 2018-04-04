@@ -38,6 +38,8 @@ angular.module('publicSourcedataApp')
                     scope.years = Filter.year;
                     scope.assays = Filter.assay;
                     scope.organisms = Filter.organism;
+
+
                 });
                 scope.$on('new.filter',function(){
                     Filter.selections = [];
