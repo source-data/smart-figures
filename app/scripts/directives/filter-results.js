@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('publicSourcedataApp')
-    .directive('filterResults',['ENV','_','Search', 'Filter', '$timeout', 'tour', 'resultsTour', function (ENV,_,Search,Filter, $timeout, tour, resultsTour) {
+    .directive('filterResults',['ENV','_','Search', 'Filter', '$location', '$timeout', 'tour', 'resultsTour', function (ENV,_,Search,Filter, $location, $timeout, tour, resultsTour) {
         return {
             scope:{parentindex:'=',
                 render:'=',
@@ -47,7 +47,7 @@ angular.module('publicSourcedataApp')
                 });
 
                 //run the results tour - see thirdParties.js for details
-                if(Search.searchParams.displayedResult && Search.searchParams.displayedResult.length>0) resultsTour.init(tour, scope, $timeout, Search);
+                if(Search.searchParams.displayedResult && Search.searchParams.displayedResult.length>0 && $location.search().resultsTour){ resultsTour.init(tour, scope, $timeout, Search);}
 
             }
         };
