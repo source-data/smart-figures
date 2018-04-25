@@ -44,7 +44,7 @@
                   {
                     orphan: true,
                     title: "SourceData Search",
-                    content: "<p>Welcome to the SourceData Search. Here you can find papers where a specific hypothesis has been tested.</p><p>With SourceData you can search the components of an experiment: cells, genes, molecules, organisms etc - called the experimental <em>entities</em> - and find relationships between them.</p> <p>Press 'Next' to continue.</p>",
+                    content: "<p>Welcome to SourceData Search. Here you can find papers where a specific hypothesis has been tested.</p><p>With SourceData you can search the components of an experiment: cells, genes, molecules, organisms etc - called the experimental <em>entities</em> - and find relationships between them.</p> <p>Press 'Next' to continue.</p>",
                     animation: true,
                     backdrop:true,
                     backdropPadding:5
@@ -73,12 +73,22 @@
                     element: ".sdform-adv-btn-go",
                     title: "Click here to search",
                     placement: "top",
-                    content: "Ready to try it? Now you can perform your search and answer the question &quot;Does <em>insulin</em> affect <em>glucose</em>?&quot;. End the tour and click this button to see the results.",
+                    content: "Ready to try it? Now you can perform your search and answer the question &quot;Does <em>insulin</em> affect <em>glucose</em>?&quot;. End the tour and SourceData will perform this search and show you the results.",
                     animation: true,
                     backdrop:true,
-                    backdropPadding: 5
+                    backdropPadding: 5,
+                    onShown: function(tour){
+                      window.lastStepReached=true;
+                    }
                   }
-                ]
+                ],
+                onEnd: function(tour){
+
+                  if(window.lastStepReached){
+                    delete window.lastStepReached; 
+                    window.location.href = '/?intervention=molecule:insulin&motif=scale&assayed=molecule:glucose';
+                  }
+                }
               });
               searchTour.init();
               searchTour.start();
@@ -91,6 +101,9 @@
     return {
       init: function(tour, scope, $timeout, Search){
         $timeout(function(){
+          //remove the lastStepReached variable
+          if(window.lastStepReached) delete window.lastStepReached;
+
           //if there are search results and the previous tour is finished
           if(localStorage.getItem("searchTour_end")){
               var resultsTour = new tour({
@@ -148,7 +161,7 @@
                           element: ".result-filters",
                           title: "Filter your results",
                           placement: "top",
-                          content: "For example, let's limit the results to experiments using 'ELISA' as an experimental assay.",
+                          content: "For example, let's limit the results to just one experimental assay.",
                           animation: true,
                           backdrop:true,
                           backdropPadding:5,
@@ -160,6 +173,15 @@
                             scope.$apply();
 
                           }                         
+                      },
+                      {
+                          orphan: true,
+                          title: "End of Tour",
+                          content: "Now you've seen how SourceData lets you search through experimental relationships and find the results you need, it's time to perform your own search.",
+                          animation: true,
+                          backdrop:true,
+                          backdropPadding:5,
+                        
                       },
                   ]
               });

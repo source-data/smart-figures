@@ -25,10 +25,12 @@
 * Controller of the publicSourcedataApp
 */
 angular.module('publicSourcedataApp')
-.controller('MainCtrl', ['$scope','$rootScope','$location', 'Search', 'Filter', 'tour', 'searchTour', function ($scope, $rootScope, $location, Search, Filter, tour, searchTour ) {
+.controller('MainCtrl', ['$scope','$rootScope','$location', 'Search', 'Filter', 'tour', 'searchTour', 
+ function ($scope, $rootScope, $location, Search, Filter, tour, searchTour ) {
 	
-    // The First Tour Starts Here (see thirdParties.js for details)
-	searchTour.init(tour, $scope);
+	// The First Tour Starts Here (see thirdParties.js for details)
+	// Tour only begins if the application is opened at the root path
+	if($location.path()=="/" && angular.equals($location.search(),{})) searchTour.init(tour, $scope);
 
 	//-F------ FORM SUBMIT => change Location ------//
 	$scope.formSubmit = function(){
