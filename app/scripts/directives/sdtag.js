@@ -100,4 +100,19 @@ angular.module('publicSourcedataApp')
 		}
     };
   }
-]);
+])
+	
+.directive('displayEntity',[function(){
+  return {
+		templateUrl:'views/partials/displayEntity.html',
+		scope:{tag:'=',sep:'=',extra:'=', from:'='},
+		restrict: 'E',
+		link: function(scope,element){
+			
+			// console.info(scope.tag);
+			scope.tag.showRawText = !scope.tag.label || (scope.tag.paper_raw_text && scope.tag.paper_raw_text.toLowerCase().indexOf(scope.tag.label.toLowerCase())==-1);
+			// console.info("enti",scope.tag,scope.sep,scope.extra);
+		}
+	}
+}]);
+

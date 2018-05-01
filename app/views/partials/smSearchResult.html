@@ -1,0 +1,32 @@
+<div class="resultSet" ng-show="searchParams.loading"> <span>Loading results... </span> <span><img ng-src='{{baseURL}}images/ring.gif' alt='loading...' height='20' width='20'></span> </div>
+<div class="resultSet" ng-show="!searchParams.result.nb.total.papers&&!searchParams.loading"> <h3>No result found</h3> </div>
+										
+<div class="resultSet" ng-show="searchParams.result.nb.total.papers&&!searchParams.loading">
+	<h3>{{searchParams.result.nb.total.papers}} result<span ng-show="searchParams.result.nb.total.papers>1">s</span> found</h3>	
+	<search-pagination size='small' position='right'></search-pagination>
+	<section class="publication" ng-repeat="paper in searchParams.result.direct">
+		
+		<div class="firstItems" ng-if="view=='upstream'">
+			<button class="element perturbation" ng-repeat="hypo in paper.firstHypos" ng-click="setPanel(hypo.panel_id)"><i class="sd-icon-2-{{hypo.type}}"></i><span compile="hypo.label"></span></button>   
+			<i class="fa fa-caret-right" aria-hidden="true"></i> 
+			<button class="element assayed"><i class="sd-icon-2-{{tag.type}}"></i>{{tag.text}}</button>                                            
+		</div>
+		
+		<div class="firstItems" ng-if="view=='downstream'">
+			<button class="element perturbation"><i class="sd-icon-2-{{tag.type}}"></i>{{tag.text}}</button>                                            
+			<i class="fa fa-caret-right" aria-hidden="true"></i> 
+			<button class="element assayed" ng-repeat="hypo in paper.firstHypos" ng-click="setPanel(hypo.panel_id)"><i class="sd-icon-2-{{hypo.type}}"></i><span compile="hypo.label"></span></button>   
+		</div>
+		
+		<div class="subsequentItems" ng-class="(paper.followedHypos.length&&paper.$show_all) ? 'show':''" id="subsequent4">
+			<button class="element" ng-class="(view=='upstream') ? 'perturbation' : 'assayed'" ng-repeat="hypo in paper.followedHypos" ng-click="setPanel(hypo.panel_id)"><i class="sd-icon-2-{{hypo.type}}"></i><span compile="hypo.label"></span></button> 
+		</div>
+		<div class="revealButton" ng-show="paper.hypos.length>3"> <button class="reveal" ng-click="paper.$show_all = !paper.$show_all" data-revealitem="subsequent4">Show {{paper.hypos.length-3}} more relations</button></div>
+		<div class="details">
+			<h3>{{paper.title}}<a href = 'http://dx.doi.org/{{paper.doi}}' target = '_blank' ng-if = 'result.doi' class = 'glyphicon glyphicon-share'></a></h3>
+			<span class="authors" ng-show="!paper.$show_all">{{paper.authors|firstAuthor}}</span>
+			<span class="authors" ng-show="paper.$show_all">{{paper.authors}}</span>
+			<a>{{paper.journal_title}} - {{paper.date}}</a>
+		</div>
+	</section>
+</div>

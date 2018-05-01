@@ -1,0 +1,14 @@
+<div class="row" ng-if="searchParams.result.nb.total.papers > searchParams.pagination.itemsPerPage">
+	<div class="col-sm-6">
+		<p style="margin-top:20px" ng-class="(searchParams.result.status>1)?'':'wait-panel'">
+			<span ng-show="!small_size">				
+				<span style="display:inline;margin-right:7px">Items per page</span>
+				<input ng-disabled="searchParams.result.status<2" ng-class="pagination_class.input" style="display:inline;width:10%" type="number" class="form-control" ng-change="changePagination()" ng-model="searchParams.pagination.itemsPerPage">
+			</span>
+			<span ng-if='searchParams.result.status<2' uib-tooltip="fetching all results"><img ng-src='{{baseURL}}images/ring.gif' alt='loading...' height='20' width='20'></span>
+		</p>
+	</div>
+	<div class="col-sm-6 ">
+		<ul ng-disabled="searchParams.result.status<2" ng-class="pagination_class.page" class="pull-right" ng-class="(searchParams.result.status<2) ? 'wait-panel':''" uib-pagination boundary-links="true" total-items="searchParams.pagination.totalItems" items-per-page='searchParams.pagination.itemsPerPage' ng-model="searchParams.pagination.currentPage" max-size="searchParams.pagination.maxSize" boundary-link-numbers="true" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" ng-change="changePagination()"></ul>
+	</div>
+</div>

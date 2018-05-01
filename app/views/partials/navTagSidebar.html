@@ -1,0 +1,37 @@
+<div>
+	<div class="tags">
+	<aside class="key"></aside>
+	<h3>{{{true:'Intervention',false:'Assayed'}[cas=='intervention']}}</h3>												
+	<span class="btn-info-group" ng-repeat='tag in tags'>
+		<button class="element" ng-click="tag.$show = !tag.$show"><i class="fa" ng-class="(tag.$show) ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i><i class="sd-icon-2-{{tag.type}}"></i><span ng-bind-html='tag.text'></span></button>
+		<div class="moreInfoBox" ng-class="(tag.$show) ? 'open' : ''">
+			<div class="entityInfoButtonContainer">
+				<button 
+				popover-placement='{{popovPlacement}}' 
+				popover-title='{{tag.external_names[0] || tag.text}} ({{tag.type}}) '
+				uib-popover-html='"<dl><dt>External ids</dt><dd>{{tag|printExternalIds}}</dd><dt>External names</dt><dd>{{tag|printExternalNames}}</dd><dt>Taxon</dt><dd>{{tag|printTaxon}}</dd></dl>"'
+				popover-trigger='click' 
+				popover-append-to-body='true'
+				popover-animation='false'>
+					<i class="fa fa-info-circle" aria-hidden="true"></i> Entity Info
+				</button>
+			</div>
+			<strong>Explore</strong>
+			<div class="exploreUpAndDownstreamContainer">
+				<button class="upstream" ng-click="explore(tag,'upstream',view!='panel')" ng-mouseenter="mouseOver('intervention',tag)" ng-mouseleave="mouseOut(tag)"><i class="sd-icon-1-undefined" aria-hidden="true"></i> </button>
+				<!-- <button class="upstream" ng-style="{cursor:(tag.relations.intervention) ? '':'not-allowed'}" ng-click="explore(tag,'upstream',view!='panel')" ng-mouseenter="mouseOver('intervention')" ng-mouseleave="mouseOut()" ng-disabled="(!tag.relations.intervention)"><i class="sd-icon-1-undefined" aria-hidden="true"></i> </button> -->
+				<i class="fa fa-caret-right" aria-hidden="true"></i>
+				<i class="sd-icon-1-{{tag.type}} exploreElementIcon" aria-hidden="true" ng-class="(tag.invertColor) ? 'inverseColor' : ''"></i>
+				<i class="fa fa-caret-right" aria-hidden="true"></i>
+				<button class="downstream" ng-click="explore(tag,'downstream',view!='panel')" ng-mouseenter="mouseOver('assayed',tag)" ng-mouseleave="mouseOut(tag)" ><i class="sd-icon-1-undefined" aria-hidden="true"></i></button>                           
+				<!-- <button class="downstream" ng-style="{cursor:(tag.relations.assayed) ? '':'not-allowed'}" ng-click="explore(tag,'downstream',view!='panel')" ng-mouseenter="mouseOver('assayed')" ng-mouseleave="mouseOut()" ng-disabled="(!tag.relations.assayed)"><i class="sd-icon-1-undefined" aria-hidden="true"></i></button>                            -->
+			</div>
+		</div>
+	</span> 
+</div>
+</div>
+<!-- <div class="panelNavigation">
+	<button ng-show="panel.nextPreviousFig[move]!=null" uib-tooltip="{{move}} figure" ng-click='setPanel(panel.paper.figures[panel.nextPreviousFig[move]].panel_id)'>
+		<i class="fa" ng-class="(cas=='intervention') ? 'fa-chevron-left' : 'fa-chevron-right'" aria-hidden="true" style="margin-right:5px"></i>{{panel.paper.figures[panel.nextPreviousFig[move]].label}}
+	</button>
+</div> -->

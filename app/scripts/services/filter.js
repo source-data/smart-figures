@@ -8,9 +8,6 @@
  */
 angular.module('publicSourcedataApp')
     .factory('Filter', ['_','$rootScope','$filter','Search', function (_, $rootScope , $filter, Search) {
-
-
-
         return {
 
             filtercollection : { //responsible for rendering filter divs
@@ -74,20 +71,21 @@ angular.module('publicSourcedataApp')
 
             //------- list of categories available for filter auto-complete ------//
             init: function () {
-                var _this = this;
-				if(Search.searchParams.result !== null){
+							var _this = this;
+							if (Search.searchParams.result !== null){
                 	_this.journal = _this.getListOfjournal(Search.searchParams.result.direct);
                 	_this.author = _this.getListOfauthor(Search.searchParams.result.direct);
                 	_this.year = _this.getListOfyear(Search.searchParams.result.direct);
                 	_this.assay = _this.getListOfassay(Search.searchParams.result.direct);
                 	_this.organism = _this.getListOforganism(Search.searchParams.result.direct);
-				} else {
-					_this.journal = null;
-					_this.author = null;
-					_this.year = null;
-					_this.assay = null;
-					_this.organism = null;
-				}
+							}
+							else {
+								_this.journal = null;
+								_this.author = null;
+								_this.year = null;
+								_this.assay = null;
+								_this.organism = null;
+							}
             },
 
             getListOfassay: function(results){
@@ -106,6 +104,7 @@ angular.module('publicSourcedataApp')
             getListOforganism: function(results){
                 var listOfOrganisms = [];
                 _.forEach(_.map(results,function(paper){return paper.hypos}),function(hypos){
+									// console.info(hypos);
                     _.forEach(_.map(hypos,function(hypo){return hypo.panels}),function(panel){
                         _.forEach(_.map(panel,function(panelInfo){return panelInfo.taxon.name}),function(taxon){
                             if(!_.includes(listOfOrganisms,taxon)){ listOfOrganisms.push(taxon)}
@@ -117,9 +116,11 @@ angular.module('publicSourcedataApp')
             getListOfauthor: function(results){
                 var listOfAuthors = [];
                 _.forEach(_.map(results,function(paper){return paper.authors}),function(all_authors){
+									if (all_authors){										
                     _.forEach(all_authors.split(','),function(auth){
                         if(!_.includes(listOfAuthors,auth)){ listOfAuthors.push(auth); }
                     });
+									}
                 });
                 return $filter('orderBy')(listOfAuthors)
             },

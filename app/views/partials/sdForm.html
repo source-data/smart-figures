@@ -3,14 +3,16 @@
 
 	<form ng-submit='onFormSubmit()'>
 		<div class='col-sm-12 vcenter sdform-input-wrapper' ng-class = "(showLogo=='false')?'col-md-offset-1 col-md-9':'col-md-8'">
+			
+			<!-- simple search -->
 			<div ng-if='!searchParams.advanced' class = 'col-sm-12 col-md-6 col-md-offset-3 sdform-simple-container'>
 				<div class="input-group sdform-simple-input-group">
-					<input type="text" class="form-control" placeholder="Search for ..." ng-model='searchParams.generic' typeahead=" tag for tag in proposeTags('generic',$viewValue)" typeahead-min-length="2"	typeahead-wait-ms="300">
+					<input type="text" class="form-control" placeholder="Search for ..." ng-model='searchParams.generic' uib-typeahead=" tag for tag in proposeTags('generic',$viewValue)" typeahead-min-length="3" typeahead-wait-ms="300">
 					<span class="input-group-btn sdform-simple-input-group-btn" ng-show='!searchParams.loading'>
 						<button class="btn btn-success sdform-simple-btn-go" type="submit" ng-disabled='!searchParams.generic'><span class="fa fa-search"></span></button>
+						<!-- <button type="reset" class='btn btn-class btn-default sdform-adv-btn-reset' ng-show='!searchParams.loading' ng-click="reset()"> Reset </button>				 -->
 					</span>
 					<span ng-if='searchParams.loading' class="input-group-addon sdform-simple-loading"><img ng-src='{{baseURL}}images/ring.gif' alt='loading...' height='20' width='20'></span>
-
 				</div>
 				<p style="margin:5px 0;font-size: 11px" class="sdform-example">
 					Try:
@@ -18,20 +20,22 @@
 						<i>insulin</i>
 					</a>
 				</p>
-			</div><!-- /simple search -->
-
+			</div>
+			<!-- /simple search -->
+			
+			<!-- advanced search -->
 			<div ng-if='searchParams.advanced' class="sdform-advanced-container">
 				<div class="row col-sm-offset-1" >
 					<div class="col-sm-1 sdform-adv-explanation-spacer" style="padding:10px;text-align: right"></div>
 					<div class="col-sm-4 sdform-adv-explanation sd-perturbation sd-mobilehide">
 						<p style="text-align:center"> Perturbation
-						<span class="glyphicon glyphicon-question-sign" tooltip="Perturbation / Intervention / Manipulation / Alteration / Independent variable"></span>
+							<span class="glyphicon glyphicon-question-sign" uib-tooltip="Perturbation / Intervention / Manipulation / Alteration / Independent variable"></span>
 						</p>
 					</div>
 					<div class="col-sm-1" class="sdform-adv-explanation-spacer" style="padding:10px;text-align: right"></div>
 					<div class="col-sm-4 sdform-adv-explanation sd-measured sd-mobilehide">
 						<p style="text-align:center">Measured entity
-							<span class="glyphicon glyphicon-question-sign" tooltip="Assayed entity / Measured entity / Observed entity / Response / Dependent variable"></span>
+							<span class="glyphicon glyphicon-question-sign" uib-tooltip="Assayed entity / Measured entity / Observed entity / Response / Dependent variable"></span>
 						</p>
 					</div>
 				</div>
@@ -40,13 +44,11 @@
 						<b>Does</b>
 					</div>
 					<div class="col-sm-4 sdform-adv-explanation sd-perturbation sd-mobileshow">
-						<p style="text-align:center"> Perturbation
-							<span class="glyphicon glyphicon-question-sign" tooltip="Perturbation / Intervention / Manipulation / Alteration / Independent variable"></span>
-						</p>
+						<p style="text-align:center"> Perturbation <span class="glyphicon glyphicon-question-sign" uib-tooltip="Perturbation / Intervention / Manipulation / Alteration / Independent variable"></span> </p>
 					</div>
 					<div class='col-sm-4'>
 						<div class="btn-group-vertical sdform-adv-btn-interv">
-							<input type="text" class="form-control sdform-adv-interv-input" placeholder="entity X" ng-model = 'searchParams.intervention' typeahead=" tag for tag in proposeTags('intervention',$viewValue)" typeahead-min-length="2" typeahead-wait-ms="300">
+							<input type="text" class="form-control sdform-adv-interv-input" placeholder="entity X" ng-model = 'searchParams.intervention' ng-change="changeInput('intervention')" uib-typeahead=" tag for tag in proposeTags('intervention',$viewValue)" typeahead-min-length="3" typeahead-wait-ms="300">
 							<div class="input-group-btn sdform-adv-interv-input-group-btn">
 								<button type="button" class="btn btn-default dropdown-toggle sdform-adv-interv-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #eaeaea">
 									of type :
@@ -67,16 +69,16 @@
 						</div><!-- /input-group -->
 					</div>
 					<div class="col-sm-1 sdform-adv-affect" style="padding:10px;text-align: right">
-						<b tooltip = 'influence'>affect</b>
+						<b uib-tooltip = 'influence'>affect</b>
 					</div>
 					<div class="col-sm-4 sdform-adv-explanation sd-measured sd-mobileshow">
 						<p style="text-align:center">Measured entity
-							<span class="glyphicon glyphicon-question-sign" tooltip="Assayed entity / Measured entity / Observed entity / Response / Dependent variable"></span>
+							<span class="glyphicon glyphicon-question-sign" uib-tooltip="Assayed entity / Measured entity / Observed entity / Response / Dependent variable"></span>
 						</p>
 					</div>
 					<div class='col-sm-4' >
 						<div class="btn-group-vertical sdform-adv-btn-assay">
-							<input type="text" class="form-control sdform-adv-btn-assay-input" placeholder="entity Y" ng-model='searchParams.assayed' typeahead=" tag for tag in proposeTags('assayed',$viewValue)" typeahead-min-length="2" typeahead-wait-ms="300">
+							<input type="text" class="form-control sdform-adv-btn-assay-input" placeholder="entity Y" ng-model='searchParams.assayed' uib-typeahead=" tag for tag in proposeTags('assayed',$viewValue)" typeahead-min-length="3" typeahead-wait-ms="300">
 							<div class="input-group-btn sdform-adv-btn-assay-input-group-btn">
 								<button type="button" class="btn btn-default dropdown-toggle sdform-adv-assay-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #eaeaea" >
 									of type :
@@ -104,32 +106,27 @@
 				<div class='row ' style="height: 10px;"></div>
 				<div class='row sdform-example' style="font-size:11px;text-align: center">
 					Try:
-					<a ng-if='searchParams.advanced' style="cursor:pointer" onmouseover='this.style.textDecoration="none"' ng-click="loadExample('advanced')">
-						does <i>insulin</i> influence <i>glucose</i>?</a>
+					<a ng-if='searchParams.advanced' style="cursor:pointer" onmouseover='this.style.textDecoration="none"' ng-click="loadExample('advanced')"> does <i>insulin</i> influence <i>glucose</i>?</a>
 					or
-					<a ng-if='searchParams.advanced' style="cursor:pointer" onmouseover='this.style.textDecoration="none"' ng-click="loadExample('advanced2')">
-						does <i>glucose</i> influence <i>insulin</i>?</a>
+					<a ng-if='searchParams.advanced' style="cursor:pointer" onmouseover='this.style.textDecoration="none"' ng-click="loadExample('advanced2')"> does <i>glucose</i> influence <i>insulin</i>?</a>
 				</div>
-			</div><!-- /advanced search -->
+			</div>
+			<!-- /advanced search -->
 		</div>
+		
 		<div class="col-md-2 col-sm-12 vcenter sd-form-button-container" >
-			<div  ng-if='searchParams.advanced'>
+			<div ng-if='searchParams.advanced'>
 				<p class='text-center'>
-					<button type='submit' class='btn btn-class btn-success sdform-adv-btn-go' ng-show='!searchParams.loading'
-					ng-disabled="!searchParams.assayed && !searchParams.intervention"><span class="fa fa-search"></span>
-				</button>
-				<button type="reset" class='btn btn-class btn-default sdform-adv-btn-reset' ng-show='!searchParams.loading'	ng-click="reset()">
-					Reset
-				</button>
-				<button class="btn btn-default sdform-adv-btn-loading" ng-if='searchParams.loading' disabled = 'disabled'><span style="width:50px;height:50px"><img ng-src='{{baseURL}}images/ring.gif' alt='loading...' height='20' width='20'></span></button>
-			</p>
-		</div>
-		<div class="row">
-			<p class="text-muted text-center sdform-toggle-simple-adv">
-				<a ng-click='toggleAdvanced()' style="cursor:pointer" onmouseover='this.style.textDecoration="none"' class='advanced_simple_link cursor-pointer'>
-					{{searchParams.advanced?"Simple search":"Advanced search"}}
-				</a>
-			</p>
+					<button type='submit' class='btn btn-class btn-success sdform-adv-btn-go' ng-show='!searchParams.loading' ng-disabled="!searchParams.assayed && !searchParams.intervention"><span class="fa fa-search"></span> </button>
+					<button type="reset" class='btn btn-class btn-default sdform-adv-btn-reset' ng-show='!searchParams.loading' ng-click="reset()"> Reset </button>
+					<button class="btn btn-default sdform-adv-btn-loading" ng-if='searchParams.loading' disabled = 'disabled'><span style="width:50px;height:50px"><img ng-src='{{baseURL}}images/ring.gif' alt='loading...' height='20' width='20'></span></button>
+				</p>
+			</div>
+			<div class="row">
+				<p class="text-muted text-center sdform-toggle-simple-adv">
+					<a ng-click='toggleAdvanced()' style="cursor:pointer" onmouseover='this.style.textDecoration="none"' class='advanced_simple_link cursor-pointer'>{{searchParams.advanced?"Simple search":"Advanced search"}}</a>
+				</p>
+			</div>
 		</div>
 	</form>
 </div>

@@ -103,7 +103,10 @@ figcaption{
 }
 
 .cursor-pointer{
-	cursor:pointer;
+	cursor:pointer !important;
+}
+.pointer{
+	cursor:pointer !important;
 }
 
 div.navigation-border{
@@ -166,6 +169,10 @@ div.navigation-border:hover{
 	margin:2px;
 }
 
+.wait-panel{
+	cursor:wait;
+	opacity:0.5;
+}
 .wait{
 	cursor:wait;
 }
@@ -208,10 +215,41 @@ div.searchResultPanelInCarousel:hover, div.similarPanelInCarousel:hover{
 	margin-right:3px !important;
 }
 
-.vcenter {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
-    font-size: 16px;
+.vcenter{
+	display: inline-block;
+	vertical-align: middle;
+	float: none;
+	font-size: 16px;
 	margin: 0;
 }
+
+.fa-right{
+	margin-right:5px;
+}
+.fa-left{
+	margin-left:5px;
+}
+
+.intervention-box{
+	padding: 15px 30px;
+	background: #cb5a3c70;
+	border: 3px solid #cb5a3c;
+	border-radius: 4px;
+}
+
+.assayed-box{
+	padding: 15px 30px;
+	background: #6292d070;
+	border: 3px solid #6292d0;
+	border-radius: 4px;
+}
+
+.popover{
+	min-width:200px;
+}
+
+.caption_legend p{
+	font-size:13px !important;
+}
+
+

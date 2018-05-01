@@ -19,8 +19,14 @@
 *****************************************************************/
 -->
 
-<h4>{{(panel.figure.panels|filter:{panel_id:panel.current_panel_id})[0].label}}</h4>
+<h4>{{(panel.figure.panels|filter:{panel_id:panel.current_panel_id})[0].label}}
+	<label class="pull-right" style="font-weight:normal">
+		<input type="checkbox" ng-model="highlight_entities.status" ng-disabled="!highlight_entities.enable">
+		<span style="margin-left:3px" ng-style="{opacity:(highlight_entities.enable) ? '1':'0.6'}">highlight entities</span>
+	</label>
+</h4>
 <p class = 'text-center sdpanel-text'>
 	<img class = 'img-responsive' style="margin:10px auto;max-width: 400px" ng-src = '{{serverURL}}/file.php?panel_id={{panel.current_panel_id}}'/>
 </p>
-<div compile-caption = '(panel.figure.panels|filter:{panel_id:panel.current_panel_id})[0].caption'></div>
+<div ng-if="!highlight_entities.status" style="font-size:14px" ng-bind-html="(panel.figure.panels|filter:{panel_id:panel.current_panel_id})[0].caption"></div>
+<div ng-if="highlight_entities.status" compile-caption = '(panel.figure.panels|filter:{panel_id:panel.current_panel_id})[0].caption'></div>

@@ -19,62 +19,76 @@
 *****************************************************************/
 -->
 <h3 class = 'page-header search-result-header' layout="row" style="text-align: center">Data search</h3>
-
 <!--FORM -->
 <sd-form search-params='searchParams' on-form-submit='formSubmit()'></sd-form>
 
 <!--RESULTS -->
 <div class='container-fluid results-container' ng-if="searchParams.result" style="margin-top: 20px">
 
-    <div ng-if='searchParams.result && searchParams.done' class='result-filter-container'>
-        <!--RESULTS COUNT AND DESCRIPTION-->
-        <div class="row">
-            <div class="col-lg-1"><h4 class="results-title">Results</h4></div>
-            <div class="col-lg-11" style="margin-top: 9px"> <p class='result-filter-summary' style="padding-left:15px" compile="searchParams.summary.phrase"></p></div>
+    <div ng-if='searchParams.result && searchParams.done'>
+
+        <!--RESULTS COUNT AND DESCRIPTION-->				
+		<div class="row">
+          <div class="col-lg-3"><h4 class="results-title cursor-pointer" ng-click="searchParams.result.$showSummary = !searchParams.result.$showSummary"><span class="fa" style="margin-right:10px" ng-class="(searchParams.result.$showSummary) ? 'fa-angle-down':'fa-angle-right'"></span>Summary</h4></div>
+          <div class="col-lg-9" style="margin-top: 9px">
+						<p class='result-filter-summary' style="padding-left:15px" compile="searchParams.summary.nb_phrase"></p>
+						<div class="row" ng-show="searchParams.result.$showSummary">
+							<div class="col-sm-6">
+								<div class="intervention-box">
+									<input type="text" class="form-control" placeholder="Filter entities" ng-model="searchParams.result.filter_intervention" style="margin-bottom:10px">
+									<ul style="list-style-type:square" ><li ng-repeat="inter_obj in searchParams.result.intervention|orderBy:'label'|filterIndexOf:searchParams.result.filter_intervention">
+										<span ng-show="inter_obj.list.length==1"> <display-entity tag='inter_obj.list[0]' extra='true' sep="'-'"></display-entity></span>
+										<span class="cursor-pointer" ng-show="inter_obj.list.length>1" ng-click="inter_obj.$unwrap = !inter_obj.$unwrap">
+											<span class="fa-right fa" ng-class="(inter_obj.$unwrap) ? 'fa-angle-down':'fa-angle-right'"></span>{{inter_obj.label}} 
+											<small ng-show="!inter_obj.$unwrap">({{inter_obj.list.length}})</small>
+											<ul  style="list-style-type:none" ng-show="inter_obj.$unwrap"><li ng-repeat="inter in inter_obj.list|orderBy:'organism'"> <display-entity tag='inter' extra='true' sep="'-'"></display-entity> </li></ul>
+										</span>
+									</li></ul>
+								</div>
+							</div>
+							<div class="col-sm-6 ">
+								<div class="assayed-box">
+									<input type="text" class="form-control" placeholder="Filter entities" ng-model="searchParams.result.filter_assayed" style="margin-bottom:10px">
+									<ul style="list-style-type:square" ><li ng-repeat="assay_obj in searchParams.result.assayed|orderBy:'label'|filterIndexOf:searchParams.result.filter_assayed">
+										<span ng-show="assay_obj.list.length==1"> <display-entity tag='assay_obj.list[0]' extra='true' sep="'-'"></display-entity></span>
+										<span class="cursor-pointer" ng-show="assay_obj.list.length>1" ng-click="assay_obj.$unwrap = !assay_obj.$unwrap">
+											<span class="fa-right fa" ng-class="(assay_obj.$unwrap) ? 'fa-angle-down':'fa-angle-right'"></span>{{assay_obj.label}}
+											<small ng-show="!assay_obj.$unwrap">({{assay_obj.list.length}})</small>
+											<ul style="list-style-type:none" ng-show="assay_obj.$unwrap"><li ng-repeat="assay in assay_obj.list|orderBy:'organism'"> <display-entity tag='assay' extra='true' sep="'-'"></display-entity> </li></ul>
+										</span>
+									</li></ul>
+								</div>
+							</div>
+						</div>
+					</div>
+		</div>
+				
+        <div class="row" style="margin-bottom:20px;margin-top:20px">
+            <div class="col-lg-3"><h4 class="results-title cursor-pointer" ng-click="searchParams.result.$hideResult=!searchParams.result.$hideResult"><span class="fa" style="margin-right:10px" ng-class="(searchParams.result.$hideResult) ? 'fa-angle-right':'fa-angle-down'"></span>Results</h4></div>
+            <div class="col-lg-9" style="margin-top: 9px"> <p class='result-filter-summary' style="padding-left:15px" compile="searchParams.summary.phrase"></p></div>
         </div>
+				
+				<div ng-show="!searchParams.result.$hideResult">
 
         <!--FILTERS -->
-        <div class="panel panel-primary result-filters" >
-            <div class="panel-body">
-                <div class="row" >
-                    <div ng-if="!searchParams.result.shortestPath.length">
-                        <div class="col-lg-2 result-filter-text-container">
-                            <span> Filter results </span>
-                        </div>
-                        <div class="col-lg-10">
-                            <div ng-repeat="subitem in filtercollection.subitems" class='result-filter-item-container'>
-                                <filter-results style="padding: 20px;"
-                                                parentindex="$index"
-                                                render="1"
-                                                remove-filter-item="removeFilterItem(i,type, currFilt)"
-                                                add-new-filter-item="addNewFilterItem()"
-                                                apply-filter="applyFilter(currFilt)"
-                                                track-selections="trackSelections(currFilt)">
-                                </filter-results>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+					<div ng-if="searchParams.result.cas =='direct'" class='result-filter-container'>
+					<div class="panel panel-primary result-filters" ng-if="searchParams.result.status>1">
+						<div class="panel-body">
+							<div class="row" ng-if="searchParams.result.direct.length" style="margin:10px 20px">
+								<filtertest></filtertest>
+							</div>
+						</div>
+					</div>
+					<search-pagination></search-pagination>
+				</div>
 
+					<direct-search-result type='direct' ng-repeat='(idx, result) in searchParams.result.displayedResult' index='idx' result='result'> </direct-search-result>
+		
+					<path-search-result ng-if="searchParams.result.path.nb" paths="searchParams.result.path.paths"> </path-search-result>
+				</div>
+			</div>
 
-    <direct-search-result type='direct'
-                          ng-repeat='(idx, result) in searchParams.displayedResult'
-                          index='idx'
-                          result='result'>
-    </direct-search-result>
-    <path-search-result type='path' ng-repeat='step in searchParams.result.shortestPath'
-                        ng-if='searchParams.result.direct.length == 0 && searchParams.action == "connect"'
-                        step='step' first='{{$first}}'>
-
-    </path-search-result>
-
-    <div ng-if='!searchParams.result.direct.length && !searchParams.result.shortestPath.length && searchParams.done'
-         class='alert alert-info alert-no-results'>Sorry, no result found.
-    </div>
-    <div ng-if='searchParams.loading' class='alert alert-info alert-results-wait'>Searching. Please wait...</div>
+			<div ng-if='searchParams.loading' class='alert alert-info alert-results-wait'>Searching. Please wait...</div>
 
 </div>
 

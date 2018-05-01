@@ -19,14 +19,144 @@
 *****************************************************************/
 -->
 
-<div class = 'col-sm-12 col-xs-12 col-md-6 col-lg-4' style = 'padding: 0 30px; position: relative'>
-	<div class = 'panel panel-default pathsearch-panel'>
+			<div ng-repeat="(pathLength,pathSameLength) in paths" >
+				<div>
+					<h4><b>{{pathSameLength.length}} Path<span ng-show="pathSameLength.length>1">s</span> with {{pathLength}} steps</b></h4>
+				</div>
+				<table class="table">
+					<tbody >
+						<tr ng-repeat-start="path in pathSameLength" ng-click="path.show = !path.show">
+							<td ng-repeat-start="node in path">
+								
+								<img ng-show="$first" ng-src = '{{baseURL}}images/icon_{{node.type}}_intervention.png' height = "20" width = "20" alt = '{{node.type}}' style = 'margin-right: 5px;'>
+								<img ng-show="!$first&&!$last" ng-src = '{{baseURL}}images/icon_{{node.type}}_experiment.png' height = "20" width = "20" alt = '{{node.type}}' style = 'margin-right: 5px;'>
+								<img ng-show="$last" ng-src = '{{baseURL}}images/icon_{{node.type}}_assayed.png' height = "20" width = "20" alt = '{{node.type}}' style = 'margin-right: 5px;'>
+								<display-entity tag='node' extra='true' sep="'line'"></display-entity>
+								<!-- <span ng-show="node.label">{{node.label}}</span>
+								<span ng-show="!node.label">{{node.paper_raw_texts.join(", ")}}</span>
+								<small ng-show="node.external_id && node.organism"><br>({{node.external_id}} - {{node.organism}})</small>
+								<small ng-show="node.external_id && !node.organism"><br>({{node.external_id}})</small>
+								<small ng-show="!node.external_id && node.organism"><br>({{node.organism}})</small>					 -->		
+								
+								
+								<!-- <img ng-src = '{{baseURL}}images/icon_{{path[0].hypotheses[0].source.type}}_intervention.png' height = "20" width = "20" alt = '{{path[0].hypotheses[0].source.type}}' style = 'margin-right: 5px;'>
+								<span compile = '::path[0].hypotheses[0].source.label'></span>
+								<span ng-if = "path[0].hypotheses[0].source.paper_raw_text && path[0].hypotheses[0].source.label.toLowerCase().indexOf(path[0].hypotheses[0].source.paper_raw_text.toLowerCase())!=0">
+									<span ng-if="path[0].hypotheses[0].source.label">(</span>
+									<span compile = 'path[0].hypotheses[0].source.paper_raw_text'></span>
+									<span ng-if="path[0].hypotheses[0].source.label">)</span>
+								</span> -->
+							</td>
+							<td class="text-center" ng-repeat-end ng-show="!$last">
+							<div class = 'direct-search-res-arrow' style = 'margin-top:15px'>
+								<p style="margin-bottom:0px" class="nowrap"><span style='font-size: 10px;white-space:nowrap'>{{node.hypotheses.length}} paper<span ng-show="node.hypotheses.length>1">s</span></span></p>
+								<p class="text-center arrow-icon-container" style="margin-top:0"><span class = 'sd-icon-3-arrow '></span></p>
+							</div>
+								<!-- <span style="margin:0 5px" class = 'glyphicon glyphicon-arrow-right'></span> -->
+							</td>
+							<!-- <td ng-repeat-end>
+								<img ng-src = '{{baseURL}}images/icon_{{step.target.type}}_{{($last) ? "assayed":"biological"}}.png' height = "20" width = "20" alt = '{{step.target.type}}' style = 'margin-right: 5px;'>
+								<span compile = '::step.source.label'></span>
+								<span ng-if = "step.source.paper_raw_text && step.source.label.toLowerCase().indexOf(step.source.paper_raw_text.toLowerCase())!=0">
+									<span ng-if="step.source.label">(</span>
+									<span compile = 'step.source.paper_raw_text'></span>
+									<span ng-if="step.source.label">)</span>
+								</span>
+							</td> -->
+						</tr>
+						<tr ng-repeat-end ng-show="path.show">
+							<td ng-repeat-start="node in path"></td>
+							<td ng-repeat-end>
+								<dl class="">	
+									<dt ng-repeat-start="hypo in node.hypotheses">{{hypo.paper.title}}</dt>
+									<dd ng-repeat-end style="display:inline-flex">
+										<span class="cursor-pointer" ng-repeat="panel in hypo.panels" ng-click='loadPanel(panel.panel_id)'>
+											<figcaption>{{::panel.label}} </figcaption>
+											<img class = 'img-responsive center-block' ng-src = '{{serverURL}}/file.php?panel_id={{panel.panel_id}}' style = 'max-height: 160px'>
+										</span>
+									</dd>								
+									<!-- <li ng-repeat="hypo in node.hypotheses">
+										<p>{{hypo.paper.paper_id}}</p>
+
+									</li> -->
+								</dl>
+
+							</td>
+							<!-- <td ng-repeat="step in path[0].hypotheses" colspan="2">
+								<p><small><b> {{step.paper.title}} </b></small></p>
+									<div ng-repeat="panel in step.panels" class="layer searchResultPanelInCarousel" ng-click='loadPanel(panel.panel_id)'>
+										<figcaption>{{::panel.label}} </figcaption>
+										<img class = 'img-responsive center-block' ng-src = '{{serverURL}}/file.php?panel_id={{panel.panel_id}}' style = 'max-height: 160px'>
+									</div>
+							</td> -->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+
+<!-- ****************************************************************/-->
+			
+			<!-- <div ng-repeat="(pathLength,pathSameLength) in paths" >
+				<div>
+					<h4><b>{{pathSameLength.length}} Path<span ng-show="pathSameLength.length>1">s</span> with {{pathLength}} steps</b></h4>
+				</div>
+				<table class="table">
+					<tbody >
+						<tr ng-repeat-start="path in pathSameLength" ng-click="path.show = !path.show">
+							<td>
+								<img ng-src = '{{baseURL}}images/icon_{{path[0].hypotheses[0].source.type}}_intervention.png' height = "20" width = "20" alt = '{{path[0].hypotheses[0].source.type}}' style = 'margin-right: 5px;'>
+								<span compile = '::path[0].hypotheses[0].source.label'></span>
+								<span ng-if = "path[0].hypotheses[0].source.paper_raw_text && path[0].hypotheses[0].source.label.toLowerCase().indexOf(path[0].hypotheses[0].source.paper_raw_text.toLowerCase())!=0">
+									<span ng-if="path[0].hypotheses[0].source.label">(</span>
+									<span compile = 'path[0].hypotheses[0].source.paper_raw_text'></span>
+									<span ng-if="path[0].hypotheses[0].source.label">)</span>
+								</span>
+							</td>
+							<td class="text-center" ng-repeat-start="step in path[0].hypotheses"><span style="margin:0 5px" class = 'glyphicon glyphicon-arrow-right'></span></td>
+							<td ng-repeat-end>
+								<img ng-src = '{{baseURL}}images/icon_{{step.target.type}}_{{($last) ? "assayed":"biological"}}.png' height = "20" width = "20" alt = '{{step.target.type}}' style = 'margin-right: 5px;'>
+								<span compile = '::step.source.label'></span>
+								<span ng-if = "step.source.paper_raw_text && step.source.label.toLowerCase().indexOf(step.source.paper_raw_text.toLowerCase())!=0">
+									<span ng-if="step.source.label">(</span>
+									<span compile = 'step.source.paper_raw_text'></span>
+									<span ng-if="step.source.label">)</span>
+								</span>
+							</td>
+						</tr>
+						<tr ng-repeat-end ng-show="path.show">
+							<td></td>
+							<td ng-repeat="step in path[0].hypotheses" colspan="2">
+								<p><small><b> {{step.paper.title}} </b></small></p>
+									<div ng-repeat="panel in step.panels" class="layer searchResultPanelInCarousel" ng-click='loadPanel(panel.panel_id)'>
+										<figcaption>{{::panel.label}} </figcaption>
+										<img class = 'img-responsive center-block' ng-src = '{{serverURL}}/file.php?panel_id={{panel.panel_id}}' style = 'max-height: 160px'>
+									</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div> -->
+
+
+<!-- ****************************************************************/-->
+
+<!-- <div class = 'col-sm-12 col-xs-12 col-md-6 col-lg-4' >
+	 <div class = 'panel panel-default '>
 		<div class = 'panel-body'>
 			<div class = 'row'>
 				<div class = 'row' ng-click="newSearch(step)">
-					<div class = 'col-xs-5 text-right pathsearch-step-left'><img ng-src = '{{baseURL}}images/icon_{{step.typeLeft}}_intervention.png' height = "20" width = "20" alt = '{{step.typeLeft}}' style = 'margin-right: 10px;' ><span ng-bind-html = 'step.displayLeft'></span></div>
+					<div class='col-xs-5 text-right pathsearch-step-left'>
+						<img ng-src = '{{baseURL}}images/icon_{{step.source.type}}_intervention.png' height = "20" width = "20" alt = '{{step.source.type}}' style = 'margin-right: 10px;'>
+						<span ng-bind-html = 'step.source.label'></span>
+						<small ng-show="step.source.organism">({{step.source.organism}})</small>
+					</div>
 					<div class = 'col-xs-2 cursor-pointer pathsearch-cursor-pointer'><h3 class = 'glyphicon glyphicon-arrow-right' style = 'margin: 0'></h3></div>
-					<div class = 'col-xs-5 pathsearch-step-right' ><span ng-bind-html = 'step.displayRight'></span><img ng-src = '{{baseURL}}images/icon_{{step.typeRight}}_assayed.png' height = "20" width = "20" alt = '{{step.typeRight}}' style = 'margin-left: 10px;'></div>
+					<div class = 'col-xs-5 pathsearch-step-right' >
+						<span ng-bind-html = 'step.target.label'></span>
+						<small ng-show="step.target.organism">({{step.target.organism}})</small>
+						<img ng-src = '{{baseURL}}images/icon_{{step.target.type}}_assayed.png' height = "20" width = "20" alt = '{{step.target.type}}' style = 'margin-left: 10px;'>
+					</div>
 				</div>
 				<ul class="list-group psmall pathsearch-ul">
 					<li class="list-group-item pathsearch-group-item" ng-repeat = 'paper in step.papers' ng-click = 'paper.show =! paper.show'>
@@ -40,26 +170,16 @@
 									<div ng-repeat="panel in collection" class="layer searchResultPanelInCarousel"  ng-click = 'loadPanel(panel.panel_id)'>
 										<figcaption>{{::panel.label}}  {{hypo.carouselIndex}}</figcaption>
 										<img class = 'img-responsive center-block' ng-src = '{{serverURL}}/file.php?panel_id={{panel.panel_id}}' style = 'max-height: 160px'>
-
 									</div>
-
 								</li>
 							</ul>
 							<div rn-carousel-indicators ng-if="paper.panelCollections.length > 1" slides="paper.panelCollections" rn-carousel-index="paper.carouselIndex"></div>
-
-							<!-- <figure ng-repeat = 'panel in paper.panels' style = 'width:300px;float: left;'>
-								{{panel.panel_id}}
-								<figcaption>{{panel.label}}</figcaption>
-								<img class = 'img-responsive' style="margin-bottom:10px;max-width: 300px" ng-src = '{{serverURL}}/file.php?panel_id={{panel.panel_id}}' ng-click = 'loadPanel(panel.panel_id)'/>
-							</figure> -->
-
 						</div>
-
 					</li>
 				</ul>
-
 			</div>
 		</div>
 	</div>
 	<h1 class = 'glyphicon glyphicon-arrow-right text-center' ng-show = '!first' style = 'position: absolute; left: -15px; top: 30px;'></h1>
-</div>
+</div> -->
+

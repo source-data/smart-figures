@@ -62,11 +62,14 @@ module.exports = function (grunt) {
  			  },
  			  constants: {
  				  ENV: {
-					  //  					  serverURL: 'http://sourcedata-dev.vital-it.ch/lou/public/php/api/',
-					  // baseURL: 'http://sourcedata-dev.vital-it.ch/lou/public/',
-					  // baseHref: '/lou/public/',
-					  serverURL: 'https://api.sourcedata.io/',
-					  baseURL: 'https://search.sourcedata.io/',
+						serverURL: 'https://sourcedata-dev.vital-it.ch/php/api/',
+						baseURL: 'https://sourcedata-dev.vital-it.ch/',
+					  // serverURL: 'https://sourcedata.vital-it.ch/php/api/',
+					  // baseURL: 'https://sourcedata.vital-it.ch/',
+					  // serverURL: 'https://sourcedata-lou.vital-it.ch/php/api/',
+					  // baseURL: 'https://sourcedata-lou.vital-it.ch/',
+					  // serverURL: 'https://api.sourcedata.io/',
+					  // baseURL: 'https://search.sourcedata.io/',
 					  baseHref: '/',
  					  withCredentials: true,
  					  debugInfoEnabled: false,
@@ -84,13 +87,13 @@ module.exports = function (grunt) {
         files: ['bower.json'],
         tasks: ['wiredep']
       },
-      js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        }
-      },
+      // js: {
+      //   files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+      //   tasks: ['newer:jshint:all'],
+      //   options: {
+      //     livereload: '<%= connect.options.livereload %>'
+      //   }
+      // },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
@@ -125,7 +128,8 @@ module.exports = function (grunt) {
       },
 		proxies: [{
 			context: '/php',
-			host: 'sourcedata-robin.vital-it.ch',
+			host: 'sourcedata-lou.vital-it.ch',
+			// host: 'sourcedata-robin.vital-it.ch',
 			port: 443,
 			https: true,
 			secure: false
@@ -236,7 +240,7 @@ module.exports = function (grunt) {
           '<%= yeoman.dist %>/scripts/{,*/}*.js',
           '<%= yeoman.dist %>/styles/{,*/}*.css',
           // '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
-          '<%= yeoman.dist %>/styles/fonts/*'
+          // '<%= yeoman.dist %>/styles/fonts/*'
         ]
       }
     },

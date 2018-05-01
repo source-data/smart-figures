@@ -1,0 +1,21 @@
+
+<span class="cursor-pointer">	
+<!-- <span ng-click="extra=!extra" class="cursor-pointer">	 -->
+	<!-- <span ng-show="from=='direct'" class='sd-icon-1-{{tag.type}} direct-search-res-intervention-icons'></span> -->
+	<span ng-show="tag.label" compile='::tag.label'></span>
+	<span ng-show="!tag.label">
+		<span ng-show="tag.paper_raw_texts.length"> {{tag.paper_raw_texts.join(", ")}} </span>
+		<span ng-show="tag.paper_raw_text">{{tag.paper_raw_text}}</span>
+	</span>
+</span>
+<span ng-show="from=='direct'&&tag.label&&tag.paper_raw_text&&tag.showRawText">({{tag.paper_raw_text}})</span>
+<span ng-show="extra" class="nowrap">
+	<!-- <small ng-show="tag.external_id && tag.organism"><br ng-show="sep=='line'"><span ng-show="sep=='-'"> - </span>({{tag.organism}} <br> <a ng-href="{{tag.database.url}}{{tag.external_id}}" target="_blank">{{tag|tagExtId}}</a>)</small>
+	<small style="white-space:nowrap" ng-show="tag.external_id && !tag.organism"><br ng-show="sep=='line'"><span ng-show="sep=='-'"> - </span><a ng-href="{{tag.database.url}}{{tag.external_id}}" target="_blank">({{tag|tagExtId}})</a></small>
+	<small style="white-space:nowrap" ng-show="!tag.external_id && tag.organism"><br ng-show="sep=='line'"><span ng-show="sep=='-'"> - </span>({{tag.organism}})</small> -->
+	
+	<small style="white-space:nowrap" ng-show="tag.organism"><br ng-show="sep=='line'"><span ng-show="sep=='-'"> - </span>{{tag.organism}}</small> 
+	<small style="white-space:nowrap" ng-show="tag.external_id "><br ng-show="sep=='line'"><span ng-show="sep=='-'"> - </span><a ng-href="{{tag.database.url}}{{tag.external_id}}" target="_blank">{{tag|tagExtId}}</a></small>
+	
+	
+</span>

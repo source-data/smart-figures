@@ -2,6 +2,6 @@
 
  angular.module('config', [])
 
-.constant('ENV', {serverURL:'https://api.sourcedata.io/',baseURL:'https://search.sourcedata.io/',baseHref:'/',withCredentials:true,debugInfoEnabled:false,CORS:true,httpCache:true,html5:true})
+.constant('ENV', {serverURL:'https://sourcedata-dev.vital-it.ch/php/api/',baseURL:'https://sourcedata-dev.vital-it.ch/',baseHref:'/',withCredentials:true,debugInfoEnabled:false,CORS:true,httpCache:true,html5:true})
 
 ;

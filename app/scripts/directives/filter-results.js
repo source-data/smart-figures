@@ -46,6 +46,157 @@ angular.module('publicSourcedataApp')
 
             }
         };
-    }]);
+    }])
+
+		.directive('searchPagination',['ENV','_','Search','$filter','$timeout', function (ENV,_,Search,$filter,$timeout) {
+			return {
+				scope:{},
+				restrict: 'E',
+				templateUrl:ENV.baseURL+'views/partials/searchPagination.html',
+				link:function(scope,element,attributes){
+					// console.info("ici pagination",attributes);
+					scope.small_size = (attributes.size && attributes.size=='small');
+					scope.position = (attributes.position && attributes.position=='left') ? 'left' : 'right'; 
+					scope.pagination_class = {page: (scope.small_size) ? 'pagination-sm' : 'pagination', input:(scope.small_size) ? 'input-sm':''};
+
+					scope.searchParams = Search.searchParams;
+					var paginationTimeout = null;
+					scope.changePagination = function(){
+						$timeout.cancel(paginationTimeout);
+						paginationTimeout = $timeout(function(){
+							if (scope.searchParams.pagination.itemsPerPage){
+								console.info("change pagination",scope.searchParams.pagination);
+								Search.fetch();
+							}
+						},750);
+					}			
+				}
+			}
+		}])
+
+		
+		.directive('filtertest',['ENV','_','Search','$filter','$timeout', function (ENV,_,Search,$filter,$timeout) {
+	      return {
+	          scope:{},
+	          restrict: 'E',
+	          templateUrl:ENV.baseURL+'views/partials/filterResults2.html',
+	          link:function(scope,element,attributes){
+							
+							$timeout(function(){
+								scope.btn_class = (attributes.from=='panel') ? 'btn-sm' : 'btn';
+								scope.filters = angular.copy(Search.searchParams.result.filters);
+								// scope.filters = Search.searchParams.result.filters;
+								scope.active_filters =[];
+						
+								_.forEach(scope.filters.list,function(filter,filter_name){
+									filter.f_values = [];
+									_.forEach(filter.values,function(val){
+										var display = val;
+										if(filter_name=='organisms') display = val['name'] + " ["+val['tax_id']+"]";
+										if(filter_name=='assays') display = val['external_name'];
+										val = {obj:val,display:display};
+										filter.f_values.push(val);
+									});
+									filter.values = [];
+								});
+												
+								scope.filter_types = _.sortBy(_.keys(scope.filters.list),'idx');
+								if(!scope.active_filters.length){
+									scope.active_filters = [{type:scope.filter_types[0],values:[]}];
+								}
+								Search.searchParams.active_filters = scope.active_filters; 
+								console.info("FILTERS",angular.copy(scope.filters));
+							},100);						
+						
+							scope.changeFilterType = function(idx){
+								console.info("change filter");
+								scope.active_filters[idx].values = [];
+							}
+						
+							scope.filterAction = function(action,idx){
+								console.info("filter action ",action, idx);
+								if(action=='add'){
+									var available_filter_types = $filter('availableFilterTypes')(scope.filter_types,scope.active_filters);
+									scope.active_filters.push({type:available_filter_types[0],values:[]});
+								}
+								else if (action=='remove'){
+									scope.active_filters.splice(idx,1);
+								
+								}
+								else if (action=='reset'){
+									scope.active_filters = [{type:scope.filter_types[0],values:[]}];
+									Search.searchParams.active_filters = scope.active_filters; 
+									Search.fetch();
+								}
+								else if(action=='update'){
+									Search.searchParams.active_filters = scope.active_filters; 
+									Search.fetch();
+								}
+							}
+						
+						}
+				}
+			}])	
+	.directive('filterResults2',['ENV','_','Search','$filter', function (ENV,_,Search,$filter) {
+	      return {
+	          scope:{},
+	          restrict: 'E',
+	          templateUrl:ENV.baseURL+'views/partials/filterResults2.html',
+	          link:function(scope,element,attributes){
+						console.info("ici filter results2");
+						// scope.active_filters = Search.searchParams.result.active_filters;
+						scope.filters = Search.searchParams.result.filters;
+						scope.active_filters =[];
+						
+						
+						_.forEach(scope.filters.list,function(filter,filter_name){
+							filter.f_values = [];
+							_.forEach(filter.values,function(val){
+								var display = val;
+								if(filter_name=='organisms') display = val['name'] + " ["+val['tax_id']+"]";
+								if(filter_name=='assays') display = val['external_name'];
+								val = {obj:val,display:display};
+								filter.f_values.push(val);
+							});
+							filter.values = [];
+						});
+												
+						scope.filter_types = _.sortBy(_.keys(scope.filters.list),'idx');
+						if(!scope.active_filters.length){
+							scope.active_filters = [{type:scope.filter_types[0],values:[]}];
+						}
+					
+						Search.searchParams.active_filters = scope.active_filters; 
+						
+						scope.changeFilterType = function(idx){
+							console.info("change filter");
+							scope.active_filters[idx].values = [];
+						}
+						
+						scope.filterAction = function(action,idx){
+							console.info("filter action ",action, idx);
+							if(action=='add'){
+								var available_filter_types = $filter('availableFilterTypes')(scope.filter_types,scope.active_filters);
+								scope.active_filters.push({type:available_filter_types[0],values:[]});
+							}
+							else if (action=='remove'){
+								scope.active_filters.splice(idx,1);
+								
+							}
+							else if (action=='reset'){
+								scope.active_filters = [{type:scope.filter_types[0],values:[]}];
+								Search.searchParams.active_filters = scope.active_filters; 
+								Search.fetch();
+							}
+							else if(action=='update'){
+								Search.searchParams.active_filters = scope.active_filters; 
+								Search.fetch();
+							}
+						}
+					
+					}
+				}
+		}])
+		;
 
 

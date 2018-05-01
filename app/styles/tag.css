@@ -78,12 +78,14 @@ sd-tag, span.sdTag{
 
 
 .intervention, .bg_intervention,.bg_intervention_selected {
-	background-color: #fbb4ae;
+	/*background-color: #fbb4ae;*/
 }
 
 sd-tag.intervention{
-	background-color: rgba(251,180,174,0.8);
-	border: 2px solid #FB1400;
+	/*background-color: rgba(251,180,174,0.8);*/
+	/*border: 2px solid #FB1400;*/
+	color: #cb5b3c;
+	text-decoration: underline
 }
 
 sd-tag.active.intervention{
@@ -92,12 +94,14 @@ sd-tag.active.intervention{
 }
 
 .assayed, .bg_assayed, .bg_assayed_selected {
-	background-color: #b3cde3;
+	/*background-color: #b3cde3;*/
 }
 
 sd-tag.assayed{
-	background-color: rgba(179,205,227,0.8);
-	border: 2px solid #007BE3;
+	/*background-color: rgba(179,205,227,0.8);*/
+	/*border: 2px solid #007BE3;*/
+	color: #6292d0;
+	text-decoration: underline
 }
 
 sd-tag.active.assayed{
@@ -106,7 +110,9 @@ sd-tag.active.assayed{
 }
 
 .normalizing, .bg_normalizing, .bg_normalizing_selected {
-	background-color: #ccebc5;
+	/*background-color: #ccebc5;*/
+	color: #1B8401;
+	text-decoration: underline
 }
 
 sd-tag.normalizing, sd-pretag.normalizing{
@@ -120,12 +126,14 @@ sd-tag.active.normalizing{
 }
 
 .experiment, .bg_experiment, .bg_experiment_selected{
-	background-color: #decbe4;
+	/*background-color: #decbe4;*/
+	color: #AD00E4;
+	text-decoration: underline
 }
 
 sd-tag.experiment, sd-pretag.experiment{
-	background-color: rgba(222,203,228,0.8);
-	border: 2px solid #AD00E4;
+	/*background-color: rgba(222,203,228,0.8);*/
+	/*border: 2px solid #AD00E4;*/
 }
 
 sd-tag.active.experiment{
@@ -134,8 +142,8 @@ sd-tag.active.experiment{
 }
 
 .component, .bg_component, .bg_component_selected{
-	background-color: #fed9a6;
-	border: 2px solid #FB8008;
+	/*color: orange;*/
+	/*text-decoration: underline*/
 }
 
 sd-tag.active.component{
@@ -145,7 +153,9 @@ sd-tag.active.component{
 
 
 sd-tag.component, sd-pretag.component{
-	background-color: rgba(254,217,166,0.8);
+	/*background-color: rgba(254,217,166,0.8);*/
+	color: orange;
+	text-decoration: underline
 }
 
 .reporter, .bg_reporter, .bg_reporter_selected{

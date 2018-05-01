@@ -1,0 +1,72 @@
+
+<div class="row">
+	<div class="col-sm-12"><p style="margin-top:10px">Filter results</p></div>
+	<div class="col-sm-12">
+		<div class="row" ng-repeat="(aidx,active_filter) in active_filters" style="margin-top:10px">
+			<div class="col-sm-4 ">
+				<select ng-model="active_filters[aidx].type" class="form-control" ng-change="changeFilterType(aidx)" ng-options="filter for filter in filter_types|availableFilterTypes:active_filters:aidx"></select>
+			</div>
+			<div class="col-sm-6">
+        <ui-select  multiple theme="bootstrap" class="form-control" ng-model="active_filters[aidx].values" close-on-select="false">
+	        <ui-select-match placeholder="Select...">{{$item.display}}</ui-select-match>
+          <ui-select-choices repeat="value in filters.list[active_filters[aidx].type].f_values | filter:$select.search" > {{value.display}} </ui-select-choices>
+        </ui-select>
+			</div>
+			<div class="col-sm-2">
+				<div class="pull-left" >
+					<button ng-class="btn_class" class="btn btn-default result-filter-button-remove" ng-click="filterAction('remove',aidx)" ng-show="!$first" style="margin-right:5px" ><span class="glyphicon glyphicon-minus"></span></button>
+					<button ng-class="btn_class" class="btn btn-primary result-filter-button-add" ng-click="filterAction('add')" ng-show="$last"><span class="glyphicon glyphicon-plus"></span></button>
+					<!-- <div class="btn-group btn-group-sm" ng-show="!$last">
+						<button ng-class="btn_class" class="btn btn-default result-filter-button-remove" ng-click="filterAction('remove',aidx)" ng-show="!$first" style="margin-right:5px" ><span class="glyphicon glyphicon-minus"></span></button>
+						<button ng-class="btn_class" class="btn btn-primary result-filter-button-add" ng-click="filterAction('add')" ng-show="$last" ><span class="glyphicon glyphicon-plus"></span></button>
+					</div> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row" style="margin-top:20px">
+	<p class="text-center">
+		<button ng-class="btn_class" class="btn btn-primary" ng-click="filterAction('update')"><span class="fa fa-refresh" style="margin-right:5px"></span>Update</button>
+		<button ng-class="btn_class" class="btn btn-default" ng-click="filterAction('reset')">Reset</button>
+	</p>
+</div>
+
+
+
+
+
+<!-- <div class="row">
+	<div class="col-sm-12"><p style="margin-top:10px">Filter results</p></div>
+	<div class="col-sm-12 result-filter-item-main">
+		<div class="row" ng-repeat="(aidx,active_filter) in active_filters" style="margin-top:10px">
+			<div class="col-sm-4 result-filter-item-category-container">
+				<select ng-model="active_filters[aidx].type" class="form-control" ng-change="changeFilterType(aidx)" ng-options="filter for filter in filter_types|availableFilterTypes:active_filters:aidx"></select>
+			</div>
+			<div class="col-sm-6 result-filter-item-value-container">
+        <ui-select  multiple theme="bootstrap" class="form-control" ng-model="active_filters[aidx].values" close-on-select="false">
+	        <ui-select-match placeholder="Select...">{{$item.display}}</ui-select-match>
+          <ui-select-choices repeat="value in filters.list[active_filters[aidx].type].f_values | filter:$select.search" > {{value.display}} </ui-select-choices>
+        </ui-select>
+			</div>
+			<div class="col-sm-2 result-filter-button-group-container">
+				<div class="pull-left" >
+					<div class="btn-group btn-group-sm result-filter-button-group">
+						<button class="btn btn-default result-filter-button-remove" ng-click="filterAction('remove',aidx)" ng-show="!$first" style="margin-right:5px" ><span class="glyphicon glyphicon-minus"></span></button>
+						<button class="btn btn-primary result-filter-button-add" ng-click="filterAction('add')" ng-show="$last" ><span class="glyphicon glyphicon-plus"></span></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row" style="margin-top:20px">
+	<p class="text-center">
+		<button ng-class="btn_class" class="btn btn-primary" ng-click="filterAction('update')"><span class="fa fa-refresh" style="margin-right:5px"></span>Update</button>
+		<button ng-class="btn_class" class="btn btn-default" ng-click="filterAction('reset')">Reset</button>
+	</p>
+</div> -->
+
+

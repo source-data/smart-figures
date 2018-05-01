@@ -41,28 +41,35 @@
 						<span class='sd-icon-2-assay direct-search-res-assay-icon'></span>
 						<span ng-repeat="assay in result.assays" class="badge experimental-badge">{{assay.external_name}}</span></div>
 				</div>
+				<a ng-show="::result.biostudies_id" ng-href="https://www.ebi.ac.uk/biostudies/studies/{{result.biostudies_id}}" target="_blank"><img class="img-responsive" src="../../images/logo_biostudies.png" width="100" alt="Logo Biostudies"></a>
 			</div>
+			
 			<div class = 'col-md-7'>
 				<ul class="list-group list-sm direct-search-res-list">
-					<li class="list-group-item liSearchResult direct-search-res-item" ng-repeat = 'hypo in result.hypos|filter:repeatFilter' style="padding-bottom:0px">
-						<div class = 'row' ng-click = 'hypo.show = !hypo.show'>
+					<li class="list-group-item liSearchResult direct-search-res-item" ng-repeat='hypo in result.hypos|filter:repeatFilter' style="padding-bottom:0px">
+					<!-- <li class="list-group-item liSearchResult direct-search-res-item" ng-repeat='hypo in result.hypos|filter:repeatFilter' style="padding-bottom:0px"> -->
+						<div class='row' ng-click = 'hypo.show = !hypo.show'>
 							<div class = 'col-xs-5 text-right direct-search-res-intervention' style="padding-top:15px">
-								<span class='sd-icon-1-{{hypo.typeLeft}} direct-search-res-intervention-icons'></span>
-								<span compile = '::hypo.externalDisplayLeft || hypo.displayLeft'></span>
-								<span ng-if = 'hypo.externalDisplayLeft && (hypo.externalDisplayLeft|lowercase) != (hypo.displayLeft.join(", ")|lowercase)'>(<span compile = 'hypo.displayLeft.join(", ")'></span>)</span>
-								<sup ng-if = 'hypo.motif_score > 8 && hypo.motif_role == "intervention"' class = 'glyphicon glyphicon-star' style = 'color:#ff9f11' tooltip = 'potential regulator' ></sup>
-							<!-- </span> -->
+								<span class='sd-icon-1-{{hypo.source.type}} direct-search-res-intervention-icons'></span>
+								<display-entity tag='hypo.source' sep="'line'" extra='false' from="'direct'"></display-entity>
+								<!-- <span compile = '::hypo.source.label'></span>
+								<span ng-if = "hypo.source.paper_raw_text && hypo.source.label.toLowerCase().indexOf(hypo.source.paper_raw_text.toLowerCase())<0">
+									<span ng-if="hypo.source.label">(</span><span compile = 'hypo.source.paper_raw_text'></span><span ng-if="hypo.source.label">)</span>
+								</span> -->
+								<!-- <sup ng-if = 'hypo.motif_score > 8 && hypo.motif_role == "intervention"' class = 'glyphicon glyphicon-star' style = 'color:#ff9f11' uib-tooltip = 'potential regulator' ></sup> -->
 							</div>
-							<div class = 'col-xs-2 text-center direct-search-res-arrow' style = 'position: relative'>
-								<p style="margin-bottom:0px"><span style='font-size: 10px;'>{{hypo.nb_panels}} experiment<span ng-show="hypo.nb_panels>1">s</span></span></p>
-								<!-- <span style = 'position: absolute; top: -10px;  text-align: center;  font-size: 10px;'>{{hypo.nb_panels}} experiments</span> -->
+							<div  class = 'col-xs-2 text-center direct-search-res-arrow' style = 'position: relative'>
+								<p style="margin-bottom:0px"><span style='font-size: 10px;'>{{hypo.panels.length}} experiment<span ng-show="hypo.panels.length>1">s</span></span></p>
 								<h3 class="text-center arrow-icon-container" style="margin-top:0"><span class = 'sd-icon-3-arrow '></span></h3>
 							</div>
 							<div class = 'col-xs-5 direct-search-res-assayed' style="padding-top:15px">
-								<span class='sd-icon-1-{{hypo.typeRight}} direct-search-res-intervention-icons'></span>
-								<span compile = '::hypo.externalDisplayRight || hypo.displayRight'></span>
-								<span ng-if = 'hypo.externalDisplayRight && (hypo.externalDisplayRight|lowercase) != (hypo.displayRight.join(", ")|lowercase)'>(<span compile = 'hypo.displayRight.join(", ")'></span>)</span>
-								<sup ng-if = 'hypo.motif_score > 8 && hypo.motif_role == "assayed"' class = 'glyphicon glyphicon-star'  style = 'color:#ff9f11' tooltip = 'potential regulator'></sup>
+								<span class='sd-icon-1-{{hypo.target.type}} direct-search-res-intervention-icons'></span>
+								<display-entity tag='hypo.target' sep="'line'" extra='false' from="'direct'"></display-entity>
+								<!-- <span compile = '::hypo.target.label'></span>
+								<span ng-if = "hypo.target.paper_raw_text && hypo.target.label.toLowerCase().indexOf(hypo.target.paper_raw_text.toLowerCase())<0">
+									<span ng-if="hypo.target.label">(</span><span compile = 'hypo.target.paper_raw_text'></span><span ng-if="hypo.target.label">)</span>
+								</span> -->
+								<!-- <sup ng-if = 'hypo.motif_score > 8 && hypo.motif_role == "assayed"' class = 'glyphicon glyphicon-star'  style = 'color:#ff9f11' uib-tooltip = 'potential regulator'></sup> -->
 
 								<button type="button" class="sd-mobilehide pull-right cursor-pointer btn btn-default btn-xs direct-search-res-figures-btn" >{{(hypo.show)?'Hide':'Show'}} figures
 									<span class="glyphicon direct-search-res-chevrons" ng-class="(hypo.show)?'glyphicon-chevron-up':'glyphicon-chevron-down'"></span>
@@ -74,16 +81,15 @@
 								</button>
 							</div>
 						</div>
-						<!-- <hr ng-if = 'hypo.show' /> -->
 						<div class = 'row' ng-if = 'hypo.show' style="margin-top:5px">
 							<div class = 'col-xs-1'>
-								<h3 ng-click = 'hypo.carouselIndex= hypo.carouselIndex-1' ng-if = 'hypo.carouselIndex' style = 'padding-top: 50px; cursor: pointer;' class = 'glyphicon glyphicon-chevron-left'></h3>
+								<h3 ng-click = 'hypo.carouselIndex=hypo.carouselIndex-1' ng-if = 'hypo.carouselIndex' style = 'padding-top: 50px; cursor: pointer;' class = 'glyphicon glyphicon-chevron-left'></h3>
 							</div>
 							<div class = 'col-xs-10'>
 								<ul rn-carousel rn-carousel-index="hypo.carouselIndex" class="image direct-search-res-carousel" style = 'height: 200px;position:relative;display: block;width: 550px; margin: auto;'>
 									<li ng-repeat="collection in hypo.collections" >
 										<div ng-repeat="panel in collection" class="layer searchResultPanelInCarousel direct-search-res-carousel-panel"  ng-click = 'loadPanel(panel.panel_id)'>
-											<figcaption tooltip-placement="bottom" class="cursor-pointer" >{{::panel.label}}<span class="pull-right glyphicon glyphicon-paperclip" ng-show="panel.panel_doc"></span></figcaption>
+											<figcaption uib-tooltip-placement="bottom" class="cursor-pointer">{{::panel.label}}<span class="pull-right glyphicon glyphicon-paperclip" ng-show="panel.panel_doc"></span></figcaption>
 											<img class = '{{baseURL}}img-responsive center-block' ng-src = '{{serverURL}}/file.php?panel_id={{panel.panel_id}}' style = 'max-height: 160px'>
 											<span><span class="badge experimental-badge direct-search-res-exp-badge" style="font-size:11px" ng-repeat="assay in panel.assays">{{assay.external_name}}</span></span>
 										</div>
@@ -92,19 +98,19 @@
 								<div rn-carousel-indicators ng-if="hypo.collections.length > 1" slides="hypo.collections" rn-carousel-index="hypo.carouselIndex"></div>
 							</div>
 							<div class = 'col-xs-1'>
-								<h3 ng-click = 'hypo.carouselIndex = hypo.carouselIndex+1' ng-if = 'hypo.carouselIndex < hypo.collections.length-1'  style = 'padding-top: 50px; cursor: pointer;' class = 'glyphicon glyphicon-chevron-right'></h3>
+								<h3 ng-click = 'hypo.carouselIndex = hypo.carouselIndex+1' ng-if='hypo.carouselIndex < hypo.collections.length-1' style='padding-top: 50px; cursor: pointer;' class='glyphicon glyphicon-chevron-right'></h3>
 							</div>
 						</div>
-						<div class="row" ng-if = 'hypo.show' style="margin-top:5px">
+						<div class = "row" ng-if = 'hypo.show' style="margin-top:5px">
 								<p style="background-color:#F2F2F2;padding:10px;margin:0" class="text-center direct-search-res-click-figure">Click on figure to view it in SmartFigure</p>
 						</div>
 					</li>
 				</ul>
-				<a class = 'pull-right' ng-if = 'repeatFilter && (diff = result.hypos.length - (result.hypos|filter:{display:true}).length) ' ng-click = 'showAll()'><ng-pluralize count="diff"
-					when="{'0': 'no more relation.',
-					'one': 'show 1 more relation',
-					'other': 'show {} more relations'}">
-				</ng-pluralize></a>
+						
+				<a class = 'pull-right' ng-if = 'repeatFilter && (diff = result.hypos.length - (result.hypos|filter:{display:true}).length) ' ng-click = 'showAll()'>
+					<ng-pluralize count="diff" when="{'0': 'no more relation.', 'one': 'show 1 more relation', 'other': 'show {} more relations'}"></ng-pluralize>
+				</a>
+
 			</div>
 		</div>
 	</div>

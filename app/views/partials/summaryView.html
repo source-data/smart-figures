@@ -22,9 +22,9 @@
 <div class="row">
 	<div class= 'col-sm-12'>
 		<div class="component borderField summary-component" style="padding:10px;background-color:#FEE4C0">
-			<p class="text-muted text-center" style="opacity:0.5" tooltip="Generic category for any biochemical entity mentioned in this panel" tooltip-placement="bottom" tooltip-popup-delay="400">Biological Component</p>
+			<p class="text-muted text-center" style="opacity:0.5" uib-tooltip="Generic category for any biochemical entity mentioned in this panel" uib-tooltip-placement="bottom" uib-tooltip-popup-delay="400">Biological Component</p>
 			<div ng-repeat="tag in summaryView.component" class="borderTag" >
-				<span tooltip-html-unsafe="{{tag.tooltipContent}}" tooltip-trigger="{{{true: 'mouseenter', false: 'never'}[tag.external_ids[0].length>0]}}"  tooltip-append-to-body = "true">
+				<span uib-tooltip-html-unsafe="{{tag.uib-tooltipContent}}" uib-tooltip-trigger="{{{true: 'mouseenter', false: 'never'}[tag.external_ids[0].length>0]}}"  uib-tooltip-append-to-body = "true">
 					<img ng-src = '{{baseURL}}images/icon_{{tag.type}}_{{tag.role}}.png' height = '22' ng-if = 'tag.role && tag.type'/>
 					<img ng-src = '{{baseURL}}images/icon_{{tag.category}}.png' height = '22' ng-if = 'tag.category'/>
 					<span class="block" compile='tag.text'></span>
@@ -33,9 +33,9 @@
 			</div>
 			<!--experiment -->
 			<div class="experiment borderField summary-experiment" style="padding:10px 10px 0 10px; margin-top:10px;background-color:#E2DAE4" >
-				<p class="text-muted text-center" style="opacity:0.5" tooltip="a component associated to an experimental factor that defines the experimental groups that are compared in the experiment" tooltip-popup-delay="400">Experiment Variable</p>
+				<p class="text-muted text-center" style="opacity:0.5" uib-tooltip="a component associated to an experimental factor that defines the experimental groups that are compared in the experiment" uib-tooltip-popup-delay="400">Experiment Variable</p>
 				<div ng-repeat="tag in summaryView.experiment" class="borderTag summary-component-tag" >
-					<span tooltip='{{tag|tagExtId:0}}' tooltip-trigger="{{{true: 'mouseenter', false: 'never'}[tag.external_ids[0].length>0]}}" tooltip-append-to-body = "true">
+					<span uib-tooltip='{{tag|tagExtId:0}}' uib-tooltip-trigger="{{{true: 'mouseenter', false: 'never'}[tag.external_ids[0].length>0]}}" uib-tooltip-append-to-body = "true">
 						<img ng-src = '{{baseURL}}images/icon_{{tag.type}}_{{tag.role}}.png' height = '22' ng-if = 'tag.role && tag.type'/>
 						<img ng-src = '{{baseURL}}images/icon_{{tag.category}}.png' height = '22' ng-if = 'tag.category'/>
 						<span class="block"><span  compile='tag.text'></span></span>
@@ -46,9 +46,9 @@
 					<!--perturbed -->
 					<div class="intervention borderField" id="interventionBlock" style="padding:10px 5px;background-color:#FACBC7;margin-right:7px" >
 						<div>
-							<p class="text-muted text-center" style="opacity:0.5" tooltip="An entity altered in a controlled way across experimental groups (also called ‘perturbation’)" tooltip-popup-delay="400">Intervention Target</p>
+							<p class="text-muted text-center" style="opacity:0.5" uib-tooltip="An entity altered in a controlled way across experimental groups (also called ‘perturbation’)" uib-tooltip-popup-delay="400">Intervention Target</p>
 							<div ng-repeat="tag in summaryView.intervention" class="borderTag" >
-								<span tooltip='{{tag|tagExtId:0}}' tooltip-trigger="{{{true: 'mouseenter', false: 'never'}[tag.external_ids[0].length>0]}}"  tooltip-append-to-body = "true">
+								<span uib-tooltip='{{tag|tagExtId:0}}' uib-tooltip-trigger="{{{true: 'mouseenter', false: 'never'}[tag.external_ids[0].length>0]}}"  uib-tooltip-append-to-body = "true">
 									<img ng-src = '{{baseURL}}images/icon_{{tag.type}}_{{tag.role}}.png' height = '22' ng-if = 'tag.role && tag.type'/>
 									<img ng-src = '{{baseURL}}images/icon_{{tag.category}}.png' height = '22' ng-if = 'tag.category'/>
 									<span class="block" compile='tag.text'></span>
@@ -60,9 +60,9 @@
 					<svg height="1000" width="50" style="z-index:1;position:absolute;left:130px" ng-hide="noArrowInContext"><polygon ng-attr-points='{{arrow}}' style="fill:#FACBC7;stroke:#585858;stroke-width:1" />Sorry, your browser does not support inline SVG.</svg>
 					<!--assay -->
 					<div id="experimentCenter" class="assayed borderField" style="padding:10px 5px; margin:0 5px 0 15px;background-color:#CBD9E4" >
-						<p class="text-muted text-center" style="opacity:0.5" tooltip="An entity that is assayed/measured/observed" tooltip-popup-delay="400">Assayed Component</p>
+						<p class="text-muted text-center" style="opacity:0.5" uib-tooltip="An entity that is assayed/measured/observed" uib-tooltip-popup-delay="400">Assayed Component</p>
 						<div ng-repeat="tag in summaryView.assayed" class="borderTag summary-assayed" >
-							<span tooltip='{{tag|tagExtId:0}}' tooltip-trigger="{{{true: 'mouseenter', false: 'never'}[tag.external_ids[0].length>0]}}"  tooltip-append-to-body = "true">
+							<span uib-tooltip='{{tag|tagExtId:0}}' uib-tooltip-trigger="{{{true: 'mouseenter', false: 'never'}[tag.external_ids[0].length>0]}}"  uib-tooltip-append-to-body = "true">
 								<img ng-src = '{{baseURL}}images/icon_{{tag.type}}_{{tag.role}}.png' height = '22' ng-if = 'tag.role && tag.type'/>
 								<img ng-src = '{{baseURL}}images/icon_{{tag.category}}.png' height = '22' ng-if = 'tag.category'/>
 								<span class="block" compile='tag.text'></span>
@@ -74,9 +74,9 @@
 					<!-- control and reporter -->
 					<div id="experimentRight">
 						<div class="normalizing col-sm-12 borderField summary-normalize" style="padding:10px 5px;margin:0 0 2px 5px;background-color:#DEEDDB" >
-							<p class="text-muted text-center" style="opacity:0.5" tooltip="An entity assayed for the purpose of normalizing data across experimental groups" tooltip-popup-delay="400">Normalizing Component</p>
+							<p class="text-muted text-center" style="opacity:0.5" uib-tooltip="An entity assayed for the purpose of normalizing data across experimental groups" uib-tooltip-popup-delay="400">Normalizing Component</p>
 							<div ng-repeat="tag in summaryView.normalizing" class="borderTag" >
-								<span tooltip='{{tag|tagExtId:0}}' tooltip-trigger="{{{true: 'mouseenter', false: 'never'}[tag.external_ids[0].length>0]}}"  tooltip-append-to-body = "true">
+								<span uib-tooltip='{{tag|tagExtId:0}}' uib-tooltip-trigger="{{{true: 'mouseenter', false: 'never'}[tag.external_ids[0].length>0]}}"  uib-tooltip-append-to-body = "true">
 									<img ng-src = '{{baseURL}}images/icon_{{tag.type}}_{{tag.role}}.png' height = '22' ng-if = 'tag.role && tag.type'/>
 									<img ng-src = '{{baseURL}}images/icon_{{tag.category}}.png' height = '22' ng-if = 'tag.category'/>
 									<span class="block" compile='tag.text'></span>
@@ -85,9 +85,9 @@
 							</div>
 						</div>
 						<div class="reporter col-sm-12 borderField summary-reporter" style="padding:10px 5px;;margin:2px 0 0 5px;background-color:#FEFEE1" >
-							<p class="text-muted text-center" style="opacity:0.5" tooltip="An entity used as a proxy to measure indirectly an entity of interest to which it is linked as part of an engineered construct" tooltip-popup-delay="400">Reporter Component</p>
+							<p class="text-muted text-center" style="opacity:0.5" uib-tooltip="An entity used as a proxy to measure indirectly an entity of interest to which it is linked as part of an engineered construct" uib-tooltip-popup-delay="400">Reporter Component</p>
 							<div ng-repeat="tag in summaryView.reporter" class="borderTag" >
-								<span tooltip='{{tag|tagExtId:0}}' tooltip-trigger="{{{true: 'mouseenter', false: 'never'}[tag.external_ids[0].length>0]}}"  tooltip-append-to-body = "true">
+								<span uib-tooltip='{{tag|tagExtId:0}}' uib-tooltip-trigger="{{{true: 'mouseenter', false: 'never'}[tag.external_ids[0].length>0]}}"  uib-tooltip-append-to-body = "true">
 									<img ng-src = '{{baseURL}}images/icon_{{tag.type}}_{{tag.role}}.png' height = '22' ng-if = 'tag.role && tag.type'/>
 									<img ng-src = '{{baseURL}}images/icon_{{tag.category}}.png' height = '22' ng-if = 'tag.category'/>
 									<span class="block" compile='tag.text'></span>
@@ -101,7 +101,7 @@
 		</div>
 		<!--category -->
 		<div class="borderField" style="background-color:#F2F2F2;padding:10px; margin-top:2px" >
-			<p class="text-muted text-center " style="opacity:0.5" tooltip="Experimental assay, physical perturbations and other unstructured annotations (experimental)" tooltip-popup-delay="400">Unstructured tags</p>
+			<p class="text-muted text-center " style="opacity:0.5" uib-tooltip="Experimental assay, physical perturbations and other unstructured annotations (experimental)" uib-tooltip-popup-delay="400">Unstructured tags</p>
 			<div ng-repeat="tag in summaryView.assay" class="borderTag summary-tags" >
 				<span>
 					<img ng-src = '{{baseURL}}images/icon_{{tag.type}}_{{tag.role}}.png' height = '22' ng-if = 'tag.role && tag.type'/>

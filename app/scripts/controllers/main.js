@@ -25,60 +25,70 @@
 * Controller of the publicSourcedataApp
 */
 angular.module('publicSourcedataApp')
-.controller('MainCtrl', ['$scope','$rootScope','$location', 'Search', 'Filter', function ($scope, $rootScope, $location, Search, Filter ) {
+.controller('MainCtrl', ['$scope','$rootScope','$location', 'Search', 'Filter','ENV','$timeout', function ($scope, $rootScope, $location, Search, Filter,ENV,$timeout ) {
 
-
+	$scope.serverURL = ENV.serverURL;
+	
 	//-F------ FORM SUBMIT => change Location ------//
 	$scope.formSubmit = function(){
+		var url = $location.search();
 		angular.forEach(categories,function(cat){
-			var type = ($scope.searchParams[cat+"Type"]) ? $scope.searchParams[cat+"Type"]+":" : "";
+			var type = ($scope.searchParams[cat+"Type"]) ? "::" + $scope.searchParams[cat+"Type"] : "";
 			if(type+$scope.searchParams[cat] !== $location.search()[cat] || $scope.searchParams.motif !== $location.search().motif){
-				$location.search(cat,(type+$scope.searchParams[cat]) ? type+$scope.searchParams[cat] : null);
-				$location.search('motif',$scope.searchParams.motif);
+				url[cat] = ($scope.searchParams[cat]+type) ? $scope.searchParams[cat]+type : null;
 			}
 		});
+		$location.search(url);
 	};
 
 	//-F------ SEARCH if $location.search ------//
 	var search = function(){
 		if(!angular.equals($location.search(),{})){
 			$scope.searchParams.loading = true;
-			if($location.search().assayed || $location.search().intervention) $scope.searchParams.advanced = true;
-			if($location.search().generic) $scope.searchParams.advanced = false;
+			if ($location.search().assayed || $location.search().intervention) $scope.searchParams.advanced = true;
+			if ($location.search().generic) $scope.searchParams.advanced = false;
 			Search.search().then(function(){
+				$scope.results = Search.searchParams.results;
 				$scope.searchParams.hide_input = true;
 				$scope.searchParams.loading = false;
 				$scope.searchParams.navbarResult = 'result';
-				Filter.removeAll();
-				Filter.init();
 			});
-		}else{
-			Filter.removeAll();
-			Filter.init();
+		}
+		else{
+			$scope.searchParams.result = null;
+			$scope.searchParams.intervention= '';
+			$scope.searchParams.interventionType= '';
+			$scope.searchParams.assayed= '';
+			$scope.searchParams.assayedType= '';
+			$scope.searchParams.generic= '';
+			$scope.searchParams.genericType= '';
+			$scope.searchParams.advanced= true;
 		}
 	};
-
-	//-O------ On route UPDATE Search and rm filters ------//
-	$scope.$on('$routeUpdate', function(){
-        search();
-	});
-	$scope.$on('$routeChangeSuccess', function(){
-		search();
-	});
-
-
-	$scope.searchParams = Search.searchParams;
-	$scope.searchParams.displayedResult = Search.searchParams.displayedResult;
-	$scope.searchParams.assayedType = ($scope.searchParams.assayedType=='gene,protein') ? '':$scope.searchParams.assayedType;
-	$scope.searchParams.interventionType = ($scope.searchParams.interventionType=='gene,protein') ? '':$scope.searchParams.interventionType;
-	$scope.searchParams.genericType = ($scope.searchParams.genericType=='gene,protein') ? '':$scope.searchParams.genericType;
-
-	var categories = Search.getCategories();
-	search();
+	
+	//-F------ ABORT SEARCH ------//
 	$scope.abortSearch = function(){
 		Search.abortSearch();
 		$scope.searchParams.loading = false;
 	};
+
+	//-O------ On route UPDATE Search and rm filters ------//
+	$scope.$on('$routeUpdate', function(){
+		console.info("routeUpdate");
+		search();
+	});
+
+
+	//-I------- INIT -----//
+	$scope.searchParams = Search.searchParams;
+	$scope.searchParams.displayedResult = Search.searchParams.displayedResult;
+	$scope.searchParams.assayedType = ($scope.searchParams.assayedType=='gene,protein') ? '' : $scope.searchParams.assayedType;
+	$scope.searchParams.interventionType = ($scope.searchParams.interventionType=='gene,protein') ? '' : $scope.searchParams.interventionType;
+	$scope.searchParams.genericType = ($scope.searchParams.genericType=='gene,protein') ? '' : $scope.searchParams.genericType;
+
+	var categories = Search.getCategories();
+	search();
+	
 
 	//------- FILTERS ------//
 

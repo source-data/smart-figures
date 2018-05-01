@@ -89,18 +89,37 @@
 	})
 	.filter('firstAuthor',function(){
 		return function(author_list){
-			if(!author_list){return};
+			if (!author_list){return};
 			var authors = author_list.split(/[;,]/);
 			return authors[0]+" et al.";
 		};
 	})
+	.filter('filterIndexOf',function(){
+		return function(tags,f){
+			if(!tags){return};
+			if(!f){return tags;}
+			return _.filter(tags,function(t){return t.label.toLowerCase().indexOf(f.toLowerCase())>-1;});
+		};
+	})
+	
+	.filter('tagExtId',function(){
+		return function(tag){
+			if (!tag.external_id) return "";
+			var database = (tag.database) ? tag.database.name : '';
+			if (database == "Gene Ontology") database = "GO";
+			var re = new RegExp(database+"[:_]{1,}","i");
+			return database + ":" + tag.external_id.replace(re,"")+"";
+			// return database + ":" + external_id.id.replace(re,"")+" ";
+		};
+	})
+
 	.filter('uniqueTagTexts',function(){
 		return function(tags){
 			var unique = [], keys = [];
-			if(!angular.isArray(tags)) return tags;
+			if (!angular.isArray(tags)) return tags;
 			angular.forEach(tags,function(tag){
 				var key = (tag.external_names && tag.external_names[0]) || tag.text;
-				if(keys.indexOf(key) == -1){
+				if (keys.indexOf(key) == -1){
 					keys.push(key);
 					unique.push(tag);
 				}

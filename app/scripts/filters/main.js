@@ -33,24 +33,41 @@ angular.module('publicSourcedataApp')
 })
 .filter('displayCategory', function () {
   return function (array,input) {
-		var tmp = _.filter(array,function(type){return type.value == input;});
-		return tmp[0].print;
+		if(array.length){			
+			var tmp = _.filter(array,function(type){return type.value == input;});
+			return tmp[0].print;
+		}
   };
 })
 .filter('displayImg', function () {
     return function (array,input) {
+			if(array.length){				
         var tmp = _.filter(array,function(type){return type.value == input;});
         return tmp[0].value;
+			}
     };
 })
-    .filter('filterTypes', function () {
-        return function (array,current) {
-            return _.filter(array,function(d){return d.type==0 || d.name==current.name;});
-        };
-    })
+.filter('filterTypes', function () {
+  return function (array,current) {
+		if(array.length){			
+      return _.filter(array,function(d){return d.type==0 || d.name==current.name;});
+		}
+  };
+})
+.filter('availableFilterTypes', function () {
+  return function (list, current,idx) {
+		if (!list || !current){return false;}
+		var current_filter_type = (idx!==undefined) ? current[idx].type : null;
+		var used_filters = _.map(current,'type');
+		var available_filters = _.filter(list,function(t){
+			return (!_.includes(used_filters,t) || (current_filter_type && current_filter_type ==t)) && t!='status';
+		});
+		return available_filters;
+  };
+})
 
-    .filter('unique', ['_',function(_) {
-    return function (arr, field) {
-        return _.uniq(arr, function(a) { return a[field]; });
-    };
+.filter('unique', ['_',function(_) {
+	return function (arr, field) {
+	    return _.uniq(arr, function(a) { return a[field]; });
+	};
 }]);

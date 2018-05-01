@@ -32,6 +32,7 @@ angular.module('publicSourcedataApp')
 			return ENV.baseURL+'views/partials/'+attrs.type+'SearchResult.html';
 		},
 		link: function postLink(scope, element, attrs) {
+			// console.info(scope.result);
 			scope.result.showDetails = false;
 			var processPanelCollection = function(){
 				_.map(scope.result.hypos,function(hypo,idx){
@@ -52,16 +53,21 @@ angular.module('publicSourcedataApp')
 				});
 			};
 			processPanelCollection();
-			scope.$on('UPDATE.RESULTS',function(){
-				processPanelCollection();
-			});
+			
+			// scope.$on('UPDATE.RESULTS',function(){
+			// 	processPanelCollection();
+			// });
+
+			
 			scope.type = attrs.type;
 			scope.serverURL = ENV.serverURL;
 			scope.baseURL = ENV.baseURL;
 			scope.repeatFilter = {display: true};
+			
 			scope.showAll = function(){
 				scope.repeatFilter = '';
 			};
+			
 			scope.loadPanel = function(panel_id){
 				$location.search({});
 				$location.path("panel/"+panel_id);
@@ -69,7 +75,8 @@ angular.module('publicSourcedataApp')
 		}
 	};
 }])
-.directive('pathSearchResult', ['ENV', '$location', function (ENV, $location) {
+
+.directive('pathSearchResultOld', ['ENV', '$location', function (ENV, $location) {
 	return {
 		scope:{step:'='},
 		restrict: 'E',
@@ -77,6 +84,7 @@ angular.module('publicSourcedataApp')
 			return ENV.baseURL+'views/partials/pathSearchResult.html';
 		},
 		link: function postLink(scope, element, attrs) {
+			console.info(scope.step);
 			scope.first = (attrs.first == 'true');
 			scope.serverURL = ENV.serverURL;
 			scope.baseURL = ENV.baseURL;
@@ -109,6 +117,35 @@ angular.module('publicSourcedataApp')
 		}
 	};
 }])
+
+.directive('pathSearchResult', ['ENV', '$location', function (ENV, $location) {
+	return {
+		scope:{paths:'='},
+		restrict: 'E',
+		templateUrl: function(){
+			return ENV.baseURL+'views/partials/pathSearchResult.html';
+		},
+		link: function postLink(scope, element, attrs) {
+
+			scope.serverURL = ENV.serverURL;
+			scope.baseURL = ENV.baseURL;
+		
+		console.info(scope.paths);
+			scope.newSearch = function(step){
+			// $location.search({"intervention":step.left,"assayed":step.right});
+			// $location.path("/search");
+
+			};
+
+			scope.loadPanel = function(panel_id){
+				$location.search({});
+				$location.path("panel/"+panel_id);
+
+			};
+		}
+	};
+}])
+
 .directive('listSearchResult', ['ENV', '$location', '$timeout','Navigation', function (ENV, $location,$timeout,Navigation) {
 	return {
 		scope:{result:'='},
@@ -121,11 +158,13 @@ angular.module('publicSourcedataApp')
 			scope.serverURL = ENV.serverURL;
 			scope.baseURL = ENV.baseURL;
 			scope.repeatFilter = {display: true};
+			
 			scope.showAll = function(){
 				scope.repeatFilter = '';
 			};
+			
 			scope.loadPanel = function(hypo){
-				Navigation.addLink(hypo);
+				// Navigation.addLink(hypo);
 				$location.search({});
 				$location.path("panel/"+hypo.panels[0].panel_id);
 
@@ -133,6 +172,90 @@ angular.module('publicSourcedataApp')
 		}
 	};
 }])
+
+.directive('smSearchResult', ['ENV', '$location', '$timeout','Search', function (ENV, $location,$timeout,Search) {
+	return {
+		scope:{tag:'=',view:'='},
+		restrict: 'E',
+		templateUrl: function(){
+			return ENV.baseURL+'views/partials/smSearchResult.html';
+		},
+		link: function postLink(scope, element, attrs) {
+			scope.serverURL = ENV.serverURL;
+			scope.baseURL = ENV.baseURL;
+			scope.searchParams = Search.searchParams;
+			
+			scope.setPanel = function(hypo){
+				$timeout(function(){
+				$location.path("panel/"+hypo);					
+				});
+				$location.search({});
+			};
+		}
+	}
+}])
+
+.directive('navTagSidebar',['ENV','$location',function(ENV,$location){
+	return {
+		scope:{tags:'=',cas:'=',panel:'=',view:'='},
+		restrict: 'EA',
+		templateUrl: function(){
+			return ENV.baseURL+'views/partials/navTagSidebar.html';
+		},
+		link: function postLink(scope, element, attrs) {
+		
+			scope.explore = explore;
+			scope.mouseOver = mouseOver;
+			scope.mouseOut = mouseOut;
+			scope.popovPlacement = (scope.cas=='intervention') ? 'right' : 'left';
+			scope.move = (scope.cas=='intervention') ? 'previous' : 'next';
+			
+			function mouseOver(where,tag){
+
+				if (where == scope.cas){
+					tag.invertColor = true;
+				}
+			}
+			function mouseOut(tag){
+				tag.invertColor = false;
+			}
+						
+			function explore(tag, direction, perform) { // tag button is clickable only when view !== "panel" => use of perform to abort the function.
+					// if (!perform) return;
+					tag.display_ext_ids = [];
+					_.forEach(tag.external_ids,function(extid,index){
+						tag.display_ext_ids.push({id:extid,url:tag.external_urls[index] + extid});
+					});
+          scope.currentTag = tag;
+
+          var type;
+					var params;
+					var newloc = {};
+          if (direction == 'downstream') {
+              type = (tag.type) ? (tag.type == 'gene' || tag.type == 'protein') ? 'gene,protein:' : tag.type + ":" : "";
+							type =  (tag.type) ? (tag.type == 'gene' || tag.type == 'protein') ? '::gene,protein:' : '::'+tag.type : "";
+							newloc.intervention = tag.text + type;
+							newloc.assayed = null;
+          }
+          else if (direction == 'upstream') {
+              type = (tag.type) ? (tag.type == 'gene' || tag.type == 'protein') ? 'gene,protein:' : tag.type + ":" : "";
+							type =  (tag.type) ? (tag.type == 'gene' || tag.type == 'protein') ? '::gene,protein:' : '::'+tag.type : "";
+							newloc.intervention = null;
+							newloc.assayed = tag.text + type;							
+          }
+          else {
+						newloc.intervention = null;
+						newloc.assayed = null;				
+          }
+					$location.search(newloc);
+          scope.view = (direction) ? direction : 'panel';
+      };
+		
+		
+		}	
+	}	
+}])
+
 .directive('sdPanel',['$timeout', 'ENV', function($timeout, ENV){
 	return {
 		scope:{panel:'='},
@@ -140,6 +263,10 @@ angular.module('publicSourcedataApp')
 		templateUrl: ENV.baseURL+'views/partials/sdPanel.html',
 		link: function postlink(scope){
 			scope.serverURL = ENV.serverURL;
+			scope.highlight_entities = {status:false,enable:(scope.panel.figure.panels[scope.panel.currentPanelIdx].tags.length)};
+			if (scope.highlight_entities.enable) scope.highlight_entities.status = true;
+			console.info(scope.highlight_entities);
+			// console.info(scope.panel.figure.panels[scope.panel.currentPanelIdx].tags.length);
 		}
 	};
 }])

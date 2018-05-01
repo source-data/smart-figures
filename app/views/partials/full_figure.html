@@ -1,0 +1,56 @@
+<!-- <div class="modal-header" >
+	<p class="modal-title">
+		<h3 style="display:inline-block"> <span>{{vm.panel.figure.label}}</span> </h3>
+	</p>
+</div>
+
+<div class="modal-body">
+	<img class = 'img-responsive' style="max-width: 500px" ng-src = '{{vm.serverURL}}/file.php?figure_id={{vm.panel.figure.figure_id}}'/>
+</div>
+
+<div class="modal-footer">
+	<button class="btn btn-default" ng-click="close()">Close</button>
+</div> -->
+
+
+
+	<div id="smartFigureLightBox">
+		<a id="LightBoxWindowClose" class="pointer" ng-click="vm.close()"> <i class="fas fa-window-close"></i> </a>
+
+		<header>
+			<!-- Title here -->
+			<h2 class="LightBoxFigureTitle">{{vm.panel.paper.title}}</h2>
+
+			<!-- Author list here -->
+			<p class="LightBoxAuthors">{{vm.panel.paper.authors}}</p>
+
+		</header>
+		<!-- Figure Title here -->
+		<h3 class="LightBoxPanelTitle">{{vm.panel.figure.label}}</h3>
+		<div class="LightBoxFigure">
+			<img id="full_figure_{{vm.panel.figure.figure_id}}" class = 'img-responsive' ng-src='{{vm.serverURL}}/file.php?figure_id={{vm.panel.figure.figure_id}}' alt="{{vm.panel.figure.label}}"/>
+			
+			<!-- these links should point to the relevant SmartFigures and the positions would need to be calculated dynamically, based on the image size and position of individual figures within the image -->
+			<a ng-click="vm.goto(panel.panel_id)" ng-class="panel.class" ng-repeat="panel in vm.dpanels" ng-style="panel.style"></a>
+
+			<!-- <a href="index.html" class="currentPanelLink" style="top:15px; left:10px;height:284px; width:310px;"></a>
+			<a href="index.html" class="otherPanelLink" style="top:15px; left:330px;height:284px; width:330px;"></a>
+			<a href="index.html" class="otherPanelLink" style="top:310px; left:10px;height:284px; width:310px;"></a>
+			<a href="index.html" class="otherPanelLink" style="top:310px; left:330px;height:284px; width:330px;"></a>  -->
+
+		</div>  
+		<!-- <ul>
+			<li ng-repeat="panel in vm.dpanels">{{panel.panel_id}} - {{vm.panel.current_panel_id}}</li>
+		</ul> -->
+
+		<!-- figure caption here-->
+		<div class="LightBoxFigureCaption">
+			<div class="caption_legend" compile="vm.panel.figure.figure_caption"></div>
+		</div>   
+		<footer>
+			<p class="footerCredits">
+				<img src="images/sourcedata_logo.png" alt="the SourceData logo" class="SourceDataFooterLogo">
+			</p>
+		</footer>           
+	</div>
+                

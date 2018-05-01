@@ -31,10 +31,10 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-carousel/dist/angular-carousel.css" />
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
     <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap-tour/build/css/bootstrap-tour-standalone.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -44,10 +44,10 @@
       <link rel="stylesheet" href="styles/sd-style-1.css">
       <link rel="stylesheet" href="styles/sd-style-2.css">
       <link rel="stylesheet" href="styles/sd-style-3.css">
+      <link rel="stylesheet" href="styles/sourcedata.css">
       <link rel="stylesheet" href="styles/embo-custom-style.css">
       <link rel="stylesheet" href="styles/embo-custom-style-tablet.css">
       <link rel="stylesheet" href="styles/embo-custom-style-desktop.css">
-
       <!-- endbuild -->
   </head>
   <body ng-app="publicSourcedataApp">
@@ -72,11 +72,11 @@
                             <li><a href="http://sourcedata.embo.org" target="blank">About</a></li>
                             <li><a href="/list" tooltip = 'List of processed papers in the SourceData compendium' tooltip-placement = 'bottom' access = 'active'>List of papers</a></li>
                             <li><a ng-href="/api" access = 'active'>API</a></li>
-                            <li><a href = 'http://sourcedata.vital-it.ch'>Curation interface</a></li>
+                            <li><a href = 'https://curation.sourcedata.io'>Curation interface</a></li>
                       </ul>
                     </div><!--/.nav-collapse -->
         </div>
-                </nav>
+        </nav>
     </header>
 
     <div class="container-fluid">
@@ -90,7 +90,6 @@
        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
        ga('create', 'UA-56264915-1');
        ga('send', 'pageview');
     </script>
@@ -122,6 +121,7 @@
     <script src="bower_components/angular-clipboard/angular-clipboard.js"></script>
     <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
     <script src="bower_components/angular-ui-select/dist/select.js"></script>
+    <script src="bower_components/bootstrap-tour/build/js/bootstrap-tour-standalone.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -129,38 +129,42 @@
         <script src="scripts/thirdParties.js" type="text/javascript" charset="utf-8"></script>
         <script src="scripts/config.js"></script>
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
-        <script src="scripts/controllers/form.js"></script>
-        <script src="scripts/services/search.js"></script>
-        <script src="scripts/services/filter.js"></script>
-        <script src="scripts/directives/direct-search-result.js"></script>
-        <script src="scripts/directives/filter-results.js"></script>
-        <script src="scripts/directives/graph-history.js" type="text/javascript" charset="utf-8"></script>
 
-        <script src="scripts/controllers/panel.js"></script>
-        <script src="scripts/filters/tagfilters.js"></script>
-        <script src="scripts/services/navigation.js"></script>
+        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/annotation.js"></script>
         <script src="scripts/controllers/figure.js"></script>
-        <script src="scripts/directives/compilecaption.js"></script>
-        <script src="scripts/directives/sdtag.js"></script>
-        <script src="scripts/directives/sd-form.js"></script>
-        <script src="scripts/directives/nav-figure-in-paper.js"></script>
-        <script src="scripts/services/authentication.js"></script>
-        <script src="scripts/services/authorization.js"></script>
-        <script src="scripts/services/base64.js"></script>
-        <script src="scripts/services/user.js"></script>
         <script src="scripts/controllers/forgetpassword.js"></script>
+        <script src="scripts/controllers/form.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/panel.js"></script>
         <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/list.js"></script>
         <script src="scripts/controllers/register.js"></script>
         <script src="scripts/controllers/setnewpassword.js"></script>
         <script src="scripts/controllers/validationrequired.js"></script>
         <script src="scripts/controllers/user.js"></script>
-        <script src="scripts/controllers/annotation.js"></script>
-        <!-- <script src="scripts/controllers/test.js"></script> -->
+
         <script src="scripts/directives/access.js"></script>
+        <script src="scripts/directives/compilecaption.js"></script>
+        <script src="scripts/directives/direct-search-result.js"></script>
+        <script src="scripts/directives/filter-results.js"></script>
+        <script src="scripts/directives/graph-history.js" type="text/javascript" charset="utf-8"></script>
+        <script src="scripts/directives/nav-figure-in-paper.js"></script>
+        <script src="scripts/directives/sd-form.js"></script>
+        <script src="scripts/directives/sdtag.js"></script>
+
+        <script src="scripts/filters/tagfilters.js"></script>
         <script src="scripts/filters/main.js"></script>
-        <script src="scripts/controllers/list.js"></script>
+
+        <script src="scripts/services/authentication.js"></script>
+        <script src="scripts/services/authorization.js"></script>
+        <script src="scripts/services/base64.js"></script>
+        <script src="scripts/services/filter.js"></script>
+        <script src="scripts/services/navigation.js"></script>
+        <script src="scripts/services/search.js"></script>
+        <script src="scripts/services/user.js"></script>
+
+        <!-- <script src="scripts/controllers/test.js"></script> -->
         <!-- endbuild -->
 </body>
 </html>

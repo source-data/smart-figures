@@ -19,22 +19,41 @@
 *****************************************************************/
 -->
 
-
 <div class = 'panel panel-default listsearchres-panel'>
 	<div class = 'panel-body listsearchres-panel-body'>
 		<ul class = 'nav nav-pills listsearchres-ul'>
 			<li ng-repeat = 'hypo in result.hypos|filter:repeatFilter'>
 				<div class = 'btn-group listsearchres-btn-group' ng-click = 'loadPanel(hypo)' style = 'margin-right: 10px;'>
-					<button class = 'btn btn-xs btn-danger listsearchres-btn-1' style = 'width: 115px; font-size: 10px; overflow: hidden; text-overflow: ellipsis; text-align: left'><img ng-src = '{{baseURL}}images/icon_{{hypo.typeLeft}}_white.png' height = "14" width = "14" >{{::hypo.externalDisplayLeft || hypo.displayLeft.join(", ")}}</button>
-					<button class = 'btn btn-xs btn-primary listsearchres-btn-2' style = 'width: 115px; font-size: 10px; overflow: hidden; text-overflow: ellipsis; text-align: left'><img ng-src = '{{baseURL}}images/icon_{{hypo.typeRight}}_white.png' height = "14" width = "14" >{{::hypo.externalDisplayRight || hypo.displayRight.join(", ")}}</button>
+					<button class = 'btn btn-xs btn-danger listsearchres-btn-1' style = 'width: 115px; font-size: 10px; overflow: hidden; text-overflow: ellipsis; text-align: left'>
+						<img ng-src = '{{baseURL}}images/icon_{{hypo.source.type}}_white.png' height = "14" width = "14" >
+						<!-- <span class='sd-icon-1-{{hypo.source.type}} direct-search-res-intervention-icons'></span> -->
+						<span compile = '::hypo.source.label'></span>
+						<span ng-if = "hypo.source.paper_raw_text && hypo.source.label.toLowerCase().indexOf(hypo.source.paper_raw_text.toLowerCase())!=0">
+							<span ng-if="hypo.source.label">(</span>
+							<span compile = 'hypo.source.paper_raw_text'></span>
+							<span ng-if="hypo.source.label">)</span>	
+						</span>
+						
+						<!-- {{::hypo.externalDisplayLeft || hypo.displayLeft.join(", ")}} -->
+					</button>
+					<button class = 'btn btn-xs btn-primary listsearchres-btn-2' style = 'width: 115px; font-size: 10px; overflow: hidden; text-overflow: ellipsis; text-align: left'>
+						<img ng-src = '{{baseURL}}images/icon_{{hypo.target.type}}_white.png' height = "14" width = "14" >
+						<!-- {{::hypo.externalDisplayRight || hypo.displayRight.join(", ")}} -->
+						<!-- <span class='sd-icon-1-{{hypo.target.type}} direct-search-res-intervention-icons'></span> -->
+						<span compile = '::hypo.target.label'></span>
+						<span ng-if = "hypo.target.paper_raw_text && hypo.target.label.toLowerCase().indexOf(hypo.target.paper_raw_text.toLowerCase())!=0">
+							<span ng-if="hypo.target.label">(</span>
+							<span compile = 'hypo.target.paper_raw_text'></span>
+							<span ng-if="hypo.target.label">)</span>
+						</span>
+					</button>
 				</div>
 			</li>
 		</ul>
-		<p style = 'margin: 0; font-size: 12px;'><a class = 'pull-right' ng-if = 'repeatFilter && (diff = result.hypos.length - (result.hypos|filter:{display:true}).length) ' ng-click = 'showAll()'><ng-pluralize count="diff"
-         when="{'0': 'no more relation.',
-             'one': 'show 1 more relation',
-             'other': 'show {} more relations'}">
-		 </ng-pluralize></a>
+		<p style = 'margin: 0; font-size: 12px;'>
+			<a class = 'pull-right' ng-if = 'repeatFilter && (diff = result.hypos.length - (result.hypos|filter:{display:true}).length) ' ng-click = 'showAll()'>
+			<ng-pluralize count="diff" when="{'0': 'no more relation.', 'one': 'show 1 more relation', 'other': 'show {} more relations'}"></ng-pluralize>
+		</a>
 		</p>
 		<h5 style = 'margin-bottom: 3px;'>{{::result.title}} <a href = 'http://dx.doi.org/{{::result.doi}}' target = '_blank' ng-if = 'result.doi' class = 'glyphicon glyphicon-share'></a></h5>
 		<p class = 'text-muted' style = 'margin-bottom: 0px; font-size: 12px;'>{{::result.author_list|firstAuthor}}</p>
