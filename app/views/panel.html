@@ -60,10 +60,6 @@
 							<div class="figureTitle">
 								<h3 style="font-weight: bold;font-size: 1.17em">{{panel.label}}</h3>
 								<div>
-									<label>
-										<input type="checkbox" ng-model="panel.highlight_entities.status" ng-disabled="!panel.highlight_entities.enable">
-										<span style="margin-left:3px;font-size:12px;font-weight:600" ng-style="{opacity:(panel.highlight_entities.enable) ? '1':'0.6'}"> highlight entities</span>
-									</label>
 									<button ng-click="downloadPanel()" class="figureDownload"><i class="fa fa-download" aria-hidden="true"></i></button>
 									<button ng-show="panel.links.length" class="pull-left"	popover-placement='"bottom"' popover-title='Source Data' uib-popover-html="panel.display_links" popover-trigger='click' popover-append-to-body="true">
 										<i class="fa fa-paperclip" aria-hidden="true"></i></button>

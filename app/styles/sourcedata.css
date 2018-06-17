@@ -2944,7 +2944,7 @@ we wrap everything in the smartfigure class
     padding: 0;
     text-align: center; }
   .smartFigure figure img {
-    margin: 0 0 1rem 0;
+    margin: 0 auto 1rem;
     padding: 0;
     max-width: 100%; }
   .smartFigure .methods {
@@ -3206,6 +3206,7 @@ we wrap everything in the smartfigure class
     color: #bdbdbd;
     z-index: 4; }
   .smartFigure .exploreUpAndDownstreamContainer .upstream:hover:before {
+    box-sizing:content-box;
     content: " ";
     display: block;
     position: absolute;
@@ -3218,6 +3219,7 @@ we wrap everything in the smartfigure class
     background-color: #f0f0f0;
     z-index: -1; }
   .smartFigure .exploreUpAndDownstreamContainer .downstream:hover:before {
+    box-sizing:content-box;
     content: " ";
     display: block;
     position: absolute;
@@ -3240,6 +3242,10 @@ we wrap everything in the smartfigure class
 
 .smartFigure .assayNav .inverseColor {
   color: #cb5b3c; }
+
+  nav-tag-sidebar {
+    padding-top:76px
+  }
 
 .smartFigure button.element {
   line-height: 24px;
@@ -3277,7 +3283,7 @@ we wrap everything in the smartfigure class
   line-height: 24px;
   vertical-align: middle;
   position: relative;
-  padding: 0 2px;
+  padding: 0 4px 0 2px;
   top: 0px; }
 
 .smartFigure .interventionNav .btn-info-group > button.element {
@@ -3610,8 +3616,8 @@ we wrap everything in the smartfigure class
   background-color: #fff;
   border-bottom: solid 4px #fff;
   cursor: pointer; }
-  .smartFigure .relatedDataCarouselItem.active {
-    border-bottom: solid 4px orange; }
+  /* .smartFigure .relatedDataCarouselItem.active {
+    border-bottom: solid 4px orange; } */
   .smartFigure .relatedDataCarouselItem .figure {
     text-align: center;
     margin-bottom: 0.882em; }
@@ -3713,7 +3719,9 @@ we wrap everything in the smartfigure class
     font-size: 1em;
     font-weight: normal; }
   #smartFigureLightBox .LightBoxFigureTitle {
-    margin: 0 0 3px 0; }
+    margin: 0 0 3px 0; 
+    line-height:1.3;
+  }
   #smartFigureLightBox .LightBoxAuthors {
     margin: 0 0 7px 0;
     font-size: 0.882em;
@@ -3742,6 +3750,7 @@ we wrap everything in the smartfigure class
       height: 2em;
       width: auto; }
   #smartFigureLightBox .currentPanelLink {
+    cursor:pointer;
     display: block;
     position: absolute;
     border: solid orange 2px;
@@ -3767,6 +3776,7 @@ we wrap everything in the smartfigure class
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px; }
   #smartFigureLightBox .otherPanelLink {
+    cursor:pointer;
     display: block;
     position: absolute;
     border: solid #6292d0 2px;
@@ -3800,5 +3810,8 @@ we wrap everything in the smartfigure class
     background-color: #fff;
     border-radius: 6px;
     border: solid 1px #bdbdbd; }
+  div.modal-backdrop.fade.in {
+    opacity:0.85;
+  }
 
 /* end of smartfigurelightbox */
