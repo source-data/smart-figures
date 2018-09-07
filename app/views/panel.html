@@ -73,6 +73,16 @@
 									<span class="method" style="font-size:11px" ng-repeat="assay in assayBadges">{{assay[0]}}</span>
 								</div>  
 							</figure>
+							<div class="figureAuthors" ng-if="panel.authors">
+								<h4 class="figureAuthorsTitle">
+									Panel Authors
+								</h4>
+								<ul class="figureAuthorList">
+									<li class="figureAuthorListItem" ng-repeat="author in panel.authors">
+										{{ author.fullname }}
+									</li>
+								</ul>
+							</div>
 						</div>
 					</div>
    
