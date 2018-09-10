@@ -79,7 +79,7 @@
 									</h4>
 									<ul class="figureAuthorList">
 										<li class="figureAuthorListItem" ng-repeat="author in panel.authors">
-											<span ng-if="author.orcid"><a ng-href="https://orcid.org/{{author.orcid}}" target="_blank"></a>{{ author.fullname }}</span>
+											<span ng-if="author.orcid"><a class="figureAuthorLink" ng-href="https://orcid.org/{{author.orcid}}" target="_blank">{{ author.fullname }}</a></span>
 											<span ng-if="!author.orcid">{{ author.fullname }}</span>
 										</li>
 									</ul>

@@ -1002,6 +1002,7 @@ dd, dt {
     border-top: solid 2px #bdbdbd;
     margin-top: 0.825em;
     padding: 0.825em 1em 0 1em;
+    color: #808080;
 }
 
 .figureAuthorList {
@@ -1012,8 +1013,12 @@ dd, dt {
 
 }
 
+.figureAuthorListItem {
+    display: inline;
+}
+
 .figureAuthorListItem:after{
-    content:"; ";
+    content:", ";
 }
 
 .figureAuthorListItem:last-child:after{
