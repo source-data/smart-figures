@@ -21,7 +21,10 @@
 		<div class="subsequentItems" ng-class="(paper.followedHypos.length&&paper.$show_all) ? 'show':''" id="subsequent4">
 			<button class="element" ng-class="(view=='upstream') ? 'perturbation' : 'assayed'" ng-repeat="hypo in paper.followedHypos" ng-click="setPanel(hypo.panel_id)"><i class="sd-icon-2-{{hypo.type}}"></i><span compile="hypo.label"></span></button> 
 		</div>
-		<div class="revealButton" ng-show="paper.hypos.length>3"> <button class="reveal" ng-click="paper.$show_all = !paper.$show_all" data-revealitem="subsequent4">Show {{paper.hypos.length-3}} more relations</button></div>
+		<div class="revealButton" ng-show="paper.hypos.length>3">
+			<button class="reveal" ng-if="!paper.$show_all" ng-click="paper.$show_all = !paper.$show_all" data-revealitem="subsequent4">Show {{paper.hypos.length}} relations</button>
+			<button class="reveal" ng-if="paper.$show_all" ng-click="paper.$show_all = !paper.$show_all" data-revealitem="subsequent4">Hide relations</button>
+		</div>
 		<div class="details">
 			<h3>{{paper.title}}<a href = 'http://dx.doi.org/{{paper.doi}}' target = '_blank' ng-if = 'result.doi' class = 'glyphicon glyphicon-share'></a></h3>
 			<span class="authors" ng-show="!paper.$show_all">{{paper.authors|firstAuthor}}</span>

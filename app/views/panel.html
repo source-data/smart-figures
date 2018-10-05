@@ -55,18 +55,27 @@
 			<section class="panel slideItem" id="smartFigure">
  				<div class="figurePanel">
 					<div>
-						<header><h2>{{::panel.figure.label}}</h2> <a class="pointer" ng-click="viewFullFigure()">View full figure</a></header>
+						<header>
+							<h2>{{::panel.figure.label}}</h2>
+							<a class="pointer" ng-click="viewFullFigure()">View full figure</a>
+						</header>
 						<div>
 							<div class="figureTitle">
-								<h3 style="font-weight: bold;font-size: 1.17em">{{panel.label}}</h3>
+								<h3 style="font-weight: bold;font-size: 1.17em">{{panel.label}}
+									<span ng-if="panel.authors.length" style="font-weight:normal;font-size:12px;font-style:italic">
+										<br>
+										Panel author<span ng-if="panel.authors.length>1">s</span> : 									
+										<span ng-repeat="author in panel.authors"> <a ng-if="author.orcid" ng-href="https://orcid.org/{{author.orcid}}">{{author.fullname}}</a> <span ng-if="!author.orcid">{{author.fullname}}</span> </span>
+									</span>
+								</h3>
+
 								<div>
 									<label>
 										<input type="checkbox" ng-model="panel.highlight_entities.status" ng-disabled="!panel.highlight_entities.enable">
 										<span style="margin-left:3px;font-size:12px;font-weight:600" ng-style="{opacity:(panel.highlight_entities.enable) ? '1':'0.6'}"> highlight entities</span>
 									</label>
 									<button ng-click="downloadPanel()" class="figureDownload"><i class="fa fa-download" aria-hidden="true"></i></button>
-									<button ng-show="panel.links.length" class="pull-left"	popover-placement='"bottom"' popover-title='Source Data' uib-popover-html="panel.display_links" popover-trigger='click' popover-append-to-body="true">
-										<i class="fa fa-paperclip" aria-hidden="true"></i></button>
+									<button ng-click="showSourceData(panel)" ng-show="panel.links.length"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
 								</div>
 							</div>
 							<figure>
@@ -181,6 +190,4 @@
     <footer>Click on figure to view in SmartFigure</footer>
 	</div>     
 </div>
-
-
-
+<jsonld data-json="jsonId"></jsonld>

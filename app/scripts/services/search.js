@@ -54,7 +54,7 @@ angular.module('publicSourcedataApp')
 	
 		//-F------ PROPOSE TAGS ------//
 		proposeTags: function(searchParams,cas){
-			var params = {cas:cas,
+			var params = {role:cas,
 										generic:{value:searchParams['generic'], type:searchParams['genericType']},
 										intervention:{value:searchParams['intervention'],type:searchParams['interventionType']},
 										assayed:{value:searchParams['assayed'],type:searchParams['assayedType']}

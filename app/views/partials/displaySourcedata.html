@@ -1,0 +1,32 @@
+	<div id="smartFigureLightBox" ng-if="vm.panel">
+		<a id="LightBoxWindowClose" class="pointer" ng-click="vm.close()"> <i class="fas fa-window-close"></i> </a>
+
+		<header>
+			<!-- Title here -->
+			<h2 class="LightBoxFigureTitle">{{vm.panel.paper.title}} </h2>
+		</header>
+		<!-- Figure Title here -->
+		<h3 class="LightBoxPanelTitle">{{vm.panel.figure.label}} : Source Data <button class="btn btn-default btn-sm pull-right" style="margin-top:-8px" ng-click="vm.close('download')"><span class="fa fa-download"></span></button></h3>
+		<div class="LightBoxFigure">
+			<!-- <div ng-bind-html="vm.panel.display_links" style="font-size:12px"></div> -->
+			<div>
+				<ul >
+					<li ng-repeat="link in vm.panel.links">
+						<a ng-if="link.type=='url'" href="link.document" target='_blank'>{{link.document}}</a>
+						<a ng-if="link.type=='file' && vm.panel.paper.biostudies_id" target='_blank' href="https://www.ebi.ac.uk/biostudies/files/{{vm.panel.paper.biostudies_id}}/sourcedata/{{vm.panel.paper.biostudies_id}}/{{link.document}}">{{link.document}}</a>
+						<span ng-if="link.type=='file' && !vm.panel.paper.biostudies_id">{{link.document}}</span>
+					</li>
+					<li ng-if="vm.panel.paper.biostudies_id" >
+						<a target='_blank' href="https://www.ebi.ac.uk/biostudies/SourceData/studies/{{vm.panel.paper.biostudies_id}}/"><span>Go to full BioStudies record<img src="../../images/logo_biostudies.png" style="margin-left:3px" width="100" alt="Logo Biostudies"></span></a>
+					</li>
+				</ul>
+			</div>
+		</div>  
+
+		<footer>
+			<p class="footerCredits">
+				<img src="images/sourcedata_logo.png" alt="the SourceData logo" class="SourceDataFooterLogo">
+			</p>
+		</footer>           
+	</div>
+                

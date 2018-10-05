@@ -256,20 +256,21 @@ angular.module('publicSourcedataApp')
 	}	
 }])
 
-.directive('sdPanel',['$timeout', 'ENV', function($timeout, ENV){
-	return {
-		scope:{panel:'='},
-		restrict: 'E',
-		templateUrl: ENV.baseURL+'views/partials/sdPanel.html',
-		link: function postlink(scope){
-			scope.serverURL = ENV.serverURL;
-			scope.highlight_entities = {status:false,enable:(scope.panel.figure.panels[scope.panel.currentPanelIdx].tags.length)};
-			if (scope.highlight_entities.enable) scope.highlight_entities.status = true;
-			console.info(scope.highlight_entities);
-			// console.info(scope.panel.figure.panels[scope.panel.currentPanelIdx].tags.length);
-		}
-	};
-}])
+// .directive('sdPanel',['$timeout', 'ENV', function($timeout, ENV){
+// 	return {
+// 		scope:{panel:'='},
+// 		restrict: 'E',
+// 		templateUrl: ENV.baseURL+'views/partials/sdPanel.html',
+// 		link: function postlink(scope){
+// 			scope.serverURL = ENV.serverURL;
+// 			console.info(scope.panel,scope.panel);
+// 			if (scope.panel){
+// 				scope.highlight_entities = {status:false,enable:(scope.panel.figure.panels[scope.panel.currentPanelIdx].tags.length)};
+// 				if (scope.highlight_entities.enable) scope.highlight_entities.status = true;
+// 			}
+// 		}
+// 	};
+// }])
 .directive('searchSummary',['$timeout', 'ENV','$filter','_','$location', function($timeout, ENV,$filter,_,$location){
 	return {
 		scope:{result:'='},

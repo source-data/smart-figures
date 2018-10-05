@@ -77,13 +77,7 @@ sd-tag, span.sdTag{
 }
 
 
-.intervention, .bg_intervention,.bg_intervention_selected {
-	/*background-color: #fbb4ae;*/
-}
-
 sd-tag.intervention{
-	/*background-color: rgba(251,180,174,0.8);*/
-	/*border: 2px solid #FB1400;*/
 	color: #cb5b3c;
 	text-decoration: underline
 }
@@ -93,13 +87,7 @@ sd-tag.active.intervention{
 	color: #FFF;
 }
 
-.assayed, .bg_assayed, .bg_assayed_selected {
-	/*background-color: #b3cde3;*/
-}
-
 sd-tag.assayed{
-	/*background-color: rgba(179,205,227,0.8);*/
-	/*border: 2px solid #007BE3;*/
 	color: #6292d0;
 	text-decoration: underline
 }
@@ -109,41 +97,29 @@ sd-tag.active.assayed{
 	color: #FFF;
 }
 
-.normalizing, .bg_normalizing, .bg_normalizing_selected {
-	/*background-color: #ccebc5;*/
-	color: #1B8401;
-	text-decoration: underline
-}
-
-sd-tag.normalizing, sd-pretag.normalizing{
-	background-color: rgba(204,235,197,0.8);
-	border: 2px solid #1B8401;
+sd-tag.normalizing{
+	color: orange;
+	text-decoration: underline;
 }
 
 sd-tag.active.normalizing{
-	background-color: #1B8401;
+	background-color: #FB8008;
 	color: #FFF;
 }
 
-.experiment, .bg_experiment, .bg_experiment_selected{
-	/*background-color: #decbe4;*/
-	color: #AD00E4;
-	text-decoration: underline
-}
-
-sd-tag.experiment, sd-pretag.experiment{
-	/*background-color: rgba(222,203,228,0.8);*/
-	/*border: 2px solid #AD00E4;*/
+sd-tag.experiment{
+	color: orange;
+	text-decoration: underline;
 }
 
 sd-tag.active.experiment{
-	background-color: #AD00E4;
+	background-color: #FB8008;
 	color: #FFF;
 }
 
-.component, .bg_component, .bg_component_selected{
-	/*color: orange;*/
-	/*text-decoration: underline*/
+sd-tag.component{
+	color: orange;
+	text-decoration: underline;
 }
 
 sd-tag.active.component{
@@ -151,25 +127,14 @@ sd-tag.active.component{
 	color: #FFF;
 }
 
-
-sd-tag.component, sd-pretag.component{
-	/*background-color: rgba(254,217,166,0.8);*/
+sd-tag.reporter{
 	color: orange;
-	text-decoration: underline
-}
-
-.reporter, .bg_reporter, .bg_reporter_selected{
-	background-color: #ffffcc;
-}
-
-sd-tag.reporter, sd-pretag.reporter{
-	background-color: rgba(255,255,204,0.8);
-	border: 2px solid #fed509;
+	text-decoration: underline;
 }
 
 sd-tag.active.reporter{
-	background-color: #fed509;
-	color: #6c4302;
+	background-color: #FB8008;
+	color: #FFF;
 }
 
 .bg_component_selected, .bg_experiment_selected, .bg_normalizing_selected, .bg_assayed_selected, .bg_intervention_selected{
@@ -178,5 +143,5 @@ sd-tag.active.reporter{
 
 
 .undefinedRole {
-		background-color:#CCC;
+	background-color:#CCC;
 }

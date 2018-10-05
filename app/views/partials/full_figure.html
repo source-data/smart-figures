@@ -14,7 +14,7 @@
 
 
 
-	<div id="smartFigureLightBox">
+	<div id="smartFigureLightBox" ng-if="vm.panel">
 		<a id="LightBoxWindowClose" class="pointer" ng-click="vm.close()"> <i class="fas fa-window-close"></i> </a>
 
 		<header>
@@ -39,13 +39,11 @@
 			<a href="index.html" class="otherPanelLink" style="top:310px; left:330px;height:284px; width:330px;"></a>  -->
 
 		</div>  
-		<!-- <ul>
-			<li ng-repeat="panel in vm.dpanels">{{panel.panel_id}} - {{vm.panel.current_panel_id}}</li>
-		</ul> -->
 
 		<!-- figure caption here-->
 		<div class="LightBoxFigureCaption">
-			<div class="caption_legend" compile="vm.panel.figure.figure_caption"></div>
+			<div class="caption_legend" ng-bind-html="vm.panel.figure.figure_caption"></div>
+			<!-- <div class="caption_legend" compile="vm.panel.figure.figure_caption"></div> -->
 		</div>   
 		<footer>
 			<p class="footerCredits">
