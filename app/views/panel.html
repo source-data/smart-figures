@@ -25,8 +25,8 @@
 		<h1 class="figpanel-paper-title">{{::panel.paper.title}}</h1>
 		<p class='authors'>{{::panel.paper.author_list|firstAuthor}} <i>{{::panel.paper.journal}}</i> {{::panel.paper.year}}</p>
 		<p class="link">Reproduced from <a ng-href='http://dx.doi.org/{{::panel.paper.doi}}' ng-if='panel.paper.doi'>{{::panel.paper.doi}}</a><span ng-if='!panel.paper.doi'>{{::panel.paper.journal}}</span> with permissions</p>
-		<a ng-show="::panel.paper.biostudies_id" ng-href="https://www.ebi.ac.uk/biostudies/studies/{{panel.paper.biostudies_id}}" target="_blank"><img class="img-responsive" src="../../images/logo_biostudies.png" width="100" alt="Logo Biostudies"></a>
-		
+		<p ng-if="::panel.paper.biostudies_id">Access full paper datasets on <a ng-href="https://wwwdev.ebi.ac.uk/biostudies/studies/{{panel.paper.biostudies_id}}" target="_blank"><img src="../../images/logo_biostudies.png" width="100" alt="Logo Biostudies"></a>
+		</p>
 	</header>
 
  	<div class="slideBox">
@@ -74,8 +74,10 @@
 										<input type="checkbox" ng-model="panel.highlight_entities.status" ng-disabled="!panel.highlight_entities.enable">
 										<span style="margin-left:3px;font-size:12px;font-weight:600" ng-style="{opacity:(panel.highlight_entities.enable) ? '1':'0.6'}"> highlight entities</span>
 									</label>
-									<button ng-click="downloadPanel()" class="figureDownload"><i class="fa fa-download" aria-hidden="true"></i></button>
-									<button ng-click="showSourceData(panel)" ng-show="panel.links.length"><i class="fa fa-paperclip" aria-hidden="true"></i></button>
+									
+									<!-- <button ng-click="downloadPanel()" class="figureDownload"><i class="fa fa-download" aria-hidden="true"></i></button> -->
+									<!-- <button ng-click="showSourceData(panel)" ng-show="panel.links.length"><i class="fa fa-paperclip" aria-hidden="true"></i></button> -->
+									<button ng-click="showSourceData(panel)" ng-show="panel.links.length">Download data</button>
 								</div>
 							</div>
 							<figure>

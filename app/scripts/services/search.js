@@ -299,6 +299,12 @@ angular.module('publicSourcedataApp')
 				$timeout.cancel(abortSearch);
 				abortSearch.resolve();
 			}
+		},
+		
+		downloadSourceData: function(doc){
+			return Restangular.all('sourcedata').getList({doc_id:doc.panel_document_id}).then(function(data){
+				console.info(data);
+			});
 		}
 	};
 }]);

@@ -132,6 +132,8 @@ angular.module('publicSourcedataApp')
 				function init(){
 					
 	        formatPanel();
+					
+					console.info($scope.panel.plain());
 
 					$scope.assayBadges = _.map(_.filter($scope.tags,function(t){return t.category == "assay" && t.external_names;}),function(t){return t.external_names});
 										
@@ -285,7 +287,9 @@ angular.module('publicSourcedataApp')
 						if (paperTag){
 							paperTag.display_ext_ids = [];
 							_.forEach(paperTag.external_ids,function(extid,index){
-								paperTag.display_ext_ids.push({id:extid,url:paperTag.external_urls[index] + extid});
+								if (paperTag.external_urls.length && paperTag.external_urls[index]){
+									paperTag.display_ext_ids.push({id:extid,url:paperTag.external_urls[index] + extid});
+								}
 							});
 							$scope.currentTag = paperTag;
 							
@@ -400,13 +404,23 @@ angular.module('publicSourcedataApp')
     }])
 		
 		
-	.controller('DisplaySourceDataCtrl',['$scope','$uibModalInstance','panel',function($scope,$uibModalInstance,panel){
+	.controller('DisplaySourceDataCtrl',['$scope','$uibModalInstance','panel','Search',function($scope,$uibModalInstance,panel,Search){
 	 var vm = this;
 	 vm.panel = panel;
 	 vm.close = function(action){
 			$uibModalInstance.close(action);
 	 }
+	 
+	 vm.downloadSourceData = function(doc,source){
+		 Search.downloadSourceData(doc).then(function(data){
+		 	console.info(data);
+		 });
+		 // var url = "https://wwwdev.ebi.ac.uk/biostudies/files/"+vm.panel.paper.biostudies_id+"/sourcedata/"+vm.panel.paper.biostudies_id+"/"+doc.document;
+		 // console.info(url);
+		 // self.location.url = url;
+	 }
 	}])
+	
 	
 	.controller('FullFigureCtrl',['$scope','$uibModalInstance','ENV','panel','$timeout',function($scope,$uibModalInstance,ENV,panel,$timeout){
 			var vm = this;
