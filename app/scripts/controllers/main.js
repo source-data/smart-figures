@@ -25,7 +25,12 @@
 * Controller of the publicSourcedataApp
 */
 angular.module('publicSourcedataApp')
-.controller('MainCtrl', ['$scope','$rootScope','$location', 'Search', 'Filter','ENV','$timeout', function ($scope, $rootScope, $location, Search, Filter,ENV,$timeout ) {
+.controller('MainCtrl', ['$scope','$rootScope','$location', 'Search', 'Filter', 'ENV','$timeout', 'tour', 'searchTour', 
+ function ($scope, $rootScope, $location, Search, Filter, ENV,$timeout,  tour, searchTour ) {
+	
+	// The First Tour Starts Here (see thirdParties.js for details)
+	// Tour only begins if the application is opened at the root path
+	if($location.path()=="/" && angular.equals($location.search(),{})) searchTour.init(tour, $scope);
 
 	$scope.serverURL = ENV.serverURL;
 	
@@ -52,6 +57,9 @@ angular.module('publicSourcedataApp')
 				$scope.searchParams.hide_input = true;
 				$scope.searchParams.loading = false;
 				$scope.searchParams.navbarResult = 'result';
+				Filter.removeAll();
+				Filter.init();
+				
 			});
 		}
 		else{

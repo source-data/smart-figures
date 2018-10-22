@@ -45,8 +45,8 @@ module.exports = function (grunt) {
  			  },
  			  constants: {
  				  ENV: {
-						serverURL: 'https://sourcedata-dev.vital-it.ch/php/api/',
-						baseURL: 'http://localhost:9000/',
+					  serverURL: 'https://api.sourcedata.io/',
+					  baseURL: 'https://search.sourcedata.io/',
 					  baseHref: '/',
  					  withCredentials: true,
  					  debugInfoEnabled: true,
