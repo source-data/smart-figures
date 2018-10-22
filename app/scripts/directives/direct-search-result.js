@@ -24,7 +24,7 @@
 * # directSearchResult
 */
 angular.module('publicSourcedataApp')
-.directive('directSearchResult', ['ENV','$location','_', function (ENV,$location,_) {
+.directive('directSearchResult', ['ENV','$location','_', 'tour', function (ENV,$location,_,tour) {
 	return {
 		scope:{result:'=',index:'='},
 		restrict: 'E',
@@ -72,6 +72,9 @@ angular.module('publicSourcedataApp')
 				$location.search({});
 				$location.path("panel/"+panel_id);
 			};
+
+
+
 		}
 	};
 }])
@@ -298,6 +301,8 @@ angular.module('publicSourcedataApp')
 				$location.search(from.antiRole,to.type+":"+to.text);
 				$location.search('generic',null);
 			};
+
+			
 		}
 	};
 }])

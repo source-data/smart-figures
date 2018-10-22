@@ -11,6 +11,7 @@ Contents
 8. Upstream and downstream
 9. Paper List
 10. API Documentation
+11. Tour Popover
 */
 
 
@@ -988,4 +989,62 @@ dd, dt {
 
 .vcenter {
     font-size:inherit;
+}
+
+.figureAuthorsTitle {
+    font-size: 0.824em;
+    font-weight:bold;
+    color: #505050;
+    padding:0 0 0.4122em 0;
+    margin:0;
+}
+
+.figureAuthors {
+    border-top: solid 2px #bdbdbd;
+    margin-top: 0.825em;
+    padding: 0.825em 1em 0 1em;
+    color: #808080;
+}
+
+.figureAuthorList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.825em;
+
+}
+
+.figureAuthorListItem {
+    display: inline;
+}
+
+.figureAuthorListItem:after{
+    content:", ";
+}
+
+.figureAuthorListItem:last-child:after{
+    content:none;
+}
+/* TOUR POPOVERS */
+.popover.tour-searchTour h3.popover-title,
+.popover.tour-resultsTour h3.popover-title
+ {
+    background-color:#0B4E6F;
+    color: #fff;
+    font-size:17px;
+    line-height:1.3em;
+}
+
+.popover.tour-searchTour .popover-content, .popover-content p,
+.popover.tour-resultsTour .popover-content, .popover-content p
+ {
+    font-size:14px;
+}
+
+.popover.tour-searchTour .popover-navigation,
+.popover.tour-resultsTour .popover-navigation
+ {
+    background-color:#0B4E6F;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
