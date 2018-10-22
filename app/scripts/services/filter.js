@@ -106,7 +106,7 @@ angular.module('publicSourcedataApp')
                 _.forEach(_.map(results,function(paper){return paper.hypos}),function(hypos){
 									// console.info(hypos);
                     _.forEach(_.map(hypos,function(hypo){return hypo.panels}),function(panel){
-                        _.forEach(_.map(panel,function(panelInfo){return panelInfo.taxon.name}),function(taxon){
+                        _.forEach(_.map(panel,function(panelInfo){if (!panelInfo.taxon) return false; return panelInfo.taxon.name}),function(taxon){
                             if(!_.includes(listOfOrganisms,taxon)){ listOfOrganisms.push(taxon)}
                         });
                     });

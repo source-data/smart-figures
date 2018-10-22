@@ -227,7 +227,7 @@ angular.module('publicSourcedataApp')
 					// if (!perform) return;
 					tag.display_ext_ids = [];
 					_.forEach(tag.external_ids,function(extid,index){
-						if (tag.external_urls && tags.external_urls[index]){
+						if (tag.external_urls && tag.external_urls[index]){
 							tag.display_ext_ids.push({id:extid,url:tag.external_urls[index] + extid});
 						}
 					});
