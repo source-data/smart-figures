@@ -15,7 +15,7 @@
 				<ul class="list-unstyled">
 					<li ng-if="vm.panel.paper.biostudies_id" >
 						<span>
-							<img src="../../images/logo_biostudies.png" style="margin-left:3px" width="100" alt="Logo Biostudies">
+							<img ng-src="{{baseURL}}/images/logo_biostudies.png" style="margin-left:3px" width="100" alt="Logo Biostudies">
 							<a style="margin:0 5px" target='_blank' href="https://wwwdev.ebi.ac.uk/biostudies/SourceData/studies/{{vm.panel.paper.biostudies_id}}/"><span class="fa fa-search-plus"></span></a>
 							<!-- <span ng-click="vm.downloadSourceData(link,'biostudies')"><span class="fa fa-download" ></span></span> -->
 						</span>

@@ -62,14 +62,14 @@ module.exports = function (grunt) {
  			  },
  			  constants: {
  				  ENV: {
-						serverURL: 'https://sourcedata-dev.vital-it.ch/php/api/',
-						baseURL: 'https://sourcedata-dev.vital-it.ch/',
+						// serverURL: 'https://sourcedata-dev.vital-it.ch/php/api/',
+						// baseURL: 'https://sourcedata-dev.vital-it.ch/',
 					  // serverURL: 'https://sourcedata.vital-it.ch/php/api/',
 					  // baseURL: 'https://sourcedata.vital-it.ch/',
 					  // serverURL: 'https://sourcedata-lou.vital-it.ch/php/api/',
 					  // baseURL: 'https://sourcedata-lou.vital-it.ch/',
-					  // serverURL: 'https://api.sourcedata.io/',
-					  // baseURL: 'https://search.sourcedata.io/',
+					  serverURL: 'https://api.sourcedata.io/',
+					  baseURL: 'https://search.sourcedata.io/',
 					  baseHref: '/',
  					  withCredentials: true,
  					  debugInfoEnabled: false,

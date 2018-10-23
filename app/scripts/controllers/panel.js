@@ -287,7 +287,7 @@ angular.module('publicSourcedataApp')
 						if (paperTag){
 							paperTag.display_ext_ids = [];
 							_.forEach(paperTag.external_ids,function(extid,index){
-								if (paperTag.external_urls.length && paperTag.external_urls[index]){
+								if (paperTag.external_urls !== undefined && paperTag.external_urls.length && paperTag.external_urls[index]){
 									paperTag.display_ext_ids.push({id:extid,url:paperTag.external_urls[index] + extid});
 								}
 							});
@@ -350,9 +350,9 @@ angular.module('publicSourcedataApp')
 				var variableMeasured = [];
 				_.forEach($scope.assayed_tags,function(t){
 					var sameAs = null;
-					if (t.external_urls.length && t.external_ids.length) sameAs = t.external_urls[0]+t.external_ids[0];
+					if (t.external_urls !== undefined && t.external_urls.length && t.external_ids.length) sameAs = t.external_urls[0]+t.external_ids[0];
 					var propertyId = null;
-					if (t.external_namespaces.length && t.external_ids.length) propertyId = t.external_namespaces[0]+":"+t.external_ids[0].replace(t.external_namespaces[0]+":",'');
+					if (t.external_namespaces !== undefined && t.external_namespaces.length && t.external_ids.length) propertyId = t.external_namespaces[0]+":"+t.external_ids[0].replace(t.external_namespaces[0]+":",'');
 					var tag = {
 					     "@type":"PropertyValue", // always this value
 					     "name":t.text, // tag.text

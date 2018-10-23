@@ -168,10 +168,10 @@ angular.module('publicSourcedataApp')
 		},
 		 
 		formatResult: function(data,resetPagination){
-			console.info(data.plain());
+			// console.info(data.plain());
 			
 			var _this = this;
-			console.info(_this.searchParams);
+			// console.info(_this.searchParams);
 			_this.cas = data.cas;
 			_this.searchParams.result = data.plain();
 			_this.searchParams.result.direct = _.values(_this.searchParams.result.direct);
@@ -210,7 +210,7 @@ angular.module('publicSourcedataApp')
 			_this.searchParams.summary = {};
 			_this.getSummary(true);
 			_this.searchParams.done = true;
-			console.info(angular.copy(_this.searchParams.result.filters));
+			// console.info(angular.copy(_this.searchParams.result.filters));
 		},
 
 		//-F------ FROM LOCATION GET PARAMETERS and DO THE SEARCH ------//
@@ -282,7 +282,7 @@ angular.module('publicSourcedataApp')
 			var _this = this;
 			var formatted_filename = angular.copy(_this.searchParams.result.filename_formatted);
 			if (formatted_filename.indexOf('raw')>-1){formatted_filename = formatted_filename.replace('raw','formatted');}
-			console.info("FETCH",formatted_filename);
+			// console.info("FETCH",formatted_filename);
 			var params_filters = (_this.searchParams.active_filters) ? JSON.stringify(_this.searchParams.active_filters) : null;
 			if (_this.searchParams.previous && !_.isEqual(params_filters,_this.searchParams.previous.filters)){
 				_this.searchParams.pagination.currentPage=1;
@@ -303,7 +303,7 @@ angular.module('publicSourcedataApp')
 		
 		downloadSourceData: function(doc){
 			return Restangular.all('sourcedata').getList({doc_id:doc.panel_document_id}).then(function(data){
-				console.info(data);
+				// console.info(data);
 			});
 		}
 	};

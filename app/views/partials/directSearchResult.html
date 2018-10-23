@@ -41,7 +41,7 @@
 						<span class='sd-icon-2-assay direct-search-res-assay-icon'></span>
 						<span ng-repeat="assay in result.assays" class="badge experimental-badge">{{assay.external_name}}</span></div>
 				</div>
-				<a ng-show="::result.biostudies_id" ng-href="https://www.ebi.ac.uk/biostudies/studies/{{result.biostudies_id}}" target="_blank"><img class="img-responsive" src="../../images/logo_biostudies.png" width="100" alt="Logo Biostudies"></a>
+				<a ng-show="::result.biostudies_id" ng-href="https://www.ebi.ac.uk/biostudies/studies/{{result.biostudies_id}}" target="_blank"><img class="img-responsive" ng-src="{{baseURL}}/images/logo_biostudies.png" width="100" alt="Logo Biostudies"></a>
 			</div>
 			
 			<div class = 'col-md-7'>

@@ -29,13 +29,16 @@ angular.module('publicSourcedataApp')
 
 	//-F------ FORM SUBMIT => change Location ------//
 	$scope.formSubmit = function(){
+		
+		console.log('search from form.js');
+		
 		$scope.baseURL = ENV.baseURL;
 		var baseurl = ENV.baseURL;
 		var url = baseurl+"?";
 		angular.forEach(categories,function(cat){
-			var type = ($scope.searchParams[cat+"Type"]) ? $scope.searchParams[cat+"Type"]+":" : "";
+			var type = ($scope.searchParams[cat+"Type"]) ? "::" + $scope.searchParams[cat+"Type"] : "";
 			if(type+$scope.searchParams[cat] !== $location.search()[cat] || $scope.searchParams.motif !== $location.search().motif){
-				if(type+$scope.searchParams[cat]) url += cat+"="+type+$scope.searchParams[cat]+"&";
+				if($scope.searchParams[cat]+type) url += cat+"="+$scope.searchParams[cat]+type+"&";
 			}
 		});
 		if(url != baseurl){
