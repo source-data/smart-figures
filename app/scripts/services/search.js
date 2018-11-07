@@ -54,15 +54,17 @@ angular.module('publicSourcedataApp')
 	
 		//-F------ PROPOSE TAGS ------//
 		proposeTags: function(searchParams,cas){
-			var params = {role:cas,
-										generic:{value:searchParams['generic'], type:searchParams['genericType']},
-										intervention:{value:searchParams['intervention'],type:searchParams['interventionType']},
-										assayed:{value:searchParams['assayed'],type:searchParams['assayedType']}
-									};
-			var rest = Restangular.all('tags').getList(params);
-			// var rest = Restangular.one('tags',value).get({type:type,other:searchParams});
-			return rest;
+				var params = {role:cas,
+					generic:{value:searchParams['generic'], type:searchParams['genericType']},
+					intervention:{value:searchParams['intervention'],type:searchParams['interventionType']},
+					assayed:{value:searchParams['assayed'],type:searchParams['assayedType']}
+				};
+				var rest = Restangular.all('tags').getList(params);
+				// var rest = Restangular.one('tags',value).get({type:type,other:searchParams});
+				return rest;
 		},
+
+
 
 		//-F------ GET Categories ------//
 		getCategories: function(){
@@ -168,10 +170,10 @@ angular.module('publicSourcedataApp')
 		},
 		 
 		formatResult: function(data,resetPagination){
-			// console.info(data.plain());
+
 			
 			var _this = this;
-			// console.info(_this.searchParams);
+
 			_this.cas = data.cas;
 			_this.searchParams.result = data.plain();
 			_this.searchParams.result.direct = _.values(_this.searchParams.result.direct);
@@ -189,7 +191,7 @@ angular.module('publicSourcedataApp')
 				// _.forEach(_this.searchParams.result.direct,function(paper){
 				// 	paper.hypos = _.values(paper.hypos);
 				// });
-				// console.info(angular.copy(_this.searchParams.result.direct));
+
 				_this.searchParams.result.intervention = _this.formatInterventionAssayed(data.intervention);
 				_this.searchParams.result.assayed = _this.formatInterventionAssayed(data.assayed);
 				if (data.filters.status){
@@ -210,7 +212,7 @@ angular.module('publicSourcedataApp')
 			_this.searchParams.summary = {};
 			_this.getSummary(true);
 			_this.searchParams.done = true;
-			// console.info(angular.copy(_this.searchParams.result.filters));
+
 		},
 
 		//-F------ FROM LOCATION GET PARAMETERS and DO THE SEARCH ------//
@@ -258,16 +260,16 @@ angular.module('publicSourcedataApp')
 			else if (assayed){ _this.searchParams.direction='assayed';rest = Restangular.one('assayed',assayed.replace("/","##")).withHttpConfig({timeout: abortSearch.promise}).get(params); }
 
 			if (rest){
-				// console.info("SEARCH");
+
 				return rest.then(function(data){			
 					_this.searchParams.counter++;
 					_this.formatResult(data);
 					
 					if (_this.cas =='direct'){
 						if (data.status<2){
-							// console.info("FORMAT_RESULTS");
+
 							Restangular.one('formatResults',data.filename).get().then(function(data2){
-								// console.info(data2);
+
 								_this.searchParams.result.filename_formatted = data2.filename;
 								_this.searchParams.result.filters = data2.filters;
 								_this.searchParams.result.status = 2;
@@ -282,7 +284,7 @@ angular.module('publicSourcedataApp')
 			var _this = this;
 			var formatted_filename = angular.copy(_this.searchParams.result.filename_formatted);
 			if (formatted_filename.indexOf('raw')>-1){formatted_filename = formatted_filename.replace('raw','formatted');}
-			// console.info("FETCH",formatted_filename);
+
 			var params_filters = (_this.searchParams.active_filters) ? JSON.stringify(_this.searchParams.active_filters) : null;
 			if (_this.searchParams.previous && !_.isEqual(params_filters,_this.searchParams.previous.filters)){
 				_this.searchParams.pagination.currentPage=1;
@@ -299,12 +301,6 @@ angular.module('publicSourcedataApp')
 				$timeout.cancel(abortSearch);
 				abortSearch.resolve();
 			}
-		},
-		
-		downloadSourceData: function(doc){
-			return Restangular.all('sourcedata').getList({doc_id:doc.panel_document_id}).then(function(data){
-				// console.info(data);
-			});
 		}
 	};
 }]);

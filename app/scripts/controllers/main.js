@@ -36,9 +36,6 @@ angular.module('publicSourcedataApp')
 	
 	//-F------ FORM SUBMIT => change Location ------//
 	$scope.formSubmit = function(){
-		
-		console.log('search from main.js');
-		
 		var url = $location.search();
 		angular.forEach(categories,function(cat){
 			var type = ($scope.searchParams[cat+"Type"]) ? "::" + $scope.searchParams[cat+"Type"] : "";
@@ -85,7 +82,6 @@ angular.module('publicSourcedataApp')
 
 	//-O------ On route UPDATE Search and rm filters ------//
 	$scope.$on('$routeUpdate', function(){
-		console.info("routeUpdate");
 		search();
 	});
 

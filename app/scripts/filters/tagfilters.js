@@ -74,6 +74,24 @@
 			return texts;
 		};
 	})
+	.filter('printPopover',['$filter',function($filter){
+		return function(tag,div_id){
+			if (div_id) div_id = " id = '"+div_id+"' ";
+			var text = "<dl"+div_id+"><dt>External ids</dt><dd>";
+			text += $filter('printExternalIds')(tag);
+			text += "</dd>";
+			var ext_names = $filter('printExternalNames')(tag);
+			if (ext_names){
+				text += "<dt>External names</dt><dd>"+ext_names+"</dd>";
+			}
+			var ext_taxa = $filter('printTaxon')(tag);
+			if (ext_taxa){
+				text += "<dt>Taxon</dt><dd>"+ext_taxa+"</dd>";
+			}
+			text += "</dl>";
+			return text;
+		}
+	}])
 	.filter('unique', function () {
 		return function (array,filter) {
 			var unique = [], keys = [];

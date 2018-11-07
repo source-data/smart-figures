@@ -123,7 +123,7 @@ angular.module('publicSourcedataApp')
 
 		//-F------ addNode : crée un noeud...------//
 		addNode: function(tagGraph,role,relativeNodeIdx){
-			console.info("ici - addNode");
+
 			var _this = this;
 			var obj = {'tag':tagGraph,'current':true};
 			var currentNodeIdx;

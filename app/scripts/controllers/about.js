@@ -73,48 +73,30 @@ angular.module('publicSourcedataApp')
 			// doc.run.url = start_url + doc.name + "/"+doc.parameters.panel_id.value+"?format="+doc.parameters.format.value;
 			// rest = Restangular.one(doc.name,doc.parameters.panel_id.value).get({format:doc.parameters.format.value});
 		}
-		else if (doc.name == 'figure'){
+		else if(doc.name == 'figure'){
 			doc.run.url = start_url  +"collection/"+doc.parameters.collection_id.value+ "/paper/"+doc.parameters.doi.value+"/figure/"+doc.parameters.figure_idx.value;
 			rest = Restangular.one('collection',doc.parameters.collection_id.value).one('paper',doc.parameters.doi.value.replace("/",":")).one('figure',doc.parameters.figure_idx.value).get();
 		}
-		else if (doc.name == 'paper'){
+		else if(doc.name == 'paper'){
 			doc.run.url = start_url +"collection/"+doc.parameters.collection_id.value +"/"+ doc.name + "/"+doc.parameters.doi.value;
 			rest = Restangular.one('collection',doc.parameters.collection_id.value).one(doc.name,doc.parameters.doi.value.replace("/",":")).get();
 		}
-		else if (doc.name == 'papers'){
+		else if(doc.name == 'papers'){
 			doc.run.url = start_url + doc.name + "/"+doc.parameters.year.value;
 			rest = Restangular.one(doc.name,doc.parameters.year.value).get();
 		}
-		else if (doc.name == 'tags'){
-			var role = null;
-			var params = {role:doc.parameters.role.value};
-			_.forEach(doc.parameters,function(p,n){
-				if (n!='role' && p.value){
-					role = n;
-					params[n] = p.value;
-				}
-			});
-			if (role && (!params.role || !params[params.role])){
-				doc.parameters.role.value = role;
-				params.role = role;
-			}
-			var paramStringify = JSON.stringify(params);
-			doc.run.url = start_url + doc.name + "?"+paramStringify;
-			
-			rest = Restangular.all(doc.name).getList(params);
-		}
-		else if (doc.name !='shortest'){
-			doc.run.url = start_url + doc.name + "/"+doc.parameters.term.value+"?limit="+doc.parameters.limit.value;
-			rest = Restangular.one(doc.name,doc.parameters.term.value).get({limit: doc.parameters.limit.value});
+		else if(doc.name !='shortest'){
+			doc.run.url = start_url + doc.name + "/"+doc.parameters.term.value+"?limit="+doc.parameters.limit.value+"&motif="+ doc.parameters.motif.value;
+			rest = Restangular.one(doc.name,doc.parameters.term.value).get({motif:doc.parameters.motif.value, limit: doc.parameters.limit.value});
 		}
 		else{
-			doc.run.url = start_url + "intervention/"+doc.parameters.iTerm.value+"/assayed/"+doc.parameters.aTerm.value+"?limit="+doc.parameters.limit.value;
-			rest = Restangular.one('intervention',doc.parameters.iTerm.value).one('assayed',doc.parameters.aTerm.value).get({limit: doc.parameters.limit.value});
+			doc.run.url = start_url + "intervention/"+doc.parameters.iTerm.value+"/assayed/"+doc.parameters.aTerm.value+"?limit="+doc.parameters.limit.value+"&motif="+ doc.parameters.motif.value;
+			rest = Restangular.one('intervention',doc.parameters.iTerm.value).one('assayed',doc.parameters.aTerm.value).get({motif:doc.parameters.motif.value, limit: doc.parameters.limit.value});
 		}
-		if (rest){
+		if(rest){
 		rest.then(function(data){
 			doc.run.status = 'finished';
-			if (data.plain){
+			if(data.plain){
 				doc.run.response = JSON.stringify(data.plain(),null,3);
 			}
 			else{

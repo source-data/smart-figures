@@ -86,7 +86,7 @@
 
                   if(window.lastStepReached){
                     delete window.lastStepReached; 
-					window.location.href='/?intervention=insulin::molecule&assayed=glucose::molecule&resultsTour'
+                    window.location.href = '/?intervention=insulin::molecule&motif=scale&assayed=glucose::molecule&resultsTour';
                   }
                 }
               });

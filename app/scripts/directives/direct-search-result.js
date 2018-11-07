@@ -32,7 +32,6 @@ angular.module('publicSourcedataApp')
 			return ENV.baseURL+'views/partials/'+attrs.type+'SearchResult.html';
 		},
 		link: function postLink(scope, element, attrs) {
-			// console.info(scope.result);
 			scope.result.showDetails = false;
 			var processPanelCollection = function(){
 				_.map(scope.result.hypos,function(hypo,idx){
@@ -87,7 +86,6 @@ angular.module('publicSourcedataApp')
 			return ENV.baseURL+'views/partials/pathSearchResult.html';
 		},
 		link: function postLink(scope, element, attrs) {
-			console.info(scope.step);
 			scope.first = (attrs.first == 'true');
 			scope.serverURL = ENV.serverURL;
 			scope.baseURL = ENV.baseURL;
@@ -133,7 +131,6 @@ angular.module('publicSourcedataApp')
 			scope.serverURL = ENV.serverURL;
 			scope.baseURL = ENV.baseURL;
 		
-		console.info(scope.paths);
 			scope.newSearch = function(step){
 			// $location.search({"intervention":step.left,"assayed":step.right});
 			// $location.path("/search");
@@ -227,9 +224,7 @@ angular.module('publicSourcedataApp')
 					// if (!perform) return;
 					tag.display_ext_ids = [];
 					_.forEach(tag.external_ids,function(extid,index){
-						if (tag.external_urls && tag.external_urls[index]){
-							tag.display_ext_ids.push({id:extid,url:tag.external_urls[index] + extid});
-						}
+						tag.display_ext_ids.push({id:extid,url:tag.external_urls[index] + extid});
 					});
           scope.currentTag = tag;
 
@@ -268,11 +263,10 @@ angular.module('publicSourcedataApp')
 // 		templateUrl: ENV.baseURL+'views/partials/sdPanel.html',
 // 		link: function postlink(scope){
 // 			scope.serverURL = ENV.serverURL;
-// 			console.info(scope.panel,scope.panel);
-// 			if (scope.panel){
-// 				scope.highlight_entities = {status:false,enable:(scope.panel.figure.panels[scope.panel.currentPanelIdx].tags.length)};
-// 				if (scope.highlight_entities.enable) scope.highlight_entities.status = true;
-// 			}
+// 			scope.highlight_entities = {status:false,enable:(scope.panel.figure.panels[scope.panel.currentPanelIdx].tags.length)};
+// 			if (scope.highlight_entities.enable) scope.highlight_entities.status = true;
+// 			console.info(scope.highlight_entities);
+// 			// console.info(scope.panel.figure.panels[scope.panel.currentPanelIdx].tags.length);
 // 		}
 // 	};
 // }])

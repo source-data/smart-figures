@@ -59,7 +59,6 @@ angular.module('publicSourcedataApp')
 				restrict: 'E',
 				templateUrl:ENV.baseURL+'views/partials/searchPagination.html',
 				link:function(scope,element,attributes){
-					// console.info("ici pagination",attributes);
 					scope.small_size = (attributes.size && attributes.size=='small');
 					scope.position = (attributes.position && attributes.position=='left') ? 'left' : 'right'; 
 					scope.pagination_class = {page: (scope.small_size) ? 'pagination-sm' : 'pagination', input:(scope.small_size) ? 'input-sm':''};
@@ -70,7 +69,6 @@ angular.module('publicSourcedataApp')
 						$timeout.cancel(paginationTimeout);
 						paginationTimeout = $timeout(function(){
 							if (scope.searchParams.pagination.itemsPerPage){
-								console.info("change pagination",scope.searchParams.pagination);
 								Search.fetch();
 							}
 						},750);
@@ -110,16 +108,13 @@ angular.module('publicSourcedataApp')
 									scope.active_filters = [{type:scope.filter_types[0],values:[]}];
 								}
 								Search.searchParams.active_filters = scope.active_filters; 
-								console.info("FILTERS",angular.copy(scope.filters));
 							},100);						
 						
 							scope.changeFilterType = function(idx){
-								console.info("change filter");
 								scope.active_filters[idx].values = [];
 							}
 						
 							scope.filterAction = function(action,idx){
-								console.info("filter action ",action, idx);
 								if(action=='add'){
 									var available_filter_types = $filter('availableFilterTypes')(scope.filter_types,scope.active_filters);
 									scope.active_filters.push({type:available_filter_types[0],values:[]});
@@ -148,7 +143,6 @@ angular.module('publicSourcedataApp')
 	          restrict: 'E',
 	          templateUrl:ENV.baseURL+'views/partials/filterResults2.html',
 	          link:function(scope,element,attributes){
-						console.info("ici filter results2");
 						// scope.active_filters = Search.searchParams.result.active_filters;
 						scope.filters = Search.searchParams.result.filters;
 						scope.active_filters =[];
@@ -174,12 +168,10 @@ angular.module('publicSourcedataApp')
 						Search.searchParams.active_filters = scope.active_filters; 
 						
 						scope.changeFilterType = function(idx){
-							console.info("change filter");
 							scope.active_filters[idx].values = [];
 						}
 						
 						scope.filterAction = function(action,idx){
-							console.info("filter action ",action, idx);
 							if(action=='add'){
 								var available_filter_types = $filter('availableFilterTypes')(scope.filter_types,scope.active_filters);
 								scope.active_filters.push({type:available_filter_types[0],values:[]});

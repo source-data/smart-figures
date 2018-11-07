@@ -61,7 +61,7 @@ angular.module('publicSourcedataApp')
 					angular.element(element).removeAttr('class');
 					angular.element(element).attr('popover-placement','top');
 					angular.element(element).attr('popover-title',(paperTag.external_names && paperTag.external_names.length && paperTag.external_names[0]) ? paperTag.external_names[0] : paperTag.text + "("+paperTag.type+")");
-					angular.element(element).attr('popover-html',"<dl><dt>External ids</dt><dd>"+$filter('printExternalIds')(paperTag)+"</dd><dt>External names</dt><dd>"+$filter('printExternalNames')(paperTag)+"</dd><dt>Taxon</dt><dd>"+$filter('printTaxon')(paperTag)+"</dd></dl>");
+					angular.element(element).attr('popover-html',$filter('printPopover')(paperTag));
 					// angular.element(element).attr('popover-trigger','mouseenter');
 					angular.element(element).attr('popover-animation', 'false');
 					angular.element(element).attr('popover-popup-delay','500');
@@ -78,7 +78,7 @@ angular.module('publicSourcedataApp')
 						var left = position.left - 50;
 						var top = position.top - 205;
 						var body = $document.find('body').eq(0);
-						var popover = angular.element("<dl id = 'sdTag-popover'><dt>External ids</dt><dd>"+$filter('printExternalIds')(paperTag)+"</dd><dt>External names</dt><dd>"+$filter('printExternalNames')(paperTag)+"</dd><dt>Taxon</dt><dd>"+$filter('printTaxon')(paperTag)+"</dd></dl>");
+						var popover = angular.element($filter('printPopover')(paperTag,'sdTag-popover'));
 						popover.css('position','absolute');
 						popover.css('left',left+"px");
 						popover.css('top',top+"px");
@@ -109,9 +109,8 @@ angular.module('publicSourcedataApp')
 		restrict: 'E',
 		link: function(scope,element){
 			
-			// console.info(scope.tag);
 			scope.tag.showRawText = !scope.tag.label || (scope.tag.paper_raw_text && scope.tag.paper_raw_text.toLowerCase().indexOf(scope.tag.label.toLowerCase())==-1);
-			// console.info("enti",scope.tag,scope.sep,scope.extra);
+
 		}
 	}
 }]);
