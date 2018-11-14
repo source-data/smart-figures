@@ -59,7 +59,7 @@
 						<a class="pointer" ng-click="viewFullFigure()">View full figure</a>
 					</header>
 					<div>
-						<div class="figureTitle">
+						<div class="figureTitle" style="padding:15px 15px 5px 15px">
 							<h3 style="font-weight: bold;font-size: 1.17em">{{panel.label}}
 								<span ng-if="panel.authors.length" style="font-weight:normal;font-size:12px;font-style:italic">
 									<br>
@@ -67,13 +67,12 @@
 									<span ng-repeat="author in panel.authors"> <a ng-if="author.orcid" ng-href="https://orcid.org/{{author.orcid}}">{{author.fullname}}</a> <span ng-if="!author.orcid">{{author.fullname}}</span> </span>
 								</span>
 							</h3>
-							<div>
+							<div style="display:grid">
 								<label>
 									<input type="checkbox" ng-model="panel.highlight_entities.status" ng-disabled="!panel.highlight_entities.enable">
 									<span style="margin-left:3px;font-size:12px;font-weight:600" ng-style="{opacity:(panel.highlight_entities.enable) ? '1':'0.6'}"> highlight entities</span>
 								</label>
-								
-								<button ng-click="showSourceData(panel)" ng-show="panel.links.length">Download data</button>
+							
 							</div>
 						</div>
 						<figure>
@@ -83,6 +82,9 @@
 							<div class="methods">
 								<span class="method" style="font-size:11px" ng-repeat="assay in assayBadges">{{assay[0]}}</span>
 							</div>  
+							<div class="entityInfoButtonContainer" style="margin-top:10px" ng-if="panel.links.length">
+								<button ng-click="showSourceData(panel)" ng-show="panel.links.length"><span class="fa fa-download" style="margin-right:5px"></span>Download data</button>
+							</div>
 						</figure>
 					</div>
 	   
