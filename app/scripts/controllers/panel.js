@@ -46,6 +46,30 @@ angular.module('publicSourcedataApp')
 				
 				// $scope.explore = explore;
 				$scope.back = back;
+				
+				
+				$scope.showSourceData = showSourceData;
+				
+				function showSourceData(panel){
+				  var modalInstance = $uibModal.open({
+				       templateUrl: '/views/partials/displaySourcedata.html',
+				       controller: 'DisplaySourceDataCtrl',
+				       controllerAs: 'vm',
+				       resolve: {
+				         panel: function () {
+				           return $scope.panel.plain();
+				         }
+				       }
+				     });
+
+			     modalInstance.result.then(function (action) {
+						 if (action=='download'){
+							 downloadPanel();
+						 }
+			     }, function () { });				
+				}
+
+				
 
 				// =======  INIT FUNCTIONS  ===== //
 				
@@ -65,13 +89,11 @@ angular.module('publicSourcedataApp')
 						if ($scope.intervention_tags[0]) $scope.intervention_tags[0].$show = true;
 					}
 					
-					console.info(angular.copy($scope.panel.plain()));
 				}
 				
 				function getNbRelationByTag(){
 
 	        angular.forEach(_.uniq($scope.tags, function (t) { return ((t.role =='intervention' || t.role=='assayed') && t.type + ":" + t.text); }), function (tag) {
-						// console.info(tag);
 						tag.relations = {intervention:0,assayed:0};
 						var rest;
 						var type = (tag.type) ? (tag.type == 'gene' || tag.type == 'protein') ? 'gene,protein' : tag.type : "";
@@ -295,7 +317,21 @@ angular.module('publicSourcedataApp')
 				};
 
     }])
-		
+	
+	.controller('DisplaySourceDataCtrl',['$scope','$uibModalInstance','panel','Search',function($scope,$uibModalInstance,panel,Search){
+		var vm = this;
+		vm.panel = panel;
+		vm.close = function(action){
+			$uibModalInstance.close(action);
+		}
+	 
+		vm.downloadSourceData = function(doc,source){
+			Search.downloadSourceData(doc).then(function(data){
+
+			});
+		}
+	}])
+	
 		
 	.controller('FullFigureCtrl',['$scope','$uibModalInstance','ENV','panel','$timeout',function($scope,$uibModalInstance,ENV,panel,$timeout){
 			var vm = this;

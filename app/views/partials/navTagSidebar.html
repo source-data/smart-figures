@@ -8,7 +8,7 @@
 				<button
 				popover-placement='{{popovPlacement}}'
 				popover-title='{{tag.external_names[0] || tag.text}} ({{tag.type}}) '
-				uib-popover-html='"<dl><dt>External ids</dt><dd>{{tag|printExternalIds}}</dd><dt>External names</dt><dd>{{tag|printExternalNames}}</dd><dt>Taxon</dt><dd>{{tag|printTaxon}}</dd></dl>"'
+				uib-popover-html='"{{tag|printPopover}}"'
 				popover-trigger='click'
 				popover-append-to-body='true'
 				popover-animation='false'>

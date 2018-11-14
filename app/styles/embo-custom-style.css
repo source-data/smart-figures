@@ -11,6 +11,7 @@ Contents
 8. Upstream and downstream
 9. Paper List
 10. API Documentation
+11. Tour Popover
 */
 
 
@@ -1023,4 +1024,27 @@ dd, dt {
 
 .figureAuthorListItem:last-child:after{
     content:none;
+}
+/* TOUR POPOVERS */
+.popover.tour-searchTour h3.popover-title,
+.popover.tour-resultsTour h3.popover-title
+ {
+    background-color:#0B4E6F;
+    color: #fff;
+    font-size:17px;
+    line-height:1.3em;
+}
+
+.popover.tour-searchTour .popover-content, .popover-content p,
+.popover.tour-resultsTour .popover-content, .popover-content p
+ {
+    font-size:14px;
+}
+
+.popover.tour-searchTour .popover-navigation,
+.popover.tour-resultsTour .popover-navigation
+ {
+    background-color:#0B4E6F;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }

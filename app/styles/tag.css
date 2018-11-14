@@ -115,13 +115,12 @@ sd-tag.active.assayed{
 	text-decoration: underline
 }
 
-sd-tag.normalizing, sd-pretag.normalizing{
-	background-color: rgba(204,235,197,0.8);
-	border: 2px solid #1B8401;
+sd-tag.normalizing{
+	color: orange;
+	text-decoration: underline;
 }
-
 sd-tag.active.normalizing{
-	background-color: #1B8401;
+	background-color: #FB8008;
 	color: #FFF;
 }
 
@@ -132,18 +131,18 @@ sd-tag.active.normalizing{
 }
 
 sd-tag.experiment, sd-pretag.experiment{
-	/*background-color: rgba(222,203,228,0.8);*/
-	/*border: 2px solid #AD00E4;*/
+	color: orange;
+	text-decoration: underline;
 }
 
 sd-tag.active.experiment{
-	background-color: #AD00E4;
+	background-color: #FB8008;
 	color: #FFF;
 }
 
 .component, .bg_component, .bg_component_selected{
-	/*color: orange;*/
-	/*text-decoration: underline*/
+	color: orange;
+	text-decoration: underline;
 }
 
 sd-tag.active.component{
@@ -158,18 +157,15 @@ sd-tag.component, sd-pretag.component{
 	text-decoration: underline
 }
 
-.reporter, .bg_reporter, .bg_reporter_selected{
-	background-color: #ffffcc;
-}
 
 sd-tag.reporter, sd-pretag.reporter{
-	background-color: rgba(255,255,204,0.8);
-	border: 2px solid #fed509;
+	color: orange;
+	 text-decoration: underline;
 }
 
 sd-tag.active.reporter{
-	background-color: #fed509;
-	color: #6c4302;
+	background-color: #FB8008;
+	color: #FFF;
 }
 
 .bg_component_selected, .bg_experiment_selected, .bg_normalizing_selected, .bg_assayed_selected, .bg_intervention_selected{

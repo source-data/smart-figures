@@ -61,13 +61,12 @@ angular.module('publicSourcedataApp')
 					scope.proposeTags = function(category,value){
 						var params = JSON.stringify(scope.searchParams);
 						var counter = angular.copy(Search.searchParams.counter);
-						// console.info(counter);
+
 						// var contraire = (category=='assayed') ? 'intervention' : 'assayed';
 						// if ((category=='generic' && scope.searchParams.generic.length>2) || (category != 'generic' && (scope.searchParams[contraire] && scope.searchParams[category].length>1) || (!scope.searchParams[contraire] && scope.searchParams[category].length>2))){
 							return Search.proposeTags(scope.searchParams,category).then(function(response){
 								var new_counter = Search.searchParams.counter;
-								// console.info(new_counter);
-								// console.info(params,Search.searchParams);
+
 								if (!scope.searchParams.loading && new_counter==counter){
 									return response;
 								}

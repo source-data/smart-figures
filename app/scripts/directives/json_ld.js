@@ -1,3 +1,4 @@
+/*global angular */
 'use strict';
 /************************ LICENCE ***************************
 * 	This file is part of <SourceData SmartFigure frontend code to search and navigate the SourceData resource>
@@ -18,15 +19,26 @@
 *
 *****************************************************************/
 /**
- * @ngdoc function
- * @name publicSourcedataApp.controller:FigureCtrl
+ * @ngdoc directive
+ * @name publicSourcedataApp.directive:jsonLd
  * @description
- * # FigureCtrl
- * Controller of the publicSourcedataApp
+ * # sdTag
  */
 angular.module('publicSourcedataApp')
-  .controller('FigureCtrl', ['$scope','figure','$location',function ($scope,figure,$location) {
-	  if(figure.panels.length){
-		  $location.path("/panel/"+figure.panels[0]);
-	  }
-  }]);
+.directive('jsonld', ['$filter', '$sce', function($filter, $sce) {
+  return {
+    restrict: 'E',
+    template: function() {
+      return '<script type="application/ld+json" ng-bind-html="onGetJson()"></script>';
+    },
+    scope: {
+      json: '=json'
+    },
+    link: function(scope, element, attrs) {
+      scope.onGetJson = function() {
+        return $sce.trustAsHtml($filter('json')(scope.json));
+      }
+    },
+    replace: true
+  };
+}]);
