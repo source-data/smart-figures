@@ -3719,11 +3719,7 @@ we wrap everything in the smartfigure class
     font-size: 1em;
     font-weight: normal; }
   #smartFigureLightBox .LightBoxFigureTitle {
-<<<<<<< HEAD
     margin: 0 0 3px 0; 
-=======
-    margin: 0 0 3px 0;
->>>>>>> master
     line-height:1.3;
   }
   #smartFigureLightBox .LightBoxAuthors {

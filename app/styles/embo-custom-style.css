@@ -989,3 +989,38 @@ dd, dt {
 .vcenter {
     font-size:inherit;
 }
+
+.figureAuthorsTitle {
+    font-size: 0.824em;
+    font-weight:bold;
+    color: #505050;
+    padding:0 0 0.4122em 0;
+    margin:0;
+}
+
+.figureAuthors {
+    border-top: solid 2px #bdbdbd;
+    margin-top: 0.825em;
+    padding: 0.825em 1em 0 1em;
+    color: #808080;
+}
+
+.figureAuthorList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.825em;
+
+}
+
+.figureAuthorListItem {
+    display: inline;
+}
+
+.figureAuthorListItem:after{
+    content:", ";
+}
+
+.figureAuthorListItem:last-child:after{
+    content:none;
+}
