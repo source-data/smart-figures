@@ -682,6 +682,13 @@ div.rn-carousel-indicator span.active {
     margin-bottom:1em;
 }
 
+.authorInList::after {
+    content:", "
+}
+.authorInList.noSeparator::after {
+    content:""
+}
+
 .figpanel-paper-title {
     font-size: 1rem;
     font-weight:bold;
@@ -692,6 +699,27 @@ div.rn-carousel-indicator span.active {
 
 .figpanel-panel-title {
     font-weight:bold;
+}
+
+.biostudies-declaration {
+    display:inline-block;
+    font-size: 0.784em;
+    padding: 0.26em 0.46em;
+    border: solid 1px hsla(0, 94%, 92%, 1);
+    background-color: #fff5f5;
+    border-radius: 6px;
+    color: #b30f00;
+    margin-top: 0.424em;
+}
+
+.biostudies-declaration:hover {
+    text-decoration: none;
+}
+
+img.biostudies-logo {
+    height: 0.96em;
+    width: auto;
+    vertical-align: baseline;
 }
 
 .figpanel-panel {
@@ -724,9 +752,42 @@ div.rn-carousel-indicator span.active {
     border-bottom-right-radius: 6px;
  }
 
+ .smartFigure .figureTitleUpper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    }
+
+.smartFigure .figureTitleLower {
+    line-height: 18px;
+    padding-top: 2px;
+}
+
  .figpanel-btn-group,
  .figpanel-btn-download {
     top:12px !important;
+ }
+
+ .smartFigure .entityInfoButtonContainer .biostudies-download-button {
+     display:block;
+     width:65%;
+     margin: 1.2em auto 0.825em;
+ }
+
+ .figureNoData {
+    font-size: 0.824em;
+    background-color: #e0e0e0;
+    color: #505050;
+    padding: 0.824em;
+    text-align: center;
+ }
+
+ .figureNoData > .fa {
+    font-size: 1.18em;
+    margin-right: 0.4em;
  }
 
  .figpanel-center-mid-col div[compile-caption],
@@ -900,6 +961,7 @@ h4.upstr-title {
     color:#216a87;
     border-color: #d2d2d2;
 }
+
 
 /* 9. Paper List */
 

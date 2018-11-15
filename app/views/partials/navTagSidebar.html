@@ -1,6 +1,6 @@
 <div>
 	<div class="tags">
-	<h3>{{{true:'Intervention',false:'Assayed'}[cas=='intervention']}}</h3>
+	<h3 ng-if="hascoretags">{{{true:'Intervention',false:'Assayed'}[cas=='intervention']}}</h3>
 	<span class="btn-info-group" ng-repeat='tag in tags'>
 		<button class="element" ng-click="tag.$show = !tag.$show"><i class="fa" ng-class="(tag.$show) ? 'fa-chevron-down' : 'fa-chevron-right'" aria-hidden="true"></i><i class="sd-icon-2-{{tag.type}}"></i><span ng-bind-html='tag.text'></span></button>
 		<div class="moreInfoBox" ng-class="(tag.$show) ? 'open' : ''">

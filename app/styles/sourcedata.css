@@ -2900,14 +2900,10 @@ we wrap everything in the smartfigure class
   .smartFigure .figurePanel > div > div {
     padding: 15px; }
   .smartFigure .figureTitle {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-        -ms-flex-pack: justify;
-            justify-content: space-between;
     border-bottom: solid 2px #bdbdbd;
     padding-bottom: 0.4em; }
+
+
   .smartFigure .key {
     padding: 4px;
     text-align: left;
