@@ -46,7 +46,7 @@ module.exports = function (grunt) {
  			  constants: {
  				  ENV: {
 					  serverURL: 'https://api.sourcedata.io/',
-					  baseURL: 'https://search.sourcedata.io/',
+					  baseURL: '/',
 					  baseHref: '/',
  					  withCredentials: true,
  					  debugInfoEnabled: true,
@@ -128,8 +128,8 @@ module.exports = function (grunt) {
       },
 		proxies: [{
 			context: '/php',
-			host: 'sourcedata-lou.vital-it.ch',
-			// host: 'sourcedata-robin.vital-it.ch',
+			// host: 'sourcedata-lou.vital-it.ch',
+			host: 'sourcedata-robin.vital-it.ch',
 			port: 443,
 			https: true,
 			secure: false

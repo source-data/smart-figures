@@ -311,10 +311,95 @@ angular.module('publicSourcedataApp')
          });
 
 
-				function downloadPanel(panel_doc_id) {
-					if (panel_doc_id) { self.location.href = $scope.serverURL + "index.php/panel/" + $scope.panel.current_panel_id + "/" + panel_doc_id + "/export?authdata=" + Authentication.currentUser.authdata; }
-					else { self.location.href = $scope.serverURL + "index.php/panel/" + $scope.panel.current_panel_id + "/export?authdata=" + Authentication.currentUser.authdata; }
-				};
+		function downloadPanel(panel_doc_id) {
+			if (panel_doc_id) { self.location.href = $scope.serverURL + "index.php/panel/" + $scope.panel.current_panel_id + "/" + panel_doc_id + "/export?authdata=" + Authentication.currentUser.authdata; }
+			else { self.location.href = $scope.serverURL + "index.php/panel/" + $scope.panel.current_panel_id + "/export?authdata=" + Authentication.currentUser.authdata; }
+		};
+		
+
+		
+
+		// --- JSON+LD -------//
+		
+		
+		$scope.authors = null;
+		if ($scope.panel.authors !== undefined && $scope.panel.authors.length){
+			$scope.authors = $scope.panel.authors;
+		}
+		if (!$scope.authors && $scope.panel.paper.authors !== undefined && $scope.panel.paper.authors.length){
+			$scope.authors = $scope.panel.paper.authors;
+			
+		}
+		if ($scope.authors){
+			$scope.authors = _.map($scope.authors,function(a){
+				return {
+		            "@type":"Person", // always this value
+		            "name": a.fullname, // paper authors
+		            "worksFor":{
+		                "@type": "Organization", // always this value
+		                "name": a.affiliation
+		            }
+				}
+			});					
+			if ($scope.authors.length == 1) $scope.authors = $scope.authors[0];
+		}
+		
+		
+		var variableMeasured = [];
+		_.forEach($scope.assayed_tags,function(t){
+			var sameAs = null;
+			if (t.external_urls.length && t.external_ids.length) sameAs = t.external_urls[0]+t.external_ids[0];
+			var propertyId = null;
+			if (t.external_namespaces.length && t.external_ids.length) propertyId = t.external_namespaces[0]+":"+t.external_ids[0].replace(t.external_namespaces[0]+":",'');
+			var tag = {
+			     "@type":"PropertyValue", // always this value
+			     "name":t.text, // tag.text
+			     "sameAs":sameAs, //URL of a reference Web page that unambiguously indicates the item's identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or official website.
+			     "propertyID": propertyId, // A commonly used identifier for the characteristic represented by the property, e.g. a manufacturer or a standard code for a property. Use the prefix used in compact identifiers, all available at https://www.ebi.ac.uk/miriam/main/collections
+			     "measurementTechnique":$scope.assayBadges[0]
+			 }
+			 variableMeasured.push(tag);
+		});
+
+		$scope.jsonId = {   // this references the json returned from the SourceData panels API as "panel"
+			"@context":"http://schema.org/", // Always this value
+			"@type":"Dataset", // Always this value
+			"@id":"https://search.sourcedata.io/panel/"+$scope.panel.current_panel_id, // Canonical identifier of panel
+			"dateModified": $scope.panel.paper.date, // panel.paper.date as ISO 8601 formatted string 
+			"dateCreated":$scope.panel.paper.date, // panel.paper.date as ISO 8601 formatted string 
+			"name": $scope.panel.paper.title +" "+panel.label, // panel.paper.title + panel.paper.panels[current].label
+			"description": $scope.panel.stripped_caption, // panel.paper.panels[current].caption in plain text
+			"url":"https://search.sourcedata.io/panel/"+$scope.panel.current_panel_id, //page url
+			"logo": "https://search.sourcedata.io/images/sourcedata_icon-color.png", // page logo
+			"includedInDataCatalog": {
+			    "@type":"DataCatalog", // always this value
+			    "name":"SourceData", // always this value
+			    "url":"https://search.sourcedata.io" // always this value
+			}, // Always this value
+			"citation": {
+			    "@type": "ScholarlyArticle", //always this value
+			    "text": $scope.panel.paper.author_list+" ("+$scope.panel.paper.year+"), "+$scope.panel.paper.title+", "+$scope.panel.paper.journal+", doi:"+$scope.panel.paper.doi, //paper citation
+			    "headline": $scope.panel.label+" - "+$scope.panel.paper.title, //panel.paper.panel[current].label + panel.paper.title
+			    "datePublished": $scope.panel.paper.date, // panel.paper.date as ISO 8601 formatted string
+			    "url": "https://www.doi.org/"+$scope.panel.paper.doi, //paper url if available, otherwise can form DOI link from panel.paper.doi field
+				"image": "https://search.sourcedata.io/php/api//file.php?panel_id="+$scope.panel.panel_id
+			},
+			"author":$scope.authors,
+			"keywords": _.map($scope.assayed_tags,function(t){return t.text}).join(",")+","+_.map($scope.intervention_tags,function(t){return t.text}).join(","), // comma-delimited string from panel.paper.panels[current].tags[each].text
+			"variableMeasured": variableMeasured,
+			"distribution": {
+			    "@type":"DataDownload", // always this value
+			    "contentUrl":"http://myDownloadLink.com", // links to downloadable files on BioStudies
+			    "fileFormat": "application/zip", // the MIME Type for the data to be downloaded, if available
+			    "dateCreated": $scope.panel.paper.biostudies_publication_date, //the date that the raw data download was created, if available
+			    "dateModified":  $scope.panel.paper.biostudies_publication_date, //the date that the raw data download was created, if available
+			    "datePublished":  $scope.panel.paper.biostudies_publication_date, //the date that the raw data download was created, if available
+			    "license": "https://creativecommons.org/licenses/by/2.0/legalcode" // URL of applicable license under which the data download is made available, if available
+			}
+		};
+			
+				console.log($scope.jsonId);
+				
 
     }])
 	
