@@ -710,10 +710,13 @@ div.rn-carousel-indicator span.active {
     border-radius: 6px;
     color: #b30f00;
     margin-top: 0.424em;
+    transition: all 0.2s ease-out;
 }
 
 .biostudies-declaration:hover {
     text-decoration: none;
+    color: #e81300;
+    background-color: #ffd8d8;
 }
 
 img.biostudies-logo {
@@ -729,7 +732,13 @@ img.biostudies-logo {
 
 }
 
+.smartFigure .figurePanel {
+    justify-content:flex-start;
+}
 
+.smartFigure .figurePanel footer {
+    margin-top:auto;
+}
 
 .panel-heading.figpanel-panel-heading,
 .panel-footer.figpanel-panel-footer {
@@ -762,7 +771,7 @@ img.biostudies-logo {
     }
 
 .smartFigure .figureTitleLower {
-    line-height: 18px;
+    line-height: 14px;
     padding-top: 2px;
 }
 
