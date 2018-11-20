@@ -348,9 +348,9 @@ angular.module('publicSourcedataApp')
 		var variableMeasured = [];
 		_.forEach($scope.assayed_tags,function(t){
 			var sameAs = null;
-			if (t.external_urls.length && t.external_ids.length) sameAs = t.external_urls[0]+t.external_ids[0];
+			if (t.external_urls !== undefined && t.external_urls.length && t.external_ids !== undefined && t.external_ids.length) sameAs = t.external_urls[0]+t.external_ids[0];
 			var propertyId = null;
-			if (t.external_namespaces.length && t.external_ids.length) propertyId = t.external_namespaces[0]+":"+t.external_ids[0].replace(t.external_namespaces[0]+":",'');
+			if (t.external_namespaces !== undefined && t.external_namespaces.length && t.external_ids !== undefined && t.external_ids.length) propertyId = t.external_namespaces[0]+":"+t.external_ids[0].replace(t.external_namespaces[0]+":",'');
 			var tag = {
 			     "@type":"PropertyValue", // always this value
 			     "name":t.text, // tag.text
@@ -397,10 +397,6 @@ angular.module('publicSourcedataApp')
 			    "license": "https://creativecommons.org/licenses/by/2.0/legalcode" // URL of applicable license under which the data download is made available, if available
 			}
 		};
-			
-				console.log($scope.jsonId);
-				
-
     }])
 	
 	.controller('DisplaySourceDataCtrl',['$scope','$uibModalInstance','panel','Search',function($scope,$uibModalInstance,panel,Search){
