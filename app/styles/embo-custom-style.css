@@ -1141,6 +1141,10 @@ dd, dt {
         order:1;
         flex-basis:100%;
     }
+
+    .smartFigure figure img {
+        max-width:100% !important;
+    }
     .smartFigure .interventionNav {
         order:2;
         flex-basis:50%;
@@ -1206,4 +1210,46 @@ dd, dt {
         padding: 0.3em;
     }
 
+
+    .smartFigure .backNavigation {
+        width:40px;
+    }
+
+    .smartFigure .slideItemUpstream .backNavigation label {
+        top: 300px;
+        left: -82px;
+    }
+
+    .smartFigure .panel.slideItemUpstream.inPanelSearchResults {
+        padding-right:50px;
+    }
+
+    .smartFigure .slideItemDownstream .backNavigation label {
+        top: 300px;
+        left: -90px;
+    }
+
+    .smartFigure .panel.slideItemDownstream.inPanelSearchResults {
+        padding-left:50px;
+    }
+
+    .smartFigure .slideItemUpstream button.element,
+    .smartFigure .slideItemDownstream button.element{
+        width:90%;
+    }
+
+    .smartFigure .slideItemUpstream .subsequentItems,
+    .smartFigure .slideItemDownstream .subsequentItems
+     {
+        padding:0;
+
+    }
+
+    .navbar-toggle {
+        background-color:#505050;
+        right: -15px;
+        bottom: -52px;
+        padding: 12px 15px;
+        font-weight: bold;
+    }
 }
