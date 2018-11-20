@@ -12,6 +12,7 @@ Contents
 9. Paper List
 10. API Documentation
 11. Tour Popover
+12. Mobile Responsive Bodge
 */
 
 
@@ -1118,4 +1119,91 @@ dd, dt {
     background-color:#0B4E6F;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+
+/**
+    12. MOBILE RESPONSIVE BODGE
+**/
+
+@media all and (max-width:730px){
+
+    .smartFigure {
+
+        width:100%;
+        font-size:1.2em;
+    }
+
+    .smartFigure .panel {
+        flex-wrap:wrap;
+    }
+
+    .smartFigure .figurePanel {
+        order:1;
+        flex-basis:100%;
+    }
+    .smartFigure .interventionNav {
+        order:2;
+        flex-basis:50%;
+    }
+    .smartFigure .assayNav {
+        order:3;
+        flex-basis:50%;
+    }
+
+    nav-tag-sidebar {
+        padding-top:1em;
+    }
+
+    .smartFigure button.element {
+        width:100%;
+    }
+
+    .smartFigure .element .fa {
+        margin-left:12px;
+    }
+
+    .smartFigure .figurePanel header a {
+        visibility:hidden;
+    }
+
+    .smartFigure .relatedData {
+        padding:1em;
+    }
+
+    .smartFigure .relatedDataCarouselItem .tags {
+        font-size:0.824em;
+    }
+
+    .smartFigure .relatedData .headerContainer {
+        display:block;
+        padding-left: 0.6em;
+    }
+
+    .smartFigure .relatedData .headerContainer > div {
+        width:auto;
+        padding-bottom:1em;
+        text-align:left;
+    }
+
+    .smartFigure .relatedDataCarouselInnerContainer ul {
+        flex-wrap:wrap;
+    }
+
+    .smartFigure .relatedDataCarouselItem {
+        width:auto;
+        flex-basis:100%;
+        border-bottom: solid 1em #f0f0f0;
+    }
+
+    .smartFigure .relatedDataCarouselOuterContainer a {
+        display:none;
+
+    }
+
+    .firstItems .fa-caret-right {
+        display:block;
+        text-align: center;
+        padding: 0.3em;
+    }
+
 }
