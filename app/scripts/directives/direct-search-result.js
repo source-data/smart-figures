@@ -197,7 +197,7 @@ angular.module('publicSourcedataApp')
 
 .directive('navTagSidebar',['ENV','$location',function(ENV,$location){
 	return {
-		scope:{tags:'=',cas:'=',panel:'=',view:'='},
+		scope:{tags:'=',cas:'=',panel:'=',view:'=', hascoretags:'='},
 		restrict: 'EA',
 		templateUrl: function(){
 			return ENV.baseURL+'views/partials/navTagSidebar.html';
@@ -226,8 +226,8 @@ angular.module('publicSourcedataApp')
 					_.forEach(tag.external_ids,function(extid,index){
 						tag.display_ext_ids.push({id:extid,url:tag.external_urls[index] + extid});
 					});
-          scope.currentTag = tag;
-
+		  scope.currentTag = tag;
+		  
           var type;
 					var params;
 					var newloc = {};

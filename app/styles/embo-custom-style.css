@@ -12,6 +12,7 @@ Contents
 9. Paper List
 10. API Documentation
 11. Tour Popover
+12. Mobile Responsive Bodge
 */
 
 
@@ -682,6 +683,13 @@ div.rn-carousel-indicator span.active {
     margin-bottom:1em;
 }
 
+.authorInList::after {
+    content:", "
+}
+.authorInList.noSeparator::after {
+    content:""
+}
+
 .figpanel-paper-title {
     font-size: 1rem;
     font-weight:bold;
@@ -694,6 +702,30 @@ div.rn-carousel-indicator span.active {
     font-weight:bold;
 }
 
+.biostudies-declaration {
+    display:inline-block;
+    font-size: 0.784em;
+    padding: 0.26em 0.46em;
+    border: solid 1px hsla(0, 94%, 92%, 1);
+    background-color: #fff5f5;
+    border-radius: 6px;
+    color: #b30f00;
+    margin-top: 0.424em;
+    transition: all 0.2s ease-out;
+}
+
+.biostudies-declaration:hover {
+    text-decoration: none;
+    color: #e81300;
+    background-color: #ffd8d8;
+}
+
+img.biostudies-logo {
+    height: 0.96em;
+    width: auto;
+    vertical-align: baseline;
+}
+
 .figpanel-panel {
 
     border: solid 1px #d2d2d2;
@@ -701,7 +733,13 @@ div.rn-carousel-indicator span.active {
 
 }
 
+.smartFigure .figurePanel {
+    justify-content:flex-start;
+}
 
+.smartFigure .figurePanel footer {
+    margin-top:auto;
+}
 
 .panel-heading.figpanel-panel-heading,
 .panel-footer.figpanel-panel-footer {
@@ -724,9 +762,42 @@ div.rn-carousel-indicator span.active {
     border-bottom-right-radius: 6px;
  }
 
+ .smartFigure .figureTitleUpper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    }
+
+.smartFigure .figureTitleLower {
+    line-height: 14px;
+    padding-top: 2px;
+}
+
  .figpanel-btn-group,
  .figpanel-btn-download {
     top:12px !important;
+ }
+
+ .smartFigure .entityInfoButtonContainer .biostudies-download-button {
+     display:block;
+     width:65%;
+     margin: 1.2em auto 0.825em;
+ }
+
+ .figureNoData {
+    font-size: 0.824em;
+    background-color: #e0e0e0;
+    color: #505050;
+    padding: 0.824em;
+    text-align: center;
+ }
+
+ .figureNoData > .fa {
+    font-size: 1.18em;
+    margin-right: 0.4em;
  }
 
  .figpanel-center-mid-col div[compile-caption],
@@ -901,6 +972,7 @@ h4.upstr-title {
     border-color: #d2d2d2;
 }
 
+
 /* 9. Paper List */
 
 .paperlist-container .paperlist-filter-panel{
@@ -1047,4 +1119,137 @@ dd, dt {
     background-color:#0B4E6F;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+}
+
+/**
+    12. MOBILE RESPONSIVE BODGE
+**/
+
+@media all and (max-width:730px){
+
+    .smartFigure {
+
+        width:100%;
+        font-size:1.2em;
+    }
+
+    .smartFigure .panel {
+        flex-wrap:wrap;
+    }
+
+    .smartFigure .figurePanel {
+        order:1;
+        flex-basis:100%;
+    }
+
+    .smartFigure figure img {
+        max-width:100% !important;
+    }
+    .smartFigure .interventionNav {
+        order:2;
+        flex-basis:50%;
+    }
+    .smartFigure .assayNav {
+        order:3;
+        flex-basis:50%;
+    }
+
+    nav-tag-sidebar {
+        padding-top:1em;
+    }
+
+    .smartFigure button.element {
+        width:100%;
+    }
+
+    .smartFigure .element .fa {
+        margin-left:12px;
+    }
+
+    .smartFigure .figurePanel header a {
+        visibility:hidden;
+    }
+
+    .smartFigure .relatedData {
+        padding:1em;
+    }
+
+    .smartFigure .relatedDataCarouselItem .tags {
+        font-size:0.824em;
+    }
+
+    .smartFigure .relatedData .headerContainer {
+        display:block;
+        padding-left: 0.6em;
+    }
+
+    .smartFigure .relatedData .headerContainer > div {
+        width:auto;
+        padding-bottom:1em;
+        text-align:left;
+    }
+
+    .smartFigure .relatedDataCarouselInnerContainer ul {
+        flex-wrap:wrap;
+    }
+
+    .smartFigure .relatedDataCarouselItem {
+        width:auto;
+        flex-basis:100%;
+        border-bottom: solid 1em #f0f0f0;
+    }
+
+    .smartFigure .relatedDataCarouselOuterContainer a {
+        display:none;
+
+    }
+
+    .firstItems .fa-caret-right {
+        display:block;
+        text-align: center;
+        padding: 0.3em;
+    }
+
+
+    .smartFigure .backNavigation {
+        width:40px;
+    }
+
+    .smartFigure .slideItemUpstream .backNavigation label {
+        top: 300px;
+        left: -82px;
+    }
+
+    .smartFigure .panel.slideItemUpstream.inPanelSearchResults {
+        padding-right:50px;
+    }
+
+    .smartFigure .slideItemDownstream .backNavigation label {
+        top: 300px;
+        left: -90px;
+    }
+
+    .smartFigure .panel.slideItemDownstream.inPanelSearchResults {
+        padding-left:50px;
+    }
+
+    .smartFigure .slideItemUpstream button.element,
+    .smartFigure .slideItemDownstream button.element{
+        width:90%;
+    }
+
+    .smartFigure .slideItemUpstream .subsequentItems,
+    .smartFigure .slideItemDownstream .subsequentItems
+     {
+        padding:0;
+
+    }
+
+    .navbar-toggle {
+        background-color:#505050;
+        right: -15px;
+        bottom: -52px;
+        padding: 12px 15px;
+        font-weight: bold;
+    }
 }

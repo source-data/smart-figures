@@ -87,6 +87,7 @@ angular.module('publicSourcedataApp')
 						$scope.intervention_tags = $filter('uniqueTagTexts')(_.filter($scope.panel.tags,function(t){return t.role =='intervention';}));
 						if ($scope.assayed_tags[0]) $scope.assayed_tags[0].$show = true;
 						if ($scope.intervention_tags[0]) $scope.intervention_tags[0].$show = true;
+						$scope.hascoretags = (!$scope.assayed_tags[0] && !$scope.intervention_tags[0]) ? false : true;
 					}
 					
 				}

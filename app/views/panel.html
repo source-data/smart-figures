@@ -25,7 +25,7 @@
 		<h1 class="figpanel-paper-title">{{::panel.paper.title}}</h1>
 		<p class='authors'>{{::panel.paper.author_list|firstAuthor}} <i>{{::panel.paper.journal}}</i> {{::panel.paper.year}}</p>
 		<p class="link">Reproduced from <a ng-href='http://dx.doi.org/{{::panel.paper.doi}}' ng-if='panel.paper.doi'>{{::panel.paper.doi}}</a><span ng-if='!panel.paper.doi'>{{::panel.paper.journal}}</span> with permissions</p>
-		<p ng-if="::panel.paper.biostudies_id">Access full paper datasets on <a ng-href="https://wwwdev.ebi.ac.uk/biostudies/studies/{{panel.paper.biostudies_id}}" target="_blank"><img src="../../images/logo_biostudies.png" width="100" alt="Logo Biostudies"></a></p>
+		<a ng-if="::panel.paper.biostudies_id" class="biostudies-declaration" ng-href="https://wwwdev.ebi.ac.uk/biostudies/studies/{{panel.paper.biostudies_id}}" target="_blank">Access full paper datasets on <img src="../../images/logo_biostudies.png" alt="Logo Biostudies" class="biostudies-logo"></a>
 			
 	</header>
 	
@@ -58,23 +58,33 @@
 						<h2>{{::panel.figure.label}}</h2>
 						<a class="pointer" ng-click="viewFullFigure()">View full figure</a>
 					</header>
+					<div ng-if="!hascoretags" class="figureNoData">
+						<span class="fa fa-exclamation-triangle"></span>Panel not annotated with SourceData as data files not available for this figure or panel.
+					</div>
 					<div>
 						<div class="figureTitle" style="padding:15px 15px 5px 15px">
-							<h3 style="font-weight: bold;font-size: 1.17em">{{panel.label}}
-								<span ng-if="panel.authors.length" style="font-weight:normal;font-size:12px;font-style:italic">
-									<br>
-									Panel author<span ng-if="panel.authors.length>1">s</span> : 									
-									<span ng-repeat="author in panel.authors"> <a ng-if="author.orcid" ng-href="https://orcid.org/{{author.orcid}}">{{author.fullname}}</a> <span ng-if="!author.orcid">{{author.fullname}}</span> </span>
-								</span>
-							</h3>
-							<div style="display:grid">
-								<label>
-									<input type="checkbox" ng-model="panel.highlight_entities.status" ng-disabled="!panel.highlight_entities.enable">
-									<span style="margin-left:3px;font-size:12px;font-weight:600" ng-style="{opacity:(panel.highlight_entities.enable) ? '1':'0.6'}"> highlight entities</span>
-								</label>
-							
+							<div class="figureTitleUpper">
+								<h3 style="font-weight: bold;font-size: 1.17em">{{panel.label}}
+
+								</h3>
+								<div style="display:grid; line-height:1em;">
+									<label>
+										<input type="checkbox" ng-model="panel.highlight_entities.status" ng-disabled="!panel.highlight_entities.enable">
+										<span style="margin-left:3px;font-size:12px;font-weight:600" ng-style="{opacity:(panel.highlight_entities.enable) ? '1':'0.6'}"> highlight entities</span>
+									</label>
+								
+								</div>
 							</div>
+							<div class="figureTitleLower">
+								<span ng-if="panel.authors.length" style="font-weight:normal;font-size:12px;font-style:italic">
+
+									<span>Panel author</span><span ng-if="panel.authors.length>1">s</span>: 									
+									<span ng-repeat="author in panel.authors" ng-class="{'noSeparator':$last}" class="authorInList"> <a ng-if="author.orcid" ng-href="https://orcid.org/{{author.orcid}}">{{author.fullname}}</a> <span ng-if="!author.orcid">{{author.fullname}}</span> </span>
+								</span>
+							</div>
+	
 						</div>
+
 						<figure>
 							<img class = 'img-responsive' style="max-width: 350px" ng-src = '{{serverURL}}/file.php?panel_id={{panel.current_panel_id}}'/>
 							<div class="caption_legend" style="text-align:justify;font-size:13px" ng-if="!panel.highlight_entities.status" ng-bind-html="(panel.figure.panels|filter:{panel_id:panel.current_panel_id})[0].caption"></div>
@@ -83,7 +93,7 @@
 								<span class="method" style="font-size:11px" ng-repeat="assay in assayBadges">{{assay[0]}}</span>
 							</div>  
 							<div class="entityInfoButtonContainer" style="margin-top:10px" ng-if="panel.links.length">
-								<button ng-click="showSourceData(panel)" ng-show="panel.links.length"><span class="fa fa-download" style="margin-right:5px"></span>Download data</button>
+								<button ng-click="showSourceData(panel)" ng-show="panel.links.length" class="biostudies-download-button"><span class="fa fa-download" style="margin-right:5px"></span>Download data</button>
 							</div>
 						</figure>
 					</div>
@@ -100,7 +110,7 @@
 	
 				<!-- This is the left sidebar of the main panel -->
 				<div class="interventionNav">
-					<nav-tag-sidebar tags='intervention_tags' panel='panel' cas='"intervention"' view='view'></nav-tag-sidebar>
+					<nav-tag-sidebar tags='intervention_tags' panel='panel' cas='"intervention"' view='view' hascoretags='hascoretags'></nav-tag-sidebar>
 					<div class="panelNavigation">
 						<button ng-show="panel.nextPreviousFig.previous!=null" uib-tooltip="Previous figure" ng-click='setPanel(panel.paper.figures[panel.nextPreviousFig.previous].panel_id)'>
 							<i class="fa fa-chevron-left" aria-hidden="true" style="margin-right:5px"></i>{{panel.paper.figures[panel.nextPreviousFig.previous].label}}
@@ -110,7 +120,7 @@
 	
 				<!-- this is the right sidebar of the main panel -->
 				<div class="assayNav">
-					<nav-tag-sidebar tags='assayed_tags' panel='panel' cas='"assayed"' view='view'></nav-tag-sidebar>
+					<nav-tag-sidebar tags='assayed_tags' panel='panel' cas='"assayed"' view='view' hascoretags='hascoretags'></nav-tag-sidebar>
 					<div class="panelNavigation">
 						<button ng-show="panel.nextPreviousFig.next!=null" uib-tooltip="Next figure" ng-click='setPanel(panel.paper.figures[panel.nextPreviousFig.next].panel_id)'>
 							{{panel.paper.figures[panel.nextPreviousFig.next].label}}<i class="fa fa-chevron-right" aria-hidden="true" style="margin-left:5px"></i>
