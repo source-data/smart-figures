@@ -1189,7 +1189,7 @@ dd, dt {
         text-align:left;
     }
 
-    .smartFigure .relatedDataCarouselInnerContainer ul {
+    .smartFigure .relatedDataCarouselInnerContainer div {
         flex-wrap:wrap;
     }
 

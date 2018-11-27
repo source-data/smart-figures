@@ -20,10 +20,11 @@
 -->
 
 <!doctype html>
-<html class="no-js">
-  <head>
+<html class="no-js"  ng-app="publicSourcedataApp">
+  <head ng-controller='headCtrl'>
     <meta charset="utf-8">
 	<base href='/'>
+	<link rel="canonical" href="https://search.sourcedata.io{{canonicalUrl}}">
     <title>SourceData</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
@@ -51,7 +52,7 @@
       <link rel="stylesheet" href="styles/embo-custom-style-desktop.css">
       <!-- endbuild -->
   </head>
-  <body ng-app="publicSourcedataApp">
+  <body>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -131,6 +132,7 @@
         <script src="scripts/config.js"></script>
         <script src="scripts/app.js"></script>
 
+        <script src="scripts/controllers/head.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/annotation.js"></script>
         <script src="scripts/controllers/figure.js"></script>
