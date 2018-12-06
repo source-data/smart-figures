@@ -25,7 +25,7 @@
 		<h1 class="figpanel-paper-title">{{::panel.paper.title}}</h1>
 		<p class='authors'>{{::panel.paper.author_list|firstAuthor}} <i>{{::panel.paper.journal}}</i> {{::panel.paper.year}}</p>
 		<p class="link">Reproduced from <a ng-href='http://dx.doi.org/{{::panel.paper.doi}}' ng-if='panel.paper.doi'>{{::panel.paper.doi}}</a><span ng-if='!panel.paper.doi'>{{::panel.paper.journal}}</span> with permissions</p>
-		<a ng-if="::panel.paper.biostudies_id" class="biostudies-declaration" ng-href="https://wwwdev.ebi.ac.uk/biostudies/studies/{{panel.paper.biostudies_id}}" target="_blank">Access full paper datasets on <img src="../../images/logo_biostudies.png" alt="Logo Biostudies" class="biostudies-logo"></a>
+		<a ng-if="::panel.paper.biostudies_id" class="biostudies-declaration" ng-href="https://www.ebi.ac.uk/biostudies/SourceData/studies/{{panel.paper.biostudies_id}}" target="_blank">Access full paper datasets on <img src="../../images/logo_biostudies.png" alt="Logo Biostudies" class="biostudies-logo"></a>
 			
 	</header>
 	
