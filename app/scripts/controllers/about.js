@@ -85,6 +85,11 @@ angular.module('publicSourcedataApp')
 			doc.run.url = start_url + doc.name + "/"+doc.parameters.year.value;
 			rest = Restangular.one(doc.name,doc.parameters.year.value).get();
 		}
+		else if(doc.name == 'latest'){
+			doc.run.url = start_url+"panels/" + doc.name;
+			rest = Restangular.one('panels/latest').get();
+		}
+		
 		else if(doc.name !='shortest'){
 			doc.run.url = start_url + doc.name + "/"+doc.parameters.term.value+"?limit="+doc.parameters.limit.value+"&motif="+ doc.parameters.motif.value;
 			rest = Restangular.one(doc.name,doc.parameters.term.value).get({motif:doc.parameters.motif.value, limit: doc.parameters.limit.value});

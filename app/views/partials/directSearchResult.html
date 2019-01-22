@@ -90,7 +90,7 @@
 									<li ng-repeat="collection in hypo.collections" >
 										<div ng-repeat="panel in collection" class="layer searchResultPanelInCarousel direct-search-res-carousel-panel"  ng-click = 'loadPanel(panel.panel_id)'>
 											<figcaption uib-tooltip-placement="bottom" class="cursor-pointer">{{::panel.label}}<span class="pull-right glyphicon glyphicon-paperclip" ng-show="panel.panel_doc"></span></figcaption>
-											<img class = '{{baseURL}}img-responsive center-block' ng-src = '{{serverURL}}/file.php?panel_id={{panel.panel_id}}' style = 'max-height: 160px'>
+											<img class = 'img-responsive center-block' ng-src = '{{serverURL}}/file.php?panel_id={{panel.panel_id}}' style = 'max-height: 160px'>
 											<span><span class="badge experimental-badge direct-search-res-exp-badge" style="font-size:11px" ng-repeat="assay in panel.assays">{{assay.external_name}}</span></span>
 										</div>
 									</li>
