@@ -15,21 +15,21 @@
 				<ul class="list-unstyled">
 					<li ng-if="vm.panel.paper.biostudies_id" >
 						<span>
-							<img ng-src="{{baseURL}}/images/logo_biostudies.png" style="margin-left:3px" width="100" alt="Logo Biostudies">
-							<a style="margin:0 5px" target='_blank' href="https://wwwdev.ebi.ac.uk/biostudies/SourceData/studies/{{vm.panel.paper.biostudies_id}}/"><span class="fa fa-search-plus"></span></a>
+							<img ng-src="{{baseURL}}images/logo_biostudies.png" style="margin-left:3px" width="100" alt="Logo Biostudies">
+							<a style="margin:0 5px" target='_blank' href="https://www.ebi.ac.uk/biostudies/SourceData/studies/{{vm.panel.paper.biostudies_id}}/"><span class="fa fa-search-plus"></span></a>
 							<!-- <span ng-click="vm.downloadSourceData(link,'biostudies')"><span class="fa fa-download" ></span></span> -->
 						</span>
 						
-						<!-- <a target='_blank' href="https://wwwdev.ebi.ac.uk/biostudies/SourceData/studies/{{vm.panel.paper.biostudies_id}}/"><span><img src="../../images/logo_biostudies.png" style="margin-left:3px" width="100" alt="Logo Biostudies"></span></a> -->
+						<!-- <a target='_blank' href="https://www.ebi.ac.uk/biostudies/SourceData/studies/{{vm.panel.paper.biostudies_id}}/"><span><img src="{{baseURL}}images/logo_biostudies.png" style="margin-left:3px" width="100" alt="Logo Biostudies"></span></a> -->
 						<ul>
 							<li ng-repeat="link in vm.panel.links">
 								<span ng-if="link.type=='file' && vm.panel.paper.biostudies_id">
 									{{link.document}}
-								<a style="margin:0 5px" target='_blank' href="https://wwwdev.ebi.ac.uk/biostudies/files/{{vm.panel.paper.biostudies_id}}/sourcedata/{{vm.panel.paper.biostudies_id}}/{{link.document}}"><span class="fa fa-download"></span></a>
+								<a style="margin:0 5px" target='_blank' href="https://www.ebi.ac.uk/biostudies/files/{{vm.panel.paper.biostudies_id}}/sourcedata/{{vm.panel.paper.biostudies_id}}/{{link.document}}"><span class="fa fa-download"></span></a>
 								<!-- <span ng-click="vm.downloadSourceData(link,'biostudies')"><span class="fa fa-download" ></span></span> -->
 								</span>
 								<!-- <a ng-if="link.type=='url'" href="link.document" target='_blank'>{{link.document}}</a> -->
-								<!-- <a ng-if="link.type=='file' && vm.panel.paper.biostudies_id" target='_blank' href="https://wwwdev.ebi.ac.uk/biostudies/files/{{vm.panel.paper.biostudies_id}}/sourcedata/{{vm.panel.paper.biostudies_id}}/{{link.document}}">{{link.document}}</a> -->
+								<!-- <a ng-if="link.type=='file' && vm.panel.paper.biostudies_id" target='_blank' href="https://www.ebi.ac.uk/biostudies/files/{{vm.panel.paper.biostudies_id}}/sourcedata/{{vm.panel.paper.biostudies_id}}/{{link.document}}">{{link.document}}</a> -->
 
 								
 								<!-- <span ng-if="link.type=='file' && !vm.panel.paper.biostudies_id">{{link.document}}</span> -->
@@ -54,7 +54,7 @@
 
 		<footer>
 			<p class="footerCredits">
-				<img src="images/sourcedata_logo.png" alt="the SourceData logo" class="SourceDataFooterLogo">
+				<img src="{{baseURL}}images/sourcedata_logo.png" alt="the SourceData logo" class="SourceDataFooterLogo">
 			</p>
 		</footer>           
 	</div>
