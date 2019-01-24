@@ -403,15 +403,42 @@ angular.module('publicSourcedataApp')
 	.controller('DisplaySourceDataCtrl',['$scope','$uibModalInstance','panel','Search',function($scope,$uibModalInstance,panel,Search){
 		var vm = this;
 		vm.panel = panel;
+		
 		vm.close = function(action){
 			$uibModalInstance.close(action);
 		}
-	 
 		vm.downloadSourceData = function(doc,source){
 			Search.downloadSourceData(doc).then(function(data){
-
 			});
 		}
+		vm.init = function(){
+			vm.panel.biostudies = vm.panel.paper.biostudies_id;
+			vm.resources = {};
+			vm.files = _.filter(vm.panel.links,function(l){return l.type=='file';});
+
+			if (vm.panel.biostudies){
+				vm.resources['BioStudies'] = {name:'BioStudies',id:vm.panel.biostudies,main_link:"https://www.ebi.ac.uk/biostudies/SourceData/studies/"+vm.panel.biostudies,img:"logo_biostudies.png",urls:[],files:vm.files};
+			}
+			else if (vm.files.length){
+				vm.resources['Unknown resources'] = {name:'Unknown resources',files:vm.files};
+			}
+		
+			_.forEach(vm.panel.links,function(doc){
+				if (doc.type=='url'){
+					if (!doc.external_db_name){
+						doc.external_db_name = 'Unknown resources';	
+					}
+					if (doc.external_db_name && !vm.resources[doc.external_db_name]){
+						vm.resources[doc.external_db_name] = {name:doc.external_db_name,urls:[],files:[]};
+					}
+					vm.resources[doc.external_db_name].urls.push(doc);
+				}
+			});
+		}		
+
+		vm.init();
+	 
+
 	}])
 	
 		
