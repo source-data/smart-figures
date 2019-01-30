@@ -17,12 +17,12 @@
 			</div>
 			<strong>Explore</strong>
 			<div class="exploreUpAndDownstreamContainer">
-				<button class="upstream" ng-click="explore(tag,'upstream',view!='panel')" ng-mouseenter="mouseOver('intervention',tag)" ng-mouseleave="mouseOut(tag)"><i class="sd-icon-1-undefined" aria-hidden="true"></i> </button>
+				<button class="upstream" ng-click="explore(tag,'upstream',view!='panel')" uib-tooltip="view experiments that have tested the effect of other entities on {{tag.text}}" ng-mouseenter="mouseOver('intervention',tag)" ng-mouseleave="mouseOut(tag)"><i class="sd-icon-1-undefined" aria-hidden="true"></i> </button>
 				<!-- <button class="upstream" ng-style="{cursor:(tag.relations.intervention) ? '':'not-allowed'}" ng-click="explore(tag,'upstream',view!='panel')" ng-mouseenter="mouseOver('intervention')" ng-mouseleave="mouseOut()" ng-disabled="(!tag.relations.intervention)"><i class="sd-icon-1-undefined" aria-hidden="true"></i> </button> -->
 				<i class="fa fa-caret-right" aria-hidden="true"></i>
 				<i class="sd-icon-1-{{tag.type}} exploreElementIcon" aria-hidden="true" ng-class="(tag.invertColor) ? 'inverseColor' : ''"></i>
 				<i class="fa fa-caret-right" aria-hidden="true"></i>
-				<button class="downstream" ng-click="explore(tag,'downstream',view!='panel')" ng-mouseenter="mouseOver('assayed',tag)" ng-mouseleave="mouseOut(tag)" ><i class="sd-icon-1-undefined" aria-hidden="true"></i></button>
+				<button class="downstream" ng-click="explore(tag,'downstream',view!='panel')"  uib-tooltip="view experiments that have tested the effect of {{tag.text}} on other entities" ng-mouseenter="mouseOver('assayed',tag)" ng-mouseleave="mouseOut(tag)" ><i class="sd-icon-1-undefined" aria-hidden="true"></i></button>
 				<!-- <button class="downstream" ng-style="{cursor:(tag.relations.assayed) ? '':'not-allowed'}" ng-click="explore(tag,'downstream',view!='panel')" ng-mouseenter="mouseOver('assayed')" ng-mouseleave="mouseOut()" ng-disabled="(!tag.relations.assayed)"><i class="sd-icon-1-undefined" aria-hidden="true"></i></button>                            -->
 			</div>
 		</div>
