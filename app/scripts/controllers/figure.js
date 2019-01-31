@@ -25,8 +25,10 @@
  * Controller of the publicSourcedataApp
  */
 angular.module('publicSourcedataApp')
-  .controller('FigureCtrl', ['$scope','figure','$location',function ($scope,figure,$location) {
-	  if(figure.panels.length){
-		  $location.path("/panel/"+figure.panels[0]);
-	  }
+  .controller('FigureCtrl', ['$scope','$location','$route','Restangular','figure','$timeout',function ($scope,$location,$route,Restangular,figure,$timeout) {
+
+		$scope.loaded = !figure.panels.length;
+	  if (figure.panels.length){
+	  	$location.path("/panel/"+figure.panels[0]);
+	  }		
   }]);

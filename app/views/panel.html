@@ -93,7 +93,7 @@
 								<span class="method" style="font-size:11px" ng-repeat="assay in assayBadges">{{assay[0]}}</span>
 							</div>  
 							<div class="entityInfoButtonContainer" style="margin-top:10px" ng-if="panel.links.length">
-								<button ng-click="showSourceData(panel)" ng-show="panel.links.length" class="biostudies-download-button"><span class="fa fa-download" style="margin-right:5px"></span>Download data</button>
+								<button ng-click="showSourceData(panel)" ng-show="panel.links.length" class="biostudies-download-button" uib-tooltip="open download window"><span class="fa fa-download" style="margin-right:5px"></span>Download data</button>
 							</div>
 						</figure>
 					</div>
