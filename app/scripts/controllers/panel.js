@@ -371,7 +371,6 @@ angular.module('publicSourcedataApp')
 			"name": $scope.panel.paper.title +" "+panel.label, // panel.paper.title + panel.paper.panels[current].label
 			"description": $scope.panel.stripped_caption, // panel.paper.panels[current].caption in plain text
 			"url":"https://search.sourcedata.io/panel/"+$scope.panel.current_panel_id, //page url
-			"logo": "https://search.sourcedata.io/images/sourcedata_icon-color.png", // page logo
 			"includedInDataCatalog": {
 			    "@type":"DataCatalog", // always this value
 			    "name":"SourceData", // always this value
