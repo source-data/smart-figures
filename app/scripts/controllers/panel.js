@@ -387,7 +387,7 @@ angular.module('publicSourcedataApp')
 				"image": "https://search.sourcedata.io/php/api//file.php?panel_id="+$scope.panel.panel_id
 			},
 			"author":$scope.authors,
-			"keywords": _.map($scope.assayed_tags,function(t){return t.ref_text}).join(", ")+", "+_.map($scope.intervention_tags,function(t){return t.ref_text}).join(", ")+", "+_.map($scope.experimental_assay_tags,function(t){return t.ref_text}).join(",")+", "+_.map($scope.disease_tags,function(t){return t.ref_text}).join(","), // comma-delimited string from panel.paper.panels[current].tags[each].text
+			"keywords": _.map($scope.assayed_tags,function(t){return t.ref_text}).join(", ")+", "+_.map($scope.intervention_tags,function(t){return t.ref_text}).join(", ")+"\n"+_.map($scope.experimental_assay_tags,function(t){return t.ref_text}).join(",")+"\n"+_.map($scope.disease_tags,function(t){return t.ref_text}).join(","), // comma-delimited string from panel.paper.panels[current].tags[each].text
 			"variableMeasured": variableMeasured,
 			"distribution": {
 			    "@type":"DataDownload", // always this value
