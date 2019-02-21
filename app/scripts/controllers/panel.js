@@ -370,7 +370,7 @@ angular.module('publicSourcedataApp')
 			"@id":"https://search.sourcedata.io/panel/"+$scope.panel.current_panel_id, // Canonical identifier of panel
 			"dateModified": $scope.panel.paper.date, // panel.paper.date as ISO 8601 formatted string 
 			"dateCreated":$scope.panel.paper.date, // panel.paper.date as ISO 8601 formatted string 
-			"name": $scope.panel.figure.figure_title +" "+panel.label, // panel.paper.title + panel.paper.panels[current].label
+			"name": $scope.panel.figure.figure_title +": "+panel.label, // panel.paper.title + panel.paper.panels[current].label
 			"description": $scope.panel.stripped_caption, // panel.paper.panels[current].caption in plain text
 			"url":"https://search.sourcedata.io/panel/"+$scope.panel.current_panel_id, //page url
 			"includedInDataCatalog": {
