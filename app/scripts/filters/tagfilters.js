@@ -137,8 +137,11 @@
 			if (!angular.isArray(tags)) return tags;
 			angular.forEach(tags,function(tag){
 				var key = (tag.external_names && tag.external_names[0]) || tag.text;
+				var ext_id = (tag.external_namespaces && tag.external_namespaces[0] && tag.external_ids && tag.external_ids[0]) ? " ("+tag.external_namespaces[0]+":"+tag.external_ids[0].replace(tag.external_namespaces[0]+":","")+")": ""
 				if (keys.indexOf(key) == -1){
 					keys.push(key);
+					
+					tag.ref_text = key + ext_id;
 					unique.push(tag);
 				}
 			});

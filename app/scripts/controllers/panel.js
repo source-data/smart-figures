@@ -85,6 +85,8 @@ angular.module('publicSourcedataApp')
 						if ($scope.panel.highlight_entities.enable){$scope.panel.highlight_entities.status = true;}
 						$scope.assayed_tags = $filter('uniqueTagTexts')(_.filter($scope.panel.tags,function(t){return t.role =='assayed';}));
 						$scope.intervention_tags = $filter('uniqueTagTexts')(_.filter($scope.panel.tags,function(t){return t.role =='intervention';}));
+						$scope.experimental_assay_tags = $filter('uniqueTagTexts')(_.filter($scope.panel.tags,function(t){return t.category =='assay';}));
+						$scope.disease_tags = $filter('uniqueTagTexts')(_.filter($scope.panel.tags,function(t){return t.category =='disease';}));
 						if ($scope.assayed_tags[0]) $scope.assayed_tags[0].$show = true;
 						if ($scope.intervention_tags[0]) $scope.intervention_tags[0].$show = true;
 						$scope.hascoretags = (!$scope.assayed_tags[0] && !$scope.intervention_tags[0]) ? false : true;
@@ -368,7 +370,7 @@ angular.module('publicSourcedataApp')
 			"@id":"https://search.sourcedata.io/panel/"+$scope.panel.current_panel_id, // Canonical identifier of panel
 			"dateModified": $scope.panel.paper.date, // panel.paper.date as ISO 8601 formatted string 
 			"dateCreated":$scope.panel.paper.date, // panel.paper.date as ISO 8601 formatted string 
-			"name": $scope.panel.paper.title +" "+panel.label, // panel.paper.title + panel.paper.panels[current].label
+			"name": $scope.panel.figure.figure_title +" "+panel.label, // panel.paper.title + panel.paper.panels[current].label
 			"description": $scope.panel.stripped_caption, // panel.paper.panels[current].caption in plain text
 			"url":"https://search.sourcedata.io/panel/"+$scope.panel.current_panel_id, //page url
 			"includedInDataCatalog": {
@@ -385,7 +387,7 @@ angular.module('publicSourcedataApp')
 				"image": "https://search.sourcedata.io/php/api//file.php?panel_id="+$scope.panel.panel_id
 			},
 			"author":$scope.authors,
-			"keywords": _.map($scope.assayed_tags,function(t){return t.text}).join(",")+","+_.map($scope.intervention_tags,function(t){return t.text}).join(","), // comma-delimited string from panel.paper.panels[current].tags[each].text
+			"keywords": _.map($scope.assayed_tags,function(t){return t.ref_text}).join(", ")+", "+_.map($scope.intervention_tags,function(t){return t.ref_text}).join(", ")+", "+_.map($scope.experimental_assay_tags,function(t){return t.ref_text}).join(",")+", "+_.map($scope.disease_tags,function(t){return t.ref_text}).join(","), // comma-delimited string from panel.paper.panels[current].tags[each].text
 			"variableMeasured": variableMeasured,
 			"distribution": {
 			    "@type":"DataDownload", // always this value
