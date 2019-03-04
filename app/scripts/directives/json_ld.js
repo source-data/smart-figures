@@ -41,4 +41,26 @@ angular.module('publicSourcedataApp')
     },
     replace: true
   };
+}])
+.directive('srcdatajsonld', ['$filter', '$sce', function($filter, $sce) {
+  return {
+    restrict: 'E',
+    template: function() {
+      return '<script type="application/ld+json" ng-bind-html="onGetSourceDataJson()"></script>';
+    },
+    link: function(scope, element, attrs) {
+      scope.onGetSourceDataJson = function() {
+				var jsondata = {
+					"@context": "http://schema.org",
+					"@type": "Organization",
+					"url": "https://sourcedata.io",
+					"logo": "https://search.sourcedata.io/images/sourcedata_icon-color.png",
+					"email": "sourcedata@embo.org"
+				}
+
+        return $sce.trustAsHtml($filter('json')(jsondata));
+      }
+    },
+    replace: true
+  };
 }]);

@@ -363,7 +363,8 @@ angular.module('publicSourcedataApp')
 			 }
 			 variableMeasured.push(tag);
 		});
-
+		var keywords = _.map($scope.assayed_tags,function(t){return t.ref_text}).join(", ")+", "+_.map($scope.intervention_tags,function(t){return t.ref_text}).join(", ")+", "+_.map($scope.experimental_assay_tags,function(t){return t.ref_text}).join(",")+", "+_.map($scope.disease_tags,function(t){return t.ref_text}).join(",");
+		keywords = keywords.replace(/,\s$/gm,"");
 		$scope.jsonId = {   // this references the json returned from the SourceData panels API as "panel"
 			"@context":"http://schema.org/", // Always this value
 			"@type":"Dataset", // Always this value
@@ -371,7 +372,7 @@ angular.module('publicSourcedataApp')
 			"dateModified": $scope.panel.paper.date, // panel.paper.date as ISO 8601 formatted string 
 			"dateCreated":$scope.panel.paper.date, // panel.paper.date as ISO 8601 formatted string 
 			"name": $scope.panel.figure.figure_title +": "+panel.label, // panel.paper.title + panel.paper.panels[current].label
-			"description": $scope.panel.stripped_caption, // panel.paper.panels[current].caption in plain text
+			"description": $scope.panel.stripped_caption+". List of tagged entities: "+keywords, // panel.paper.panels[current].caption in plain text
 			"url":"https://search.sourcedata.io/panel/"+$scope.panel.current_panel_id, //page url
 			"includedInDataCatalog": {
 			    "@type":"DataCatalog", // always this value
@@ -387,7 +388,7 @@ angular.module('publicSourcedataApp')
 				"image": "https://search.sourcedata.io/php/api//file.php?panel_id="+$scope.panel.panel_id
 			},
 			"author":$scope.authors,
-			"keywords": _.map($scope.assayed_tags,function(t){return t.ref_text}).join(", ")+", "+_.map($scope.intervention_tags,function(t){return t.ref_text}).join(", ")+"\n"+_.map($scope.experimental_assay_tags,function(t){return t.ref_text}).join(",")+"\n"+_.map($scope.disease_tags,function(t){return t.ref_text}).join(","), // comma-delimited string from panel.paper.panels[current].tags[each].text
+			"keywords": keywords, // comma-delimited string from panel.paper.panels[current].tags[each].text
 			"variableMeasured": variableMeasured,
 			"distribution": {
 			    "@type":"DataDownload", // always this value
