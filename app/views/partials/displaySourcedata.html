@@ -15,7 +15,7 @@
 					<span ng-if="!resource.main_link"><b>{{resource.name}} :</b></span>
 					<span ng-if="resource.main_link">
 						<img ng-src="{{baseURL}}images/{{resource.img}}" style="margin-left:3px" width="100" alt="Logo ">
-						<a style="margin:0 5px" target='_blank' ng-href="{{resource.main_link}}"><span class="fa fa-search-plus"></span></a>
+						<a style="margin:0 5px" target='_blank' ng-href="{{resource.main_link}}"><span class="glyphicon glyphicon-new-window"></span></a>
 					</span>
 					<li ng-repeat="url in resource.urls">
 						<a target="_blank" ng-href="{{url.name}}">{{url.name}}</a>
