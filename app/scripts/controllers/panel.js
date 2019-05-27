@@ -27,7 +27,6 @@
 angular.module('publicSourcedataApp')
     .controller('PanelCtrl', ['$scope', '$location', '$filter', '$timeout', '$rootScope', 'panel', 'Search', 'Filter', 'ENV', 'Restangular', 'localStorageService', 'Navigation', '_', 'Authentication','$uibModal', function ($scope, $location, $filter, $timeout, $rootScope, panel, Search, Filter, ENV, Restangular, localStorageService, Navigation, _, Authentication,$uibModal) {
 
-
         //-M------ MAIN ------//
         $scope.inIFrame = (window.self !== window.top);
         $scope.serverURL = ENV.serverURL;
@@ -158,11 +157,13 @@ angular.module('publicSourcedataApp')
 
 	        //-M------ MAIN : search ------//
 	        search();
-
-					$timeout(function(){
-						getNbRelationByTag();
-						getSimilarPanels();
-					});
+					
+					if ($location.path().indexOf("cache") === -1) {
+						$timeout(function(){
+							getNbRelationByTag();
+							getSimilarPanels();
+						});							
+					}
 				}
 				init();
 				

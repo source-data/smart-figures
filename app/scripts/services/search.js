@@ -217,7 +217,6 @@ angular.module('publicSourcedataApp')
 
 		//-F------ FROM LOCATION GET PARAMETERS and DO THE SEARCH ------//
 		search: function () {
-
 			var _this = this;
 			var url = $location.search();
 			_this.searchParams.loading = true;
@@ -243,7 +242,6 @@ angular.module('publicSourcedataApp')
 			var params = {motif:_this.searchParams.motif, limit: _this.searchParams.limit};
 			
 			var rest;
-
 			if (abortSearch){
 				console.log('aborting');
 				// abortSearch.resolve();
@@ -251,14 +249,13 @@ angular.module('publicSourcedataApp')
 			}
 			abortSearch = $q.defer();
 
-			if(generic){
+			if (generic){
 				rest = Restangular.one('generic',generic.replace("/","##")).withHttpConfig({timeout: abortSearch.promise}).get(params);
 				_this.advanced = false;
 			}
 			else if (intervention && assayed){ rest = Restangular.one('intervention',intervention.replace("/","##")).withHttpConfig({timeout: abortSearch.promise}).one('assayed',assayed).get(params); }
 			else if (intervention){ _this.searchParams.direction='intervention';rest = Restangular.one('intervention',intervention.replace("/","##")).withHttpConfig({timeout: abortSearch.promise}).get(params); }
 			else if (assayed){ _this.searchParams.direction='assayed';rest = Restangular.one('assayed',assayed.replace("/","##")).withHttpConfig({timeout: abortSearch.promise}).get(params); }
-
 			if (rest){
 
 				return rest.then(function(data){			

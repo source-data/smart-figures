@@ -81,6 +81,22 @@ angular
 				}
 
 			})
+			.when('/cache/:panel_id', {
+				templateUrl: ENV.baseURL+'views/panel.html',
+				controller: 'PanelCtrl',
+				resolve: {
+					panel: function(Restangular, $route) {
+						return Restangular.one("panel",$route.current.params.panel_id).get();
+					}
+				},
+				reloadOnSearch: false,
+				access:{
+					loginRequired: true,
+					permissions: ['active'],
+					permissionCheckType: 'one'
+				}
+
+			})
 			.when('/paper/:pmcid/figure/:figure_id', {
 				templateUrl: ENV.baseURL+'views/figure.html',
 				controller: 'FigureCtrl',
