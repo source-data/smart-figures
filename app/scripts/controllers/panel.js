@@ -158,11 +158,11 @@ angular.module('publicSourcedataApp')
 
 	        //-M------ MAIN : search ------//
 	        search();
-					
+
 					$timeout(function(){
 						getNbRelationByTag();
 						getSimilarPanels();
-					});	
+					});
 				}
 				init();
 				
