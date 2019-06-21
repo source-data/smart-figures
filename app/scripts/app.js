@@ -81,7 +81,7 @@ angular
 				}
 
 			})
-			.when('/cache/:panel_id', {
+			.when('/panel/cache/:panel_id', {
 				templateUrl: ENV.baseURL+'views/panel.html',
 				controller: 'PanelCtrl',
 				resolve: {

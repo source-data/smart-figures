@@ -41,14 +41,16 @@
 		return function (tag) {
 			var texts = [];
 			var url;
-			if(tag.external_ids !== undefined && tag.external_ids.length){
-				for(var i = 0; i < tag.external_ids.length; i++){
-					if(tag.external_ids[i].toLowerCase().indexOf(tag.external_databases[i].toLowerCase()) == -1){
+			if (tag.external_ids !== undefined && tag.external_ids.length){
+				for (var i = 0; i < tag.external_ids.length; i++){
+					if (tag.external_ids[i].toLowerCase().indexOf(tag.external_databases[i].toLowerCase()) == -1){
 						url = (tag.external_urls && tag.external_urls[i]) ? tag.external_urls[i]+tag.external_ids[i] : "";
 						texts.push("<a href = '"+url+"' target = '_blank'>"+tag.external_databases[i]+": "+tag.external_ids[i]+"</a>");
 					}
 					else{
-						url = (tag.external_urls && tag.external_urls[i]) ? tag.external_urls[i]+tag.external_ids[i].split(":")[1] : "";
+
+						url = (tag.external_urls && tag.external_urls[i]) ? tag.external_urls[i]+tag.external_ids[i].substr(tag.external_ids[i].indexOf(":")+1) : "";
+						console.log(url)
 						texts.push("<a href = '"+url+"' target = '_blank'>"+tag.external_ids[i]+"</a>");
 					}
 
