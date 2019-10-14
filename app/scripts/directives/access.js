@@ -27,7 +27,8 @@
 	*/
 	angular.module('publicSourcedataApp')
 	.directive('access',access)
-	.directive('loginButton',loginButton);
+	.directive('loginButton',loginButton)
+	.directive('maintenance',maintenance);
 
 	access.$digest = ['Authorization','localStorageService'];
 	function access(Authorization,localStorageService){
@@ -84,4 +85,19 @@
 			}
 		}
 	}
+	
+	function maintenance () {
+		return {
+			template: function(ele,attrs) {
+				var max = new Date(attrs.date)
+			
+				return (max >= new Date()) ? "<h4 style = 'margin-top: 0px; padding: 10px;' class = 'text-danger text-center'>Planned maintenance down time: <b>"+max.toDateString()+" (from 8 a.m. to 6 p.m. CET)</b></h4>" : "";
+			},
+			restrict: 'E',
+			scope: {},
+			link: function(scope,element,attrs){
+			}
+		}
+	}
+	
 })();
