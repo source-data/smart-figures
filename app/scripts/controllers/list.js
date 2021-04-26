@@ -40,8 +40,8 @@ angular.module('publicSourcedataApp')
 	  $scope.loadPaper = function(paper){
 		  $location.search({});
 			
-			let figures = _.orderBy(paper.figures, f => {return f.figure_label})
-			let panel_id = _.first(_.filter(figures, "first_panel_id")).first_panel_id
+			var figures = _.orderBy(paper.figures, function(f){return f.figure_label})
+			var panel_id = _.first(_.filter(figures, "first_panel_id")).first_panel_id
 			if (panel_id) $location.path("panel/"+panel_id);
 
 	  };

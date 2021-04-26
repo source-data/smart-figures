@@ -22,7 +22,7 @@
 					</li>
 					<li ng-repeat="file in resource.files">
 							{{file.document}}
-							<a v-if="resource.main_link" style="margin:0 5px" target='_blank' href="https://www.ebi.ac.uk/biostudies/files/{{resource.id}}/{{file.document}}"><span class="fa fa-download"></span></a>
+							<a v-if="resource.main_link" style="margin:0 5px" target='_blank' href="https://www.ebi.ac.uk/biostudies/files/{{resource.id}}/{{file.path}}"><span class="fa fa-download"></span></a>
 							
 					</li>
 				</ul>
