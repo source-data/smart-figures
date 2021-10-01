@@ -168,6 +168,10 @@ sd-tag.active.reporter{
 	color: #FFF;
 }
 
+sd-tag.assay {
+	border-bottom: 1px dotted #666;
+}
+
 .bg_component_selected, .bg_experiment_selected, .bg_normalizing_selected, .bg_assayed_selected, .bg_intervention_selected{
 	color: #C00;
 }

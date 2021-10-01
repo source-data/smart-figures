@@ -418,7 +418,6 @@ angular.module('publicSourcedataApp')
 			vm.panel.biostudies = vm.panel.paper.biostudies_id;
 			vm.resources = {};
 			vm.files = _.filter(vm.panel.links,function(l){return l.type=='file';});
-			console.log(vm.files)
 			if (vm.panel.biostudies){
 				vm.resources['BioStudies'] = {name:'BioStudies',id:vm.panel.biostudies,main_link:"https://www.ebi.ac.uk/biostudies/SourceData/studies/"+vm.panel.biostudies,img:"logo_biostudies.png",urls:[],files:vm.files};
 			}

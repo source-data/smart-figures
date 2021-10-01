@@ -39,7 +39,7 @@ angular.module('publicSourcedataApp')
 				// scope.
 				// NOTE: we only compile .childNodes so that
 				// we don't get into infinite loop compiling ourselves
-				if(value) $compile(element.contents())(scope);
+				if (value) $compile(element.contents())(scope);
 			}
 		);
 
