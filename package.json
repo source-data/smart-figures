@@ -6,7 +6,7 @@
   },
   "devDependencies": {
     "connect-modrewrite": "^0.10.1",
-    "grunt": "^0.4.1",
+    "grunt": "^1.5.3",
     "grunt-autoprefixer": "^0.7.3",
     "grunt-concurrent": "^0.5.0",
     "grunt-connect-proxy2": "^2.0.0",
