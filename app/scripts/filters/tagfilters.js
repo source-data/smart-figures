@@ -48,9 +48,12 @@
 						texts.push("<a href = '"+url+"' target = '_blank'>"+tag.external_databases[i]+": "+tag.external_ids[i]+"</a>");
 					}
 					else{
-
-						url = (tag.external_urls && tag.external_urls[i]) ? tag.external_urls[i]+tag.external_ids[i].substr(tag.external_ids[i].indexOf(":")+1) : "";
-						console.log(url)
+						if (tag.external_ids[i].indexOf('CL:') > -1){
+							url = (tag.external_urls && tag.external_urls[i]) ? tag.external_urls[i]+tag.external_ids[i] : "";	
+						}
+						else {
+							url = (tag.external_urls && tag.external_urls[i]) ? tag.external_urls[i]+tag.external_ids[i].substr(tag.external_ids[i].indexOf(":")+1) : "";	
+						}
 						texts.push("<a href = '"+url+"' target = '_blank'>"+tag.external_ids[i]+"</a>");
 					}
 
